@@ -48,54 +48,54 @@
 </div>
 
 <div class="mt-4 mx-2 ml-8">
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Blog
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Communication
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     DAO
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Docs
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Funny
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('games')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Games
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Interesting
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
-    Investors
+  <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+    Investor
   </a>
 </div>
 <div class="mt-2 mb-4 ml-8">
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Landing
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Learning
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Music
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     NFT
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Social
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Utility
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Video
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
+  <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Work In Progress
   </a>
 </div>
@@ -104,28 +104,33 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue"
 import { main } from "canisters/main"
+import axios from 'axios'
 
 export default {
   name: "Intro",
-  setup: () => {
-    const count = ref(0)
-
-    const refreshCounter = async () => {
-      const res = await main.getValue()
-      count.value = res.toString()
+  methods: {
+    categorySearch (txt) {
+      let newUrlIS =  window.location.origin + '/category/' + txt;
+      history.pushState({}, null, newUrlIS);
+      axios.post(this.host, {
+        "action": "searchCategory",
+        "category": txt
+      }).then((response) => {
+        console.log(response.data)
+      });
     }
-
-    const increment = async () => {
-      await main.increment()
-      refreshCounter()
-    }
-
-    onMounted(refreshCounter)
-
-    return { increment, count }
   },
+  beforeMount () {
+    if (location.port === '3000' || location.port === '8000') {
+      this.host = 'http://localhost:4000/search'
+    }
+  },
+  data() {
+    return {
+      host: ''
+    }
+  }
 }
 </script>
 <style>
