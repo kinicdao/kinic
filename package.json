@@ -1,0 +1,30 @@
+{
+  "name": "kinic",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite serve"
+  },
+  "dependencies": {
+    "@dfinity/agent": "0.10.0",
+    "@dfinity/auth-client": "0.10.0",
+    "@dfinity/authentication": "0.10.0",
+    "@dfinity/candid": "0.10.0",
+    "@dfinity/identity": "0.10.0",
+    "@dfinity/principal": "0.10.0",
+    "axios": "^0.24.0",
+    "esbuild": "^0.14.1",
+    "vue": "^3.0.5",
+    "vue-axios": "^3.4.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vue/compiler-sfc": "^3.0.5",
+    "autoprefixer": "^10.4.0",
+    "buffer": "^6.0.3",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19",
+    "vite": "2.5.10"
+  }
+}
