@@ -1,26 +1,26 @@
 <template>
-  <div class="bg-blue-600">
+  <div style="background: #4182d8;">
     <div class="max-w-7xl mx-auto py-3 px-2">
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
-          <p class="ml-3 font-medium text-white truncate">
-            <span> 👉 Kinic allows you to search all of the frontend canisters on the IC. Enter a canister ID or search text to find great content on web3.</span>
+          <p class="ml-3 font-light text-white truncate">
+            <span > Kinic allows you to search all of the frontend canisters on the IC. Enter a canister ID or search text to find great content on web3.</span>
           </p>
         </div>
         <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-          <a href="https://dfinity.org/supernova/" target="_blank" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-blue-600 bg-white hover:bg-indigo-50"> #SUPERNOVA </a>
+          <a href="https://dfinity.org/supernova/" target="_blank" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-500 bg-white hover:bg-indigo-50 addFont"> Built for #SUPERNOVA </a>
         </div>
       </div>
     </div>
   </div>
-  <section class="w-full mt-48 text-7xl">
+  <section class="w-full mt-48">
     <div class="flex justify-center">
-      <h1 class="text-gray-800">
-        Kinic Search
+      <h1 style="font-family: 'Bowlby One SC'; color:#7F321A;" class="text-8xl">
+        Kinic.
       </h1>
     </div>
   </section>
-  <section style="margin-bottom:10%;" class="w-full">
+  <section style="margin-bottom:6%;" class="w-full">
       <div class="p-4 w-full">
           <div class="flex justify-center">
               <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
@@ -38,64 +38,64 @@
                </div>
             </div>
           <div class="flex justify-center mt-10">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-8 rounded">Search Web 3.0</button>
+            <button class="text-white font-light py-2 px-8 rounded srchIt addFont">Search Web 3.0</button>
           </div>
       </div>
   </section>
 
-<div class="h-5 border-b-2 border-gray-400 text-xl">
+<div class="h-5 border-b-2 border-gray-400 text-xl addFont">
     <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
 </div>
 
-<div class="mt-4 mx-2 ml-8 border-r-2">
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+<div class="mt-4 mx-2 ml-8">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Blog
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Communication
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     DAO
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Docs
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Funny
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Games
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Interesting
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Investors
   </a>
 </div>
-<div class="mt-2 mb-4 ml-8 border-r-2">
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+<div class="mt-2 mb-4 ml-8">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Landing
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Learning
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Music
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     NFT
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Social
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Utility
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Video
   </a>
-  <a href="#!" class="mr-6 text-gray-500 hover:underline font-light">
+  <a href="#!" class="mr-6 text-gray-500 hover:text-yellow-500 font-light">
     Work In Progress
   </a>
 </div>
@@ -129,6 +129,15 @@ export default {
 }
 </script>
 <style>
+  .addFont {
+    font-family: 'Bowlby One SC';
+  }
+  .srchIt {
+    background-color: #4182d8;
+  }
+  .srchIt:hover {
+    background-color: #235da9;
+  }
   .custom-hover:hover {
     box-shadow: rgb(0 0 0 / 15%) 0px 6px 15px -3px, rgb(0 0 0 / 15%) 0px -3px 6px -4px;
   }
