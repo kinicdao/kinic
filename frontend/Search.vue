@@ -43,19 +43,30 @@
 
     <!-- SEARCH RESULTS -->
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
-      <div v-for="item in results" :key="item.Canisterid" className="max-w-xl mb-8">
+      <div v-for="item in results[page]" :key="item.Canisterid" className="max-w-xl mb-8">
         <div className="group">
           <b style="color:#7F321A;" className="text-sm addFont">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
-          <a :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-if="item.Title" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
             <h2 style="color: #4182d8;" className="truncate text-xl group-hover:underline">
               {{item.Title}}
+            </h2>
+          </a>
+          <a v-else :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+            <h2 style="color: #4182d8;" className="truncate text-xl group-hover:underline">
+              No Title
             </h2>
           </a>
         </div>
         <p className="line-clamp-2 text-gray-900">
           {{item.Subtitle}}
+        </p>
+        <p className="line-clamp-2 text-gray-900 text-sm font-light">
+          Subnet: {{item.Subnetid}}
+        </p>
+        <p v-if="item.Note" className="line-clamp-2 text-gray-900 text-sm font-light">
+          Note: {{item.Note}}
         </p>
       </div>
     </section>
@@ -76,8 +87,27 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category}}</p>
-            <a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center">Visit icme.io</p></a>
+            <a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center">Visit icme.io for no-code content creation on web3.</p></a>
         </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div v-if="searchMode" class="flex flex-col items-center my-12">
+      <div class="flex text-gray-700">
+          <div @click="backPage()" class="h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left w-6 h-6">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+          </div>
+          <div class="flex h-12 font-medium rounded-full bg-gray-200">
+              <div v-for="i in pages" :key="i" @click="changePage(i)" class="w-12 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in rounded-full">{{i}}</div>
+          </div>
+          <div @click="nextPage()" class="h-12 w-12 ml-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right w-6 h-6">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+          </div>
+      </div>
     </div>
 
     <!-- SEARCH AND TITLE PAGE -->
@@ -133,7 +163,7 @@
       <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Funny
       </a>
-      <a @click="categorySearch('games')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+      <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Games
       </a>
       <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
@@ -179,22 +209,72 @@ import axios from 'axios'
 export default {
   name: "Intro",
   methods: {
+    addPageToHistory () {
+      if (this.category) {
+        let newUrlIS = window.location.origin + '/category/' + this.category + '/' + (this.page + 1)
+        history.pushState({}, null, newUrlIS)
+      }
+    },
+    changePage (page) {
+      console.log(page)
+      this.page = page - 1
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      this.addPageToHistory()
+    },
+    backPage () {
+      if (this.page !== 0) {
+        this.page = this.page - 1
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        this.addPageToHistory()
+      }
+    },
+    nextPage () {
+      if (this.page !== (this.pages - 1)) {
+        this.page = this.page + 1
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        this.addPageToHistory()
+      }
+    },
     reset () {
       let newUrlIS =  window.location.origin + '/'
       history.pushState({}, null, newUrlIS)
       this.searchMode = false
       this.results = []
       this.category = ''
+      this.page = 0
+      this.pages = 0
     },
     setSearch () {
+      if (window.location.pathname && window.location.pathname.split('/')[3]) {
+        this.page = (window.location.pathname.split('/')[3] - 1)
+      }
       if (window.location.pathname.split('/')[1] === 'category') {
         this.categorySearch(window.location.pathname.split('/')[2])
       } else {
         this.reset();
       }
     },
+    paginate (data) {
+      this.pages = Math.ceil(data.length / 20)
+      let total = 0
+      for (let k = 0; k < this.pages; k++) {
+        let page = []
+        for (let i = 0; page.length < 20; i++) {
+          if (data[total]) {
+            page.push(data[total])
+            total++
+          } else {
+            break
+          }
+        }
+        this.results.push(page)
+      }
+    },
     categorySearch (txt) {
       let newUrlIS =  window.location.origin + '/category/' + txt
+      if (this.page !== 0) {
+        newUrlIS = window.location.origin + '/category/' + txt + '/' + (this.page + 1)
+      }
       history.pushState({}, null, newUrlIS)
       this.searchMode = true
       this.category = txt
@@ -204,7 +284,7 @@ export default {
         "category": txt
       }).then((response) => {
           if (response.data) {
-            this.results = response.data
+            this.paginate(response.data)
           }
       });
     }
@@ -224,7 +304,8 @@ export default {
       host: '',
       searchMode: false,
       results: [],
-      category: ''
+      category: '',
+      page: 0
     }
   }
 }
