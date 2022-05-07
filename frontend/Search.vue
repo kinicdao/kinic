@@ -22,7 +22,7 @@
                 <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="font-bold text-2xl cursor-pointer">Kinic</h2>
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
-                     type="search" name="search" placeholder="">
+                     type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -35,7 +35,7 @@
                  </div>
                 <div class="auth flex items-center">
                     <!-- <b class="text-gray-500 p-2 mr-4 font-light">Sign in</b> -->
-                    <button class="bg-gray-900 text-gray-200  py-2 px-3 rounded  hover:bg-gray-800 hover:text-gray-100">Login</button>
+                    <button class="bg-gray-800 text-gray-200  py-2 px-3 rounded  hover:bg-gray-700 hover:text-gray-100">Login</button>
                 </div>
             </nav>
         </div>
@@ -63,11 +63,17 @@
           {{item.Subtitle}}
         </p>
         <p className="line-clamp-2 text-gray-900 text-sm font-light">
+          ID: {{item.Canisterid}}
+        </p>
+        <p className="line-clamp-2 text-gray-900 text-sm font-light">
           Subnet: {{item.Subnetid}}
         </p>
         <p v-if="item.Note" className="line-clamp-2 text-gray-900 text-sm font-light">
           Note: {{item.Note}}
         </p>
+      </div>
+      <div v-if="results.length === 0" className="max-w-xl mb-8">
+        No Results...
       </div>
     </section>
 
@@ -92,7 +98,7 @@
     </div>
 
     <!-- PAGINATION -->
-    <div v-if="searchMode" class="flex flex-col items-center my-12">
+    <div v-if="searchMode && pages > 1" class="flex flex-col items-center my-12">
       <div class="flex text-gray-700">
           <div @click="backPage()" class="h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left w-6 h-6">
@@ -124,7 +130,7 @@
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
-                     type="search" name="search" placeholder="">
+                     type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -137,7 +143,7 @@
                  </div>
               </div>
             <div class="flex justify-center mt-10">
-              <button class="text-white font-light py-2 px-8 rounded srchIt addFont">Search Web 3.0</button>
+              <button @click="termSearch('in')" class="text-white font-light py-2 px-8 rounded srchIt addFont">Search Web 3.0</button>
             </div>
         </div>
     </section>
@@ -213,10 +219,12 @@ export default {
       if (this.category) {
         let newUrlIS = window.location.origin + '/category/' + this.category + '/' + (this.page + 1)
         history.pushState({}, null, newUrlIS)
+      } else if (this.search) {
+        let newUrlIS = window.location.origin + '/search/' + this.search + '/' + (this.page + 1)
+        history.pushState({}, null, newUrlIS)
       }
     },
     changePage (page) {
-      console.log(page)
       this.page = page - 1
       window.scrollTo({ top: 0, behavior: 'smooth' })
       this.addPageToHistory()
@@ -243,6 +251,7 @@ export default {
       this.category = ''
       this.page = 0
       this.pages = 0
+      this.search = ''
     },
     setSearch () {
       if (window.location.pathname && window.location.pathname.split('/')[3]) {
@@ -250,11 +259,45 @@ export default {
       }
       if (window.location.pathname.split('/')[1] === 'category') {
         this.categorySearch(window.location.pathname.split('/')[2])
+      } else if (window.location.pathname.split('/')[1] === 'search') {
+        this.search = decodeURI(window.location.pathname.split('/')[2])
+        this.termSearch()
       } else {
         this.reset();
       }
     },
     paginate (data) {
+      this.results = []
+      data.sort(function(a, b) {
+        if (a.Datalength < b.Datalength) {
+            return 1;
+        } else if (a.Datalength > b.Datalength) {
+            return -1;
+        }
+        return 0;
+      });
+
+      // Set category for Ads
+      if (!this.category) {
+        let mainCategory = data.map(function(value, index) {return value['Apptype']}),
+          distribution = {},
+          max = 0,
+          result = [];
+
+        mainCategory.forEach(function (a) {
+            distribution[a] = (distribution[a] || 0) + 1;
+            if (distribution[a] > max) {
+                max = distribution[a];
+                result = [a];
+                return;
+            }
+            if (distribution[a] === max) {
+                result.push(a);
+            }
+        });
+        this.category = result[0]
+      }
+
       this.pages = Math.ceil(data.length / 20)
       let total = 0
       for (let k = 0; k < this.pages; k++) {
@@ -270,7 +313,53 @@ export default {
         this.results.push(page)
       }
     },
+    termSearch (txt) {
+      this.results = []
+      this.category = ''
+      if (txt === 'in') {
+        this.page = 0
+        this.pages = 0
+      }
+      let newUrlIS =  window.location.origin + '/search/' + this.search
+      if (this.page !== 0) {
+        newUrlIS = window.location.origin + '/search/' + this.search + '/' + (this.page + 1)
+      }
+      history.pushState({}, null, newUrlIS)
+      this.searchMode = true
+
+      let isIdSearch = false
+      if (this.search.length === 27) {
+        let temp = this.search.split('-')
+        if (temp.length === 5) {
+          if (temp[4] === 'cai') {
+            isIdSearch = true
+          }
+        }
+      }
+
+      if (isIdSearch) {
+        axios.post(this.host, {
+          "action": "searchID",
+          "category": this.search
+        }).then((response) => {
+            if (response.data) {
+              this.paginate(response.data)
+            }
+        });
+      } else {
+        axios.post(this.host, {
+          "action": "searchTerm",
+          "category": this.search
+        }).then((response) => {
+            if (response.data && response.data.message !== 'No action defined.') {
+
+              this.paginate(response.data)
+            }
+        });
+      }
+    },
     categorySearch (txt) {
+      this.results = []
       let newUrlIS =  window.location.origin + '/category/' + txt
       if (this.page !== 0) {
         newUrlIS = window.location.origin + '/category/' + txt + '/' + (this.page + 1)
@@ -283,7 +372,7 @@ export default {
         "action": "searchCategory",
         "category": txt
       }).then((response) => {
-          if (response.data) {
+          if (response.data && response.data.message !== 'No action defined.') {
             this.paginate(response.data)
           }
       });
@@ -301,6 +390,7 @@ export default {
   },
   data () {
     return {
+      search: '',
       host: '',
       searchMode: false,
       results: [],
