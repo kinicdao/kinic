@@ -18,9 +18,16 @@
   <!-- HEADER FOR RESULTS PAGE -->
   <header v-if="searchMode" class="h-full" style="border-bottom: 1px solid #eee">
         <div class="content px-8 py-2">
+            <!-- MOBILE NAV -->
+            <nav class="block xl:hidden flex items-center justify-between mb-4">
+              <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="font-bold text-2xl cursor-pointer">Kinic</h2>
+              <div class="auth flex items-center">
+                  <button class="bg-gray-800 text-gray-200 py-2 px-3 rounded hover:bg-gray-700 hover:text-gray-100">Login</button>
+              </div>
+            </nav>
             <nav class="flex items-center justify-between">
-                <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="font-bold text-2xl cursor-pointer">Kinic</h2>
-                <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
+                <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="hidden xl:block font-bold text-2xl cursor-pointer">Kinic</h2>
+                <div class="hidden xl:block pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
@@ -33,9 +40,11 @@
                      </svg>
                    </i>
                  </div>
-                <div class="auth flex items-center">
+                 <input style="border-width: 1px;" class="block xl:hidden border-gray-200 bg-white h-12 px-5 pl-6 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
+                   type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
+                <div class="hidden xl:block auth flex items-center">
                     <!-- <b class="text-gray-500 p-2 mr-4 font-light">Sign in</b> -->
-                    <button class="bg-gray-800 text-gray-200  py-2 px-3 rounded  hover:bg-gray-700 hover:text-gray-100">Login</button>
+                    <button class="bg-gray-800 text-gray-200 py-2 px-3 rounded hover:bg-gray-700 hover:text-gray-100">Login</button>
                 </div>
             </nav>
         </div>
