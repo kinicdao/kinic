@@ -5,7 +5,7 @@
         <div class="w-0 flex-1 flex items-center">
           <p class="ml-3 font-light text-white truncate">
             <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the IC. Enter a canister ID or search text to find great content on web3.</span>
-            <span v-else>☝Advertisers can bid ICP to put Ads at the top of categories. These profits are shared with content sites by % of clicks.</span>
+            <span v-else>☝Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners by % of clicks.</span>
           </p>
         </div>
         <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
@@ -68,9 +68,24 @@
         <p className="line-clamp-2 text-gray-900 text-sm font-light">
           Subnet: {{item.Subnetid}}
         </p>
-        <p v-if="item.Note" className="line-clamp-2 text-gray-900 text-sm font-light">
-          Note: {{item.Note}}
-        </p>
+        <span v-if="item.Status && item.Status === 'official'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">OFFICIAL</span>
+        <a v-if="item.Note && item.Note === 'ICME'"  target="_blank" href="https://www.icme.io">
+          <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">BUILT ON ICME.IO</span>
+        </a>
+        <a v-if="item.Note && item.Note.indexOf('github') > -1"  target="_blank" :href="item.Note">
+          <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">OPEN SOURCE</span>
+        </a>
+        <a v-if="item.Note && item.Note.indexOf('twitter') > -1"  target="_blank" :href="item.Note">
+          <svg
+            style="display:inline;"
+            class="w-5 h-5 text-blue-300 fill-current ml-1 pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24">
+            <path
+              d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+            />
+          </svg>
+        </a>
       </div>
       <div v-if="results.length === 0" className="max-w-xl mb-8">
         No Results...
@@ -88,7 +103,7 @@
             <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Your AD</div>
             <p class="text-gray-600 text-center px-5">
               Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
-              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/icme_app">@kinic</a> on Twitter for support.
+              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic</a> on Twitter for support.
             </p>
         </div>
         <div class="w-full">
@@ -180,6 +195,9 @@
       </a>
     </div>
     <div v-if="!searchMode" class="mt-2 mb-4 ml-8">
+      <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        Portfolio
+      </a>
       <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Landing
       </a>
@@ -216,7 +234,7 @@ export default {
   name: "Intro",
   methods: {
     addPageToHistory () {
-      if (this.category) {
+      if (this.category && !this.search) {
         let newUrlIS = window.location.origin + '/category/' + this.category + '/' + (this.page + 1)
         history.pushState({}, null, newUrlIS)
       } else if (this.search) {
@@ -275,6 +293,13 @@ export default {
             return -1;
         }
         return 0;
+      });
+
+      data.sort(function(a, b) {
+        if (a.Status === 'official') {
+            return -1;
+        }
+        return 1;
       });
 
       // Set category for Ads
