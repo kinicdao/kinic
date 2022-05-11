@@ -5,7 +5,7 @@
         <div class="w-0 flex-1 flex items-center">
           <p class="ml-3 font-light text-white truncate">
             <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the IC. Enter a canister ID or search text to find great content on web3.</span>
-            <span v-else>☝Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners by % of clicks.</span>
+            <span v-else>☝Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
         <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
@@ -49,6 +49,19 @@
             </nav>
         </div>
     </header>
+
+    <header v-if="!searchMode" class="h-full">
+          <div class="content px-8 py-2">
+              <!-- MOBILE NAV -->
+              <nav class="flex items-center justify-between mb-4">
+                <h2 class="font-bold text-2xl"></h2>
+                <div class="auth flex items-center">
+                    <button class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700">Login</button>
+                </div>
+              </nav>
+          </div>
+    </header>
+
 
     <!-- SEARCH RESULTS -->
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
@@ -96,8 +109,8 @@
           </svg>
         </a>
       </div>
-      <div v-if="results.length === 0" className="max-w-xl mb-8">
-        No Results...
+      <div v-if="results.length === 0" className="max-w-xl mb-8 animate-pulse">
+        ...
       </div>
     </section>
 
@@ -112,11 +125,11 @@
             <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Your AD</div>
             <p class="text-gray-600 text-center px-5">
               Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
-              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic</a> on Twitter for support.
+              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
             </p>
         </div>
         <div class="w-full">
-            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category}}</p>
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
             <a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center">Visit icme.io for no-code content creation on web3.</p></a>
         </div>
     </div>
@@ -177,7 +190,7 @@
         <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
     </div>
 
-    <div v-if="!searchMode" class="mt-4 mx-2 ml-8">
+    <div v-if="!searchMode" class="mt-4 mx-2 ml-8 mb-2">
       <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Blog
       </a>
@@ -186,6 +199,9 @@
       </a>
       <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         DAO
+      </a>
+      <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        Defi
       </a>
       <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Docs
@@ -203,7 +219,7 @@
         Investor
       </a>
     </div>
-    <div v-if="!searchMode" class="mt-2 mb-4 ml-8">
+    <div v-if="!searchMode" class="mt-2 mb-10 ml-8">
       <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Portfolio
       </a>
@@ -295,6 +311,8 @@ export default {
     },
     paginate (data) {
       this.results = []
+
+      // Sort results
       data.sort(function(a, b) {
         if (a.Datalength < b.Datalength) {
             return 1;
@@ -304,12 +322,27 @@ export default {
         return 0;
       });
 
-      data.sort(function(a, b) {
-        if (a.Status === 'official') {
+      let top = [];
+      // for Vue.js. Needs new array.
+      let newData = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].Status === 'official') {
+          top.push(data[i])
+        } else {
+          newData.push(data[i])
+        }
+      }
+
+      top.sort(function(a, b) {
+        if (a.Datalength < b.Datalength) {
+            return 1;
+        } else if (a.Datalength > b.Datalength) {
             return -1;
         }
-        return 1;
+        return 0;
       });
+
+      data = top.concat(newData)
 
       // Set category for Ads
       if (!this.category) {
