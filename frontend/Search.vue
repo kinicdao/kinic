@@ -143,7 +143,7 @@
               </svg>
           </div>
           <div class="flex h-12 font-medium rounded-full bg-gray-200">
-              <div v-for="i in pages" :key="i" @click="changePage(i)" class="w-12 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in rounded-full">{{i}}</div>
+              <div v-for="i in pages" :key="i" @click="changePage(i)" :class="i == (page + 1) ? 'bg-gray-100' : ''" class="w-12 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in rounded-full">{{i}}</div>
           </div>
           <div @click="nextPage()" class="h-12 w-12 ml-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right w-6 h-6">
