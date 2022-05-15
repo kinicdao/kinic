@@ -67,7 +67,7 @@
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
       <div v-for="item in results[page]" :key="item.Canisterid" className="max-w-xl mb-8">
         <div className="group">
-          <b style="color:#7F321A;" className="text-sm addFont">
+          <b style="color:#7F321A;" className="text-xs addFont">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
           <a v-if="item.Title" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
@@ -109,7 +109,7 @@
           </svg>
         </a>
       </div>
-      <div v-if="results.length === 0" className="max-w-xl mb-8 animate-pulse">
+      <div v-if="results.length === 0" class="max-w-xl mb-8 animate-pulse">
         ...
       </div>
     </section>
