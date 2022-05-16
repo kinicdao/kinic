@@ -100,6 +100,7 @@
         </div>
     </header>
 
+    <!-- HEADER FOR LANDING PAGE -->
     <header v-if="!searchMode" class="h-full">
           <div class="content px-8 py-2">
               <!-- LANDING NAV -->
@@ -189,7 +190,7 @@
     </section>
 
     <!-- AD SPACE -->
-    <div @click="dropdownOn = false" v-if="searchMode" class="hidden xl:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24" style="max-width: 500px">
+    <div v-if="searchMode" @click="dropdownOn = false" class="hidden xl:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24" style="max-width: 500px">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/default.png" alt="">
@@ -228,7 +229,7 @@
     </div>
 
     <!-- SEARCH AND TITLE PAGE -->
-    <section @click="dropdownOn = false" v-if="!searchMode" class="w-full mt-48">
+    <section v-if="!searchMode" @click="dropdownOn = false" class="w-full mt-48">
       <div class="flex justify-center">
         <h1 style="font-family: 'Bowlby One SC'; color:#7F321A;" class="text-8xl">
           Kinic.
@@ -236,7 +237,7 @@
       </div>
     </section>
 
-    <section @click="dropdownOn = false" v-if="!searchMode" style="margin-bottom:6%;" class="w-full">
+    <section v-if="!searchMode" @click="dropdownOn = false" style="margin-bottom:6%;" class="w-full">
         <div class="p-4 w-full">
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
@@ -259,80 +260,80 @@
         </div>
     </section>
 
-    <!-- CATEGORY Footer -->
-    <div @click="dropdownOn = false" v-if="!searchMode" class="h-5 border-b-2 border-gray-400 text-xl addFont">
+    <!-- CATEGORY FOOTER -->
+    <div v-if="!searchMode" @click="dropdownOn = false" class="h-5 border-b-2 border-gray-400 text-xl addFont">
         <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
     </div>
 
-    <div @click="dropdownOn = false" v-if="!searchMode" class="mt-4 mx-2 ml-8 mb-2">
-      <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Blog
-      </a>
-      <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Communication
-      </a>
-      <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        DAO
-      </a>
-      <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Defi
-      </a>
-      <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Docs
-      </a>
-      <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Funny
-      </a>
-      <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Games
-      </a>
-      <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Interesting
-      </a>
-      <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Investor
-      </a>
+    <div v-if="!searchMode" @click="dropdownOn = false" class="mt-4 mx-2 ml-8 mb-2">
+        <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Blog
+        </a>
+        <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Communication
+        </a>
+        <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          DAO
+        </a>
+        <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Defi
+        </a>
+        <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Docs
+        </a>
+        <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Funny
+        </a>
+        <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Games
+        </a>
+        <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Interesting
+        </a>
+        <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Investor
+        </a>
     </div>
-    <div @click="dropdownOn = false" v-if="!searchMode" class="mt-2 mb-10 ml-8">
-      <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Portfolio
-      </a>
-      <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Landing
-      </a>
-      <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Learning
-      </a>
-      <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Music
-      </a>
-      <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        NFT
-      </a>
-      <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Social
-      </a>
-      <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Utility
-      </a>
-      <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Video
-      </a>
-      <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
-        Work In Progress
-      </a>
+    <div v-if="!searchMode" @click="dropdownOn = false" class="mt-2 mb-10 ml-8">
+        <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Portfolio
+        </a>
+        <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Landing
+        </a>
+        <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Learning
+        </a>
+        <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Music
+        </a>
+        <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          NFT
+        </a>
+        <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Social
+        </a>
+        <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Utility
+        </a>
+        <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Video
+        </a>
+        <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+          Work In Progress
+        </a>
     </div>
 
 </template>
 
 <script>
-import { main } from "canisters/main"
+import { main } from 'canisters/main'
 import axios from 'axios'
-import { AuthClient } from "@dfinity/auth-client"
-import { Principal } from "@dfinity/principal";
+import { AuthClient } from '@dfinity/auth-client'
+import { Principal } from '@dfinity/principal';
 
 export default {
-  name: "Intro",
+  name: 'Search',
   async mounted () {
     const client = await AuthClient.create()
     const isAuthenticated = await client.isAuthenticated()
@@ -350,7 +351,7 @@ export default {
     async logIn () {
       const authClient = await AuthClient.create();
       authClient.login({
-        identityProvider: "https://identity.ic0.app",
+        identityProvider: 'https://identity.ic0.app',
         onSuccess: async () => {
           this.identity = authClient.getIdentity()
           this.principal = this.identity.getPrincipal().toString()
@@ -518,8 +519,8 @@ export default {
 
       if (isIdSearch) {
         axios.post(this.host, {
-          "action": "searchID",
-          "category": this.search
+          'action': 'searchID',
+          'category': this.search
         }).then((response) => {
             if (response.data) {
               this.paginate(response.data)
@@ -527,8 +528,8 @@ export default {
         });
       } else {
         axios.post(this.host, {
-          "action": "searchTerm",
-          "category": this.search
+          'action': 'searchTerm',
+          'category': this.search
         }).then((response) => {
             if (response.data && response.data.message !== 'No action defined.') {
 
@@ -548,8 +549,8 @@ export default {
       this.category = txt
 
       axios.post(this.host, {
-        "action": "searchCategory",
-        "category": txt
+        'action': 'searchCategory',
+        'category': txt
       }).then((response) => {
           if (response.data && response.data.message !== 'No action defined.') {
             this.paginate(response.data)
