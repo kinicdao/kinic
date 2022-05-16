@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #4182d8;">
+  <div @click="dropdownOn = false" style="background: #4182d8;">
     <div class="max-w-7xl mx-auto py-3 px-2">
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
@@ -189,7 +189,7 @@
     </section>
 
     <!-- AD SPACE -->
-    <div v-if="searchMode" class="hidden xl:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24" style="max-width: 500px">
+    <div @click="dropdownOn = false" v-if="searchMode" class="hidden xl:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24" style="max-width: 500px">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/default.png" alt="">
@@ -228,7 +228,7 @@
     </div>
 
     <!-- SEARCH AND TITLE PAGE -->
-    <section v-if="!searchMode" class="w-full mt-48">
+    <section @click="dropdownOn = false" v-if="!searchMode" class="w-full mt-48">
       <div class="flex justify-center">
         <h1 style="font-family: 'Bowlby One SC'; color:#7F321A;" class="text-8xl">
           Kinic.
@@ -236,7 +236,7 @@
       </div>
     </section>
 
-    <section v-if="!searchMode" style="margin-bottom:6%;" class="w-full">
+    <section @click="dropdownOn = false" v-if="!searchMode" style="margin-bottom:6%;" class="w-full">
         <div class="p-4 w-full">
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
@@ -260,11 +260,11 @@
     </section>
 
     <!-- CATEGORY Footer -->
-    <div v-if="!searchMode" class="h-5 border-b-2 border-gray-400 text-xl addFont">
+    <div @click="dropdownOn = false" v-if="!searchMode" class="h-5 border-b-2 border-gray-400 text-xl addFont">
         <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
     </div>
 
-    <div v-if="!searchMode" class="mt-4 mx-2 ml-8 mb-2">
+    <div @click="dropdownOn = false" v-if="!searchMode" class="mt-4 mx-2 ml-8 mb-2">
       <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Blog
       </a>
@@ -293,7 +293,7 @@
         Investor
       </a>
     </div>
-    <div v-if="!searchMode" class="mt-2 mb-10 ml-8">
+    <div @click="dropdownOn = false" v-if="!searchMode" class="mt-2 mb-10 ml-8">
       <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
         Portfolio
       </a>
@@ -397,6 +397,7 @@ export default {
       }
     },
     reset () {
+      this.dropdownOn = false
       let newUrlIS =  window.location.origin + '/'
       history.pushState({}, null, newUrlIS)
       this.searchMode = false
