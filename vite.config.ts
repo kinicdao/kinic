@@ -57,6 +57,7 @@ export default defineConfig({
   },
   server: {
     fs: {
+      strict: false,
       allow: ["."],
     },
     proxy: {

@@ -9,7 +9,7 @@
           </p>
         </div>
         <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-          <a href="https://dfinity.org/supernova/" target="_blank" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-500 bg-white hover:bg-indigo-50 addFont"> Built for #SUPERNOVA </a>
+          <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-500 bg-white hover:bg-indigo-50 addFont"> Built for #SUPERNOVA </a>
         </div>
       </div>
     </div>
@@ -22,9 +22,34 @@
             <nav class="block xl:hidden flex items-center justify-between mb-4">
               <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="font-bold text-2xl cursor-pointer">Kinic</h2>
               <div class="auth flex items-center">
-                  <button class="bg-gray-800 text-gray-200 py-2 px-3 rounded hover:bg-gray-700 hover:text-gray-100">Login</button>
+                  <button v-if="!principal" @click="logIn()" class="bg-gray-800 text-gray-200 py-2 px-3 rounded hover:bg-gray-700 hover:text-gray-100">Login</button>
+                  <div v-else class="relative inline-block">
+                     <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                         <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
+                         <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
+                         </svg>
+                     </button>
+                     <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
+
+                       <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           Create Ad
+                       </a>
+
+                       <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           Claim Site
+                       </a>
+
+                       <hr class="border-gray-200">
+
+                       <a @click="logOut()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           Logout
+                       </a>
+                     </div>
+                 </div>
               </div>
             </nav>
+            <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between">
                 <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="hidden xl:block font-bold text-2xl cursor-pointer">Kinic</h2>
                 <div class="hidden xl:block pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
@@ -42,21 +67,70 @@
                  </div>
                  <input style="border-width: 1px;" class="block xl:hidden border-gray-200 bg-white h-12 px-5 pl-6 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
                    type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
-                <div class="hidden xl:block auth flex items-center">
-                    <!-- <b class="text-gray-500 p-2 mr-4 font-light">Sign in</b> -->
-                    <button class="bg-gray-800 text-gray-200 py-2 px-3 rounded hover:bg-gray-700 hover:text-gray-100">Login</button>
-                </div>
+                 <div class="hidden xl:block auth flex items-center text-sm">
+                      <button v-if="!principal" @click="logIn()" class="bg-gray-800 text-gray-200 py-2 px-3 rounded hover:bg-gray-700 hover:text-gray-100">Login</button>
+
+                      <div v-else class="relative inline-block">
+                         <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                             <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
+                             <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
+                             </svg>
+                         </button>
+                         <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
+
+                           <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                               Create Ad
+                           </a>
+
+                           <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                               Claim Site
+                           </a>
+
+                           <hr class="border-gray-200">
+
+                           <a @click="logOut()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                               Logout
+                           </a>
+                         </div>
+                     </div>
+                  </div>
+
             </nav>
         </div>
     </header>
 
     <header v-if="!searchMode" class="h-full">
           <div class="content px-8 py-2">
-              <!-- MOBILE NAV -->
+              <!-- LANDING NAV -->
               <nav class="flex items-center justify-between mb-4">
                 <h2 class="font-bold text-2xl"></h2>
                 <div class="auth flex items-center">
-                    <button class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700">Login</button>
+                    <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700">Login</button>
+                    <div v-else class="relative inline-block">
+                       <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                           <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
+                           <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
+                           </svg>
+                       </button>
+                       <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
+
+                         <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                             Create Ad
+                         </a>
+
+                         <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                             Claim Site
+                         </a>
+
+                         <hr class="border-gray-200">
+
+                         <a @click="logOut()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                             Logout
+                         </a>
+                       </div>
+                   </div>
                 </div>
               </nav>
           </div>
@@ -254,11 +328,47 @@
 <script>
 import { main } from "canisters/main"
 import axios from 'axios'
+import { AuthClient } from "@dfinity/auth-client"
+import { Principal } from "@dfinity/principal";
 
 export default {
   name: "Intro",
+  async mounted () {
+    const client = await AuthClient.create()
+    const isAuthenticated = await client.isAuthenticated()
+
+    if (isAuthenticated) {
+      this.identity = client.getIdentity()
+      this.principal = this.identity.getPrincipal().toString()
+      // Force close.
+      setTimeout(() => {
+        this.dropdownOn = false
+      }, 200)
+    }
+  },
   methods: {
+    async logIn () {
+      const authClient = await AuthClient.create();
+      authClient.login({
+        identityProvider: "https://identity.ic0.app",
+        onSuccess: async () => {
+          this.identity = authClient.getIdentity()
+          this.principal = this.identity.getPrincipal().toString()
+          // Force close.
+          setTimeout(() => {
+            this.dropdownOn = false
+          }, 200)
+        }
+      })
+    },
+    async logOut () {
+      const authClient = await AuthClient.create();
+      await authClient.logout()
+      this.identity = null
+      this.principal = null
+    },
     addPageToHistory () {
+      this.dropdownOn = false
       if (this.category && !this.search) {
         let newUrlIS = window.location.origin + '/category/' + this.category + '/' + (this.page + 1)
         history.pushState({}, null, newUrlIS)
@@ -310,6 +420,7 @@ export default {
       }
     },
     paginate (data) {
+      this.dropdownOn = false
       this.results = []
 
       // Sort results
@@ -443,6 +554,9 @@ export default {
             this.paginate(response.data)
           }
       });
+    },
+    toggleDD () {
+      this.dropdownOn = !this.dropdownOn
     }
   },
   beforeMount () {
@@ -462,7 +576,10 @@ export default {
       searchMode: false,
       results: [],
       category: '',
-      page: 0
+      page: 0,
+      principal: null,
+      identity: null,
+      dropdownOn: false
     }
   }
 }
