@@ -383,11 +383,80 @@
       </div>
     </section>
 
-    <!-- AD SPACE -->
-    <div v-if="searchMode" @click="dropdownOn = false" class="hidden xl:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24" style="max-width: 500px">
+    <!--
+        AD SPACE
+        We could do this programatically and swap out the text and image.. but we have plans for some crazy Ad types. Therefore each category needs to be unique.
+    -->
+    <div v-if="searchMode && category === 'landing'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-                <!--<img src="./assets/default.png" alt="">-->
+                <img src="./assets/icme.png" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
+              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center underline">Visit icme.io for no-code content creation on web3.</p></a>
+        </div>
+    </div>
+    <div v-else-if="searchMode && category === 'nft'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
+                <img src="./assets/toniq.png" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
+              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://toniqlabs.com/"><p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p></a>
+        </div>
+    </div>
+    <div v-else-if="searchMode && category === 'funny'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-80 -mt-16 mx-auto shadow-lg">
+                <img src="./assets/tacos.gif" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              Taco NFTs are stoked to support Kinic’s mission of innovation and discovery on ICP and all of the devs working on Supernova!
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://taconfts.xyz/"><p class="text-sm text-center underline">Learn more about our 10,000 Tacos living on the ICP Blockchain, join our community and mint your own at taconfts.xyz</p></a>
+        </div>
+    </div>
+    <div v-else-if="searchMode && category === 'utility'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
+                <img src="./assets/nfid.png" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
+              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.ic0.app/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
+        </div>
+    </div>
+    <div v-else-if="searchMode" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
             </div>
         </div>
         <div class="w-full mb-10">
@@ -399,7 +468,6 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <!--<a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center">Visit icme.io for no-code content creation on web3.</p></a>-->
         </div>
     </div>
 
@@ -795,6 +863,9 @@ export default {
 }
 </script>
 <style>
+  .adSpace {
+    max-width: 33%;
+  }
   .addFont {
     font-family: 'Bowlby One SC';
   }
