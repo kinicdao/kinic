@@ -421,6 +421,38 @@
             <a target="_blank" href="https://toniqlabs.com/"><p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p></a>
         </div>
     </div>
+    <div v-else-if="searchMode && category === 'investor'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
+                <img src="./assets/icpanalysis.png" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              The ICP Analysis DSCVR portal will be the single most influential space for Internet Computer microeconomic discussion. It will feature monthly supply-demand-price reports from Kyle Langham, as well as deep data drives into the IC ecosystem.
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://kn5ky-6iaaa-aaaai-qbikq-cai.ic0.app/project.html?projectId=18"><p class="text-sm text-center underline">Access NFTs for Season one on sale now!</p></a>
+        </div>
+    </div>
+    <div v-else-if="searchMode && category === 'dao'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
+                <img src="./assets/flowerdao.png" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              Community controlled launchpad by @btcflower | Merging the best Web3 stack with the finest art | Exclusively covering developments in the DAO.
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://oot6y-haaaa-aaaae-qaa7q-cai.ic0.app/"><p class="text-sm text-center underline">Check it out now!</p></a>
+        </div>
+    </div>
     <div v-else-if="searchMode && category === 'funny'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-80 -mt-16 mx-auto shadow-lg">
@@ -445,8 +477,8 @@
         </div>
         <div class="w-full mb-10">
             <p class="text-gray-600 text-center px-5">
-              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
-              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+              You and your users want a delightful onboarding experience to Web3, complete with proof of humanity and wallet support, and without sacrificing privacy or security. Get it all and then some (soon) with NFID built atop Internet Identity!
+              Contact <a target="_blank" href="https://twitter.com/IdentityMaxis">@IdentityMaxis</a> on Twitter for support.
             </p>
         </div>
         <div class="w-full">
