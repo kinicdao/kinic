@@ -1,5 +1,5 @@
 <template>
-  <div @click="dropdownOn = false" style="background: #4182d8;">
+  <div @click="dropdownOn = false" class="blueBG">
     <div class="max-w-7xl mx-auto py-3 px-2">
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
@@ -20,7 +20,7 @@
         <div class="content px-8 py-2">
             <!-- MOBILE NAV -->
             <nav class="block xl:hidden flex items-center justify-between mb-4">
-              <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="font-bold text-2xl cursor-pointer">Kinic</h2>
+              <h2 @click="reset" class="font-bold text-2xl cursor-pointer brownText addFont">Kinic</h2>
               <div class="auth flex items-center">
                 <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
                   Login
@@ -140,9 +140,9 @@
             </nav>
             <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between">
-                <h2 @click="reset" style="font-family: 'Bowlby One SC'; color:#7F321A;" class="hidden xl:block font-bold text-2xl cursor-pointer">Kinic</h2>
+                <h2 @click="reset" class="hidden xl:block font-bold text-2xl cursor-pointer brownText addFont">Kinic</h2>
                 <div class="hidden xl:block pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
+                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@
                      </svg>
                    </i>
                  </div>
-                 <input style="border-width: 1px;" class="block xl:hidden border-gray-200 bg-white h-12 px-5 pl-6 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
+                 <input style="border-width: 1px;" class="block xl:hidden border-gray-200 bg-white h-12 px-5 pl-6 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                    type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                  <div class="hidden xl:block auth flex items-center text-sm">
                    <div v-if="!principal" class="relative inline-block">
@@ -334,29 +334,29 @@
 
     <!-- SEARCH RESULTS -->
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
-      <div v-for="item in results[page]" :key="item.Canisterid" className="max-w-xl mb-8">
-        <div className="group">
-          <b style="color:#7F321A;" className="text-xs addFont">
+      <div v-for="item in results[page]" :key="item.Canisterid" class="max-w-xl mb-8">
+        <div class="group">
+          <b class="text-xs addFont brownText">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
           <a v-if="item.Title" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
-            <h2 style="color: #4182d8;" className="truncate text-xl group-hover:underline">
+            <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.Title}}
             </h2>
           </a>
           <a v-else :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
-            <h2 style="color: #4182d8;" className="truncate text-xl group-hover:underline">
+            <h2 class="truncate text-xl group-hover:underline blueText">
               No Title
             </h2>
           </a>
         </div>
-        <p className="line-clamp-2 text-gray-900">
+        <p class="line-clamp-2 text-gray-900">
           {{item.Subtitle}}
         </p>
-        <p className="line-clamp-2 text-gray-900 text-sm font-light">
+        <p class="line-clamp-2 text-gray-900 text-sm font-light">
           ID: {{item.Canisterid}}
         </p>
-        <p className="line-clamp-2 text-gray-900 text-sm font-light">
+        <p class="line-clamp-2 text-gray-900 text-sm font-light">
           Subnet: {{item.Subnetid}}
         </p>
         <span v-if="item.Status && item.Status === 'official'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">OFFICIAL</span>
@@ -525,7 +525,7 @@
     <!-- SEARCH AND TITLE PAGE -->
     <section v-if="!searchMode" @click="dropdownOn = false" class="w-full mt-48">
       <div class="flex justify-center">
-        <h1 style="font-family: 'Bowlby One SC'; color:#7F321A;" class="text-8xl">
+        <h1 class="text-8xl brownText addFont">
           Kinic.
         </h1>
       </div>
@@ -535,7 +535,7 @@
         <div class="p-4 w-full">
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full custom-hover text-lg"
+                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
@@ -549,7 +549,7 @@
                  </div>
               </div>
             <div class="flex justify-center mt-10">
-              <button @click="termSearch('in')" class="text-white font-light py-2 px-8 rounded srchIt addFont">Search Web 3.0</button>
+              <button @click="termSearch('in')" class="text-white font-light py-2 px-8 rounded searchButton addFont">Search Web 3.0</button>
             </div>
         </div>
     </section>
@@ -901,13 +901,22 @@ export default {
   .addFont {
     font-family: 'Bowlby One SC';
   }
-  .srchIt {
+  .blueBG {
     background-color: #4182d8;
   }
-  .srchIt:hover {
+  .blueText {
+    color: #4182d8;
+  }
+  .brownText {
+    color:#7F321A;
+  }
+  .searchButton {
+    background-color: #4182d8;
+  }
+  .searchButton:hover {
     background-color: #235da9;
   }
-  .custom-hover:hover {
+  .customHover:hover {
     box-shadow: rgb(0 0 0 / 15%) 0px 6px 15px -3px, rgb(0 0 0 / 15%) 0px -3px 6px -4px;
   }
 </style>
