@@ -4,6 +4,11 @@
       "main": "backend/main.mo",
       "type": "motoko"
     },
+    "ledger": {
+      "type": "custom",
+      "wasm": "backend/LocalLedger/ledger.wasm",
+      "candid": "backend/LocalLedger/ledger.public.did"
+    },
     "assets": {
       "dependencies": [
         "main"
@@ -22,7 +27,7 @@
       "packtool": ""
     }
   },
-  "dfx": "0.8.4",
+  "dfx": "0.9.3",
   "networks": {
     "local": {
       "bind": "127.0.0.1:8000",
