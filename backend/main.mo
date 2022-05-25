@@ -265,7 +265,7 @@ actor class Auction() =  this {
       case (?props) switch (props) {
         case (#Unknown(_)) return #err "the canister is not verified";
         case (#Verified(v)) {
-          if (v.owner != caller) return #err "you are not owner";
+          // if (v.owner != caller) return #err "you are not owner"; // WIP 本番はコメントアウトを解く
           switch (v.balance) {
 
             // 既にどこかへ入札している場合，それが最高額のbidなら拒否する,それ以外は通す
