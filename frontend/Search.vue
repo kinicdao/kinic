@@ -1,26 +1,26 @@
 <template>
-  <div @click="dropdownOn = false" class="blueBG">
-    <div class="max-w-7xl mx-auto py-3 px-2">
+  <div @click="dropdownOn = false" class="redBG">
+    <div class="max-w-7xl mx-auto py-1 px-2">
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
-          <p class="ml-3 font-light text-white truncate">
+          <p class="ml-3 font-light text-md text-gray-300 truncate">
             <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the IC. Enter a canister ID or search text to find great content on web3.</span>
             <span v-else>☝Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
-        <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-          <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-500 bg-white hover:bg-indigo-50 addFont"> Built for #SUPERNOVA </a>
+        <div class="order-3 mt-2 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+          <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm text font-bold text-white bg-black hover:bg-indigo-50 hover:text-red-800 mt-1"> Built for #SUPERNOVA </a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- HEADER FOR RESULTS PAGE -->
-  <header v-if="searchMode" class="h-full" style="border-bottom: 1px solid #eee">
-        <div class="content px-8 py-2">
+  <header v-if="searchMode" class="h-full" style="border-bottom: 1px solid #eee;">
+        <div class="content px-8 pt-2 pb-4 blackBG">
             <!-- MOBILE NAV -->
             <nav class="block xl:hidden flex items-center justify-between mb-4">
-              <h2 @click="reset" class="font-bold text-2xl cursor-pointer brownText addFont">Kinic</h2>
+              <h2 @click="reset" class="font-bold text-2xl cursor-pointer redText addFont">Kinic</h2>
               <div class="auth flex items-center">
                 <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
                   Login
@@ -140,9 +140,9 @@
             </nav>
             <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between">
-                <h2 @click="reset" class="hidden xl:block font-bold text-2xl cursor-pointer brownText addFont">Kinic</h2>
-                <div class="hidden xl:block pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                <h2 @click="reset" class="hidden xl:block font-bold text-2xl cursor-pointer redText addFont">Kinic</h2>
+                <div class="hidden xl:block pt-3 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
+                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
@@ -206,12 +206,12 @@
     </header>
 
     <!-- HEADER FOR LANDING PAGE -->
-    <header v-if="!searchMode" class="h-full">
-          <div class="content px-8 py-2">
+    <header v-if="!searchMode" class="h-full blackBG">
+          <div class="content px-8 py-2 pt-5">
               <!-- LANDING NAV -->
               <nav class="flex items-center justify-between mb-4">
                 <h2 class="font-bold text-2xl"></h2>
-                <div class="auth flex items-center">
+                <div class="auth flex items-center mr-14">
                     <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
                       Login
                       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -336,7 +336,7 @@
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
       <div v-for="item in results[page]" :key="item.Canisterid" class="max-w-xl mb-8">
         <div class="group">
-          <b class="text-xs addFont brownText">
+          <b class="text-xs redText">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
           <a v-if="item.Title" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
@@ -542,16 +542,16 @@
     </div>
 
     <!-- SEARCH AND TITLE PAGE -->
-    <section v-if="!searchMode" @click="dropdownOn = false" class="w-full mt-48">
+    <section v-if="!searchMode" @click="dropdownOn = false" class="w-full pt-20 mt-30 blackBG">
       <div class="flex justify-center">
-        <h1 class="text-8xl brownText addFont">
+        <h1 class="text-8xl text-white tracking-wide addFont" style="color:#B01234;">
           Kinic.
         </h1>
       </div>
     </section>
 
-    <section v-if="!searchMode" @click="dropdownOn = false" style="margin-bottom:6%;" class="w-full">
-        <div class="p-4 w-full">
+    <section v-if="!searchMode" @click="dropdownOn = false" style="margin-bottom:2%;" class="w-full blackBG">
+        <div class="p-4 w-full pb-20">
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
@@ -568,71 +568,71 @@
                  </div>
               </div>
             <div class="flex justify-center mt-10">
-              <button @click="termSearch('in')" class="text-white font-light py-2 px-8 rounded searchButton addFont">Search Web 3.0</button>
+              <button @click="termSearch('in')" class="text-white font-bold py-3 px-8 rounded searchButton text-gray-800 bg-gray-300 hover:text-gray-300 hover:bg-red-800">Search Web 3.0</button>
             </div>
         </div>
     </section>
 
     <!-- CATEGORY FOOTER -->
-    <div v-if="!searchMode" @click="dropdownOn = false" class="h-5 border-b-2 border-gray-400 text-xl addFont">
+    <div v-if="!searchMode" @click="dropdownOn = false" class="h-5 border-b-2 text-xl addFont redBORDER">
         <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
     </div>
 
-    <div v-if="!searchMode" @click="dropdownOn = false" class="mt-4 mx-2 ml-8 mb-2">
-        <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+    <div v-if="!searchMode" @click="dropdownOn = false" class="mt-6 mx-2 ml-8 mb-2">
+        <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Blog
         </a>
-        <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Communication
         </a>
-        <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           DAO
         </a>
-        <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Defi
         </a>
-        <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Docs
         </a>
-        <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Funny
         </a>
-        <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Games
         </a>
-        <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Interesting
         </a>
-        <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Investor
         </a>
     </div>
     <div v-if="!searchMode" @click="dropdownOn = false" class="mt-2 mb-10 ml-8">
-        <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Portfolio
         </a>
-        <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Landing
         </a>
-        <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Learning
         </a>
-        <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Music
         </a>
-        <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           NFT
         </a>
-        <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Social
         </a>
-        <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Utility
         </a>
-        <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Video
         </a>
-        <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-yellow-500 font-light cursor-pointer">
+        <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Work In Progress
         </a>
     </div>
@@ -918,16 +918,22 @@ export default {
     max-width: 33%;
   }
   .addFont {
-    font-family: 'Bowlby One SC';
+    font-family: "neonize","Noto Sans JP",Helvetica,Arial,sans-serif;
   }
-  .blueBG {
-    background-color: #4182d8;
+  .blackBG {
+    background-color: #181616;
+  }
+  .redBG {
+    background-color: #7D0B24;
   }
   .blueText {
     color: #4182d8;
   }
-  .brownText {
-    color:#7F321A;
+  .redText {
+    color:#7D0B24;
+  }
+  .redBORDER {
+    border-color:#B01234;
   }
   .searchButton {
     background-color: #4182d8;
