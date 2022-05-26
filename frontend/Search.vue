@@ -544,7 +544,7 @@
     <!-- SEARCH AND TITLE PAGE -->
     <section v-if="!searchMode" @click="dropdownOn = false" class="w-full pt-20 mt-30 blackBG">
       <div class="flex justify-center">
-        <h1 class="text-8xl text-white tracking-wide addFont" style="color:#B01234;">
+        <h1 class="text-6xl md:text-8xl text-white tracking-wide addFont" style="color:#B01234;">
           Kinic.
         </h1>
       </div>
@@ -574,7 +574,7 @@
     </section>
 
     <!-- CATEGORY FOOTER -->
-    <div v-if="!searchMode" @click="dropdownOn = false" class="h-5 border-b-2 text-xl addFont redBORDER">
+    <div v-if="!searchMode" @click="dropdownOn = false" class="h-5 border-b-2 text-md md:text-xl addFont redBORDER">
         <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
     </div>
 
