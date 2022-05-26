@@ -421,6 +421,25 @@
             <a target="_blank" href="https://toniqlabs.com/"><p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p></a>
         </div>
     </div>
+    <div v-else-if="searchMode && category === 'interesting'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-160 -mt-16 mx-auto shadow-lg">
+                  <video controls>
+                    <source src="./assets/icos_demo.mp4" type="video/mp4">
+                  </video>
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              ICPCS is building an ecosystem on the Internet Computer powered by NFTs.
+              Access your own personalized portal into the IC - featuring powerful dApps, staking rewards, on-chain file storage and much more, all in one place. Join the ICPCS Community today!
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://icpcs.io/"><p class="text-sm text-center underline">Read more about ICPCS</p></a>
+        </div>
+    </div>
     <div v-else-if="searchMode && category === 'investor'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
