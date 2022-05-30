@@ -7,7 +7,7 @@
     "ledger": {
       "type": "custom",
       "wasm": "backend/LocalLedger/ledger.wasm",
-      "candid": "backend/LocalLedger/ledger.public.did"
+      "candid": "backend/LocalLedger/ledger.private.did"
     },
     "assets": {
       "dependencies": [
@@ -24,7 +24,7 @@
   },
   "defaults": {
     "build": {
-      "packtool": ""
+      "packtool": "vessel sources"
     }
   },
   "dfx": "0.9.3",

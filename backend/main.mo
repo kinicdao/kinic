@@ -1,29 +1,18 @@
-// motoko base
-import HashMap "mo:base/HashMap";
-import Principal "mo:base/Principal";
-import List "mo:base/List";
-import Text "mo:base/Text";
-import Debug "mo:base/Debug";
-import Iter "mo:base/Iter";
-import Result "mo:base/Result";
-import Time "mo:base/Time";
+// Motoko base
 import Array "mo:base/Array";
-
-// locak
+import Debug "mo:base/Debug";
+import HashMap "mo:base/HashMap";
+import Hex "mo:ext/util/Hex";
+import Iter "mo:base/Iter";
 import Ledger "ledgerManage";
+import List "mo:base/List";
+import Principal "mo:base/Principal";
+import Result "mo:base/Result";
+import Text "mo:base/Text";
+import Time "mo:base/Time";
 
 
 actor class Auction() =  this {
-  stable var currentValue: Nat = 0;
-
-  public func increment(): async () {
-      currentValue += 1;
-  };
-
-  public query func getValue(): async Nat {
-      currentValue;
-  };
-
   /* ---- new implements ---- */
 
   /*types*/
@@ -35,7 +24,7 @@ actor class Auction() =  this {
   type UserId = Principal; // content site owner
   type Bid = (CanisterId,Price);
   type ContentProps = {
-    #Unknown : { // not be verified canister
+    #Unknown : { // not be verified canister by content site owner
       var clickRecord : Nat;
     };
     #Verified : {
@@ -122,7 +111,7 @@ actor class Auction() =  this {
   /*
   Verify content site owner. This is debug funciton.
   */
-  public shared ({caller}) func verifyContentOwner_for_debug(canisterId : CanisterId, owner : UserId) : async Result<Text, Text> {
+  public shared ({caller}) func verifyContentOwner_for_debug({canisterId : CanisterId; owner : UserId}) : async Result<Text, Text> {
     Debug.print("[WIP] This is Debug function !!!");
     switch (_contents.get(canisterId)) {
       case (?#Unknown(v))  {
@@ -186,12 +175,14 @@ actor class Auction() =  this {
     }
   };
 
-  stable var testBidPrice : Nat64 = 1;
-  public shared({caller}) func offerBid_for_debug(category : Category, canisterId : CanisterId) : async Result<Text, Text> {
-    testBidPrice += 1; // for debug
-    var bidPrice = testBidPrice : Nat64; //e8s
+  public func getAccountIdentifier(canisterId : CanisterId) : async Text {
+    Ledger.getTextAccountIdentifier({icme=Principal.fromActor(this); canisterId=canisterId});
+  };
 
+  public shared({caller}) func offerBid_for_debug({category : Category; canisterId : CanisterId}) : async Result<Text, Text> {
     /* notify  ledger balance */
+    let bidPrice = (await Ledger.contentBalance({icme=Principal.fromActor(this); canisterID=canisterId})).e8s;
+    if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee";
     
     // auth owner
     switch (_contents.get(canisterId)) {
@@ -260,7 +251,7 @@ actor class Auction() =  this {
     return #ok "ok";
   };
 
-  public shared({caller}) func cancelBid_for_debug(category : Category, canisterId : CanisterId) : async Result<Text, Text> {
+  public shared({caller}) func cancelBid_for_debug({category : Category; canisterId : CanisterId}) : async Result<Text, Text> {
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
         case (#Unknown(_)) return #err "the canister is not verified";
@@ -294,6 +285,10 @@ actor class Auction() =  this {
     };
   };
 
+  // public shared ({caller}) func refound({to : Text}) : async () {
+
+  // };
+
   public func AutoSelectWinner_for_debug(category : Category) : async Result<Text, Text> {
     switch (_categories.get(category)) {
       case null return #err "The category is not exsiting";
@@ -310,10 +305,16 @@ actor class Auction() =  this {
               });
               return #err "There are no bid";
             };
-            case (?(ad, p)) {
+            case (?(ad, p)) { // (canister_id, bid_price)
 
-              /* adからp分のicpを送金する */
+              // send winner's bid price to category 
+              let ledgerResult = await Ledger.sendToCategory({icme=Principal.fromActor(this); canisterID=ad; amount={e8s=p}; category=category});
 
+              switch (ledgerResult) {
+                case (#Err(_)) return #err "ledger transfer error";
+                case (#Ok(_)) {}
+              };
+              // close auction
               _categories.put(category, {
                 status = #close;
                 lastWinner = ad; 

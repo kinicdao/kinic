@@ -2,10 +2,16 @@ let upstream = https://github.com/dfinity/vessel-package-set/releases/download/m
 let Package = { name : Text, version : Text, repo : Text, dependencies : List Text }
 
 let additions = [{
+    name = "base",
+    repo = "https://github.com/dfinity/motoko-base",
+    version = "dfx-0.7.2",
+    dependencies = ["base"]
+
+}, {
     name = "ext",
     repo = "https://github.com/wyattbenno777/extendable-token",
     version = "main",
-    dependencies = ["ext"]
+    dependencies = ["base", "ext"]
     
 }] : List Package
 
