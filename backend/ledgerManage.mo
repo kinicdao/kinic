@@ -1,15 +1,19 @@
-// motoko base
+// Motoko base
 import Blob "mo:base/Blob";
 import Array "mo:base/Array";
 import Principal "mo:base/Principal";
 import Text "mo:base/Text";
 import Time "mo:base/Time";
 
-// ext standard
+// Ext standard
 import Hex "mo:ext/util/Hex";
 import ExtCore "mo:ext/Core";
 import SHA224 "mo:ext/util/SHA224";
 import AID "mo:ext/util/AccountIdentifier";
+
+// Local
+// import Types "types";
+
 
 module {
   /* Ledger Types */
@@ -102,15 +106,15 @@ dfx identity use clankpan
   let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
 
   /* for content */
-  public func contentBalance({icme : Principal; canisterID : Principal}) : async Tokens {
-    let subAccount = toSubAccount_fromPrincipal(canisterID);
+  public func contentBalance({icme : Principal; canisterId : Principal}) : async Tokens {
+    let subAccount = toSubAccount_fromPrincipal(canisterId);
     let aId  = toAccountIdentifer(icme, subAccount);
     await ledger.account_balance({
         account = aId;
     });
   };
-  public func sendToContent({icme : Principal; canisterID : Principal; amount : Tokens; to : AccountIdentifier}) : async TransferResult {
-    let fromSubAccount = toSubAccount_fromPrincipal(canisterID);
+  public func sendToContent({icme : Principal; canisterId : Principal; amount : Tokens; to : AccountIdentifier}) : async TransferResult {
+    let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
     // let aId  = toAccountIdentifer(icme, subAccount);
     let args : TransferArgs = {
       memo: Memo = 0;
@@ -132,8 +136,8 @@ dfx identity use clankpan
     });
   };
 
-  public func sendToCategory({icme : Principal; canisterID : Principal; amount : Tokens; category : Text}) : async TransferResult {
-    let fromSubAccount = toSubAccount_fromPrincipal(canisterID);
+  public func sendToCategory({icme : Principal; canisterId : Principal; amount : Tokens; category : Text}) : async TransferResult {
+    let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
     let toSubAccount = toSubAccount_fromText(category);
     let toAId  = toAccountIdentifer(icme, toSubAccount);
     let args : TransferArgs = {
@@ -146,6 +150,22 @@ dfx identity use clankpan
     };
     await ledger.transfer(args);
   };
+
+  public func refoundToUser({icme : Principal; canisterId : Principal; to : Text}) : async TransferResult {
+    let amount : Tokens = await contentBalance({icme; canisterId});
+    let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
+    let toAId  = Blob.fromArray(Hex.decode(to));
+    let args : TransferArgs = {
+      memo: Memo = 0;
+      amount: Tokens = amount;
+      fee: Tokens = {e8s=10_000};
+      from_subaccount: ?SubAccount = ?Blob.fromArray(fromSubAccount);
+      to: AccountIdentifier = toAId;
+      created_at_time: ?TimeStamp = null;
+    };
+    await ledger.transfer(args);
+  };
+
 
   public func getTextAccountIdentifier({icme : Principal; canisterId : Principal}) : Text {
     let subAccount = toSubAccount_fromPrincipal(canisterId);
