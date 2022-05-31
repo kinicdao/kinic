@@ -140,7 +140,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   add category. Only ICME can use this.
   */
   public shared({caller}) func addCategory(category : Category) : async Result<Text, Text> {
-    assert(caller != installer); // only use icme
+    assert(caller == installer); // only use icme
     // assert(caller != "2vxsx-fae");
     // assert(not Principal.isAnonymous(caller)); // error because we use dfx-0.7.2 via vessel
 
@@ -160,7 +160,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   start category ad acution. Only ICME can use this.
   */
   public shared({caller}) func startAuction(category : Category) : async Result<Text, Text> {
-    assert(caller != installer); // only use icme
+    assert(caller == installer); // only use icme
     // assert(caller != "2vxsx-fae");
 
     switch (_categories.get(category)) {
@@ -317,7 +317,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   };
 
   public shared({caller}) func AutoSelectWinner_for_debug(category : Category) : async Result<Text, Text> {
-    assert(caller != installer); // only use icme
+    assert(caller == installer); // only use icme
     // assert(caller != "2vxsx-fae");
 
     switch (_categories.get(category)) {
