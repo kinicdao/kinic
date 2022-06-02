@@ -4,6 +4,7 @@ import Array "mo:base/Array";
 import Principal "mo:base/Principal";
 import Text "mo:base/Text";
 import Time "mo:base/Time";
+import Nat64 "mo:base/Nat64";
 
 // Ext standard
 import Hex "mo:ext/util/Hex";
@@ -157,6 +158,21 @@ dfx identity use clankpan
     if (10_000 > amount.e8s) return #Err(#InsufficientFunds({ balance=amount; }));
     let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
     let toAId  = Blob.fromArray(Hex.decode(to));
+    let args : TransferArgs = {
+      memo: Memo = 0;
+      amount: Tokens = {e8s=amount.e8s-10_000};
+      fee: Tokens = {e8s=10_000};
+      from_subaccount: ?SubAccount = ?Blob.fromArray(fromSubAccount);
+      to: AccountIdentifier = toAId;
+      created_at_time: ?TimeStamp = null;
+    };
+    await ledger.transfer(args);
+  };
+
+  public func sendFee({kinic : Principal; canisterId : Principal; amount : Tokens;}) : async TransferResult {
+    if (10_000 > amount.e8s) return #Err(#InsufficientFunds({ balance=amount; }));
+    let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
+    let toAId  = Blob.fromArray(Hex.decode(AID.fromPrincipal(kinic, null)));
     let args : TransferArgs = {
       memo: Memo = 0;
       amount: Tokens = {e8s=amount.e8s-10_000};

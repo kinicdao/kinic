@@ -10,7 +10,7 @@
 // |_____|/  |____|/   |___________|/    |______|/|_____|/  |___________|/    \|_____|    ||  
 //                                                                                   |____|/ 
 //
-// By ClankPan and Wyatt 2022~
+// By ClankPan and Wyatt 2022 June ~
 
 
 // Motoko base
@@ -25,6 +25,7 @@ import Principal "mo:base/Principal";
 import Result "mo:base/Result";
 import Text "mo:base/Text";
 import Time "mo:base/Time";
+import Nat64 "mo:base/Nat64";
 
 // Local
 import Types "types";
@@ -52,6 +53,8 @@ shared ({caller=installer}) actor class Auction() =  this {
   let day = 24 * hour;
   let week =  7 * day;
   stable var defaultAuctionTime = 1 * minutes;
+
+  let bidFeePercent = 1; // [%]
 
   // let IC0 = actor("aaaaa-aa") : 
   //   actor {
@@ -305,8 +308,8 @@ shared ({caller=installer}) actor class Auction() =  this {
     assert(isNotAnonymous(caller));
 
     // get ledger balance 
-    let bidPrice = (await Ledger.contentBalance({kinic=Principal.fromActor(this); canisterId=canisterId})).e8s;
-    if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee";
+    let ledgerBalance = Nat64.toNat((await Ledger.contentBalance({kinic=Principal.fromActor(this); canisterId=canisterId})).e8s);
+    if (10_000 >= ledgerBalance) return #err  "your bid prince is under ledger transfer fee & kinic bid fee";
     
     // auth owner
     switch (_contents.get(canisterId)) {
@@ -336,7 +339,15 @@ shared ({caller=installer}) actor class Auction() =  this {
       case (_) return #err "the canister is not registred";
     };
 
-    /* bid手数料をここで引く */
+    /* WIP bid手数料をここで引く */
+    let bidPrice = Nat64.fromNat((ledgerBalance * 100 - ledgerBalance * bidFeePercent)/100);
+    let fee = Nat64.fromNat(ledgerBalance) - bidPrice;
+    if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee after pay kinic bid fee";
+    switch (await Ledger.sendFee({kinic=Principal.fromActor(this); canisterId=canisterId; amount={e8s=fee}})) {
+      case (#Err(e)) return #err "ledger transfer error";
+      case (#Ok(_)) {}
+    };
+
 
     // add bid to _categories
     switch (_categories.get(category)) {
