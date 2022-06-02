@@ -158,6 +158,7 @@ shared ({caller=installer}) actor class Auction() =  this {
         _categories.put(category, {
           status = #close; // auction status
           lastWinner : CanisterId = Principal.fromActor(this);
+          auctionHistory = List.nil<(Time.Time, List.List<Bid>)>();
         });
         return #ok "add category, init winner is this canister";
       };
@@ -184,6 +185,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                 end = Time.now() + defaultAuctionTime;
               });
               lastWinner : CanisterId = auction.lastWinner; // category's first winner is KINIC's canister
+              auctionHistory : List.List<(Time.Time, List.List<Bid>)> = auction.auctionHistory;
             });
           return #ok "started auction";
         }
@@ -350,7 +352,8 @@ shared ({caller=installer}) actor class Auction() =  this {
             case (null) {
               _categories.put(category, {
                 status = #close;
-                lastWinner = auction.lastWinner; // 前回のwinnerにする
+                lastWinner = auction.lastWinner; // continue last winner
+                auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
               return #err(#main("There are no bid"));
             };
@@ -366,7 +369,8 @@ shared ({caller=installer}) actor class Auction() =  this {
               // close auction
               _categories.put(category, {
                 status = #close;
-                lastWinner = ad; 
+                lastWinner = ad;
+                auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
 
               /* bidderのbalanceを全部unlockに変更する */
