@@ -158,29 +158,6 @@ shared ({caller=installer}) actor class Auction() =  this {
     return #ok "Verified Owner";
   };
 
-  public shared ({caller}) func requestVerifyContentOwner(canisterId : CanisterId) : async Result<Text, Text> {
-    assert(isNotAnonymous(caller));
-
-    switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {};
-      case (?#Verified(v)) {
-        return #err("Alrady Verified by " # Principal.toText(v.owner));
-      };
-      case (_) {};
-    };
-
-    // add _ownerVerifyRequests
-    switch (_ownerVerifyRequests.get(canisterId)) {
-      case (null) {
-        _ownerVerifyRequests.put(canisterId, List.push<UserId>(caller, List.nil<UserId>()))
-      };
-      case (?v) {
-        _ownerVerifyRequests.put(canisterId, List.push<UserId>(caller, v))
-      }
-    };
-    return #ok "ok";
-
-  };
   public query func getVerifyRequests() : async [(CanisterId, [UserId])] {
     Array.map<(CanisterId, List.List<UserId>), (CanisterId, [UserId])>(Iter.toArray(_ownerVerifyRequests.entries()), func((canisterId, list)) {
       (canisterId, List.toArray<UserId>(list))
@@ -300,6 +277,30 @@ shared ({caller=installer}) actor class Auction() =  this {
 
   /* public user functions */
 
+  public shared ({caller}) func requestVerifyContentOwner(canisterId : CanisterId) : async Result<Text, Text> {
+    assert(isNotAnonymous(caller));
+
+    switch (_contents.get(canisterId)) {
+      case (?#Unknown(v))  {};
+      case (?#Verified(v)) {
+        return #err("Alrady Verified by " # Principal.toText(v.owner));
+      };
+      case (_) {};
+    };
+
+    // add _ownerVerifyRequests
+    switch (_ownerVerifyRequests.get(canisterId)) {
+      case (null) {
+        _ownerVerifyRequests.put(canisterId, List.push<UserId>(caller, List.nil<UserId>()))
+      };
+      case (?v) {
+        _ownerVerifyRequests.put(canisterId, List.push<UserId>(caller, v))
+      }
+    };
+    return #ok "ok";
+
+  };
+
   public func getContentAccountIdentifier(canisterId : CanisterId) : async Text {
     Ledger.getContentAccountIdentifier({kinic=Principal.fromActor(this); canisterId=canisterId});
   };
@@ -339,7 +340,6 @@ shared ({caller=installer}) actor class Auction() =  this {
       case (_) return #err "the canister is not registred";
     };
 
-    /* WIP bid手数料をここで引く */
     let bidPrice = Nat64.fromNat((ledgerBalance * 100 - ledgerBalance * bidFeePercent)/100);
     let fee = Nat64.fromNat(ledgerBalance) - bidPrice;
     if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee after pay kinic bid fee";
@@ -347,7 +347,6 @@ shared ({caller=installer}) actor class Auction() =  this {
       case (#Err(e)) return #err "ledger transfer error";
       case (#Ok(_)) {}
     };
-
 
     // add bid to _categories
     switch (_categories.get(category)) {
