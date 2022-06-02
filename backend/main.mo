@@ -1,3 +1,18 @@
+//  ______   _______     ____________    _____    _____       ____________           _____    
+// |\     \  \      \   /            \  |\    \   \    \     /            \     _____\    \_  
+//  \\     \  |     /| |\___/\  \\___/|  \\    \   |    |   |\___/\  \\___/|   /     /|     | 
+//   \|     |/     //   \|____\  \___|/   \\    \  |    |    \|____\  \___|/  /     / /____/| 
+//    |     |_____//          |  |         \|    \ |    |          |  |      |     | |____|/  
+//    |     |\     \     __  /   / __       |     \|    |     __  /   / __   |     |  _____   
+//   /     /|\|     |   /  \/   /_/  |     /     /\      \   /  \/   /_/  |  |\     \|\    \  
+//  /_____/ |/_____/|  |____________/|    /_____/ /______/| |____________/|  | \_____\|    |  
+// |     | / |    | |  |           | /   |      | |     | | |           | /  | |     /____/|  
+// |_____|/  |____|/   |___________|/    |______|/|_____|/  |___________|/    \|_____|    ||  
+//                                                                                   |____|/ 
+//
+// By ClankPan and Wyatt 2022~
+
+
 // Motoko base
 import Array "mo:base/Array";
 import Debug "mo:base/Debug";
@@ -16,7 +31,6 @@ import Types "types";
 
 
 shared ({caller=installer}) actor class Auction() =  this {
-  /* ---- new implements ---- */
 
   /*types*/
   type Result<T, E> = Result.Result<T, E>;
@@ -37,17 +51,17 @@ shared ({caller=installer}) actor class Auction() =  this {
   let hour = 60 * minutes;
   let day = 24 * hour;
   let week =  7 * day;
-  let defaultAuctionTime = 3 * minutes;
+  stable var defaultAuctionTime = 1 * minutes;
 
-  let IC0 = actor("aaaaa-aa") : 
-    actor {
-      canister_status : shared { canister_id : Principal } -> 
-        async {
-          module_hash : ?[Nat8];
-          status : { #stopped; #stopping; #running };
-          cycles : Nat;
-        };
-  };
+  // let IC0 = actor("aaaaa-aa") : 
+  //   actor {
+  //     canister_status : shared { canister_id : Principal } -> 
+  //       async {
+  //         module_hash : ?[Nat8];
+  //         status : { #stopped; #stopping; #running };
+  //         cycles : Nat;
+  //       };
+  // };
 
   stable var _upgradeProps = {
     contents : [(CanisterId, ContentProps)] = [];
@@ -75,14 +89,14 @@ shared ({caller=installer}) actor class Auction() =  this {
     };
   };
 
-  /*functions*/
+  /* KINIC Owner functions*/
 
   /*
-  Record click count. Only ICME can use this.
+  Record click count. Only KINIC can use this.
   */
   public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
-    // assert(caller != "2vxsx-fae");
-    Debug.print("this funciton is WIP !!! anyone can use this function");
+    assert(caller == installer); // only use kinic
+    assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
       case (?#Unknown(v))  {
@@ -105,9 +119,9 @@ shared ({caller=installer}) actor class Auction() =  this {
   /*
   Verify content site owner. This is debug funciton.
   */
-  public shared ({caller}) func verifyContentOwner_for_debug({canisterId : CanisterId; owner : UserId}) : async Result<Text, Text> {
-    // assert(caller != "2vxsx-fae");
-    Debug.print("this funciton is WIP !!! anyone can use this function");
+  public shared ({caller}) func verifyContentOwnerManually({canisterId : CanisterId; owner : UserId}) : async Result<Text, Text> {
+    assert(caller == installer); // only use kinic
+    assert(isNotAnonymous(caller));
     
     switch (_contents.get(canisterId)) {
       case (?#Unknown(v))  {
@@ -132,17 +146,12 @@ shared ({caller=installer}) actor class Auction() =  this {
     }
   };
 
-  // public shared ({caller}) func verifyContentOwner{canisterId : CanisterId) : async () {
-  //   let ic0 = actor
-  // };
-
   /*
-  add category. Only ICME can use this.
+  add category. Only KINIC can use this.
   */
   public shared({caller}) func addCategory(category : Category) : async Result<Text, Text> {
-    assert(caller == installer); // only use icme
-    // assert(caller != "2vxsx-fae");
-    // assert(not Principal.isAnonymous(caller)); // error because we use dfx-0.7.2 via vessel
+    assert(caller == installer); // only use kinic
+    assert(isNotAnonymous(caller));
 
     switch (_categories.get(category)) {
       case (null) {
@@ -157,11 +166,11 @@ shared ({caller=installer}) actor class Auction() =  this {
   };
 
   /*
-  start category ad acution. Only ICME can use this.
+  start category ad acution. Only KINIC can use this.
   */
   public shared({caller}) func startAuction(category : Category) : async Result<Text, Text> {
-    assert(caller == installer); // only use icme
-    // assert(caller != "2vxsx-fae");
+    assert(caller == installer); // only use kinic
+    assert(isNotAnonymous(caller));
 
     switch (_categories.get(category)) {
       case null return #err "The category is not exsiting";
@@ -174,7 +183,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                 start = Time.now();
                 end = Time.now() + defaultAuctionTime;
               });
-              lastWinner : CanisterId = auction.lastWinner; // category's first winner is ICME's canister
+              lastWinner : CanisterId = auction.lastWinner; // category's first winner is KINIC's canister
             });
           return #ok "started auction";
         }
@@ -182,15 +191,25 @@ shared ({caller=installer}) actor class Auction() =  this {
     }
   };
 
-  public func getAccountIdentifier(canisterId : CanisterId) : async Text {
-    Ledger.getTextAccountIdentifier({icme=Principal.fromActor(this); canisterId=canisterId});
+  public shared ({caller}) func getCategoryAccountIdentifier(category : Category) : async Text {
+    assert(caller == installer); // only use kinic
+    assert(isNotAnonymous(caller));
+
+    Ledger.getCategoryAccountIdentifier({kinic=Principal.fromActor(this); category=category});
+  };
+
+
+  /* public user functions */
+
+  public func getContentAccountIdentifier(canisterId : CanisterId) : async Text {
+    Ledger.getContentAccountIdentifier({kinic=Principal.fromActor(this); canisterId=canisterId});
   };
 
   public shared({caller}) func offerBid({category : Category; canisterId : CanisterId}) : async Result<Text, Text> {
-    // assert(caller != "2vxsx-fae");
+    assert(isNotAnonymous(caller));
 
     // get ledger balance 
-    let bidPrice = (await Ledger.contentBalance({icme=Principal.fromActor(this); canisterId=canisterId})).e8s;
+    let bidPrice = (await Ledger.contentBalance({kinic=Principal.fromActor(this); canisterId=canisterId})).e8s;
     if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee";
     
     // auth owner
@@ -260,8 +279,8 @@ shared ({caller=installer}) actor class Auction() =  this {
     return #ok "ok";
   };
 
-  public shared({caller}) func cancelBid_for_debug({category : Category; canisterId : CanisterId}) : async Result<Text, Text> {
-    // assert(caller != "2vxsx-fae");
+  public shared({caller}) func cancelBid(canisterId : CanisterId) : async Result<Text, Text> {
+    assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
@@ -293,39 +312,39 @@ shared ({caller=installer}) actor class Auction() =  this {
     };
   };
 
-  public shared ({caller}) func refound({canisterId : CanisterId; to : Text}) : async Result<Text, Text> {
-    // assert(caller != "2vxsx-fae");
+  public shared ({caller}) func refound({canisterId : CanisterId; to : Text}) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
+    assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
-        case (#Unknown(_)) return #err "the canister is not verified";
+        case (#Unknown(_)) return #err(#main("the canister is not verified"));
         case (#Verified(v)) {
-          if (v.owner != caller) return #err "you are not owner";
+          if (v.owner != caller) return #err(#main("you are not owner"));
           switch (v.balance) {
-            case (#locked(_)) return #err "your balnce is locked";
+            case (#locked(_)) return #err(#main("your balnce is locked"));
             case (#unlock) {
-              switch (await Ledger.refoundToUser({icme=Principal.fromActor(this); canisterId=canisterId; to=to})) {
-                case (#Err(_)) return #err "ledger transfer error";
+              switch (await Ledger.refoundToUser({kinic=Principal.fromActor(this); canisterId=canisterId; to=to})) {
+                case (#Err(e)) return #err(#ledger(e));
                 case (#Ok(_)) return #ok "ok";
               }
             }
           }
         }
       };
-      case (_) return #err "the canister is not registred";
+      case (_) return #err(#main("the canister is not registred"));
     }
   };
 
-  public shared({caller}) func AutoSelectWinner_for_debug(category : Category) : async Result<Text, Text> {
-    assert(caller == installer); // only use icme
-    // assert(caller != "2vxsx-fae");
+  public shared({caller}) func AutoSelectWinner(category : Category) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
+    assert(caller == installer); // only use knic
+    assert(isNotAnonymous(caller));
 
     switch (_categories.get(category)) {
-      case null return #err "The category is not exsiting";
+      case null return #err(#main( "The category is not exsiting"));
       case (?auction) switch (auction.status) {
-        case (#close) return #err "The category is already closed";
+        case (#close) return #err(#main("The category is already closed"));
         case (#open(v)) {
-          if (v.end >= Time.now()) return #err "The category is still in auction";
+          if (v.end >= Time.now()) return #err(#main( "The category is still in auction"));
 
           switch (List.get<Bid>(v.bids, 0)) {
             case (null) {
@@ -333,15 +352,15 @@ shared ({caller=installer}) actor class Auction() =  this {
                 status = #close;
                 lastWinner = auction.lastWinner; // 前回のwinnerにする
               });
-              return #err "There are no bid";
+              return #err(#main("There are no bid"));
             };
             case (?(ad, p)) { // (canister_id, bid_price)
 
               // send winner's bid price to category 
-              let ledgerResult = await Ledger.sendToCategory({icme=Principal.fromActor(this); canisterId=ad; amount={e8s=p}; category=category});
+              let ledgerResult = await Ledger.sendToCategory({kinic=Principal.fromActor(this); canisterId=ad; amount={e8s=p}; category=category});
 
               switch (ledgerResult) {
-                case (#Err(_)) return #err "ledger transfer error";
+                case (#Err(e)) return #err(#ledger(e));
                 case (#Ok(_)) {}
               };
               // close auction
@@ -447,4 +466,8 @@ shared ({caller=installer}) actor class Auction() =  this {
     )
   };
 
+  // Principal.isAnonymous() will be error because we use dfx-0.7.2 via vessel
+  func isNotAnonymous(principal : Principal) : Bool {
+    principal != Principal.fromText("2vxsx-fae")
+  };
 };

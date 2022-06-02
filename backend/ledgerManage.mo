@@ -37,7 +37,7 @@ module {
     created_at_time: ?TimeStamp;
   };
 
-  type TransferError = {
+  public type TransferError = {
     #BadFee : { expected_fee : Tokens; };
     #InsufficientFunds : { balance: Tokens; };
     #TxTooOld : { allowed_window_nanos: Nat64 };
@@ -106,19 +106,20 @@ dfx identity use clankpan
   let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
 
   /* for content */
-  public func contentBalance({icme : Principal; canisterId : Principal}) : async Tokens {
+  public func contentBalance({kinic : Principal; canisterId : Principal}) : async Tokens {
     let subAccount = toSubAccount_fromPrincipal(canisterId);
-    let aId  = toAccountIdentifer(icme, subAccount);
+    let aId  = toAccountIdentifer(kinic, subAccount);
     await ledger.account_balance({
         account = aId;
     });
   };
-  public func sendToContent({icme : Principal; canisterId : Principal; amount : Tokens; to : AccountIdentifier}) : async TransferResult {
+  public func sendToContent({kinic : Principal; canisterId : Principal; amount : Tokens; to : AccountIdentifier}) : async TransferResult {
+    if (10_000 > amount.e8s) return #Err(#InsufficientFunds({ balance=amount; }));
     let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
-    // let aId  = toAccountIdentifer(icme, subAccount);
+    // let aId  = toAccountIdentifer(kinic, subAccount);
     let args : TransferArgs = {
       memo: Memo = 0;
-      amount: Tokens = amount;
+      amount: Tokens = {e8s=amount.e8s-10_000};
       fee: Tokens = {e8s=10_000};
       from_subaccount: ?SubAccount = ?Blob.fromArray(fromSubAccount);
       to: AccountIdentifier = to;
@@ -128,21 +129,21 @@ dfx identity use clankpan
   };
   
   /* for category */
-  public func categoryBalance({icme : Principal; category : Text}) : async Tokens {
+  public func categoryBalance({kinic : Principal; category : Text}) : async Tokens {
     let subAccount = toSubAccount_fromText(category);
-    let aId = toAccountIdentifer(icme, subAccount);
+    let aId = toAccountIdentifer(kinic, subAccount);
     await ledger.account_balance({
         account = aId;
     });
   };
 
-  public func sendToCategory({icme : Principal; canisterId : Principal; amount : Tokens; category : Text}) : async TransferResult {
+  public func sendToCategory({kinic : Principal; canisterId : Principal; amount : Tokens; category : Text}) : async TransferResult {
     let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
     let toSubAccount = toSubAccount_fromText(category);
-    let toAId  = toAccountIdentifer(icme, toSubAccount);
+    let toAId  = toAccountIdentifer(kinic, toSubAccount);
     let args : TransferArgs = {
       memo: Memo = 0;
-      amount: Tokens = amount;
+      amount: Tokens = {e8s=amount.e8s-10_000};
       fee: Tokens = {e8s=10_000};
       from_subaccount: ?SubAccount = ?Blob.fromArray(fromSubAccount);
       to: AccountIdentifier = toAId;
@@ -151,13 +152,14 @@ dfx identity use clankpan
     await ledger.transfer(args);
   };
 
-  public func refoundToUser({icme : Principal; canisterId : Principal; to : Text}) : async TransferResult {
-    let amount : Tokens = await contentBalance({icme; canisterId});
+  public func refoundToUser({kinic : Principal; canisterId : Principal; to : Text}) : async TransferResult {
+    let amount : Tokens = await contentBalance({kinic; canisterId});
+    if (10_000 > amount.e8s) return #Err(#InsufficientFunds({ balance=amount; }));
     let fromSubAccount = toSubAccount_fromPrincipal(canisterId);
     let toAId  = Blob.fromArray(Hex.decode(to));
     let args : TransferArgs = {
       memo: Memo = 0;
-      amount: Tokens = amount;
+      amount: Tokens = {e8s=amount.e8s-10_000};
       fee: Tokens = {e8s=10_000};
       from_subaccount: ?SubAccount = ?Blob.fromArray(fromSubAccount);
       to: AccountIdentifier = toAId;
@@ -167,11 +169,18 @@ dfx identity use clankpan
   };
 
 
-  public func getTextAccountIdentifier({icme : Principal; canisterId : Principal}) : Text {
+  public func getContentAccountIdentifier({kinic : Principal; canisterId : Principal}) : Text {
     let subAccount = toSubAccount_fromPrincipal(canisterId);
-    let aId = toAccountIdentifer(icme, subAccount);
+    let aId = toAccountIdentifer(kinic, subAccount);
     Hex.encode(Blob.toArray(aId));
   };
+
+  public func getCategoryAccountIdentifier({kinic : Principal; category : Text}) : Text {
+    let subAccount = toSubAccount_fromText(category);
+    let aId = toAccountIdentifer(kinic, subAccount);
+    Hex.encode(Blob.toArray(aId));
+  };
+
 
 
   /* helpler */
