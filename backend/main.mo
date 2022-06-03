@@ -186,6 +186,7 @@ shared ({caller=installer}) actor class Auction() =  this {
 
   /*
   start category ad acution. Only KINIC can use this.
+  this is first price auciotn
   */
   public shared({caller}) func startAuction(category : Category) : async Result<Text, Text> {
     assert(caller == installer); // only use kinic
