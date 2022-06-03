@@ -20,7 +20,7 @@
         <div class="content px-8 pt-2 pb-4 blackBG">
             <!-- MOBILE NAV -->
             <nav class="block xl:hidden flex items-center justify-between mb-4">
-              <h2 @click="reset" class="font-bold text-2xl cursor-pointer redText addFont">Kinic</h2>
+              <img @click="reset" class="cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
               <div class="auth flex items-center">
                 <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
                   Login
@@ -140,7 +140,7 @@
             </nav>
             <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between">
-                <h2 @click="reset" class="hidden xl:block font-bold text-2xl cursor-pointer redText addFont">Kinic</h2>
+                <img @click="reset" class="hidden xl:block cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
                 <div class="hidden xl:block pt-3 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
@@ -544,9 +544,7 @@
     <!-- SEARCH AND TITLE PAGE -->
     <section v-if="!searchMode" @click="dropdownOn = false" class="w-full pt-20 mt-30 blackBG">
       <div class="flex justify-center">
-        <h1 class="text-6xl md:text-8xl text-white tracking-wide addFont" style="color:#B01234;">
-          Kinic.
-        </h1>
+        <img src="./assets/kinic_0_470px.png" alt="">
       </div>
     </section>
 
