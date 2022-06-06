@@ -3,8 +3,8 @@
     <div class="max-w-7xl mx-auto py-1 px-2">
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
-          <p class="ml-3 font-light text-md truncate">
-            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the IC.</span>
+          <p class="ml-3 font-medium text-md truncate headerSN">
+            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the Internet Computer</span>
             <span v-else>Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
@@ -958,5 +958,8 @@ export default {
   }
   .kinicLogo {
   	max-width: 383px;
+  }
+  .headerSN {
+    font-size: 0.9rem;
   }
 </style>
