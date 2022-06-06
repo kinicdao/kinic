@@ -954,7 +954,7 @@ export default {
     background-color: #235da9;
   }
   .customHover:hover {
-    box-shadow: rgb(0 0 0 / 15%) 0px 6px 15px -3px, rgb(0 0 0 / 15%) 0px -3px 6px -4px;
+    box-shadow: rgba(0 0 0 0.15) 0 6px 15px -3px, rgba(0 0 0 0.15) 0 -3px 6px -4px;
   }
   .kinicLogo {
   	max-width: 365px;
