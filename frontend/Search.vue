@@ -1,22 +1,22 @@
 <template>
-  <div @click="dropdownOn = false" class="redBG">
+  <div @click="dropdownOn = false" class="yellowBG">
     <div class="max-w-7xl mx-auto py-1 px-2">
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
-          <p class="ml-3 font-light text-md text-gray-300 truncate">
-            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the IC. Enter a canister ID or search text to find great content on web3.</span>
-            <span v-else>☝Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
+          <p class="ml-3 font-light text-md truncate">
+            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the IC.</span>
+            <span v-else>Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
         <div class="order-3 mt-2 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-          <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm text font-bold text-white bg-black hover:bg-indigo-50 hover:text-red-800 mt-1"> Built for #SUPERNOVA </a>
+          <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm text font-bold text-white bg-black hover:bg-indigo-50 hover:text-yellow-500 mt-1"> Built for #SUPERNOVA </a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- HEADER FOR RESULTS PAGE -->
-  <header v-if="searchMode" class="h-full" style="border-bottom: 1px solid #eee;">
+  <header v-if="searchMode" class="h-full">
         <div class="content px-8 pt-2 pb-4 blackBG">
             <!-- MOBILE NAV -->
             <nav class="block xl:hidden flex items-center justify-between mb-4">
@@ -421,6 +421,22 @@
             <a target="_blank" href="https://toniqlabs.com/"><p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p></a>
         </div>
     </div>
+    <div v-else-if="searchMode && category === 'defi'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+        <div class="w-full pt-1 pb-5">
+            <div class="overflow-hidden w-40 -mt-16 mx-auto shadow-lg">
+                <img src="./assets/infinityswap.png" alt="">
+            </div>
+        </div>
+        <div class="w-full mb-10">
+            <p class="text-gray-600 text-center px-5">
+              The Platform to Create, Stake and Swap Tokens on the Internet Computer (Dfinity).
+            </p>
+        </div>
+        <div class="w-full">
+            <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
+            <a target="_blank" href="https://exwqn-uaaaa-aaaaf-qaeaa-cai.ic0.app/Infinity-Swap"><p class="text-sm text-center underline">InfinitySwap News on Nuance, the Publishing Platform for Web3.</p></a>
+        </div>
+    </div>
     <div v-else-if="searchMode && category === 'interesting'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-160 -mt-16 mx-auto shadow-lg">
@@ -544,7 +560,7 @@
     <!-- SEARCH AND TITLE PAGE -->
     <section v-if="!searchMode" @click="dropdownOn = false" class="w-full pt-20 mt-30 blackBG">
       <div class="flex justify-center">
-        <img src="./assets/kinic_0_470px.png" alt="">
+            <img class="kinicLogo" alt="kinic logotype" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzIxIDM1NC44NiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNmMDVjMjI7fS5jbHMtMntmaWxsOiNmYmFmMjg7fS5jbHMtM3tmaWxsOiMyM2E4ZTA7fS5jbHMtNHtmaWxsOiNlYzE5Nzg7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyNjcuMjEsMzQzLjIzYTE2Mi40MiwxNjIuNDIsMCwwLDEtMTQwLjI3LDYuNEExNjAuMTYsMTYwLjE2LDAsMCwxLDEwNDAsMjYyLjY5YTE2Mi4wNiwxNjIuMDYsMCwwLDEsMC0xMjYuNzdBMTYwLjE5LDE2MC4xOSwwLDAsMSwxMTI2Ljk0LDQ5YTE2Mi45MywxNjIuOTMsMCwwLDEsMTQwLjE3LDYuMiwxNjIuMTYsMTYyLjE2LDAsMCwxLDU4LjA2LDUyLjA1TDEzMzcsOTkuNTVhMTc3LjA2LDE3Ny4wNiwwLDAsMC02My4wOS01Ni43N0ExNzYuNjYsMTc2LjY2LDAsMCwwLDExMjEuNDIsMzYsMTc1LDE3NSwwLDAsMCwxMDI3LDEzMC40YTE3NS40MiwxNzUuNDIsMCwwLDAsMCwxMzcuODEsMTc0Ljk0LDE3NC45NCwwLDAsMCw5NC40Myw5NC40MywxNzYuNiwxNzYuNiwwLDAsMCwxNTIuMy02LjcsMTc3LjQyLDE3Ny40MiwwLDAsMCw2My4wOC01Ni4yOUwxMzI1LjM3LDI5MUExNjMuNzIsMTYzLjcyLDAsMCwxLDEyNjcuMjEsMzQzLjIzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMTkwLjMyLDEyMS4yNGE3Ny42NSw3Ny42NSwwLDAsMSw2NC42NywzNC4xbDExLjYzLTcuNjhBOTEuNTcsOTEuNTcsMCwwLDAsMTIzMy44OSwxMThhOTEuNzksOTEuNzksMCwwLDAtNzkuMzUtMy42NSw5MS4xMyw5MS4xMywwLDAsMC00OS4xOSw0OS4xOCw5MS40OCw5MS40OCwwLDAsMCwwLDcxLjU3LDkxLjE5LDkxLjE5LDAsMCwwLDQ5LjE5LDQ5LjE5LDkxLjg3LDkxLjg3LDAsMCwwLDc5LjE2LTMuNTUsOTEuNTUsOTEuNTUsMCwwLDAsMzIuNzItMjkuMzdMMTI1NSwyNDMuMDdhNzcuNTQsNzcuNTQsMCwwLDEtMjcuNywyNSw3Ni4xNyw3Ni4xNywwLDAsMS0zNyw5LjI2cS0zMi4zMywwLTU1LjItMjIuODZ0LTIyLjg2LTU1LjJxMC0zMi4zNCwyMi44Ni01NS4yVDExOTAuMzIsMTIxLjI0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMjkwLjA4LDEzMS40OWExMTkuNTIsMTE5LjUyLDAsMCwwLTQyLjg4LTM4LjY0LDEyMS4yNiwxMjEuMjYsMCwwLDAtMTE3LjQsMiwxMTkuNDgsMTE5LjQ4LDAsMCwwLTQ0LDQ0LDEyMS4zNCwxMjEuMzQsMCwwLDAsMCwxMjEsMTE5LjQ1LDExOS40NSwwLDAsMCw0NCw0NCwxMjEuMjIsMTIxLjIyLDAsMCwwLDExNy40LDIsMTE5LjYxLDExOS42MSwwLDAsMCw0Mi44OC0zOC42NEwxMjc4LjQ1LDI1OWExMDYuMzEsMTA2LjMxLDAsMCwxLTM3Ljg1LDM0LjExLDEwNi43MSwxMDYuNzEsMCwwLDEtMTAzLjctMS42OCwxMDYuMjIsMTA2LjIyLDAsMCwxLTM4Ljc0LTM4Ljc0LDEwNi45NSwxMDYuOTUsMCwwLDEsMC0xMDYuODUsMTA2LjM3LDEwNi4zNywwLDAsMSwzOC43NC0zOC43NCwxMDYuOTEsMTA2LjkxLDAsMCwxLDEwMy42LTEuNzcsMTA2LjI1LDEwNi4yNSwwLDAsMSwzNy43NSwzMy44MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTMxMy43NCwxMTUuNzJhMTQ5LjE5LDE0OS4xOSwwLDAsMC01My00Ny44MSwxNDkuMzcsMTQ5LjM3LDAsMCwwLTE0NS4xLDIuMzcsMTQ4LjQ2LDE0OC40NiwwLDAsMC01NC4zMiw1NC4zMSwxNDUuNywxNDUuNywwLDAsMC0yMCw3NC43MiwxNDUuNywxNDUuNywwLDAsMCwyMCw3NC43MiwxNDguNTMsMTQ4LjUzLDAsMCwwLDU0LjMyLDU0LjMxLDE0OS40OCwxNDkuNDgsMCwwLDAsMTQ0LjgsMi41NiwxNDguMjEsMTQ4LjIxLDAsMCwwLDUyLjkzLTQ3LjQxTDEzMDEuOTEsMjc1QTEzNS4xOSwxMzUuMTksMCwwLDEsMTI1NCwzMTguMThhMTMxLjE2LDEzMS4xNiwwLDAsMS02My42OCwxNiwxMzIuNzcsMTMyLjc3LDAsMCwxLTUyLjQ0LTEwLjY0LDEzMS41OCwxMzEuNTgsMCwwLDEtNzEuNzYtNzEuNzcsMTM0LjUyLDEzNC41MiwwLDAsMSwwLTEwNC44NywxMzEuNjcsMTMxLjY3LDAsMCwxLDcxLjc2LTcxLjc3LDEzNSwxMzUsMCwwLDEsMTE2LDUuMjMsMTM0LjExLDEzNC4xMSwwLDAsMSw0OCw0My4wOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI0MTUuMjUiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9IjM4NS42MiIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMzU2IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSIzMjYuMzciIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTExLjYxIDM0OC40NCA1MjYuNDIgMzQ4LjQ0IDUyNi40MiA5OS4wOSA1MTEuNjEgNzMuOTggNTExLjYxIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3ODMuMTkgNy43NCA3NjguMzcgNy43NCA3NjguMzcgMjU3LjEgNzgzLjE5IDI4Mi4yIDc4My4xOSA3Ljc0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjcyMy45MyA3Ljc0IDcwOS4xMiA3Ljc0IDcwOS4xMiAxNTkuOTkgNzIzLjkzIDE4NC40NyA3MjMuOTMgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3NTMuNTYgNy43NCA3MzguNzUgNy43NCA3MzguNzUgMjA4LjEzIDc1My41NiAyMzMuMDIgNzUzLjU2IDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNzk4IDMyNC4zNyA2MDMuNzggNy43NCA1ODYuNSA3Ljc0IDc5NS4zMiAzNDguNDQgODEyLjgxIDM0OC40NCA4MTIuODEgNy43NCA3OTggNy43NCA3OTggMzI0LjM3Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjU0MS4yMyAzNDguNDQgNTU2LjA1IDM0OC40NCA1NTYuMDUgMTQ4LjA1IDU0MS4yMyAxMjMuMTYgNTQxLjIzIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1MTYuNzUgNy43NCA3MjYuMiAzNDguNDQgNzQzLjQ4IDM0OC40NCA1MzQuMDMgNy43NCA1MTYuNzUgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1NTEuNzMgNy43NCA3NjAuNzYgMzQ4LjQ0IDc3OC40NSAzNDguNDQgNTY5LjIxIDcuNzQgNTUxLjczIDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTcwLjg2IDM0OC40NCA1ODUuNjcgMzQ4LjQ0IDU4NS42NyAxOTYuMiA1NzAuODYgMTcxLjcyIDU3MC44NiAzNDguNDQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNDgxLjk4IDcuNzQgNDgxLjk4IDM0OC40NCA0OTYuNzkgMzQ4LjQ0IDQ5Ni43OSAzMS44MSA2OTEuNDIgMzQ4LjQ0IDcwOC41IDM0OC40NCA0OTkuNjggNy43NCA0ODEuOTggNy43NCIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iOTE3LjU3IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI4NTguMzEiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9Ijk0Ny4xOSIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iODg3Ljk0IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy00IiB4PSIyOS43MSIgeT0iNC4xNiIgd2lkdGg9IjE0Ljg1IiBoZWlnaHQ9IjM0MS42NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSI4OS4xMiAzNDUuOCAxMDMuOTggMzQ1LjggMTAzLjk4IDI1MS43IDg5LjEyIDIyMi43IDg5LjEyIDM0NS44Ii8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjU5LjQyIDM0NS44IDc0LjI3IDM0NS44IDc0LjI3IDE5My42OSA2NC42OSAxNzQuOTggNzQuMjcgMTU2LjI3IDc0LjI3IDQuMTYgNTkuNDIgNC4xNiA1OS40MiAzNDUuOCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSIxMDMuOTggNC4xNiA4OS4xMiA0LjE2IDg5LjEyIDEyNy4yNiAxMDMuOTggOTguMjUgMTAzLjk4IDQuMTYiLz48cmVjdCBjbGFzcz0iY2xzLTQiIHk9IjQuMTYiIHdpZHRoPSIxNC44NSIgaGVpZ2h0PSIzNDEuNjQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTA2LjkyIDE3Ny42MiAxOTQuMzkgNi44IDE3Ny44OCA2LjggMTAzLjk4IDE1MS4xMyA5MC40MSAxNzcuNjIgMTAzLjk4IDIwNC4xMSAxNzYuNTMgMzQ1LjggMTc3Ljg4IDM0OC40NCAxOTQuMzkgMzQ4LjQ0IDE5My4wMyAzNDUuOCAxMDYuOTIgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjE0MC4zNCAxNzcuNjIgMjI3LjYxIDYuOCAyMTEuMSA2LjggMTIzLjgzIDE3Ny42MiAyMDkuNzUgMzQ1LjggMjExLjEgMzQ4LjQ0IDIyNy42MSAzNDguNDQgMjI2LjI1IDM0NS44IDE0MC4zNCAxNzcuNjIiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTczLjU1IDE3Ny42MiAyNjAuODIgNi44IDI0NC4zMiA2LjggMTU3LjA1IDE3Ny42MiAyNDIuOTcgMzQ1LjggMjQ0LjMyIDM0OC40NCAyNjAuODIgMzQ4LjQ0IDI1OS40NyAzNDUuOCAxNzMuNTUgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjI3Ny41MyA2LjggMTkwLjI2IDE3Ny42MiAyNzcuNTMgMzQ4LjQ0IDI5NC4wNCAzNDguNDQgMjA2Ljc3IDE3Ny42MiAyOTQuMDQgNi44IDI3Ny41MyA2LjgiLz48L3N2Zz4=" />
       </div>
     </section>
 
@@ -553,7 +569,7 @@
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
-                     type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
+                     type="search" name="search" placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -570,11 +586,6 @@
             </div>
         </div>
     </section>
-
-    <!-- CATEGORY FOOTER -->
-    <div v-if="!searchMode" @click="dropdownOn = false" class="h-5 border-b-2 text-md md:text-xl addFont redBORDER">
-        <span class="bg-white px-2 ml-8 font-bold">Category Search</span>
-    </div>
 
     <div v-if="!searchMode" @click="dropdownOn = false" class="mt-6 mx-2 ml-8 mb-2">
         <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
@@ -662,7 +673,7 @@ export default {
     async logInNFID () {
       const authClient = await AuthClient.create();
       authClient.login({
-        identityProvider: 'https://3y5ko-7qaaa-aaaal-aaaaq-cai.ic0.app/authenticate/?applicationName=kinic#authorize',
+        identityProvider: 'https://nfid.one/authenticate/?applicationName=kinic#authorize',
         onSuccess: async () => {
           this.identity = authClient.getIdentity()
           this.principal = this.identity.getPrincipal().toString()
@@ -919,10 +930,13 @@ export default {
     font-family: "neonize","Noto Sans JP",Helvetica,Arial,sans-serif;
   }
   .blackBG {
-    background-color: #181616;
+    background-color: #162337;
   }
   .redBG {
     background-color: #7D0B24;
+  }
+  .yellowBG {
+    background-color: #FCB028;
   }
   .blueText {
     color: #4182d8;
@@ -941,5 +955,8 @@ export default {
   }
   .customHover:hover {
     box-shadow: rgb(0 0 0 / 15%) 0px 6px 15px -3px, rgb(0 0 0 / 15%) 0px -3px 6px -4px;
+  }
+  .kinicLogo {
+  	max-width: 383px;
   }
 </style>
