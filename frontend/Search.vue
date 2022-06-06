@@ -582,7 +582,7 @@
                  </div>
               </div>
             <div class="flex justify-center mt-10">
-              <button @click="termSearch('in')" class="text-white font-bold py-3 px-8 rounded searchButton text-gray-800 bg-gray-300 hover:text-gray-300 hover:bg-red-800">Search Web 3.0</button>
+              <button @click="termSearch('in')" class="text-white font-bold py-3 px-8 rounded searchButton text-gray-800 bg-gray-300 hover:text-gray-700 hover:bg-gray-100">Search Web 3.0</button>
             </div>
         </div>
     </section>
