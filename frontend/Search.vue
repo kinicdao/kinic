@@ -957,7 +957,7 @@ export default {
     box-shadow: rgb(0 0 0 / 15%) 0px 6px 15px -3px, rgb(0 0 0 / 15%) 0px -3px 6px -4px;
   }
   .kinicLogo {
-  	max-width: 383px;
+  	max-width: 365px;
   }
   .headerSN {
     font-size: 0.9rem;
