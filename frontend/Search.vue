@@ -518,7 +518,7 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.ic0.app/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
+            <a target="_blank" href="https://nfid.one/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
         </div>
     </div>
     <div v-else-if="searchMode" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
@@ -568,7 +568,7 @@
         <div class="p-4 w-full pb-20">
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                   <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
