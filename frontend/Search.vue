@@ -213,7 +213,7 @@
                 <h2 class="font-bold text-2xl"></h2>
                 <div class="auth flex items-center mr-14">
                     <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
-                      Login
+                      <span class="loginStyle">LOGIN</span>
                       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                          preserveAspectRatio="xMidYMid meet" viewBox="-1 -1 107.42470599999999 54.6597" width="103.42" height="48.66"
                          class="inline h-8 w-8 ml-1" data-v-45c16e28="" data-v-5e337368="">
@@ -961,5 +961,11 @@ export default {
   }
   .headerSN {
     font-size: 0.9rem;
+  }
+  .loginStyle {
+      font-weight: 900;
+      font-size: 0.82rem;
+      position: relative;
+      top: 1px;
   }
 </style>
