@@ -964,7 +964,7 @@ export default {
   }
   .loginStyle {
       font-weight: 900;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       position: relative;
       top: 1px;
   }
