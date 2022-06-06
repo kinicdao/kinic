@@ -1,7 +1,7 @@
 # Kinic
 ## Search re-imagined for web3.
 
-Web3 is all about ownership. We believe that content creators should be rewarded for their contributions to web3. 
+Web3 is all about ownership. We believe that content creators should be rewarded for their contributions to web3.
 
 - Big tech eats most of web2 Ad revenue, even though it is not their content!
 - We use 'smart-code' to map all of the frontend canisters on the Internet Computer.
@@ -36,5 +36,5 @@ vite serve // serves locally
 ```
 ## License
 
-MIT
-**Free Software: created for Dfinity Hackathon SUPERNOVA!**
+To Be Determined.. please change branding if you spin up a canister and plan on marketing it :)
+**Free Software: created for Dfinity Hackathon!**
