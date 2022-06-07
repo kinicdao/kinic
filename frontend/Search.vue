@@ -120,13 +120,12 @@
                          </svg>
                      </button>
                      <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
-
-                       <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                           Create Ad
-                       </a>
-
                        <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
                            Claim Site
+                       </a>
+
+                       <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           Ad Auction
                        </a>
 
                        <hr class="border-gray-200">
@@ -185,12 +184,12 @@
                          <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
 
                            <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                               Create Ad
-                           </a>
-
-                           <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
                                Claim Site
                            </a>
+                           <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                               Ad Auction
+                           </a>
+
 
                            <hr class="border-gray-200">
 
@@ -311,12 +310,12 @@
                        </button>
                        <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
 
-                         <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                             Create Ad
-                         </a>
 
                          <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
                              Claim Site
+                         </a>
+                         <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                             Ad Auction
                          </a>
 
                          <hr class="border-gray-200">
@@ -646,6 +645,52 @@
         </a>
     </div>
 
+    <Modal
+      v-model="adMode"
+      :close="closeAds"
+      class="z-20"
+    >
+      <div class="modal shadow-lg">
+        <button @click="closeAds" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
+          X
+        </button>
+        <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Auctions</div>
+        <div class="text-lg text-indigo-500 text-center">Bid to get your Ad in a category for two weeks. </div>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                <table class="min-w-full">
+                  <thead class="bg-indigo-100 border-b">
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Category
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Status
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Bids
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Highest Bid
+                      </th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in this.cats" :key="item.name" class="bg-white border-b">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.name}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.status}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.bids.length}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.highestBid}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Modal>
+
 </template>
 
 <script>
@@ -670,6 +715,54 @@ export default {
     }
   },
   methods: {
+    closeAds () {
+      this.adMode = false
+    },
+    viewAuctions () {
+      main.getCategoryAll().then((res) => {
+        if (res) {
+          let final = []
+          let bidAmounts = []
+          res.forEach((ent) => {
+            let obj = {
+              name: ent[0],
+              status: 'Pending',
+              bids: [],
+              highestBid: 0
+            }
+            if (ent[1].status) {
+              for (var key in ent[1].status) {
+                if (key === 'open') {
+                  obj.status = 'Open'
+                  obj.bids = ent[1].status.open.bids
+                  if (ent[1].status.open.bids) {
+                    ent[1].status.open.bids.forEach((bid) => {
+                      if (bid[0] && bid[0][1]) {
+                        bidAmounts.push(Number(bid[0][1])/100000000)
+                      }
+                    })
+                    if (ent[1].status.open.end) {
+                      let end = "" + Number(ent[1].status.open.end)
+                      // Needs to be 13 digits for JS.
+                      end = Number(end.slice(0,13))
+                      if (end < Date.now()) {
+                        obj.status = 'Finished'
+                      }
+                    }
+                  }
+                  bidAmounts.sort().reverse()
+                  obj.highestBid = bidAmounts[0] || 0
+                }
+                break;
+              }
+            }
+            final.push(obj)
+          })
+          this.cats = final
+          this.adMode = true
+        }
+      })
+    },
     recordClick (canisterID) {
       main.recordClick(Principal.fromText(canisterID))
     },
@@ -741,7 +834,9 @@ export default {
       let newUrlIS =  window.location.origin + '/'
       history.pushState({}, null, newUrlIS)
       this.searchMode = false
+      this.adMode = false
       this.results = []
+      this.cats = []
       this.category = ''
       this.page = 0
       this.pages = 0
@@ -915,7 +1010,9 @@ export default {
       search: '',
       host: '',
       searchMode: false,
+      adMode: false,
       results: [],
+      cats: [],
       category: '',
       page: 0,
       principal: null,
@@ -970,5 +1067,12 @@ export default {
       font-size: 0.8rem;
       position: relative;
       top: 1px;
+  }
+  .modal {
+    width: 80%;
+    min-height: 400px;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: #fff;
   }
 </style>
