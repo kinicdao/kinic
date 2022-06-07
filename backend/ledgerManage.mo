@@ -68,7 +68,7 @@ dfx identity use clankpan
 export LEDGER_ACC=$(dfx ledger account-id)
 dfx deploy ledger --argument '(record {minting_account = "'${MINT_ACC}'"; initial_values = vec { record { "'${LEDGER_ACC}'"; record { e8s=100_000_000_000 } }; }; send_whitelist = vec {}})'
 
-  # send 
+  # send
 dfx identity use minter
 dfx canister call ledger send_dfx \
 '(
@@ -101,12 +101,13 @@ dfx identity use clankpan
 
 
   */
+
   // type SubAccount = ExtCore.SubAccount;
 
-
+  // WARNING: need to change this to ledger for prod.
   let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
 
-  /* for content */
+  /* For content */
   public func contentBalance({kinic : Principal; canisterId : Principal}) : async Tokens {
     let subAccount = toSubAccount_fromPrincipal(canisterId);
     let aId  = toAccountIdentifer(kinic, subAccount);
@@ -128,8 +129,8 @@ dfx identity use clankpan
     };
     await ledger.transfer(args);
   };
-  
-  /* for category */
+
+  /* For category */
   public func categoryBalance({kinic : Principal; category : Text}) : async Tokens {
     let subAccount = toSubAccount_fromText(category);
     let aId = toAccountIdentifer(kinic, subAccount);
@@ -197,9 +198,7 @@ dfx identity use clankpan
     Hex.encode(Blob.toArray(aId));
   };
 
-
-
-  /* helpler */
+  /* Helper */
 
   public func toSubAccount_fromPrincipal(principal : Principal) : [Nat8] {
     let sub_nat32byte : [Nat8] = Blob.toArray(Text.encodeUtf8(Principal.toText(principal)));

@@ -13,13 +13,13 @@ import Time "mo:base/Time";
 
 module {
 
-  public type Price = Nat64; //e8s 
+  public type Price = Nat64; //e8s
   public type Category = Text; // game, nft, ...etc
-  public type CanisterId = Principal; // canister hosting content site
+  public type CanisterId = Principal; // Canister hosting content site.
   public type UserId = Principal; // content site owner
   public type Bid = (CanisterId,Price);
   public type ContentProps = {
-    #Unknown : { // not be verified canister by content site owner
+    #Unknown : { // A non-verified site.
       var clickRecord : Nat;
     };
     #Verified : {
@@ -28,7 +28,7 @@ module {
       var balance : {
         #unlock; // can withdrawn
         #locked : {
-          category : Category; // for check being heighest bid
+          category : Category; // To check highest bid.
           bidPrice : Price;
         };
       }

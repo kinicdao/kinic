@@ -44,7 +44,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   type ContentProps = Types.ContentProps;
   type Auction = Types.Auction;
 
-  /*variavles*/
+  /*variables*/
 
   // const
   let sec = 1_000_000_000;
@@ -77,13 +77,13 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeProps.categories.vals(), 0, Text.equal, Text.hash
   );
 
-  // For Verify content site owner using web2 api
+  // For verifying content site owner using web2 API.
   stable var _upgradeOwnerVerifyRequests : [(CanisterId, List.List<UserId>)] = [];
   let _ownerVerifyRequests = HashMap.fromIter<CanisterId, List.List<UserId>>(
     _upgradeOwnerVerifyRequests.vals(), 0, Principal.equal, Principal.hash
   );
 
-  /* system */
+  /* System */
   system func preupgrade() {
     _upgradeProps := {
       contents = Iter.toArray(_contents.entries());
@@ -92,6 +92,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeOwnerVerifyRequests := Iter.toArray(_ownerVerifyRequests.entries());
     Debug.print("end preupgrade()")
   };
+
   system func postupgrade() {
     _upgradeProps := {
       contents = [];
@@ -100,38 +101,13 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeOwnerVerifyRequests := [];
   };
 
-  /* KINIC Owner functions*/
+  /* Owner functions */
 
   /*
-  Record click count. Only KINIC can use this.
-  */
-  public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
-    assert(caller == installer); // only use kinic
-    assert(isNotAnonymous(caller));
-
-    switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {
-        v.clickRecord +=1;
-        return #ok "added record to Unknown Canister";
-      };
-      case (?#Verified(v)) {
-        v.clickRecord +=1;
-        return #ok "added record to Verified Canister";
-      };
-      case (_) { // if there is no the canister, add new one as unknown.
-        _contents.put(canisterId, #Unknown({
-          var clickRecord : Nat = 1; // init 1 count
-        }));
-        return #ok "added record to new Canister";
-      }
-    }
-  };
-
-  /*
-  Verify content site owner.
+    Verify site owner.
   */
   public shared ({caller}) func acceptVerifyRequest({canisterId : CanisterId; owner : UserId}) : async Result<Text, Text> {
-    assert(caller == installer); // only use kinic
+    assert(caller == installer); // Installer only.
     assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
@@ -143,9 +119,9 @@ shared ({caller=installer}) actor class Auction() =  this {
         }));
       };
       case (?#Verified(v)) {
-        return #err "Alrady Verified";
+        return #err "Already verified.";
       };
-      case (_) { // if there is no the caanister,  add new one as verified.
+      case (_) { // If there is no the canister, add new one as verified.
         _contents.put(canisterId, #Verified({
           var clickRecord : Nat = 0;
           owner : UserId = owner;
@@ -155,7 +131,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     };
 
     _ownerVerifyRequests.delete(canisterId);
-    return #ok "Verified Owner";
+    return #ok "Verified Owner.";
   };
 
   public query func getVerifyRequests() : async [(CanisterId, [UserId])] {
@@ -165,10 +141,10 @@ shared ({caller=installer}) actor class Auction() =  this {
   };
 
   /*
-  add category. Only KINIC can use this.
+    Add category.
   */
   public shared({caller}) func addCategory(category : Category) : async Result<Text, Text> {
-    assert(caller == installer); // only use kinic
+    assert(caller == installer); // Installer only.
     assert(isNotAnonymous(caller));
 
     switch (_categories.get(category)) {
@@ -178,24 +154,24 @@ shared ({caller=installer}) actor class Auction() =  this {
           lastWinner : CanisterId = Principal.fromActor(this);
           auctionHistory = List.nil<(Time.Time, List.List<Bid>)>();
         });
-        return #ok "add category, init winner is this canister";
+        return #ok "Category added.";
       };
-      case (?_) return #err "The category is already exsiting";
+      case (?_) return #err "This category already exists.";
     }
   };
 
   /*
-  start category ad acution. Only KINIC can use this.
-  this is first price auciotn
+    Start category ad auction.
+    This is a first price auction.
   */
   public shared({caller}) func startAuction(category : Category) : async Result<Text, Text> {
-    assert(caller == installer); // only use kinic
+    assert(caller == installer); // Installer only.
     assert(isNotAnonymous(caller));
 
     switch (_categories.get(category)) {
-      case null return #err "The category is not exsiting";
+      case null return #err "The category does not exist.";
       case (?auction) switch (auction.status) {
-        case (#open _) return #err "The category is already opened";
+        case (#open _) return #err "The category is already opened for bidding.";
         case (#close) {
             _categories.put(category, {
               status = #open({
@@ -203,7 +179,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                 start = Time.now();
                 end = Time.now() + defaultAuctionTime;
               });
-              lastWinner : CanisterId = auction.lastWinner; // category's first winner is KINIC's canister
+              lastWinner : CanisterId = auction.lastWinner; // The category's first winner is KINIC's canister
               auctionHistory : List.List<(Time.Time, List.List<Bid>)> = auction.auctionHistory;
             });
           return #ok "started auction";
@@ -213,22 +189,22 @@ shared ({caller=installer}) actor class Auction() =  this {
   };
 
   public shared ({caller}) func getCategoryAccountIdentifier(category : Category) : async Text {
-    assert(caller == installer); // only use kinic
+    assert(caller == installer); // Installer only.
     assert(isNotAnonymous(caller));
 
     Ledger.getCategoryAccountIdentifier({kinic=Principal.fromActor(this); category=category});
   };
 
   public shared({caller}) func AutoSelectWinner(category : Category) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
-    assert(caller == installer); // only use knic
+    assert(caller == installer); // Installer only
     assert(isNotAnonymous(caller));
 
     switch (_categories.get(category)) {
-      case null return #err(#main( "The category is not exsiting"));
+      case null return #err(#main( "The category does not exist."));
       case (?auction) switch (auction.status) {
-        case (#close) return #err(#main("The category is already closed"));
+        case (#close) return #err(#main("The category is already closed."));
         case (#open(v)) {
-          if (v.end >= Time.now()) return #err(#main( "The category is still in auction"));
+          if (v.end >= Time.now()) return #err(#main( "The category is still in auction mode."));
 
           switch (List.get<Bid>(v.bids, 0)) {
             case (null) {
@@ -276,7 +252,30 @@ shared ({caller=installer}) actor class Auction() =  this {
   };
 
 
-  /* public user functions */
+  /* Public user functions */
+
+  /*
+    Record click count.
+  */
+  public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
+
+    switch (_contents.get(canisterId)) {
+      case (?#Unknown(v))  {
+        v.clickRecord +=1;
+        return #ok "added record to Unknown Canister";
+      };
+      case (?#Verified(v)) {
+        v.clickRecord +=1;
+        return #ok "added record to Verified Canister";
+      };
+      case (_) { // if there is no the canister, add new one as unknown.
+        _contents.put(canisterId, #Unknown({
+          var clickRecord : Nat = 1; // init 1 count
+        }));
+        return #ok "added record to new Canister";
+      }
+    }
+  };
 
   public shared ({caller}) func requestVerifyContentOwner(canisterId : CanisterId) : async Result<Text, Text> {
     assert(isNotAnonymous(caller));
@@ -284,7 +283,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     switch (_contents.get(canisterId)) {
       case (?#Unknown(v))  {};
       case (?#Verified(v)) {
-        return #err("Alrady Verified by " # Principal.toText(v.owner));
+        return #err("Already verified by " # Principal.toText(v.owner));
       };
       case (_) {};
     };
@@ -311,17 +310,17 @@ shared ({caller=installer}) actor class Auction() =  this {
 
     // get ledger balance
     let ledgerBalance = Nat64.toNat((await Ledger.contentBalance({kinic=Principal.fromActor(this); canisterId=canisterId})).e8s);
-    if (10_000 >= ledgerBalance) return #err  "your bid prince is under ledger transfer fee & kinic bid fee";
+    if (10_000 >= ledgerBalance) return #err  "Your bid price is under ledger transfer fee & the Kinic bid fee";
 
     // auth owner
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
-        case (#Unknown(_)) return #err "the canister is not verified";
+        case (#Unknown(_)) return #err "The canister is not verified.";
         case (#Verified(v)) {
           if (v.owner != caller) return #err "you are not owner"; // auth content site owner
           switch (v.balance) {
             case (#unlock) {};
-            // if this bidder have alrady bided, it is need to check the bid is highest bid
+            // If this bidder has already bided, we must check that the bid is higher.
             case (#locked({category=c;bidPrice=_})) switch (_categories.get(c)) {
               case null assert(false);
               case (?auction) switch (auction.status) {
@@ -330,7 +329,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                 case (#open(_v)) switch (List.get<Bid>(_v.bids, 0)) {
                   case (null) assert(false);
                   case (?(ad, p)) { // (canisterId, Price)
-                    if (ad == canisterId) return #err("you are height bidder in category: " # c);
+                    if (ad == canisterId) return #err("You are the highest bidder in category: " # c);
                   }
                 }
               }
@@ -338,12 +337,12 @@ shared ({caller=installer}) actor class Auction() =  this {
           }
         }
       };
-      case (_) return #err "the canister is not registred";
+      case (_) return #err "This canister is not registered.";
     };
 
     let bidPrice = Nat64.fromNat((ledgerBalance * 100 - ledgerBalance * bidFeePercent)/100);
     let fee = Nat64.fromNat(ledgerBalance) - bidPrice;
-    if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee after pay kinic bid fee";
+    if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee after paying the Kinic bid fee.";
     switch (await Ledger.sendFee({kinic=Principal.fromActor(this); canisterId=canisterId; amount={e8s=fee}})) {
       case (#Err(e)) return #err "ledger transfer error";
       case (#Ok(_)) {}
@@ -351,7 +350,7 @@ shared ({caller=installer}) actor class Auction() =  this {
 
     // add bid to _categories
     switch (_categories.get(category)) {
-      case null return #err "The category is not exsiting";
+      case null return #err "The category does not exist";
       case (?auction) switch (auction.status) {
         case (#close) return #err "The category is closed";
         case (#open(v)) {
@@ -369,7 +368,7 @@ shared ({caller=installer}) actor class Auction() =  this {
       }
     };
 
-    // lock balance
+    // Lock balance
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
         case (#Unknown(_)) assert(false);
@@ -393,10 +392,10 @@ shared ({caller=installer}) actor class Auction() =  this {
       case (?props) switch (props) {
         case (#Unknown(_)) return #err "the canister is not verified";
         case (#Verified(v)) {
-          if (v.owner != caller) return #err "you are not owner";
+          if (v.owner != caller) return #err "You are not the owner.";
           switch (v.balance) {
-            case (#unlock) return #ok("your balnce is alrady unlocked");
-            // if this bidder have alrady bided, it is need to check the bid is highest bid
+            case (#unlock) return #ok("Your balance is already unlocked.");
+            // If this bidder has already bided, we must check the bid is the highest bid.
             case (#locked({category=c;bidPrice=_})) switch (_categories.get(c)) {
               case null return #err "assert(false)";
               case (?auction) switch (auction.status) {
@@ -405,9 +404,9 @@ shared ({caller=installer}) actor class Auction() =  this {
                   case (null) return #err "assert(false)";
                   //check highest bid
                   case (?(ad, p)) { // (canisterId, Price)
-                    if (ad == canisterId) return #err("you are height bidder in category: " # c);
+                    if (ad == canisterId) return #err("You are highest bidder in category: " # c);
                     v.balance := #unlock;
-                    return #ok("your balnce is unlocked, since you are not height bidder in category" # c);
+                    return #ok("your balance is unlocked, since you are not highest bidder in category: " # c);
                   }
                 }
               };
@@ -415,20 +414,21 @@ shared ({caller=installer}) actor class Auction() =  this {
           }
         }
       };
-      case (_) return #err "the canister is not registred";
+      case (_) return #err "This canister is not registered.";
     };
   };
 
+  // Used to return funds.
   public shared ({caller}) func refound({canisterId : CanisterId; to : Text}) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
     assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
-        case (#Unknown(_)) return #err(#main("the canister is not verified"));
+        case (#Unknown(_)) return #err(#main("The canister is not verified."));
         case (#Verified(v)) {
-          if (v.owner != caller) return #err(#main("you are not owner"));
+          if (v.owner != caller) return #err(#main("You are not owner."));
           switch (v.balance) {
-            case (#locked(_)) return #err(#main("your balnce is locked"));
+            case (#locked(_)) return #err(#main("Your balance is locked."));
             case (#unlock) {
               switch (await Ledger.refoundToUser({kinic=Principal.fromActor(this); canisterId=canisterId; to=to})) {
                 case (#Err(e)) return #err(#ledger(e));
@@ -438,13 +438,13 @@ shared ({caller=installer}) actor class Auction() =  this {
           }
         }
       };
-      case (_) return #err(#main("the canister is not registred"));
+      case (_) return #err(#main("This canister is not registered."));
     }
   };
 
   /* query */
   type FreezedContentProps = {
-    #Unknown : { // not be verified canister
+    #Unknown : { // A non-verified canister
       clickRecord : Nat;
     };
     #Verified : {
@@ -453,7 +453,7 @@ shared ({caller=installer}) actor class Auction() =  this {
       balance : {
         #unlock; // can withdrawn
         #locked : {
-          category : Category; // for check being heighest bid
+          category : Category; // For checking highest bid.
           bidPrice : Price;
         };
       }
@@ -475,7 +475,7 @@ shared ({caller=installer}) actor class Auction() =  this {
               balance = v.balance : {
                 #unlock; // can withdrawn
                 #locked : {
-                  category : Category; // for check being heighest bid
+                  category : Category; // For checking highest bid.
                   bidPrice : Price;
                 };
               }
@@ -519,7 +519,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     )
   };
 
-  // Principal.isAnonymous() will be error because we use dfx-0.7.2 via vessel
+  // Principal.isAnonymous() will cause an error because we use dfx-0.7.2 via vessel
   func isNotAnonymous(principal : Principal) : Bool {
     principal != Principal.fromText("2vxsx-fae")
   };

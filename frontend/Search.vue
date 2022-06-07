@@ -339,12 +339,12 @@
           <b class="text-xs redText">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
-          <a v-if="item.Title" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.Title}}
             </h2>
           </a>
-          <a v-else :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-else @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               No Title
             </h2>
@@ -670,6 +670,9 @@ export default {
     }
   },
   methods: {
+    recordClick (canisterID) {
+      main.recordClick(Principal.fromText(canisterID))
+    },
     async logInNFID () {
       const authClient = await AuthClient.create();
       authClient.login({
