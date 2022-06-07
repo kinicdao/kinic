@@ -6,7 +6,7 @@
     },
     "ledger": {
       "type": "custom",
-      "wasm": "backend/LocalLedger/ledger.wasm",
+      "wasm": "backend/LocalLedger/ledger.wasm.gz",
       "candid": "backend/LocalLedger/ledger.private.did"
     },
     "assets": {
