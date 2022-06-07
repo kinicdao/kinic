@@ -1,14 +1,14 @@
-//  ______   _______     ____________    _____    _____       ____________           _____    
-// |\     \  \      \   /            \  |\    \   \    \     /            \     _____\    \_  
-//  \\     \  |     /| |\___/\  \\___/|  \\    \   |    |   |\___/\  \\___/|   /     /|     | 
-//   \|     |/     //   \|____\  \___|/   \\    \  |    |    \|____\  \___|/  /     / /____/| 
-//    |     |_____//          |  |         \|    \ |    |          |  |      |     | |____|/  
-//    |     |\     \     __  /   / __       |     \|    |     __  /   / __   |     |  _____   
-//   /     /|\|     |   /  \/   /_/  |     /     /\      \   /  \/   /_/  |  |\     \|\    \  
-//  /_____/ |/_____/|  |____________/|    /_____/ /______/| |____________/|  | \_____\|    |  
-// |     | / |    | |  |           | /   |      | |     | | |           | /  | |     /____/|  
-// |_____|/  |____|/   |___________|/    |______|/|_____|/  |___________|/    \|_____|    ||  
-//                                                                                   |____|/ 
+//  ______   _______     ____________    _____    _____       ____________           _____
+// |\     \  \      \   /            \  |\    \   \    \     /            \     _____\    \_
+//  \\     \  |     /| |\___/\  \\___/|  \\    \   |    |   |\___/\  \\___/|   /     /|     |
+//   \|     |/     //   \|____\  \___|/   \\    \  |    |    \|____\  \___|/  /     / /____/|
+//    |     |_____//          |  |         \|    \ |    |          |  |      |     | |____|/
+//    |     |\     \     __  /   / __       |     \|    |     __  /   / __   |     |  _____
+//   /     /|\|     |   /  \/   /_/  |     /     /\      \   /  \/   /_/  |  |\     \|\    \
+//  /_____/ |/_____/|  |____________/|    /_____/ /______/| |____________/|  | \_____\|    |
+// |     | / |    | |  |           | /   |      | |     | | |           | /  | |     /____/|
+// |_____|/  |____|/   |___________|/    |______|/|_____|/  |___________|/    \|_____|    ||
+//                                                                                   |____|/
 //
 // By ClankPan and Wyatt 2022 June ~
 
@@ -36,7 +36,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   /*types*/
   type Result<T, E> = Result.Result<T, E>;
 
-  type Price = Types.Price; //e8s 
+  type Price = Types.Price; //e8s
   type Category = Types.Category; // game, nft, ...etc
   type CanisterId = Types.CanisterId; // canister hosting content site
   type UserId = Types.UserId; // content site owner
@@ -46,7 +46,7 @@ shared ({caller=installer}) actor class Auction() =  this {
 
   /*variavles*/
 
-  // const 
+  // const
   let sec = 1_000_000_000;
   let minutes =  60 * sec;
   let hour = 60 * minutes;
@@ -56,9 +56,9 @@ shared ({caller=installer}) actor class Auction() =  this {
 
   let bidFeePercent = 1; // [%]
 
-  // let IC0 = actor("aaaaa-aa") : 
+  // let IC0 = actor("aaaaa-aa") :
   //   actor {
-  //     canister_status : shared { canister_id : Principal } -> 
+  //     canister_status : shared { canister_id : Principal } ->
   //       async {
   //         module_hash : ?[Nat8];
   //         status : { #stopped; #stopping; #running };
@@ -128,7 +128,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   };
 
   /*
-  Verify content site owner. 
+  Verify content site owner.
   */
   public shared ({caller}) func acceptVerifyRequest({canisterId : CanisterId; owner : UserId}) : async Result<Text, Text> {
     assert(caller == installer); // only use kinic
@@ -241,7 +241,7 @@ shared ({caller=installer}) actor class Auction() =  this {
             };
             case (?(ad, p)) { // (canister_id, bid_price)
 
-              // send winner's bid price to category 
+              // send winner's bid price to category
               let ledgerResult = await Ledger.sendToCategory({kinic=Principal.fromActor(this); canisterId=ad; amount={e8s=p}; category=category});
 
               switch (ledgerResult) {
@@ -261,7 +261,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                   case (null) {};
                   case (?props) switch (props) {
                     case (#Unknown(_)) {};
-                    case (#Verified(v)) v.balance := #unlock;     
+                    case (#Verified(v)) v.balance := #unlock;
                   }
                 }
               });
@@ -309,10 +309,10 @@ shared ({caller=installer}) actor class Auction() =  this {
   public shared({caller}) func offerBid({category : Category; canisterId : CanisterId}) : async Result<Text, Text> {
     assert(isNotAnonymous(caller));
 
-    // get ledger balance 
+    // get ledger balance
     let ledgerBalance = Nat64.toNat((await Ledger.contentBalance({kinic=Principal.fromActor(this); canisterId=canisterId})).e8s);
     if (10_000 >= ledgerBalance) return #err  "your bid prince is under ledger transfer fee & kinic bid fee";
-    
+
     // auth owner
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
@@ -323,12 +323,12 @@ shared ({caller=installer}) actor class Auction() =  this {
             case (#unlock) {};
             // if this bidder have alrady bided, it is need to check the bid is highest bid
             case (#locked({category=c;bidPrice=_})) switch (_categories.get(c)) {
-              case null assert(false); 
+              case null assert(false);
               case (?auction) switch (auction.status) {
-                case (#close) assert(false); 
+                case (#close) assert(false);
                 //check highest bid
                 case (#open(_v)) switch (List.get<Bid>(_v.bids, 0)) {
-                  case (null) assert(false); 
+                  case (null) assert(false);
                   case (?(ad, p)) { // (canisterId, Price)
                     if (ad == canisterId) return #err("you are height bidder in category: " # c);
                   }
@@ -498,7 +498,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     };
     lastWinner : CanisterId;
   };
-  
+
   public query func getCategoryAll() : async [(Category, FreezedAuciton)] {
     Array.map<(Category, Auction), (Category, FreezedAuciton)>(
       Iter.toArray(_categories.entries()), func((_category, _auction)) {
