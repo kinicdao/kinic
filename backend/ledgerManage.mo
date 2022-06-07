@@ -107,7 +107,7 @@ dfx identity use clankpan
   // WARNING: need to change this to ledger for prod.
   let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
 
-  /* For content */
+  /* For content sites */
   public func contentBalance({kinic : Principal; canisterId : Principal}) : async Tokens {
     let subAccount = toSubAccount_fromPrincipal(canisterId);
     let aId  = toAccountIdentifer(kinic, subAccount);
@@ -185,13 +185,14 @@ dfx identity use clankpan
     await ledger.transfer(args);
   };
 
-
+  // Get the address to send ICP to for bidding.
   public func getContentAccountIdentifier({kinic : Principal; canisterId : Principal}) : Text {
     let subAccount = toSubAccount_fromPrincipal(canisterId);
     let aId = toAccountIdentifer(kinic, subAccount);
     Hex.encode(Blob.toArray(aId));
   };
 
+  // The address where ICP goes after bidding is complete and a winner is selected.
   public func getCategoryAccountIdentifier({kinic : Principal; category : Text}) : Text {
     let subAccount = toSubAccount_fromText(category);
     let aId = toAccountIdentifer(kinic, subAccount);
