@@ -843,6 +843,7 @@ export default {
           alert("Success!")
           this.buttonClicked = false
         }).catch((err) => {
+          console.log(err)
           alert("Something went wrong.")
           this.buttonClicked = false
         })
@@ -864,6 +865,7 @@ export default {
           alert('Request for verification sent!')
           this.buttonClicked = false
         }).catch((err) => {
+          console.log(err)
           alert("Something went wrong.")
           this.buttonClicked = false
         })
@@ -884,6 +886,7 @@ export default {
             alert(res.err)
           }
         }).catch((err) => {
+          console.log(err)
           alert("Something went wrong.")
           this.buttonClicked = false
         });
@@ -896,7 +899,6 @@ export default {
           return;
         }
         main.cancelBid(Principal.fromText(canisterId)).then((res) => {
-          console.log(res)
           this.buttonClicked = false
           if (res.err && res.err === 'This canister is not registered.') {
             alert('Please register your canister first.')
@@ -905,6 +907,7 @@ export default {
             alert(res.err)
           }
         }).catch((err) => {
+          console.log(err)
           alert("Something went wrong.")
           this.buttonClicked = false
         });

@@ -410,7 +410,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                   case (?(ad, p)) { // (canisterId, Price)
                     if (ad == canisterId) return #err("You are highest bidder in category: " # c);
                     v.balance := #unlock;
-                    return #ok("your balance is unlocked, since you are not highest bidder in category: " # c);
+                    return #ok("Your balance is unlocked, since you are not highest bidder in category: " # c);
                   }
                 }
               };
