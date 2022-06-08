@@ -52,7 +52,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   let hour = 60 * minutes;
   let day = 24 * hour;
   let week =  7 * day;
-  stable var defaultAuctionTime = 1 * minutes;
+  stable var defaultAuctionTime = 1 * week;
 
   let bidFeePercent = 1; // [%]
 
@@ -231,7 +231,7 @@ shared ({caller=installer}) actor class Auction() =  this {
                 auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
 
-              /* bidderのbalanceを全部unlockに変更する */
+              /* Change bidder balances to unlock */
               List.iterate<Bid>(v.bids, func (bidedAd,_) {
                 switch (_contents.get(bidedAd)) {
                   case (null) {};
@@ -315,7 +315,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     // auth owner
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
-        case (#Unknown(_)) return #err "The canister is not verified.";
+        case (#Unknown(_)) return #err "This canister is not registered.";
         case (#Verified(v)) {
           if (v.owner != caller) return #err "you are not owner"; // auth content site owner
           switch (v.balance) {
@@ -354,7 +354,7 @@ shared ({caller=installer}) actor class Auction() =  this {
       case (?auction) switch (auction.status) {
         case (#close) return #err "The category is closed";
         case (#open(v)) {
-          if (Time.now() > v.end) return #err "The auction is over";
+          if (Time.now() > v.end) return #err "Bidding has ended. An admin will accept the winner and all other bids will be returned.";
           switch (List.get<Bid>(v.bids, 0)) {
             case (null) {
               v.bids := List.push<Bid>((canisterId, bidPrice), v.bids);
@@ -424,7 +424,7 @@ shared ({caller=installer}) actor class Auction() =  this {
 
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
-        case (#Unknown(_)) return #err(#main("The canister is not verified."));
+        case (#Unknown(_)) return #err(#main("This canister is not registered."));
         case (#Verified(v)) {
           if (v.owner != caller) return #err(#main("You are not owner."));
           switch (v.balance) {
