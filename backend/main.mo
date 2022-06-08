@@ -195,7 +195,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     Ledger.getCategoryAccountIdentifier({kinic=Principal.fromActor(this); category=category});
   };
 
-  public shared({caller}) func AutoSelectWinner(category : Category) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
+  public shared({caller}) func autoSelectWinner(category : Category) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
     assert(caller == installer); // Installer only
     assert(isNotAnonymous(caller));
 
@@ -394,7 +394,7 @@ shared ({caller=installer}) actor class Auction() =  this {
 
     switch (_contents.get(canisterId)) {
       case (?props) switch (props) {
-        case (#Unknown(_)) return #err "the canister is not verified";
+        case (#Unknown(_)) return #err "This canister is not registered.";
         case (#Verified(v)) {
           if (v.owner != caller) return #err "You are not the owner.";
           switch (v.balance) {
