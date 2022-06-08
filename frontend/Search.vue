@@ -753,6 +753,11 @@
                 <p v-if="balance" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">
                   {{(Number(balance)/100000000)}} ICP
                 </p>
+                <p v-if="balance" class="text-medium mt-4">Enter the account id that you want to send your balance to.</p>
+                <input v-if="balance" type="text" v-model="accountID" placeholder="Account ID (ex. bb1bddb10fa4e5539316e735d6559d8ae454a48aeb68cc6b454f0f9201bdb9f8)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
+                <button v-if="balance" :disabled="buttonClicked" @click="refound(claimCanister)" class="bg-yellow-600 text-white py-2 px-3 rounded hover:bg-yellow-500 mt-2 mb-2">
+                  Redeem Balance
+                </button>
             </div>
           </div>
         </div>
@@ -816,6 +821,32 @@ export default {
           })
         })
     },
+    refound (canisterId) {
+        this.buttonClicked = true
+        if (!canisterId || canisterId.length !== 27) {
+          alert('That canister ID is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+        if (!this.accountID || this.accountID.length !== 64) {
+          alert('This account id is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+
+        main.refound({canisterId: Principal.fromText(canisterId), to: this.accountID}).then((res) => {
+          if (res.err && res.err.main) {
+            alert(res.err.main)
+            this.buttonClicked = false
+            return
+          }
+          alert("Success!")
+          this.buttonClicked = false
+        }).catch((err) => {
+          alert("Something went wrong.")
+          this.buttonClicked = false
+        })
+    },
     claimSite (canisterId) {
         this.buttonClicked = true
         if (!canisterId || canisterId.length !== 27) {
@@ -827,8 +858,13 @@ export default {
         main.requestVerifyContentOwner(Principal.fromText(canisterId)).then((res) => {
           if (res.err) {
             alert(res.err)
+            this.buttonClicked = false
+            return;
           }
           alert('Request for verification sent!')
+          this.buttonClicked = false
+        }).catch((err) => {
+          alert("Something went wrong.")
           this.buttonClicked = false
         })
     },
@@ -840,7 +876,6 @@ export default {
           return;
         }
         main.offerBid({category, canisterId: Principal.fromText(canisterId)}).then((res) => {
-          console.log(res)
           this.buttonClicked = false
           if (res.err && res.err === 'This canister is not registered.') {
             alert('Please register your canister first.')
@@ -848,6 +883,9 @@ export default {
           } else if (res.err) {
             alert(res.err)
           }
+        }).catch((err) => {
+          alert("Something went wrong.")
+          this.buttonClicked = false
         });
     },
     cancelBid (canisterId) {
@@ -866,6 +904,9 @@ export default {
           } else if (res.err) {
             alert(res.err)
           }
+        }).catch((err) => {
+          alert("Something went wrong.")
+          this.buttonClicked = false
         });
     },
     viewClaim () {
@@ -914,6 +955,9 @@ export default {
           this.cats = final
           this.adMode = true
         }
+      }).catch((err) => {
+        alert("Something went wrong.")
+        this.buttonClicked = false
       })
     },
     recordClick (canisterID) {
@@ -1164,6 +1208,7 @@ export default {
       search: '',
       claimCanister: '',
       bidAddress: '',
+      accountID: '',
       host: '',
       searchMode: false,
       adMode: false,
