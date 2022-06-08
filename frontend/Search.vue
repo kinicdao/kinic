@@ -139,12 +139,12 @@
               </div>
             </nav>
             <!-- SEARCH RESULT PAGE NAV -->
-            <nav class="flex items-center justify-between">
+            <nav class="flex items-center justify-between mt-1 mb-1">
                 <img @click="reset" class="hidden xl:block cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
-                <div class="hidden xl:block pt-3 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
+                <div class="hidden xl:block relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
                    <input style="border-width: 1px;" class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
-                   <i class="absolute left-4 top-1 mt-5 mr-4">
+                   <i class="absolute left-4 top-1 mt-2 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
                        viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
