@@ -8,7 +8,7 @@
             <span v-else>Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
-        <div class="order-3 mt-2 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+        <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
           <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm text font-bold text-white bg-black hover:bg-indigo-50 hover:text-yellow-500 mt-1"> Built for #SUPERNOVA </a>
         </div>
       </div>
