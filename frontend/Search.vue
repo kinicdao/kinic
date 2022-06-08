@@ -659,7 +659,6 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div class="overflow-hidden">
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <table class="min-w-full">
                   <thead class="bg-indigo-100 border-b">
@@ -704,7 +703,6 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
             </div>
           </div>
         </div>
@@ -725,7 +723,6 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div class="overflow-hidden">
                 <p class="text-medium mt-4">Enter the canister's ID and make a Claim Request.</p>
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to claim. (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <button :disabled="buttonClicked" @click="claimSite(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
@@ -756,7 +753,6 @@
                 <p v-if="balance" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">
                   {{(Number(balance)/100000000)}} ICP
                 </p>
-              </div>
             </div>
           </div>
         </div>
