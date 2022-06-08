@@ -726,24 +726,35 @@
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div class="overflow-hidden">
+                <p class="text-medium mt-4">Enter the canister's ID and make a Claim Request.</p>
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to claim. (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <button :disabled="buttonClicked" @click="claimSite(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
                   Claim Request
                 </button>
-                <!--<p class="font-light text-gray-700 bg-gray-100 px-2 py-4">
-                  dfx canister call r7inp-6aaaa-aaaaa-aaabq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'
-                </p>-->
-                <p class="font-bold mt-2 mb-2 text-sm">
-                  *Your claim request needs to be manually verfied as Motoko does not have a 'canister info' method yet. This may take some time. DM us at https://twitter.com/kinic_app for support.
+                <p class="text-medium mt-4 mb-2">Use DFX with the identity that created the canister or is the owner and run this command.</p>
+                <p class="font-light text-gray-700 bg-gray-100 px-2 py-4">
+                  dfx canister --network ic call r7inp-6aaaa-aaaaa-aaabq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'
+                </p>
+                <p class="font-bold mt-2 mb-2 text-xs">
+                  *Your claim request needs to be manually verfied as Motoko does not have a 'canister info' method yet. This may take some time. DM us at https://twitter.com/kinic_app with this principal for support.
+                </p>
+                <p class="font-bold mb-2 text-xs">
+                  *For support: {{this.principal}}
                 </p>
                 <hr/>
                 <div class="text-2xl text-indigo-500 leading-tight addFont mt-4">Fill Account</div>
                 <div class="text-medium text-indigo-500">Fill this address with ICP to make a bid. Make sure you claim your site first.</div>
                 <button :disabled="buttonClicked" @click="getAddress(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mt-2">
-                  Get Address
+                  Get Address & Balance
                 </button>
-                <p v-if="bidAddress" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">
+                <p v-if="bidAddress" class="font-light text-gray-700 bg-gray-100 px-2 py-4 mt-2">
                   {{bidAddress}}
+                </p>
+                <p v-if="bidAddress" class="font-bold mb-2 text-xs mb-2">
+                  *Transfer ICP to this address. The full amount will be used when you make a bid.
+                </p>
+                <p v-if="balance" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">
+                  {{(Number(balance)/100000000)}} ICP
                 </p>
               </div>
             </div>
@@ -793,9 +804,20 @@ export default {
         main.getContentAccountIdentifier(Principal.fromText(canisterId)).then((res) => {
           if (res.err) {
             alert(res.err)
+            this.buttonClicked = false
+            return
           }
           this.bidAddress = res
-          this.buttonClicked = false
+
+          main.getContentBalance(Principal.fromText(canisterId)).then((res) => {
+            if (res.err) {
+              alert(res.err)
+              this.buttonClicked = false
+              return
+            }
+            this.balance = res
+            this.buttonClicked = false
+          })
         })
     },
     claimSite (canisterId) {
@@ -1154,6 +1176,7 @@ export default {
       cats: [],
       category: '',
       page: 0,
+      balance: 0,
       principal: null,
       identity: null,
       buttonClicked: false,
