@@ -305,6 +305,10 @@ shared ({caller=installer}) actor class Auction() =  this {
     Ledger.getContentAccountIdentifier({kinic=Principal.fromActor(this); canisterId=canisterId});
   };
 
+  public func getContentBalance(canisterId : CanisterId) : async Nat64 {
+    (await Ledger.contentBalance({kinic=Principal.fromActor(this); canisterId=canisterId})).e8s
+  };
+
   public shared({caller}) func offerBid({category : Category; canisterId : CanisterId}) : async Result<Text, Text> {
     assert(isNotAnonymous(caller));
 
