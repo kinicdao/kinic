@@ -567,7 +567,7 @@
     <section v-if="!searchMode" @click="dropdownOn = false" style="margin-bottom:2%;" class="w-full blackBG">
         <div class="p-4 w-full pb-20">
             <div class="flex justify-center">
-                <div class="pt-2 relative mx-auto text-gray-600 w-9/12 2xl:w-5/12">
+                <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-6/12 2xl:w-5/12">
                    <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
