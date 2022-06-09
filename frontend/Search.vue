@@ -142,7 +142,7 @@
             <nav class="flex items-center justify-between mt-1 mb-1">
                 <img @click="reset" class="hidden xl:block cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
                 <div class="hidden xl:block relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                   <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-2 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
@@ -568,7 +568,7 @@
         <div class="p-4 w-full pb-20">
             <div class="flex justify-center">
                 <div class="pt-2 relative mx-auto text-gray-600 w-9/12 2xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                   <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
