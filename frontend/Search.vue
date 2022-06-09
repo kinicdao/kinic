@@ -8,7 +8,7 @@
             <span v-else>Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
-        <div class="order-3 mt-2 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+        <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
           <a href="https://twitter.com/kinic_app" target="_blank" class="flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm text font-bold text-white bg-black hover:bg-indigo-50 hover:text-yellow-500 mt-1"> Built for #SUPERNOVA </a>
         </div>
       </div>
@@ -139,12 +139,12 @@
               </div>
             </nav>
             <!-- SEARCH RESULT PAGE NAV -->
-            <nav class="flex items-center justify-between">
+            <nav class="flex items-center justify-between mt-1 mb-1">
                 <img @click="reset" class="hidden xl:block cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
-                <div class="hidden xl:block pt-3 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
-                   <input style="border-width: 1px;" class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                <div class="hidden xl:block relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
+                   <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
-                   <i class="absolute left-4 top-1 mt-5 mr-4">
+                   <i class="absolute left-4 top-1 mt-2 mr-4">
                      <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
                        viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
@@ -518,7 +518,7 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://nfid.one/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
+            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.ic0.app/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
         </div>
     </div>
     <div v-else-if="searchMode" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
@@ -567,7 +567,7 @@
     <section v-if="!searchMode" @click="dropdownOn = false" style="margin-bottom:2%;" class="w-full blackBG">
         <div class="p-4 w-full pb-20">
             <div class="flex justify-center">
-                <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
+                <div class="pt-2 relative mx-auto text-gray-600 w-9/12 2xl:w-5/12">
                    <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
                    <i class="absolute left-4 top-1 mt-5 mr-4">
