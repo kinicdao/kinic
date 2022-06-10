@@ -69,6 +69,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   stable var _upgradeProps = {
     contents : [(CanisterId, ContentProps)] = [];
     categories : [(Category, Auction)] = [];
+    clickRecords : [(CanisterId, Nat)] = [];
   };
   let _contents = HashMap.fromIter<CanisterId, ContentProps>(
     _upgradeProps.contents.vals(), 0, Principal.equal, Principal.hash
@@ -76,6 +77,10 @@ shared ({caller=installer}) actor class Auction() =  this {
   let _categories = HashMap.fromIter<Category, Auction>(
     _upgradeProps.categories.vals(), 0, Text.equal, Text.hash
   );
+  var _clickRecords = HashMap.fromIter<CanisterId, Nat>(
+    _upgradeProps.clickRecords.vals(), 0, Principal.equal, Principal.hash
+  );
+  stable var _auctionHistories = List.nil<(Time.Time, Category, List.List<Bid>)>();
 
   // For verifying content site owner using web2 API.
   stable var _upgradeOwnerVerifyRequests : [(CanisterId, List.List<UserId>)] = [];
@@ -88,6 +93,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeProps := {
       contents = Iter.toArray(_contents.entries());
       categories = Iter.toArray(_categories.entries());
+      clickRecords = Iter.toArray(_clickRecords.entries());
     };
     _upgradeOwnerVerifyRequests := Iter.toArray(_ownerVerifyRequests.entries());
     Debug.print("end preupgrade()")
@@ -97,6 +103,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeProps := {
       contents = [];
       categories = [];
+      clickRecords = [];
     };
     _upgradeOwnerVerifyRequests := [];
   };
@@ -111,9 +118,8 @@ shared ({caller=installer}) actor class Auction() =  this {
     assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {
+      case (?#Unknown(_))  {
         _contents.put(canisterId, #Verified({
-          var clickRecord : Nat = v.clickRecord;
           owner : UserId = owner;
           var balance = #unlock;
         }));
@@ -123,7 +129,6 @@ shared ({caller=installer}) actor class Auction() =  this {
       };
       case (_) { // If there is no the canister, add new one as verified.
         _contents.put(canisterId, #Verified({
-          var clickRecord : Nat = 0;
           owner : UserId = owner;
           var balance = #unlock;
         }));
@@ -152,7 +157,6 @@ shared ({caller=installer}) actor class Auction() =  this {
         _categories.put(category, {
           status = #close; // auction status
           lastWinner : CanisterId = Principal.fromActor(this);
-          auctionHistory = List.nil<(Time.Time, List.List<Bid>)>();
         });
         return #ok "Category added.";
       };
@@ -180,7 +184,6 @@ shared ({caller=installer}) actor class Auction() =  this {
                 end = Time.now() + defaultAuctionTime;
               });
               lastWinner : CanisterId = auction.lastWinner; // The category's first winner is KINIC's canister
-              auctionHistory : List.List<(Time.Time, List.List<Bid>)> = auction.auctionHistory;
             });
           return #ok "started auction";
         }
@@ -211,8 +214,9 @@ shared ({caller=installer}) actor class Auction() =  this {
               _categories.put(category, {
                 status = #close;
                 lastWinner = auction.lastWinner; // continue last winner
-                auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
+              // add bid history
+              _auctionHistories := List.push<(Time.Time, Category, List.List<Bid>)>((Time.now(), category, v.bids), _auctionHistories);
               return #err(#main("There are no bid"));
             };
             case (?(ad, p)) { // (canister_id, bid_price)
@@ -228,8 +232,10 @@ shared ({caller=installer}) actor class Auction() =  this {
               _categories.put(category, {
                 status = #close;
                 lastWinner = ad;
-                auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
+
+              // add bid history
+              _auctionHistories := List.push<(Time.Time, Category, List.List<Bid>)>((Time.now(), category, v.bids), _auctionHistories);
 
               /* Change bidder balances to unlock */
               List.iterate<Bid>(v.bids, func (bidedAd,_) {
@@ -251,37 +257,54 @@ shared ({caller=installer}) actor class Auction() =  this {
     }
   };
 
+  public shared ({caller}) func refoundToInstaller(to : Text) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
+    assert(isNotAnonymous(caller));
+    assert(caller == installer); // Installer only
+
+    switch (await Ledger.refoundToInstaller({kinic = Principal.fromActor(this); to = to})) {
+      case (#Err(e)) return #err(#ledger(e));
+      case (#Ok(_)) return #ok "ok";
+    }
+  };
+
+  public shared ({caller}) func clearClickRecords() : async [(CanisterId, Nat)] {
+    assert(isNotAnonymous(caller));
+    assert(caller == installer); // Installer only
+
+    let currentClickRecords = Iter.toArray(_clickRecords.entries());
+    _clickRecords := HashMap.HashMap<CanisterId, Nat>(0, Principal.equal, Principal.hash);
+
+    return currentClickRecords;
+  };
+
+  public shared ({caller}) func clearAuctionHistories() : async List.List<(Time.Time, Category, List.List<Bid>)> {
+    assert(isNotAnonymous(caller));
+    assert(caller == installer); // Installer only
+
+    let currentAuctionHistories = _auctionHistories;
+    _auctionHistories := List.nil<(Time.Time, Category, List.List<Bid>)>();
+
+    return currentAuctionHistories;
+  };
 
   /* Public user functions */
 
   /*
     Record click count.
   */
-  public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
+  public shared ({caller}) func recordClick(canisterId : CanisterId) : async () {
 
-    switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {
-        v.clickRecord +=1;
-        return #ok "added record to Unknown Canister";
-      };
-      case (?#Verified(v)) {
-        v.clickRecord +=1;
-        return #ok "added record to Verified Canister";
-      };
-      case (_) { // if there is no the canister, add new one as unknown.
-        _contents.put(canisterId, #Unknown({
-          var clickRecord : Nat = 1; // init 1 count
-        }));
-        return #ok "added record to new Canister";
-      }
-    }
+    switch (_clickRecords.get(canisterId)) {
+      case (null) _clickRecords.put(canisterId, 1);
+      case (?v) _clickRecords.put(canisterId, v+1)
+    };
   };
 
   public shared ({caller}) func requestVerifyContentOwner(canisterId : CanisterId) : async Result<Text, Text> {
     assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {};
+      case (?#Unknown(_))  {};
       case (?#Verified(v)) {
         return #err("Already verified by " # Principal.toText(v.owner));
       };
@@ -448,11 +471,8 @@ shared ({caller=installer}) actor class Auction() =  this {
 
   /* query */
   type FreezedContentProps = {
-    #Unknown : { // A non-verified canister
-      clickRecord : Nat;
-    };
+    #Unknown; // A non-verified canister
     #Verified : {
-      clickRecord : Nat;
       owner : UserId;
       balance : {
         #unlock; // can withdrawn
@@ -467,14 +487,11 @@ shared ({caller=installer}) actor class Auction() =  this {
     Array.map<(CanisterId, ContentProps), (CanisterId, FreezedContentProps)>(
       Iter.toArray(_contents.entries()), func((_canister, _props)) {
         let props = switch (_props) {
-          case (#Unknown(v)) {
-            #Unknown{
-              clickRecord : Nat = v.clickRecord;
-            }
+          case (#Unknown(_)) {
+            #Unknown
           };
           case (#Verified(v)) {
             #Verified {
-              clickRecord : Nat = v.clickRecord;
               owner : UserId = v.owner;
               balance = v.balance : {
                 #unlock; // can withdrawn

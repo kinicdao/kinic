@@ -105,7 +105,25 @@ dfx identity use clankpan
   // type SubAccount = ExtCore.SubAccount;
 
   // WARNING: need to change this to ledger for prod.
-  let ledger : Interface = actor("ryjl3-tyaaa-aaaaa-aaaba-cai");
+  let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
+
+  /* For installer */
+  public func refoundToInstaller({kinic : Principal; to : Text}) : async TransferResult {
+    let amount : Tokens = await ledger.account_balance({
+      account = Blob.fromArray(Hex.decode(AID.fromPrincipal(kinic, null)))
+    });
+    if (10_000 > amount.e8s) return #Err(#InsufficientFunds({ balance=amount; }));
+    let toAId  = Blob.fromArray(Hex.decode(to));
+    let args : TransferArgs = {
+      memo: Memo = 0;
+      amount: Tokens = {e8s=amount.e8s-10_000};
+      fee: Tokens = {e8s=10_000};
+      from_subaccount: ?SubAccount = null;
+      to: AccountIdentifier = toAId;
+      created_at_time: ?TimeStamp = null;
+    };
+    await ledger.transfer(args);
+  };
 
   /* For content sites */
   public func contentBalance({kinic : Principal; canisterId : Principal}) : async Tokens {
