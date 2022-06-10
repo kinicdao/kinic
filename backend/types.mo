@@ -41,6 +41,5 @@ module {
       #close;
     };
     lastWinner : CanisterId;
-    auctionHistory : List.List<(Time.Time, List.List<Bid>)>;
   };
 }

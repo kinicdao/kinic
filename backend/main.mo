@@ -80,6 +80,7 @@ shared ({caller=installer}) actor class Auction() =  this {
   var _clickRecords = HashMap.fromIter<CanisterId, Nat>(
     _upgradeProps.clickRecords.vals(), 0, Principal.equal, Principal.hash
   );
+  stable var _auctionHistories = List.nil<(Time.Time, Category, List.List<Bid>)>();
 
   // For verifying content site owner using web2 API.
   stable var _upgradeOwnerVerifyRequests : [(CanisterId, List.List<UserId>)] = [];
@@ -156,7 +157,6 @@ shared ({caller=installer}) actor class Auction() =  this {
         _categories.put(category, {
           status = #close; // auction status
           lastWinner : CanisterId = Principal.fromActor(this);
-          auctionHistory = List.nil<(Time.Time, List.List<Bid>)>();
         });
         return #ok "Category added.";
       };
@@ -184,7 +184,6 @@ shared ({caller=installer}) actor class Auction() =  this {
                 end = Time.now() + defaultAuctionTime;
               });
               lastWinner : CanisterId = auction.lastWinner; // The category's first winner is KINIC's canister
-              auctionHistory : List.List<(Time.Time, List.List<Bid>)> = auction.auctionHistory;
             });
           return #ok "started auction";
         }
@@ -215,8 +214,9 @@ shared ({caller=installer}) actor class Auction() =  this {
               _categories.put(category, {
                 status = #close;
                 lastWinner = auction.lastWinner; // continue last winner
-                auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
+              // add bid history
+              _auctionHistories := List.push<(Time.Time, Category, List.List<Bid>)>((Time.now(), category, v.bids), _auctionHistories);
               return #err(#main("There are no bid"));
             };
             case (?(ad, p)) { // (canister_id, bid_price)
@@ -232,8 +232,10 @@ shared ({caller=installer}) actor class Auction() =  this {
               _categories.put(category, {
                 status = #close;
                 lastWinner = ad;
-                auctionHistory = List.push<(Time.Time, List.List<Bid>)>((Time.now(), v.bids), auction.auctionHistory);
               });
+
+              // add bid history
+              _auctionHistories := List.push<(Time.Time, Category, List.List<Bid>)>((Time.now(), category, v.bids), _auctionHistories);
 
               /* Change bidder balances to unlock */
               List.iterate<Bid>(v.bids, func (bidedAd,_) {
@@ -273,6 +275,16 @@ shared ({caller=installer}) actor class Auction() =  this {
     _clickRecords := HashMap.HashMap<CanisterId, Nat>(0, Principal.equal, Principal.hash);
 
     return currentClickRecords;
+  };
+
+  public shared ({caller}) func clearAuctionHistories() : async List.List<(Time.Time, Category, List.List<Bid>)> {
+    assert(isNotAnonymous(caller));
+    assert(caller == installer); // Installer only
+
+    let currentAuctionHistories = _auctionHistories;
+    _auctionHistories := List.nil<(Time.Time, Category, List.List<Bid>)>();
+
+    return currentAuctionHistories;
   };
 
   /* Public user functions */
