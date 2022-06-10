@@ -251,6 +251,15 @@ shared ({caller=installer}) actor class Auction() =  this {
     }
   };
 
+  public shared ({caller}) func refoundToInstaller(to : Text) : async Result<Text, {#main:Text;#ledger:Ledger.TransferError}> {
+    assert(isNotAnonymous(caller));
+    assert(caller == installer); // Installer only
+
+    switch (await Ledger.refoundToInstaller({kinic = Principal.fromActor(this); to = to})) {
+      case (#Err(e)) return #err(#ledger(e));
+      case (#Ok(_)) return #ok "ok";
+    }
+  };
 
   /* Public user functions */
 
