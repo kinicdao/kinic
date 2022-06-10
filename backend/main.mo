@@ -111,9 +111,8 @@ shared ({caller=installer}) actor class Auction() =  this {
     assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {
+      case (?#Unknown(_))  {
         _contents.put(canisterId, #Verified({
-          var clickRecord : Nat = v.clickRecord;
           owner : UserId = owner;
           var balance = #unlock;
         }));
@@ -123,7 +122,6 @@ shared ({caller=installer}) actor class Auction() =  this {
       };
       case (_) { // If there is no the canister, add new one as verified.
         _contents.put(canisterId, #Verified({
-          var clickRecord : Nat = 0;
           owner : UserId = owner;
           var balance = #unlock;
         }));
@@ -266,31 +264,31 @@ shared ({caller=installer}) actor class Auction() =  this {
   /*
     Record click count.
   */
-  public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
+  // public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
 
-    switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {
-        v.clickRecord +=1;
-        return #ok "added record to Unknown Canister";
-      };
-      case (?#Verified(v)) {
-        v.clickRecord +=1;
-        return #ok "added record to Verified Canister";
-      };
-      case (_) { // if there is no the canister, add new one as unknown.
-        _contents.put(canisterId, #Unknown({
-          var clickRecord : Nat = 1; // init 1 count
-        }));
-        return #ok "added record to new Canister";
-      }
-    }
-  };
+  //   switch (_contents.get(canisterId)) {
+  //     case (?#Unknown(v))  {
+  //       v.clickRecord +=1;
+  //       return #ok "added record to Unknown Canister";
+  //     };
+  //     case (?#Verified(v)) {
+  //       v.clickRecord +=1;
+  //       return #ok "added record to Verified Canister";
+  //     };
+  //     case (_) { // if there is no the canister, add new one as unknown.
+  //       _contents.put(canisterId, #Unknown({
+  //         var clickRecord : Nat = 1; // init 1 count
+  //       }));
+  //       return #ok "added record to new Canister";
+  //     }
+  //   }
+  // };
 
   public shared ({caller}) func requestVerifyContentOwner(canisterId : CanisterId) : async Result<Text, Text> {
     assert(isNotAnonymous(caller));
 
     switch (_contents.get(canisterId)) {
-      case (?#Unknown(v))  {};
+      case (?#Unknown(_))  {};
       case (?#Verified(v)) {
         return #err("Already verified by " # Principal.toText(v.owner));
       };
@@ -457,11 +455,8 @@ shared ({caller=installer}) actor class Auction() =  this {
 
   /* query */
   type FreezedContentProps = {
-    #Unknown : { // A non-verified canister
-      clickRecord : Nat;
-    };
+    #Unknown; // A non-verified canister
     #Verified : {
-      clickRecord : Nat;
       owner : UserId;
       balance : {
         #unlock; // can withdrawn
@@ -476,14 +471,11 @@ shared ({caller=installer}) actor class Auction() =  this {
     Array.map<(CanisterId, ContentProps), (CanisterId, FreezedContentProps)>(
       Iter.toArray(_contents.entries()), func((_canister, _props)) {
         let props = switch (_props) {
-          case (#Unknown(v)) {
-            #Unknown{
-              clickRecord : Nat = v.clickRecord;
-            }
+          case (#Unknown(_)) {
+            #Unknown
           };
           case (#Verified(v)) {
             #Verified {
-              clickRecord : Nat = v.clickRecord;
               owner : UserId = v.owner;
               balance = v.balance : {
                 #unlock; // can withdrawn

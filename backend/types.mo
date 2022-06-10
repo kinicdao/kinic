@@ -19,11 +19,8 @@ module {
   public type UserId = Principal; // content site owner
   public type Bid = (CanisterId,Price);
   public type ContentProps = {
-    #Unknown : { // A non-verified site.
-      var clickRecord : Nat;
-    };
+    #Unknown ; // A non-verified site.
     #Verified : {
-      var clickRecord : Nat;
       owner : UserId;
       var balance : {
         #unlock; // can withdrawn
