@@ -69,12 +69,16 @@ shared ({caller=installer}) actor class Auction() =  this {
   stable var _upgradeProps = {
     contents : [(CanisterId, ContentProps)] = [];
     categories : [(Category, Auction)] = [];
+    clickRecords : [(CanisterId, Nat)] = [];
   };
   let _contents = HashMap.fromIter<CanisterId, ContentProps>(
     _upgradeProps.contents.vals(), 0, Principal.equal, Principal.hash
   );
   let _categories = HashMap.fromIter<Category, Auction>(
     _upgradeProps.categories.vals(), 0, Text.equal, Text.hash
+  );
+  var _clickRecords = HashMap.fromIter<CanisterId, Nat>(
+    _upgradeProps.clickRecords.vals(), 0, Principal.equal, Principal.hash
   );
 
   // For verifying content site owner using web2 API.
@@ -88,6 +92,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeProps := {
       contents = Iter.toArray(_contents.entries());
       categories = Iter.toArray(_categories.entries());
+      clickRecords = Iter.toArray(_clickRecords.entries());
     };
     _upgradeOwnerVerifyRequests := Iter.toArray(_ownerVerifyRequests.entries());
     Debug.print("end preupgrade()")
@@ -97,6 +102,7 @@ shared ({caller=installer}) actor class Auction() =  this {
     _upgradeProps := {
       contents = [];
       categories = [];
+      clickRecords = [];
     };
     _upgradeOwnerVerifyRequests := [];
   };
@@ -259,30 +265,28 @@ shared ({caller=installer}) actor class Auction() =  this {
     }
   };
 
+  public shared ({caller}) func clearClickRecords() : async [(CanisterId, Nat)] {
+    assert(isNotAnonymous(caller));
+    assert(caller == installer); // Installer only
+
+    let currentClickRecords = Iter.toArray(_clickRecords.entries());
+    _clickRecords := HashMap.HashMap<CanisterId, Nat>(0, Principal.equal, Principal.hash);
+
+    return currentClickRecords;
+  };
+
   /* Public user functions */
 
   /*
     Record click count.
   */
-  // public shared ({caller}) func recordClick(canisterId : CanisterId) : async Result<Text, Text> {
+  public shared ({caller}) func recordClick(canisterId : CanisterId) : async () {
 
-  //   switch (_contents.get(canisterId)) {
-  //     case (?#Unknown(v))  {
-  //       v.clickRecord +=1;
-  //       return #ok "added record to Unknown Canister";
-  //     };
-  //     case (?#Verified(v)) {
-  //       v.clickRecord +=1;
-  //       return #ok "added record to Verified Canister";
-  //     };
-  //     case (_) { // if there is no the canister, add new one as unknown.
-  //       _contents.put(canisterId, #Unknown({
-  //         var clickRecord : Nat = 1; // init 1 count
-  //       }));
-  //       return #ok "added record to new Canister";
-  //     }
-  //   }
-  // };
+    switch (_clickRecords.get(canisterId)) {
+      case (null) _clickRecords.put(canisterId, 1);
+      case (?v) _clickRecords.put(canisterId, v+1)
+    };
+  };
 
   public shared ({caller}) func requestVerifyContentOwner(canisterId : CanisterId) : async Result<Text, Text> {
     assert(isNotAnonymous(caller));
