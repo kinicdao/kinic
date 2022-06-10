@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
           <p class="ml-3 font-medium text-md truncate headerSN">
-            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the Internet Computer</span>
+            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the Internet Computer.</span>
             <span v-else>Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
           </p>
         </div>
@@ -120,13 +120,12 @@
                          </svg>
                      </button>
                      <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
-
-                       <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                           Create Ad
+                       <a @click="viewClaim" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           Claim Site
                        </a>
 
-                       <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                           Claim Site
+                       <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           Ad Auction
                        </a>
 
                        <hr class="border-gray-200">
@@ -184,13 +183,13 @@
                          </button>
                          <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
 
-                           <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                               Create Ad
-                           </a>
-
-                           <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                           <a @click="viewClaim" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
                                Claim Site
                            </a>
+                           <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                               Ad Auction
+                           </a>
+
 
                            <hr class="border-gray-200">
 
@@ -311,12 +310,12 @@
                        </button>
                        <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
 
-                         <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                             Create Ad
-                         </a>
 
-                         <a class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                         <a @click="viewClaim" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
                              Claim Site
+                         </a>
+                         <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                             Ad Auction
                          </a>
 
                          <hr class="border-gray-200">
@@ -339,12 +338,12 @@
           <b class="text-xs redText">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
-          <a v-if="item.Title" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.Title}}
             </h2>
           </a>
-          <a v-else :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-else @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               No Title
             </h2>
@@ -646,6 +645,125 @@
         </a>
     </div>
 
+    <Modal
+      v-model="adMode"
+      :close="closeAds"
+      class="z-20"
+    >
+      <div class="modal shadow-lg">
+        <button @click="closeAds" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
+          X
+        </button>
+        <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Auctions</div>
+        <div class="text-lg text-indigo-500 text-center">Bid to get your ad presented in a category for two weeks.</div>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
+                <table class="min-w-full">
+                  <thead class="bg-indigo-100 border-b">
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Category
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Status
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Bids
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Highest Bid
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Manage Your Bid
+                      </th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in this.cats" :key="item.name" class="bg-white border-b">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.name}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.status}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.bids.length}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.highestBid}}</td>
+                      <td v-if="item.status === 'Open'" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <button :disabled="buttonClicked" @click="offerBid(item.name, claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
+                          Make Offer
+                        </button>
+                        <button :disabled="buttonClicked" @click="cancelBid(claimCanister)" class="bg-red-600 text-white py-2 px-3 rounded hover:bg-red-500 mr-2">
+                          Cancel Offer
+                        </button>
+                      </td>
+                      <td v-else class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <button disabled class="bg-green-400 text-white py-2 px-3 rounded mr-2 cursor-not-allowed">
+                          Make Offer
+                        </button>
+                        <button disabled class="bg-red-400 text-white py-2 px-3 rounded mr-2 cursor-not-allowed">
+                          Cancel Offer
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Modal>
+
+    <Modal
+      v-model="claimMode"
+      :close="closeClaim"
+      class="z-20"
+    >
+      <div class="modal shadow-lg">
+        <button @click="closeClaim" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
+          X
+        </button>
+        <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Claim Site</div>
+        <div class="text-lg text-indigo-500 text-center">By claiming your site you get an OFFICIAL tag which boosts SEO.</div>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <p class="text-medium mt-4">Enter the canister's ID and make a Claim Request.</p>
+                <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to claim. (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
+                <button :disabled="buttonClicked" @click="claimSite(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
+                  Claim Request
+                </button>
+                <p class="text-medium mt-4 mb-2">Use DFX with the identity that created the canister or is the owner and run this command.</p>
+                <p class="font-light text-gray-700 bg-gray-100 px-2 py-4">
+                  dfx canister --network ic call r7inp-6aaaa-aaaaa-aaabq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'
+                </p>
+                <p class="font-bold mt-2 mb-2 text-xs">
+                  *Your claim request needs to be manually verfied as Motoko does not have a 'canister info' method yet. This may take some time. DM us at https://twitter.com/kinic_app with this principal for support.
+                </p>
+                <p class="font-bold mb-2 text-xs">
+                  *For support: {{this.principal}}
+                </p>
+                <hr/>
+                <div class="text-2xl text-indigo-500 leading-tight addFont mt-4">Fill Account</div>
+                <div class="text-medium text-indigo-500">Fill this address with ICP to make a bid. Make sure you claim your site first.</div>
+                <button :disabled="buttonClicked" @click="getAddress(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mt-2">
+                  Get Address & Balance
+                </button>
+                <p v-if="bidAddress" class="font-light text-gray-700 bg-gray-100 px-2 py-4 mt-2">
+                  {{bidAddress}}
+                </p>
+                <p v-if="bidAddress" class="font-bold mb-2 text-xs mb-2">
+                  *Transfer ICP to this address. The full amount will be used when you make a bid.
+                </p>
+                <p v-if="balance" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">
+                  {{(Number(balance)/100000000)}} ICP
+                </p>
+                <p v-if="balance" class="text-medium mt-4">Enter the account id that you want to send your balance to.</p>
+                <input v-if="balance" type="text" v-model="accountID" placeholder="Account ID (ex. bb1bddb10fa4e5539316e735d6559d8ae454a48aeb68cc6b454f0f9201bdb9f8)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
+                <button v-if="balance" :disabled="buttonClicked" @click="refound(claimCanister)" class="bg-yellow-600 text-white py-2 px-3 rounded hover:bg-yellow-500 mt-2 mb-2">
+                  Redeem Balance
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Modal>
+
 </template>
 
 <script>
@@ -670,6 +788,184 @@ export default {
     }
   },
   methods: {
+    closeAds () {
+      this.adMode = false
+    },
+    closeClaim () {
+      this.claimMode = false
+    },
+    getAddress (canisterId) {
+        this.buttonClicked = true
+        if (!canisterId || canisterId.length !== 27) {
+          alert('That canister ID is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+
+        main.getContentAccountIdentifier(Principal.fromText(canisterId)).then((res) => {
+          if (res.err) {
+            alert(res.err)
+            this.buttonClicked = false
+            return
+          }
+          this.bidAddress = res
+
+          main.getContentBalance(Principal.fromText(canisterId)).then((res) => {
+            if (res.err) {
+              alert(res.err)
+              this.buttonClicked = false
+              return
+            }
+            this.balance = res
+            this.buttonClicked = false
+          })
+        })
+    },
+    refound (canisterId) {
+        this.buttonClicked = true
+        if (!canisterId || canisterId.length !== 27) {
+          alert('That canister ID is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+        if (!this.accountID || this.accountID.length !== 64) {
+          alert('This account id is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+
+        main.refound({canisterId: Principal.fromText(canisterId), to: this.accountID}).then((res) => {
+          if (res.err && res.err.main) {
+            alert(res.err.main)
+            this.buttonClicked = false
+            return
+          }
+          alert("Success!")
+          this.buttonClicked = false
+        }).catch((err) => {
+          console.log(err)
+          alert("Something went wrong.")
+          this.buttonClicked = false
+        })
+    },
+    claimSite (canisterId) {
+        this.buttonClicked = true
+        if (!canisterId || canisterId.length !== 27) {
+          alert('That canister ID is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+
+        main.requestVerifyContentOwner(Principal.fromText(canisterId)).then((res) => {
+          if (res.err) {
+            alert(res.err)
+            this.buttonClicked = false
+            return;
+          }
+          alert('Request for verification sent!')
+          this.buttonClicked = false
+        }).catch((err) => {
+          console.log(err)
+          alert("Something went wrong.")
+          this.buttonClicked = false
+        })
+    },
+    offerBid (category, canisterId) {
+        this.buttonClicked = true
+        if (!canisterId || canisterId.length !== 27) {
+          alert('That canister ID is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+        main.offerBid({category, canisterId: Principal.fromText(canisterId)}).then((res) => {
+          this.buttonClicked = false
+          if (res.err && res.err === 'This canister is not registered.') {
+            alert('Please register your canister first.')
+            return;
+          } else if (res.err) {
+            alert(res.err)
+          }
+        }).catch((err) => {
+          console.log(err)
+          alert("Something went wrong.")
+          this.buttonClicked = false
+        });
+    },
+    cancelBid (canisterId) {
+        this.buttonClicked = true
+        if (!canisterId || canisterId.length !== 27) {
+          alert('That canister ID is not valid.')
+          this.buttonClicked = false
+          return;
+        }
+        main.cancelBid(Principal.fromText(canisterId)).then((res) => {
+          this.buttonClicked = false
+          if (res.err && res.err === 'This canister is not registered.') {
+            alert('Please register your canister first.')
+            return;
+          } else if (res.err) {
+            alert(res.err)
+          }
+        }).catch((err) => {
+          console.log(err)
+          alert("Something went wrong.")
+          this.buttonClicked = false
+        });
+    },
+    viewClaim () {
+      this.claimMode = true
+    },
+    viewAuctions () {
+      main.getCategoryAll().then((res) => {
+        if (res) {
+          let final = []
+          let bidAmounts = []
+          res.forEach((ent) => {
+            let obj = {
+              name: ent[0],
+              status: 'Pending',
+              bids: [],
+              highestBid: 0
+            }
+            if (ent[1].status) {
+              for (var key in ent[1].status) {
+                if (key === 'open') {
+                  obj.status = 'Open'
+                  obj.bids = ent[1].status.open.bids
+                  if (ent[1].status.open.bids) {
+                    ent[1].status.open.bids.forEach((bid) => {
+                      if (bid[0] && bid[0][1]) {
+                        bidAmounts.push(Number(bid[0][1])/100000000)
+                      }
+                    })
+                    if (ent[1].status.open.end) {
+                      let end = "" + Number(ent[1].status.open.end)
+                      // Needs to be 13 digits for JS.
+                      end = Number(end.slice(0,13))
+                      if (end < Date.now()) {
+                        obj.status = 'Finished'
+                      }
+                    }
+                  }
+                  bidAmounts.sort().reverse()
+                  obj.highestBid = bidAmounts[0] || 0
+                }
+                break;
+              }
+            }
+            final.push(obj)
+          })
+          this.cats = final
+          this.adMode = true
+        }
+      }).catch((err) => {
+        alert("Something went wrong.")
+        this.buttonClicked = false
+      })
+    },
+    recordClick (canisterID) {
+      main.recordClick(Principal.fromText(canisterID))
+    },
     async logInNFID () {
       const authClient = await AuthClient.create();
       authClient.login({
@@ -739,7 +1035,10 @@ export default {
       let newUrlIS =  window.location.origin + '/'
       history.pushState({}, null, newUrlIS)
       this.searchMode = false
+      this.adMode = false
+      this.claimMode = false
       this.results = []
+      this.cats = []
       this.category = ''
       this.page = 0
       this.pages = 0
@@ -911,13 +1210,21 @@ export default {
   data () {
     return {
       search: '',
+      claimCanister: '',
+      bidAddress: '',
+      accountID: '',
       host: '',
       searchMode: false,
+      adMode: false,
+      claimMode: false,
       results: [],
+      cats: [],
       category: '',
       page: 0,
+      balance: 0,
       principal: null,
       identity: null,
+      buttonClicked: false,
       dropdownOn: false
     }
   }
@@ -968,5 +1275,12 @@ export default {
       font-size: 0.8rem;
       position: relative;
       top: 1px;
+  }
+  .modal {
+    width: 80%;
+    min-height: 400px;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: #fff;
   }
 </style>

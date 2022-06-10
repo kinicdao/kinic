@@ -4,6 +4,11 @@
       "main": "backend/main.mo",
       "type": "motoko"
     },
+    "ledger": {
+      "type": "custom",
+      "wasm": "backend/LocalLedger/ledger.wasm.gz",
+      "candid": "backend/LocalLedger/ledger.private.did"
+    },
     "assets": {
       "dependencies": [
         "main"
@@ -19,7 +24,7 @@
   },
   "defaults": {
     "build": {
-      "packtool": ""
+      "packtool": "vessel sources"
     }
   },
   "dfx": "0.10.0",

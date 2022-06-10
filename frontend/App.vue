@@ -2,6 +2,7 @@
   <div class="App">
     <Search />
   </div>
+  <div id="modals"></div>
 </template>
 
 <script>
