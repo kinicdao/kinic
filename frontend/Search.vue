@@ -334,7 +334,7 @@
     <!-- SEARCH RESULTS -->
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
       <div v-for="item in results[page]" :key="item.Canisterid" class="max-w-xl mb-8">
-        <div class="group">
+        <div v-if="item.Canisterid.length === 27" class="group">
           <b class="text-xs redText">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
@@ -349,13 +349,28 @@
             </h2>
           </a>
         </div>
+        <div v-else class="group">
+          <b class="text-xs redText">
+            {{item.Subnetid}}
+          </b>
+          <a v-if="item.Title" @click="recordClick(item.Canisterid)" :href="'http://' + item.Subnetid">
+            <h2 class="truncate text-xl group-hover:underline blueText">
+              {{item.Title}}
+            </h2>
+          </a>
+          <a v-else @click="recordClick(item.Canisterid)" :href="'http://' + item.Subnetid">
+            <h2 class="truncate text-xl group-hover:underline blueText">
+              No Title
+            </h2>
+          </a>
+        </div>
         <p class="line-clamp-2 text-gray-900">
           {{item.Subtitle}}
         </p>
-        <p class="line-clamp-2 text-gray-900 text-sm font-light">
+        <p v-if="item.Canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
           ID: {{item.Canisterid}}
         </p>
-        <p class="line-clamp-2 text-gray-900 text-sm font-light">
+        <p v-if="item.Canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
           Subnet: {{item.Subnetid}}
         </p>
         <span v-if="item.Status && item.Status === 'official'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">OFFICIAL</span>
