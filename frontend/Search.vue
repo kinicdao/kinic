@@ -674,7 +674,7 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <b>Fund your account on the 'Claim Site' page.</b>
+                <b>Fund your account on the 'Claim Site' page. Auctions end after one week. Check our Twitter @kinic_app,</b>
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <table class="min-w-full">
                   <thead class="bg-indigo-100 border-b">
@@ -703,9 +703,21 @@
                       <td v-if="item.status === 'Open'" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         <button :disabled="buttonClicked" @click="offerBid(item.name, claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
                           Make Offer
+                          <b v-if="buttonClicked">
+                            <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                              <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          </b>
                         </button>
                         <button :disabled="buttonClicked" @click="cancelBid(claimCanister)" class="bg-red-600 text-white py-2 px-3 rounded hover:bg-red-500 mr-2">
                           Cancel Offer
+                          <b v-if="buttonClicked">
+                            <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                              <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          </b>
                         </button>
                       </td>
                       <td v-else class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -739,10 +751,16 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <p class="text-medium mt-4">Enter the canister's ID and make a Claim Request.</p>
+                <p class="text-medium mt-4">Enter the canister's ID and make a Claim Request. If you have done this previously add ID and get funding address below.</p>
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to claim. (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <button :disabled="buttonClicked" @click="claimSite(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
                   Claim Request
+                  <b v-if="buttonClicked">
+                    <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </b>
                 </button>
                 <p class="text-medium mt-4 mb-2">Use DFX with the identity that created the canister or is the owner and run this command.</p>
                 <p class="font-light text-gray-700 bg-gray-100 px-2 py-4">
@@ -759,6 +777,12 @@
                 <div class="text-medium text-indigo-500">Fill this address with ICP to make a bid. Make sure you claim your site first.</div>
                 <button :disabled="buttonClicked" @click="getAddress(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mt-2">
                   Get Address & Balance
+                  <b v-if="buttonClicked">
+                    <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </b>
                 </button>
                 <p v-if="bidAddress" class="font-light text-gray-700 bg-gray-100 px-2 py-4 mt-2">
                   {{bidAddress}}
@@ -800,6 +824,9 @@ export default {
     if (isAuthenticated) {
       this.identity = client.getIdentity()
       this.principal = this.identity.getPrincipal().toString()
+      if (this.identity) {
+        main = mainCA(MAIN_CANISTER_ID, {agentOptions: {identity: this.identity}})
+      }
       // Force close.
       setTimeout(() => {
         this.dropdownOn = false
