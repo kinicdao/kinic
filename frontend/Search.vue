@@ -4,8 +4,8 @@
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
           <p class="ml-3 font-medium text-md truncate headerSN">
-            <span v-if="!searchMode">Kinic allows you to search all of the frontend canisters on the Internet Computer.</span>
-            <span v-else>Advertisers can bid ICP to put Ads at the top of categories. This revenue is shared with content site owners.</span>
+            <span v-if="!searchMode">Kinic is the world's first web3 search engine.</span>
+            <span v-else>Advertisers can bid ICP to place Ads in categories. Login to see more.</span>
           </p>
         </div>
         <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
@@ -401,7 +401,7 @@
         AD SPACE
         We could do this programatically and swap out the text and image.. but we have plans for some crazy Ad types. Therefore each category needs to be unique.
     -->
-    <div v-if="searchMode && category === 'landing'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-if="searchMode && category === 'landingbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/icme.png" alt="">
@@ -418,7 +418,7 @@
             <a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center underline">Visit icme.io for no-code content creation on web3.</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'nft'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'nftbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/toniq.png" alt="">
@@ -435,7 +435,7 @@
             <a target="_blank" href="https://toniqlabs.com/"><p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'defi'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'defibl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-40 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/infinityswap.png" alt="">
@@ -451,7 +451,7 @@
             <a target="_blank" href="https://exwqn-uaaaa-aaaaf-qaeaa-cai.ic0.app/Infinity-Swap"><p class="text-sm text-center underline">InfinitySwap News on Nuance, the Publishing Platform for Web3.</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'interesting'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'interestingbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-160 -mt-16 mx-auto shadow-lg">
                   <video controls>
@@ -470,7 +470,7 @@
             <a target="_blank" href="https://icpcs.io/"><p class="text-sm text-center underline">Read more about ICPCS</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'investor'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'investorbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/icpanalysis.png" alt="">
@@ -486,7 +486,7 @@
             <a target="_blank" href="https://kn5ky-6iaaa-aaaai-qbikq-cai.ic0.app/project.html?projectId=18"><p class="text-sm text-center underline">Access NFTs for Season one on sale now!</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'dao'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'daobl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/flowerdao.png" alt="">
@@ -502,7 +502,7 @@
             <a target="_blank" href="https://oot6y-haaaa-aaaae-qaa7q-cai.ic0.app/"><p class="text-sm text-center underline">Check it out now!</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'funny'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'funnybl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-80 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/tacos.gif" alt="">
@@ -518,7 +518,7 @@
             <a target="_blank" href="https://taconfts.xyz/"><p class="text-sm text-center underline">Learn more about our 10,000 Tacos living on the ICP Blockchain, join our community and mint your own at taconfts.xyz</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'utility'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'utilitybl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/nfid.png" alt="">
@@ -670,10 +670,11 @@
           X
         </button>
         <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Auctions</div>
-        <div class="text-lg text-indigo-500 text-center">Bid to get your ad presented in a category for two weeks.</div>
+        <div class="text-lg text-indigo-500 text-center">Bid to get your ad presented in a category for one month.</div>
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <b>Fund your account on the 'Claim Site' page.</b>
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <table class="min-w-full">
                   <thead class="bg-indigo-100 border-b">
@@ -745,7 +746,7 @@
                 </button>
                 <p class="text-medium mt-4 mb-2">Use DFX with the identity that created the canister or is the owner and run this command.</p>
                 <p class="font-light text-gray-700 bg-gray-100 px-2 py-4">
-                  dfx canister --network ic call r7inp-6aaaa-aaaaa-aaabq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'
+                  dfx canister --network ic call 73j6l-2iaaa-aaaaf-qagrq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'
                 </p>
                 <p class="font-bold mt-2 mb-2 text-xs">
                   *Your claim request needs to be manually verfied as Motoko does not have a 'canister info' method yet. This may take some time. DM us at https://twitter.com/kinic_app with this principal for support.
@@ -782,10 +783,13 @@
 </template>
 
 <script>
-import { main } from 'canisters/main'
+import { createActor as mainCA} from "canisters/main"
+const MAIN_CANISTER_ID = process.env.MAIN_CANISTER_ID;
 import axios from 'axios'
 import { AuthClient } from '@dfinity/auth-client'
 import { Principal } from '@dfinity/principal';
+
+let main = mainCA(MAIN_CANISTER_ID);
 
 export default {
   name: 'Search',
@@ -989,6 +993,7 @@ export default {
         onSuccess: async () => {
           this.identity = authClient.getIdentity()
           this.principal = this.identity.getPrincipal().toString()
+          main = mainCA(MAIN_CANISTER_ID, {agentOptions: {identity: this.identity}})
           // Force close.
           setTimeout(() => {
             this.dropdownOn = false
@@ -1003,6 +1008,7 @@ export default {
         onSuccess: async () => {
           this.identity = authClient.getIdentity()
           this.principal = this.identity.getPrincipal().toString()
+          main = mainCA(MAIN_CANISTER_ID, {agentOptions: {identity: this.identity}})
           // Force close.
           setTimeout(() => {
             this.dropdownOn = false
