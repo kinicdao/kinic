@@ -369,7 +369,7 @@ shared ({caller=installer}) actor class Auction() =  this {
 
     let bidPrice = Nat64.fromNat((ledgerBalance * 100 - ledgerBalance * bidFeePercent)/100);
     let fee = Nat64.fromNat(ledgerBalance) - bidPrice;
-    if (10_000 >= bidPrice) return #err  "your bid prince is under ledger transfer fee after paying the Kinic bid fee.";
+    if (10_000 >= bidPrice) return #err  "Your bid price is under ledger transfer fee after paying the Kinic bid fee.";
     switch (await Ledger.sendFee({kinic=Principal.fromActor(this); canisterId=canisterId; amount={e8s=fee}})) {
       case (#Err(e)) return #err "ledger transfer error";
       case (#Ok(_)) {}

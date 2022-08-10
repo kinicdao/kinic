@@ -335,10 +335,18 @@
     <section v-if="searchMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
       <div v-for="item in results[page]" :key="item.Canisterid" class="max-w-xl mb-8">
         <div v-if="item.Canisterid.length === 27" class="group">
-          <b class="text-xs redText">
+          <b v-if="item.Notraw" class="text-xs redText">
+            https://{{item.Canisterid}}.ic0.app/
+          </b>
+          <b v-else class="text-xs redText">
             https://{{item.Canisterid}}.raw.ic0.app/
           </b>
-          <a v-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-if="item.Notraw && item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.ic0.app/'">
+            <h2 class="truncate text-xl group-hover:underline blueText">
+              {{item.Title}}
+            </h2>
+          </a>
+          <a v-else-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.Title}}
             </h2>
@@ -674,7 +682,9 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <b>Fund your account on the 'Claim Site' page. Auctions end after one week. Check our Twitter @kinic_app,</b>
+                <b>Fund your account on the 'Claim Site' page. Auctions end after one week. Check out Twitter @kinic_app for updates!</b>
+                <br/>
+                <b>Kinic receives 1% of each bid for running the auction.</b>
                 <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
                 <table class="min-w-full">
                   <thead class="bg-indigo-100 border-b">
@@ -925,11 +935,14 @@ export default {
         }
         main.offerBid({category, canisterId: Principal.fromText(canisterId)}).then((res) => {
           this.buttonClicked = false
+
           if (res.err && res.err === 'This canister is not registered.') {
             alert('Please register your canister first.')
             return;
           } else if (res.err) {
             alert(res.err)
+          } else {
+            alert("Success!")
           }
         }).catch((err) => {
           console.log(err)
@@ -951,6 +964,8 @@ export default {
             return;
           } else if (res.err) {
             alert(res.err)
+          } else {
+            alert("Success!")
           }
         }).catch((err) => {
           console.log(err)
