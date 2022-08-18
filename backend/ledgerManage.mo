@@ -108,9 +108,10 @@ dfx identity use clankpan
   let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
 
   /* For installer */
-  public func refoundToInstaller({kinic : Principal; to : Text}) : async TransferResult {
+  public func refoundToInstaller({kinic : Principal; to : Text; category: Text}) : async TransferResult {
+    let fromSubAccount = toSubAccount_fromText(category);
     let amount : Tokens = await ledger.account_balance({
-      account = Blob.fromArray(Hex.decode(AID.fromPrincipal(kinic, null)))
+      account = Blob.fromArray(Hex.decode(AID.fromPrincipal(kinic, ?fromSubAccount)))
     });
     if (10_000 > amount.e8s) return #Err(#InsufficientFunds({ balance=amount; }));
     let toAId  = Blob.fromArray(Hex.decode(to));
@@ -118,7 +119,7 @@ dfx identity use clankpan
       memo: Memo = 0;
       amount: Tokens = {e8s=amount.e8s-10_000};
       fee: Tokens = {e8s=10_000};
-      from_subaccount: ?SubAccount = null;
+      from_subaccount: ?SubAccount = ?Blob.fromArray(fromSubAccount);
       to: AccountIdentifier = toAId;
       created_at_time: ?TimeStamp = null;
     };
