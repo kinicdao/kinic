@@ -651,6 +651,9 @@
         <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           Music
         </a>
+        <a @click="categorySearch('news')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
+          News
+        </a>
         <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
           NFT
         </a>
