@@ -155,6 +155,7 @@
                  </div>
                  <input style="border-width: 1px;" class="block xl:hidden border-gray-200 bg-white h-12 px-5 pl-6 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                    type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
+                  <div v-if="searchMode && category === 'blog'" @click="categorySearchNewest('blog')" class="text-white mr-2 ml-2 cursor-pointer">View newest</div>
                  <div class="hidden xl:block auth flex items-center text-sm">
                    <div v-if="!principal" class="relative inline-block">
                       <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
@@ -1123,41 +1124,43 @@ export default {
         this.reset();
       }
     },
-    paginate (data) {
+    paginate (data, skip) {
       this.dropdownOn = false
       this.results = []
 
-      // Sort results
-      data.sort(function(a, b) {
-        if (a.Datalength < b.Datalength) {
-            return 1;
-        } else if (a.Datalength > b.Datalength) {
-            return -1;
-        }
-        return 0;
-      });
+      if (!skip) {
+        // Sort results
+        data.sort(function(a, b) {
+          if (a.Datalength < b.Datalength) {
+              return 1;
+          } else if (a.Datalength > b.Datalength) {
+              return -1;
+          }
+          return 0;
+        });
 
-      let top = [];
-      // for Vue.js. Needs new array.
-      let newData = [];
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].Status === 'official') {
-          top.push(data[i])
-        } else {
-          newData.push(data[i])
+        let top = [];
+        // for Vue.js. Needs new array.
+        let newData = [];
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].Status === 'official') {
+            top.push(data[i])
+          } else {
+            newData.push(data[i])
+          }
         }
+
+        top.sort(function(a, b) {
+          if (a.Datalength < b.Datalength) {
+              return 1;
+          } else if (a.Datalength > b.Datalength) {
+              return -1;
+          }
+          return 0;
+        });
+
+        data = top.concat(newData)
       }
-
-      top.sort(function(a, b) {
-        if (a.Datalength < b.Datalength) {
-            return 1;
-        } else if (a.Datalength > b.Datalength) {
-            return -1;
-        }
-        return 0;
-      });
-
-      data = top.concat(newData)
 
       // Set category for Ads
       if (!this.category) {
@@ -1256,6 +1259,25 @@ export default {
       }).then((response) => {
           if (response.data && response.data.message !== 'No action defined.') {
             this.paginate(response.data)
+          }
+      });
+    },
+    categorySearchNewest (txt) {
+      this.results = []
+      let newUrlIS =  window.location.origin + '/category/' + txt
+      if (this.page !== 0) {
+        newUrlIS = window.location.origin + '/category/' + txt + '/' + (this.page + 1)
+      }
+      history.pushState({}, null, newUrlIS)
+      this.searchMode = true
+      this.category = txt
+
+      axios.post(this.host, {
+        'action': 'categorySearchNewest',
+        'category': txt
+      }).then((response) => {
+          if (response.data && response.data.message !== 'No action defined.') {
+            this.paginate(response.data, true)
           }
       });
     },
