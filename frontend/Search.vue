@@ -140,22 +140,23 @@
             <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between mt-1 mb-1">
                 <img @click="reset" class="hidden xl:block cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
-                <div class="hidden xl:block relative mx-auto text-gray-600 w-9/12 xl:w-5/12">
+                <div class="flex flex-col block relative mx-auto text-gray-600 w-full xl:w-5/12">
                    <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
                      type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
-                   <i class="absolute left-4 top-1 mt-2 mr-4">
-                     <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                       xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                       viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                       width="512px" height="512px">
-                       <path
-                         d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                     </svg>
-                   </i>
+                       <i class="absolute left-4 top-1 mt-2 mr-4">
+                         <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                           xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                           viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                           width="512px" height="512px">
+                           <path
+                             d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                         </svg>
+                       </i>
+                        <div v-if="searchMode && category === 'blog'" @click="categorySearchNewest('blog')"
+                             class="absolute top-2 p-1 pl-3 pr-3 right-10 text-white text-sm mr-2 ml-2 text-center cursor-pointer bg-gray-400 hover:bg-gray-800 rounded-xl leading-4">
+                            View newest
+                        </div>
                  </div>
-                 <input style="border-width: 1px;" class="block xl:hidden border-gray-200 bg-white h-12 px-5 pl-6 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
-                   type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
-                  <div v-if="searchMode && category === 'blog'" @click="categorySearchNewest('blog')" class="text-white mr-2 ml-2 cursor-pointer">View newest</div>
                  <div class="hidden xl:block auth flex items-center text-sm">
                    <div v-if="!principal" class="relative inline-block">
                       <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
