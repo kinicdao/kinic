@@ -19,8 +19,8 @@
         <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
             <p class="text-xs text-black">Login & make history. 1st ever web3 ad spot auction. Ends in:</p>
             <div class="flex items-center justify-center px-4 py-3 rounded-md shadow-sm text-sm text font-bold text-white bg-black mt-1">
-                <vue-countdown :time="2 * 24 * 60 * 60 * 1000" v-slot="{ days, hours, minutes, seconds }">
-                  {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds
+                <vue-countdown :time="time" :interval="100" v-slot="{ days, hours, minutes, seconds}">
+                    {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds
                 </vue-countdown>
             </div>
         </div>
@@ -1312,7 +1312,11 @@ export default {
     self.setSearch();
   },
   data () {
+    const now = new Date();
+    const auctionEnds = new Date(now.getFullYear(), 8, 31);
+
     return {
+      time: auctionEnds - now,
       search: '',
       claimCanister: '',
       bidAddress: '',
