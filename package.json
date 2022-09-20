@@ -7,6 +7,7 @@
     "serve": "vite serve"
   },
   "dependencies": {
+    "@chenfengyuan/vue-countdown": "^2.1.0",
     "@dfinity/agent": "^0.11.3",
     "@dfinity/auth-client": "^0.11.3",
     "@dfinity/authentication": "^0.11.3",
