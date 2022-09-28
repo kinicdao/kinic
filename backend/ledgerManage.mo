@@ -105,7 +105,7 @@ dfx identity use clankpan
   // type SubAccount = ExtCore.SubAccount;
 
   // WARNING: need to change this to ledger for prod.
-  let ledger : Interface = actor("rrkah-fqaaa-aaaaa-aaaaq-cai");
+  let ledger : Interface = actor("ryjl3-tyaaa-aaaaa-aaaba-cai");
 
   /* For installer */
   public func refoundToInstaller({kinic : Principal; to : Text; category: Text}) : async TransferResult {

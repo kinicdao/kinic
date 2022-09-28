@@ -17,12 +17,12 @@
             </div>
         </div>
         <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-            <p class="text-xs text-black">Login & make history. 1st ever web3 ad spot auction. Ends in:</p>
+            <!--<p class="text-xs text-black">Login & make history. 1st ever web3 ad spot auction. Ends in:</p>
             <div class="flex items-center justify-center px-4 py-3 rounded-md shadow-sm text-sm text font-bold text-white bg-black mt-1">
                 <vue-countdown :time="time" :interval="100" v-slot="{ days, hours, minutes, seconds}">
                     {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds
                 </vue-countdown>
-            </div>
+            </div>-->
         </div>
       </div>
     </div>
@@ -424,7 +424,7 @@
         AD SPACE
         We could do this programatically and swap out the text and image.. but we have plans for some crazy Ad types. Therefore each category needs to be unique.
     -->
-    <div v-if="searchMode && category === 'landingbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-if="searchMode && category === 'landing'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
                 <img src="./assets/icme.png" alt="">
@@ -1313,7 +1313,7 @@ export default {
   },
   data () {
     const now = new Date();
-    const auctionEnds = new Date(now.getFullYear(), 8, 31);
+    const auctionEnds = new Date(now.getFullYear(), 8, 26);
 
     return {
       time: auctionEnds - now,
