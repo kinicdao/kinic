@@ -352,22 +352,22 @@
       <div v-for="item in results[page]" :key="item.Canisterid" class="max-w-xl mb-8">
         <div v-if="item.Canisterid.length === 27" class="group">
           <b v-if="item.Notraw" class="text-xs redText">
-            https://{{item.Canisterid}}.ic0.app/
+            https://{{item.Canisterid}}.icp0.io/
           </b>
           <b v-else class="text-xs redText">
-            https://{{item.Canisterid}}.raw.ic0.app/
+            https://{{item.Canisterid}}.raw.icp0.io/
           </b>
-          <a v-if="item.Notraw && item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.ic0.app/'">
+          <a v-if="item.Notraw && item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.Title}}
             </h2>
           </a>
-          <a v-else-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-else-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.Title}}
             </h2>
           </a>
-          <a v-else @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.ic0.app/'">
+          <a v-else @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               No Title
             </h2>
@@ -472,7 +472,7 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://exwqn-uaaaa-aaaaf-qaeaa-cai.ic0.app/Infinity-Swap"><p class="text-sm text-center underline">InfinitySwap News on Nuance, the Publishing Platform for Web3.</p></a>
+            <a target="_blank" href="https://exwqn-uaaaa-aaaaf-qaeaa-cai.icp0.io/Infinity-Swap"><p class="text-sm text-center underline">InfinitySwap News on Nuance, the Publishing Platform for Web3.</p></a>
         </div>
     </div>
     <div v-else-if="searchMode && category === 'interestingbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
@@ -507,7 +507,7 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://kn5ky-6iaaa-aaaai-qbikq-cai.ic0.app/project.html?projectId=18"><p class="text-sm text-center underline">Access NFTs for Season one on sale now!</p></a>
+            <a target="_blank" href="https://kn5ky-6iaaa-aaaai-qbikq-cai.icp0.io/project.html?projectId=18"><p class="text-sm text-center underline">Access NFTs for Season one on sale now!</p></a>
         </div>
     </div>
     <div v-else-if="searchMode && category === 'daobl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
@@ -523,7 +523,7 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://oot6y-haaaa-aaaae-qaa7q-cai.ic0.app/"><p class="text-sm text-center underline">Check it out now!</p></a>
+            <a target="_blank" href="https://oot6y-haaaa-aaaae-qaa7q-cai.icp0.io/"><p class="text-sm text-center underline">Check it out now!</p></a>
         </div>
     </div>
     <div v-else-if="searchMode && category === 'funnybl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
@@ -556,7 +556,7 @@
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.ic0.app/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
+            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.icp0.io/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
         </div>
     </div>
     <div v-else-if="searchMode" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
@@ -1051,7 +1051,7 @@ export default {
     async logInNFID () {
       const authClient = await AuthClient.create();
       authClient.login({
-        identityProvider: 'https://nfid.one/authenticate/?applicationName=Kinic&applicationLogo=https%3A%2F%2Fb3kfi-qqaaa-aaaam-qaixq-cai.raw.ic0.app%2Ffile%3Fid%3Da4xcpig3z5d224%26minterid%3Ddgxla-dyaaa-aaaam-qaiya-cai%26tokenid%3Da4o4k-eqkor-uwiaa-aaaaa-deacg-aaqca-aaaac-q#authorize',
+        identityProvider: 'https://nfid.one/authenticate/?applicationName=Kinic&applicationLogo=https%3A%2F%2Fb3kfi-qqaaa-aaaam-qaixq-cai.raw.icp0.io%2Ffile%3Fid%3Da4xcpig3z5d224%26minterid%3Ddgxla-dyaaa-aaaam-qaiya-cai%26tokenid%3Da4o4k-eqkor-uwiaa-aaaaa-deacg-aaqca-aaaac-q#authorize',
         windowOpenerFeatures: `left=${window.screen.width / 2 - 525 / 2}, ` + `top=${window.screen.height / 2 - 705 / 2},` + `toolbar=0,location=0,menubar=0,width=525,height=705`,
         onSuccess: async () => {
           this.identity = authClient.getIdentity()
@@ -1305,7 +1305,7 @@ export default {
   beforeMount () {
     const self = this;
     if (location.port === '3000' || location.port === '8000') {
-      this.host = 'http://localhost:4000/search'
+      this.host = ''
     }
     window.onpopstate = function () {
       self.setSearch();
