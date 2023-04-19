@@ -1986,7 +1986,6 @@ export default {
   beforeMount () {
     const self = this;
     if (location.port === '3000' || location.port === '8000') {
-      this.host = 'https://cat.icme.io/search'
     }
     window.onpopstate = function () {
       self.setSearch();
@@ -2003,7 +2002,7 @@ export default {
       claimCanister: '',
       bidAddress: '',
       accountID: '',
-      host: 'https://cat.icme.io/search',
+      host: '',
       searchMode: false,
       adMode: false,
       whitepaperMode: false,
