@@ -31,25 +31,30 @@
 
   <!-- WHITEPAGE -->
   <header v-if="whitepaperMode" class="h-full">
-        <div class="content px-8 pt-4 pb-2 blackBG">
+        <div class="content px-8 pt-4 pb-2 blackBG" id="top">
             <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between mt-1 mb-1">
                 <div class="mb-2 text-4xl font-extrabold leading-none tracking-tight md:text-3xl lg:text-4xl text-white">
-                  Kinic SNS Whitepaper
+                  Kinic SNS DAO Whitepaper
                 </div>
             </nav>
         </div>
         <div class="w-full px-8 pt-4">
             <div class="mb-4 rounded-t-1">
                 <div class="p-4 sm:mx-1 lg:mx-8 leading-normal text-lg">
+                  <h5 class="mb-2">
+                    <h2 section-trigger class="relative flex items-center w-full text-2xl font-semibold text-left border-b border-solid">
+                      Table of Contents
+                    </h2>
+                  </h5>
                   <nav class="space-y-2">
-                    <a href="#executive-summary" class="block text-blue-600 font-medium hover:underline">Executive Summary</a>
-                    <a href="#the-kinic-vision-and-product" class="block text-blue-600 font-medium hover:underline">The Kinic Vision and Product</a>
-                    <a href="#kinic-dao" class="block text-blue-600 font-medium hover:underline">Kinic DAO</a>
-                    <a href="#kinic-token-and-revenue" class="block text-blue-600 font-medium hover:underline">KINIC Token and Revenue</a>
-                    <a href="#kinic-dao-tokenomics" class="block text-blue-600 font-medium hover:underline">Kinic DAO Tokenomics</a>
-                    <a href="#launch-allocations-and-mechanics" class="block text-blue-600 font-medium hover:underline">Launch Allocations and Mechanics</a>
-                    <a href="#legal-disclaimers" class="block text-blue-600 font-medium hover:underline">Legal Disclaimers</a>
+                    <a href="#executive-summary" class="block text-blue-600 font-medium hover:underline">1. Executive Summary</a>
+                    <a href="#the-kinic-vision-and-product" class="block text-blue-600 font-medium hover:underline">2. The Kinic Vision and Product</a>
+                    <a href="#kinic-dao" class="block text-blue-600 font-medium hover:underline">3. Kinic DAO Launch and Governance</a>
+                    <a href="#kinic-token-and-revenue" class="block text-blue-600 font-medium hover:underline">4. Kinic DAO Treasury and Token Utility</a>
+                    <a href="#kinic-dao-tokenomics" class="block text-blue-600 font-medium hover:underline">5. Kinic DAO Tokenomics</a>
+                    <a href="#launch-allocations-and-mechanics" class="block text-blue-600 font-medium hover:underline">6. Launch Allocations and Mechanics</a>
+                    <a href="#legal-disclaimers" class="block text-blue-600 font-medium hover:underline">7. Token Holder Rights and Limitations</a>
                   </nav>
                   <div section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
                     <p class="mt-4 text-md text-gray-500">
@@ -65,16 +70,17 @@
                   <h5 class="mb-2">
                     <h2 section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
                       1. Executive Summary
+                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
                   <p class="mb-3">Kinic is the first and only search engine for web3 content that runs on blockchain.</p>
-                  <p class="mb-3">Kinic the answer to other search engines that are operated by a centralized entity, undermine data privacy, favor established players, and ignore the emerging world of web3 content.</p>
+                  <p class="mb-3">Kinic the answer to Google and other search engines that are operated by a centralized entity, undermine data privacy, favor established players, and ignore the emerging world of web3 content.</p>
                   <p class="mb-3">Currently, Kinic allows you to search all frontend canisters on the Internet Computer blockchain. Kinic’s roadmap includes adding content hosted on other blockchains and decentralized storage networks. Kinic’s SEO module will involve unprecedented transparency backed by zero-knowledge machine learning (ZKML) technology. All users will be able to trust that they are getting the best results as determined by Kinic’s algorithms, and are not being served ad based content other than which is clearly transparent.</p>
                   <p class="mb-3">Kinic’s vision will be fulfilled by decentralizing its governance using an on-chain, decentralized autonomous organization (DAO). The DAO will operate using the IC’s unique service nervous system. The Kinic DAO will manage and improve the Kinic software service by voting on proposals.</p>
                   <p class="mb-3">To submit proposals and vote, KINIC token holders must lock (“stake”) their tokens into neurons. To incentivize KINIC token holders to stake their tokens into neurons and vote, neurons receive rewards for voting that can be converted to KINIC tokens.</p>
                   <p class="mb-3">The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens. KINIC tokens can be used to pay for Kinic's current and upcoming products and services. The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO. ICP tokens in the DAO’s treasury can be used to fund expenses.</p>
                   <p class="mb-3">Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens. The total supply of KINIC tokens upon launch will be 6 million tokens. Minting tokens increases the total supply and burning tokens decreases them. KINIC tokens can only be burned by proposal. A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards. KINIC tokens that are locked in a neuron are not part of the liquid supply.</p>
-                  <p class="mb-3">The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens. 50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the development team and 10% allocated to seed funders. The maximum ICP that can be earned in the sale of the KINIC tokens is 2 million ICP. The minimum is 500,000 ICP. 1 KINIC token may be worth between 0.33 and 1.33 ICP tokens based on the DAO earning between 500,000 and 2 million ICP tokens in the decentralization sale.</p>
+                  <p class="mb-3">The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens. 50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization and 10% allocated to seed funders. The maximum ICP that can be earned in the sale of the KINIC tokens is 1.5 million ICP. The minimum is 500,000 ICP. 1 KINIC token may be worth between 0.33 and 1 ICP tokens based on the DAO earning between 500,000 and 1.5 million ICP tokens in the decentralization sale.</p>
 
                 </div>
               </div>
@@ -85,6 +91,7 @@
                   <h5 class="mb-2">
                     <h2 id="the-kinic-vision-and-product" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
                       2. The Kinic Vision and Product
+                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
                   <p class="mb-3 font-semibold text-xl">Summary</p>
@@ -109,8 +116,8 @@
                     Several unique features, however, arguably make the IC the world’s most powerful blockchain and in many ways the truest embodiment of web3 to date. These features include the following:
                   </p>
                   <ol class="list-decimal list-inside mb-3">
-                    <li>IC smart contracts not only execute on-chain transactions but also store content files and other forms of data entirely on chain <a class="blueText" href="https://internetcomputer.org/how-it-works/smart-contracts-serve-the-web/" target="_blank">(32 gigabytes per smart contract)</a>.
-                      These smart contracts are referred to as “canisters”. A primary benefit is that they can run in any web browser because they are <a class="blueText" href="https://webassembly.org/" target="_blank">WebAssembly-based programs.</a></li>
+                    <li>IC smart contracts not only execute on-chain transactions but also store content files and other forms of data entirely on chain <a class="blueText" href="https://internetcomputer.org/how-it-works/smart-contracts-serve-the-web/" target="_blank">(52 gigabytes per smart contract)</a>.
+                      These smart contracts are referred to as “canisters”. A primary benefit is that web browsers can directly interact with canister smart contracts.</li>
                     <li>The IC blockchain operates at the <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Web_Speed" target="_blank">speed of the standard web</a> and in principle can scale infinitely with the addition of more nodes.</li>
                     <li>Any web browser <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Web_Serving" target="_blank">can be used</a> to view content stored on the IC, including websites and the front-end graphics that run inside smart contract canisters.</li>
                     <li>Publishing content to a smart contract can be done anonymously using login credentials such as the IC’s Webauthn-based <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Internet_Computer_wiki#Internet_Identity_Introduction" target="_blank">Internet Identity</a>.</li>
@@ -118,7 +125,7 @@
                   </ol>
 
                   <p class="mb-3">
-                    As a result, the IC is an end-to-end decentralized compute platform and content network where everything takes place, is stored, and published on chain. More information about the IC is available <a class="blueText" href="https://internetcomputer.org/" target="_blank">here</a>. Other parts of the web3 ecosystem include decentralized content storage networks that complement the IC by specializing in long-term storage of files that are not frequently accessed. These networks include the Interplanetary File System and Arweave.
+                    As a result, the IC is an end-to-end decentralized compute platform and content network where everything takes place, is stored, and published on chain. More information about the IC is available <a class="blueText" href="https://internetcomputer.org/" target="_blank">here</a>. Other parts of the web3 ecosystem include decentralized content storage networks that complement the IC by specializing in long-term storage of files that are not frequently accessed. These networks include the Interplanetary File System (IPFS) and Arweave.
                   </p>
                   <p class="mb-3">
                     Content that is hosted on web3 needs a new vision for search. And Kinic provides a profound new vision: search that is fully private, user centric, and built on and for web3. The name Kinic comes from the word kin from kinship.
@@ -129,6 +136,8 @@
                   <ol class="list-decimal list-inside mb-3">
                     <li>
                       <b>Runs on chain.</b> Kinic is the only search engine that runs <b>entirely on chain</b> to benefit from the privacy, security, and immutability features of blockchain.
+                      Unlike privacy-focused search engines like DuckDuckGo that trust a centralized corporation to maintain user privacy, Kinic must operate according to the privacy-protecting <a class="blueText" target="_blank" href="https://medium.com/dfinity/the-internet-computer-blockchains-privacy-advantages-73340c6c42db">protocol rules</a> of the Internet Computer blockchain and its anonymous
+                      <a class="blueText" target="_blank" href="https://internetcomputer.org/docs/current/tokenomics/identity-auth/what-is-ic-identity"> login methods</a>.
                     </li>
                     <li>
                       <b>Searches content on web3.</b> Kinic is the only search engine dedicated to searching frontend content <b>on web3</b> as opposed to content about web3 that is on web2 such as <a class="blueText" href="https://www.kaito.ai/" target="_blank">Kaito</a>.
@@ -137,7 +146,7 @@
                       <b>Searches all of web3.</b> Kinic is the only search engine dedicated to searching <b>all</b> frontend content on web3 and not focused only on one web3 network such as <a class="blueText" href="https://ipfs-search.com/#/" target="_blank">IPFS Search</a>.
                     </li>
                     <li>
-                      <b>Searches frontend</b>. Kinic is the only <b>frontend</b> search engine for web3 unlike backend blockchain and NFT data explorers and analytics platforms.
+                      <b>Searches frontend</b>. Kinic is the only <b>frontend</b> search engine for web3. This is in contrast to backend blockchain and NFT data explorers and indexing protocols such as <a class="blueText" href="https://thegraph.com/en/" target="_blank">The Graph</a>.
                     </li>
                   </ol>
                   <hr class="mb-3"/>
@@ -192,7 +201,8 @@
                   </ol>
                   <h5 class="mt-5 mb-2">
                     <h2 id="kinic-dao" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      3. Kinic DAO: Launch and Governance
+                      3. Kinic DAO Launch and Governance
+                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
                   <p class="mb-3 font-semibold text-xl">
@@ -224,7 +234,7 @@
                     Creation of the Kinic DAO will take place as follows:
                   </p>
                   <ol class="list-disc list-inside mb-3">
-                    <li>Kinic developers will submit a proposal to the NNS with details (parameters) about the decentralization sale such as the initial token allocation, voting rules and rewards, and tokenomics. </li>
+                    <li>The Kinic development organization will submit a proposal to the NNS with details (parameters) about the decentralization sale such as the initial token allocation, voting rules and rewards, and tokenomics. </li>
                     <li>If the proposal is approved by the NNS, the decentralization sale of KINIC tokens will begin to take place.</li>
                     <li>The ICP raised in the sale will be placed into the smart contract canister owned and controlled by the Kinic DAO. </li>
                   </ol>
@@ -284,7 +294,7 @@
                     To incentivize KINIC holders to vote, voters receive voting rewards each time they vote.
                   </p>
                   <p class="mb-3">
-                    To qualify for voting rewards, KINIC holders must first stake their tokens and set the neuron’s dissolve delay. The dissolve delay is the length of time that a neuron is locked. One year is the maximum dissolve delay.
+                    To qualify for voting rewards, KINIC holders must first stake their tokens and set the neuron’s dissolve delay to at least one month long. The dissolve delay is the length of time that a neuron is locked. One year is the maximum dissolve delay.
                   </p>
                   <p class="mb-3">
                     Staked KINIC tokens (neurons) cannot be traded. To unlock staked KINIC tokens, they must be dissolved. When the dissolve delay has ended, the KINIC tokens can be dissolved and then traded.
@@ -296,13 +306,10 @@
                     When neurons vote, voting rewards are earned by the neurons in the form of a maturity. Maturity is an attribute of a neuron and not a tradable asset. The more a neuron votes, the more maturity their neuron obtains. Voting rewards (maturity) are earned daily based on all of the votes of the DAO that ended on that day.
                   </p>
                   <p class="mb-3">
-                    To generate income from maturity, the KINIC token holder must first convert the maturity into a new neuron that will contain new KINIC tokens. This process will consume (or “burn”) the converted maturity. It is also the primary inflationary mechanism for KINIC tokens.
+                    To generate income from maturity, the KINIC token holder must convert (disburse) the maturity into new KINIC tokens. This process will consume (or “burn”) the converted maturity. By default, units of maturity are converted into KINIC tokens on a 1:1 basis. For example, disbursing a neuron that 100 has maturity will convert to 100 KINIC tokens. These new KINIC tokens will be provided to the token holder’s main account.
                   </p>
                   <p class="mb-3">
-                    The ratio of maturity to ICP changes over time based on the ICP/Cycles conversion rate. For example, converting 100 maturity on February 1, 2022 would earn 100.73 ICP. Further details about converting maturity to ICP can be found <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Maturity_modulation" target="_blank">here</a>.
-                  </p>
-                  <p class="mb-3">
-                    As an alternative to converting maturity into KINIC, a voting member can also stake their maturity to earn additional voting rewards.
+                    As an alternative to converting maturity into KINIC tokens, a voting member can also stake their maturity to earn additional voting rewards.
                   </p>
                   <p class="mb-3 font-semibold underline">
                     Voting Power: Dissolve Delay Bonus and Age Bonus
@@ -327,7 +334,7 @@
                     Neurons can directly vote on individual proposals using the Kinic section inside the NNS app <a class="blueText" href="https://nns.ic0.app/" target="_blank">here</a>. Neurons can also delegate their votes to another voting member.
                   </p>
                   <p class="mb-3">
-                    Vote delegation is accomplished by setting a neuron to follow another neuron; that is, to vote along with the votes of another neuron (per proposal type). For example, neurons can follow the Kinic development team voting neuron The follower neuron will vote for a proposal if a majority of the development team agrees. This way, neurons will follow the development team’s votes. An advantage of following the development team’s neuron is that the development team votes on every proposal. This enables followers to maximize voting rewards for voting on every proposal as well.
+                    Vote delegation is accomplished by setting a neuron to follow another neuron; that is, to vote along with the votes of another neuron (per proposal type). For example, neurons can follow the Kinic development organization voting neuron The follower neuron will vote for a proposal if a majority of the Kinic development organization agrees. This way, neurons will follow the Kinic development organization’s votes. An advantage of following the Kinic development organization’s neuron is that the Kinic development organization votes on every proposal. This enables followers to maximize voting rewards for voting on every proposal as well.
                   </p>
                   <p class="mb-3">
                     Voting neurons may effectively gain disproportionate voting power if they have a large number of followers. This is similar to representative democracy.
@@ -335,6 +342,7 @@
                   <h5 class="mt-5 mb-2">
                     <h2 id="kinic-token-and-revenue" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
                       4. Kinic DAO Treasury and Token Utility
+                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
                   <p class="mb-3 font-semibold text-xl">
@@ -360,7 +368,7 @@
                     To enable the trading of KINIC, proposals will be made soon after the decentralization sale to transfer KINIC and ICP to decentralized exchange liquidity pools. The purpose of enabling trading in KINIC tokens is to enable people to join in or exit from Kinic DAO governance. The purpose is not to enable or encourage investment or speculation in KINIC tokens.
                   </p>
                   <p class="mb-3">
-                    ICP tokens in the DAO’s treasury can be used to fund expenses such as paying cycles for hosting, third-party services, and paying the development team. Infrequent proposals will be made to transfer ICP from the treasury to Kinic’s cycle dispenser canister. The purpose is for the canister can pay for cycles other Kinic canisters.
+                    ICP tokens in the DAO’s treasury can be used to fund expenses such as paying cycles for hosting, third-party services, and paying developers. Infrequent proposals will be made to transfer ICP from the treasury to Kinic’s cycle dispenser canister. The purpose is for the canister to pay for cycles other Kinic canisters.
                   </p>
                   <p class="mb-3">
                     Kinic is an on-chain service. It currently has the following off-chain dependencies:
@@ -403,7 +411,7 @@
                     The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO with ICP tokens. The Kinic DAO also earns ICP if the DAO stakes its ICP into a neuron on the NNS and earns voting rewards.
                   </p>
                   <p class="mb-3">
-                    The Kinic DAO’s expenses will come from spending ICP to buy cycles for hosting costs, third party services, and the core development team.
+                    The Kinic DAO’s expenses will come from spending ICP to buy cycles for hosting costs, third party services, and the Kinic development organization.
                   </p>
                   <p class="mb-3">
                     Expenses will most likely exceed revenue for the first few years of the DAO but revenue is expected to eventually exceed DAO expenses.
@@ -411,6 +419,7 @@
                   <h5 class="mt-5 mb-2">
                     <h2 id="kinic-dao-tokenomics" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
                       5. Kinic DAO Tokenomics
+                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
                   <p class="mb-3 font-semibold text-xl">
@@ -435,7 +444,7 @@
                     Voting rewards incentivize token holders to keep them locked up and not be part of the liquid supply. A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards to neurons that vote. As discussed in the Kinic DAO: Launch and Governance section, these rewards are given in the form of maturity. The DAO’s initial voting reward rate of 2.5% can be changed by vote.
                   </p>
                   <p class="mb-3">
-                    A neuron’s maturity is burned when it is disbursed into a newly spawned (i.e., created) neuron. When the new neuron dissolves after 7 days, it will contain new KINIC tokens. At that time, the DAO will mint the corresponding value of KINIC tokens.
+                    A neuron’s maturity is burned when it is disbursed to provide KINIC tokens to the token holder’s main account. At that time, the DAO will mint the corresponding value of KINIC tokens. Converting maturity into KINIC tokens is the primary inflationary mechanism for KINIC tokens.The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens.
                   </p>
                   <p class="mb-3">
                     KINIC tokens can only be burned by proposal. Usage of KINIC will be given back into the DAO treasury. The DAO can make a proposal to burn or otherwise utilize the tokens.
@@ -507,15 +516,17 @@
                   <h5 class="mt-5 mb-2">
                     <h2 id="launch-allocations-and-mechanics" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
                       6. Launch Allocations and Mechanics
+                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
                   <p class="mb-3 font-semibold text-xl">
                     Summary
                   </p>
                   <ol class="list-disc list-inside mb-3">
-                    <li>The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens. 50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the development team and 10% allocated to seed funders.</li>
-                    <li>The maximum ICP that can be earned in the sale of the KINIC tokens is 2 million ICP, and the minimum is 500,000 ICP.</li>
-                    <li>1 KINIC token may be worth between 0.33 and 1.33 ICP tokens based on earning between 500,000 and 2 million ICP tokens</li>
+                    <li>The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens.</li>
+                    <li>50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization, 10% allocated to seed funders, and 4% will be allocated to Kinic NFT holders via airdrop.</li>
+                    <li>The maximum ICP that can be earned in the sale of the KINIC tokens is 1.5 million ICP, and the minimum is 500,000 ICP.</li>
+                    <li>1 KINIC token may be worth between 0.33 and 1.33 ICP tokens based on earning between 500,000 and 1.5 million ICP tokens</li>
                   </ol>
                   <p class="mb-3 font-semibold underline">
                     Initial token allocation
@@ -524,13 +535,21 @@
                     The purpose of the decentralization sale is to decentralize the governance of the Kinic DAO. The Kinic DAO will launch with a total supply of 6 million KINIC tokens.
                   </p>
                   <p class="mb-3">
-                    Out of the total 6 million supply of KINIC tokens, 25% (1,500,000) will be available for open sale in exchange for ICP tokens. The maximum ICP that can be earned in the sale of the 1,500,000 KINIC is 2 million ICP, and the minimum is 500,000 ICP.
+                    Out of the total 6 million supply of KINIC tokens, 25% (1,500,000) will be available for open sale in exchange for ICP tokens. The maximum ICP that can be earned in the sale of the 1,500,000 KINIC is 1,500,000 million ICP, and the minimum is 500,000 ICP.
                   </p>
+                  <p class="mb-3">
+                    The Kinic DAO’s two million ICP funding target is based on comparable funding rounds:
+                  </p>
+                  <ol class="list-disc list-inside mb-3">
+                    <li>Privacy-focused search engine DuckDuckGo <a class="blueText" target="_blank" href="https://www.crunchbase.com/organization/duck-duck-go">has raised</a> a total of $172 million across four funding rounds, the most recent of which was <a href="https://spreadprivacy.com/duckduckgrowing/">$100 million</a> in late 2020.</li>
+                    <li>In January 2022, The Graph Foundation <a class="blueText" target="_blank" href="https://thegraph.com/blog/graph-raise/">raised</a> $50 million to build an indexing protocol for querying data on networks like Ethereum and IPFS.</li>
+                    <li>In March 2023, Kaito <a class="blueText" target="_blank" href="https://www.linkedin.com/pulse/kaito-ai-raises-53m-transform-crypto-search-chatgpt-kaitoai/?trackingId=1QyGZzaTRYMOo0rKhm0F2w%3D%3D">raised</a> $5.3 million to transform crypto search with ChatGPT.</li>
+                  </ol>
                   <p class="mb-3">
                     From the 1,500,000 KINIC tokens available as part of the open sale, Kinic will seek to sell 4.2% (250,000) to the Internet Computer’s Community Fund and the remaining 20.8% (1,250,000) KINIC to the community more generally. If the target maximum ICP is earned in the sale, the amount of ICP earned from the Community Fund will be 252,000 ICP.
                   </p>
                   <p class="mb-3">
-                    50% (3,000,000) will remain in the DAO’s treasury. 10% will be allocated to the development team and funders. 4% (240,000) will be allocated to Kinic NFT holders via airdrop.
+                    50% (3,000,000) will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization and funders. 4% (240,000) will be allocated to Kinic NFT holders via airdrop.
                   </p>
                   <p class="mb-3">
                     1% (60,000) of the KINIC tokens will be used to create liquidity pools on exchanges for trading. The tokens available for trade will be backed by ICP earned from the decentralization sale. Proposals will be required to be made and approved to transfer KINIC tokens and ICP to an exchange.
@@ -560,40 +579,41 @@
                     The neuron with 0 months dissolve delay can immediately be released into liquid KINIC tokens. Accordingly, 20% of the neurons for buyers in the decentralization sale will be immediately liquid.
                   </p>
                   <p class="mb-3 font-semibold underline">
-                    Allocation to Development Team and Seed Funders
+                    Allocation to Kinic Development Organization and Seed Funders
                   </p>
                   <p class="mb-3">
-                    The founding Kinic development team will receive 10% (600,000) of the KINIC tokens in the form of 3 neurons that have a 1 month dissolve delay.
+                    The founding Kinic development organization will receive 10% (600,000) of the KINIC tokens in the form of 3 neurons that have a 1 month dissolve delay.
                   </p>
                   <p class="mb-3">
                     These three neurons have the following vesting schedule:
                   </p>
                   <ol class="list-disc list-inside mb-3">
-                    <li>25% (150,000) vested for 6 months</li>
                     <li>25% (150,000) vested for 1 year</li>
-                    <li>50% (300,000) vested for three years.</li>
+                    <li>25% (150,000) vested for 2 years</li>
+                    <li>50% (300,000) vested for 3 years</li>
                   </ol>
                   <p class="mb-3">
-                    During the vesting period, neurons cannot be disbursed into tokens or otherwise changed. The 1 month dissolve delay reduces the relative voting power of the KINIC tokens owned by the development team.
+                    During the vesting period, neurons cannot be disbursed into tokens or otherwise changed. The 1 month dissolve delay reduces the relative voting power of the KINIC tokens owned by the Kinic development organization.
                   </p>
                   <p class="mb-3">
                     Likewise, Kinic seed funders will receive 10% (600,000) of the KINIC tokens in the form of 2 neurons that have a 1 month dissolve delay. These neurons have the following vesting schedule:
                   </p>
                   <ol class="list-disc list-inside mb-3">
-                    <li>50% (300,000) no vesting</li>
-                    <li>50% (300,000) vested for 12 months</li>
+                    <li>25% (150,000) no vesting</li>
+                    <li>25% (150,000) vested for 1 year</li>
+                    <li>50% (300,000) vested for 2 years</li>
                   </ol>
                   <p class="mb-3 font-semibold underline">
                     Allocation to Kinic NFT Holders
                   </p>
                   <p class="mb-3">
-                    4% of KINIC tokens (240,000) will be given to Kinic NFT holders.
+                    4% of KINIC tokens (240,000) will be given to Kinic NFT holders. NFT holders will receive their KINIC tokens in the form of three neurons. These three neurons will have the same dissolve delay and vesting schedule as the seed funders.
                   </p>
                   <p class="mb-3">
                     The process to disburse Kinic NFT holders will require a snapshot on April 17th 8PM JST, owners at this time will be recorded and set into the sns.yml file. Any pending transfer of an NFT, sale, or alteration of ownership after this point in time will not be recorded. Please make sure to hold your NFT at the time of the snapshot. *Please note that if you purchase a Kinic NFT after this time it will not be included in the snapshot.
                   </p>
                   <p class="mb-3">
-                    The Kinic NFT is available on <a class="blueText" href="https://entrepot.app/marketplace/kinic" target="_blank">Entrepot</a>.
+                    The Kinic NFT is available on <a class="blueText" target="_blank" href="https://entrepot.app/marketplace/kinic">Entrepot</a>.
                   </p>
                   <p class="mb-3 font-semibold underline">
                     Allocation to DAO Treasury
@@ -608,7 +628,7 @@
                     <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The total number of KINIC tokens to be sold</div>
                     <div class="border-b px-4 py-2">1,500,000 (25% of total)</div>
                     <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The maximum ICP to be raised</div>
-                    <div class="border-b px-4 py-2">2,000,000</div>
+                    <div class="border-b px-4 py-2">1,500,000</div>
                     <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The minimum ICP to be raised (otherwise sale fails and ICP returned)</div>
                     <div class="border-b px-4 py-2">500,000</div>
                     <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">End date of sale (unless maximum ICP raised sooner)</div>
@@ -629,10 +649,10 @@
                     The value (in ICP) of KINIC tokens upon launch is based upon how many ICP tokens are raised in the decentralization sale.
                   </p>
                   <p class="mb-3">
-                    The more ICP tokens that are exchanged for 1.5 million KINIC tokens, the higher the value of a single KINIC token. This is because the price of 1 KINIC equals the amount of ICP earned (between 500,000 and 2 million) divided by the number of KINIC tokens sold (1.5 million).
+                    The more ICP tokens that are exchanged for 1.5 million KINIC tokens, the higher the value of a single KINIC token. This is because the price of 1 KINIC equals the amount of ICP earned (between 500,000 and 1.5 million) divided by the number of KINIC tokens sold (1.5 million).
                   </p>
                   <p class="mb-3">
-                    Accordingly, 1 KINIC token may be worth between 0.33 and 1.33 ICP tokens based on earning between 500,000 and 2 million ICP tokens, respectively, as shown in the following chart.
+                    Accordingly, 1 KINIC token may be worth between 0.33 and 1 ICP tokens based on earning between 500,000 and 1.5 million ICP tokens, respectively, as shown in the following chart.
                   </p>
                   <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image4.png" alt="">
                   <p class="mb-3">
@@ -647,7 +667,7 @@
                   <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image1.png" alt="">
                   <hr class="mb-3"/>
                   <p class="mb-3 font-semibold underline">
-                    Legal Disclaimers
+                    7. Token Holder Rights and Limitations
                   </p>
                   <p class="mb-3">
                       Any person that purchases, holds, owns, or otherwise directly or indirectly controls or benefits from one or more KINIC tokens (a “Tokenholder”) agrees and acknowledges the following terms and conditions:
@@ -655,13 +675,13 @@
                   <ol id="legal-disclaimers" class="list-decimal list-inside mb-3">
                     <li>The purpose of the Tokenholder’s interest is not for investment, trading, speculation, or any other financial purpose.</li>
                     <li>Each Tokenholder is a natural person acting on its own behalf and not for the benefit of any other person.</li>
-                    <li>The Tokenholder is not a United States citizen and is not physically present inside the United States, except for the development team and seed funders.</li>
+                    <li>The Tokenholder is not a United States citizen and is not physically present inside the United States, except for the Kinic development organization and seed funders.</li>
                     <li>The Kinic DAO, and nothing in this whitepaper, is intended to, or shall be deemed to, establish any partnership or joint venture between any of the Tokenholders, or authorize any Tokenholder to make or enter into any commitments for or on behalf of any other party. </li>
                     <li>To the maximum extent permitted by law, each Token holder absolutely and irrevocably waives any and all claims, actions, causes of action, loss, damage and expense including any and all attorneys’ fees and other costs of enforcement arising out of or in connection with any breach or alleged breach of any fiduciary duty by any other Tokenholders or the Kinic DAO. It is the express intent of the Tokenholders that each Tokenholder and the Kinic DAO shall be and hereby are relieved of any and all fiduciary duties which might otherwise be applicable.</li>
                     <li>In no event shall any Tokenholder or the Kinic DAO be liable to any other Tokenholder for any loss of anticipated profits or other consequential, special or indirect loss or damage of any nature arising at any time, whether arising under contract, tort (including negligence), strict liability or for any other cause whatsoever.</li>
                     <li>No Tokenholder shall bring any legal claim, action, or proceeding against any other Tokenholder on any basis.</li>
-                    <li>No Tokenholder is relying upon any statement or representation made by the founding development team, the Kinic DAO, or any other Tokenholder.</li>
-                    <li>No Tokenholder, the founding development team, nor the Kinic DAO, makes any express or implied warranty, any disclaims all such express or implied warranties, including any warranties of merchantability or fitness for a particular purpose.</li>
+                    <li>No Tokenholder is relying upon any statement or representation made by the founding Kinic development organization, the Kinic DAO, or any other Tokenholder.</li>
+                    <li>No Tokenholder, the founding Kinic development organization, nor the Kinic DAO, makes any express or implied warranty, any disclaims all such express or implied warranties, including any warranties of merchantability or fitness for a particular purpose.</li>
                     <li>Tokenholders that fail to stake their KINIC tokens and engage in voting for a reasonable time are subject to having their tokens repurchased by the DAO.</li>
                   </ol>
                   <p class="mb-6">
@@ -1966,7 +1986,7 @@ export default {
   beforeMount () {
     const self = this;
     if (location.port === '3000' || location.port === '8000') {
-      this.host = ''
+      this.host = 'https://cat.icme.io/search'
     }
     window.onpopstate = function () {
       self.setSearch();
@@ -1983,7 +2003,7 @@ export default {
       claimCanister: '',
       bidAddress: '',
       accountID: '',
-      host: '',
+      host: 'https://cat.icme.io/search',
       searchMode: false,
       adMode: false,
       whitepaperMode: false,
