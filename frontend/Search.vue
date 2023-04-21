@@ -73,7 +73,7 @@
                       <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
                     </h2>
                   </h5>
-                  <p class="mb-3">Kinic is the first and only search engine for web3 content that runs on blockchain.</p>
+                  <p class="mb-3">Kinic is the first and only search engine for web3 content that runs on blockchain. </p>
                   <p class="mb-3">Kinic the answer to Google and other search engines that are operated by a centralized entity, undermine data privacy, favor established players, and ignore the emerging world of web3 content.</p>
                   <p class="mb-3">Currently, Kinic allows you to search all frontend canisters on the Internet Computer blockchain. Kinic’s roadmap includes adding content hosted on other blockchains and decentralized storage networks. Kinic’s SEO module will involve unprecedented transparency backed by zero-knowledge machine learning (ZKML) technology. All users will be able to trust that they are getting the best results as determined by Kinic’s algorithms, and are not being served ad based content other than which is clearly transparent.</p>
                   <p class="mb-3">Kinic’s vision will be fulfilled by decentralizing its governance using an on-chain, decentralized autonomous organization (DAO). The DAO will operate using the IC’s unique service nervous system. The Kinic DAO will manage and improve the Kinic software service by voting on proposals.</p>
