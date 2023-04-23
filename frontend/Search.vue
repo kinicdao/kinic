@@ -1013,25 +1013,25 @@
 
     <!-- SEARCH RESULTS -->
     <section v-if="searchMode && !whitepaperMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
-      <div v-for="item in results[page]" :key="item.Canisterid" class="max-w-xl mb-8">
-        <div v-if="item.Canisterid.length === 27" class="group">
-          <b v-if="item.Notraw" class="text-xs redText">
-            https://{{item.Canisterid}}.icp0.io/
+      <div v-for="item in results[page]" :key="item.canisterid" class="max-w-xl mb-8">
+        <div v-if="item.canisterid.length === 27" class="group">
+          <b v-if="item.notraw" class="text-xs redText">
+            https://{{item.canisterid}}.icp0.io/
           </b>
           <b v-else class="text-xs redText">
-            https://{{item.Canisterid}}.raw.icp0.io/
+            https://{{item.canisterid}}.raw.icp0.io/
           </b>
-          <a v-if="item.Notraw && item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.icp0.io/'">
+          <a v-if="item.notraw && item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
-              {{item.Title}}
+              {{item.title}}
             </h2>
           </a>
-          <a v-else-if="item.Title" @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.icp0.io/'">
+          <a v-else-if="item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.raw.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
-              {{item.Title}}
+              {{item.title}}
             </h2>
           </a>
-          <a v-else @click="recordClick(item.Canisterid)" :href="'https://' + item.Canisterid + '.raw.icp0.io/'">
+          <a v-else @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.raw.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               No Title
             </h2>
@@ -1039,36 +1039,36 @@
         </div>
         <div v-else class="group">
           <b class="text-xs redText">
-            {{item.Subnetid}}
+            {{item.subnetid}}
           </b>
-          <a v-if="item.Title" @click="recordClick(item.Canisterid)" :href="'http://' + item.Subnetid">
+          <a v-if="item.title" @click="recordClick(item.canisterid)" :href="'http://' + item.subnetid">
             <h2 class="truncate text-xl group-hover:underline blueText">
-              {{item.Title}}
+              {{item.title}}
             </h2>
           </a>
-          <a v-else @click="recordClick(item.Canisterid)" :href="'http://' + item.Subnetid">
+          <a v-else @click="recordClick(item.canisterid)" :href="'http://' + item.subnetid">
             <h2 class="truncate text-xl group-hover:underline blueText">
               No Title
             </h2>
           </a>
         </div>
         <p class="line-clamp-2 text-gray-900">
-          {{item.Subtitle}}
+          {{item.subtitle}}
         </p>
-        <p v-if="item.Canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
-          ID: {{item.Canisterid}}
+        <p v-if="item.canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
+          ID: {{item.canisterid}}
         </p>
-        <p v-if="item.Canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
-          Subnet: {{item.Subnetid}}
+        <p v-if="item.canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
+          Subnet: {{item.subnetid}}
         </p>
-        <span v-if="item.Status && item.Status === 'official'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">OFFICIAL</span>
-        <a v-if="item.Note && item.Note === 'ICME'"  target="_blank" href="https://www.icme.io">
+        <span v-if="item.status && item.status === 'official'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">OFFICIAL</span>
+        <a v-if="item.note && item.note === 'ICME'"  target="_blank" href="https://www.icme.io">
           <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">BUILT ON ICME.IO</span>
         </a>
-        <a v-if="item.Note && item.Note.indexOf('github') > -1"  target="_blank" :href="item.Note">
+        <a v-if="item.note && item.note.indexOf('github') > -1"  target="_blank" :href="item.note">
           <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">OPEN SOURCE</span>
         </a>
-        <a v-if="item.Note && item.Note.indexOf('twitter') > -1"  target="_blank" :href="item.Note">
+        <a v-if="item.note && item.note.indexOf('twitter') > -1"  target="_blank" :href="item.note">
           <svg
             style="display:inline;"
             class="w-5 h-5 text-blue-300 fill-current ml-1 pointer"
@@ -1503,9 +1503,17 @@ import axios from 'axios'
 import { AuthClient } from '@dfinity/auth-client'
 import { Principal } from '@dfinity/principal'
 import VueCountdown from '@chenfengyuan/vue-countdown'
+import { createActor as canDBService} from "./candbservice/index"
+import { createActor as canDBIndex} from "./candbindex/index"
 
 
 let main = mainCA(MAIN_CANISTER_ID);
+
+let host = 'https://ic0.app'
+if (location.port === '3000' || location.port === '8000') {
+  host = 'http://127.0.0.1:8080'
+}
+let dbService = canDBService('rkp4c-7iaaa-aaaaa-aaaca-cai', {agentOptions: {host: "http://127.0.0.1:8080"}});
 
 export default {
   name: 'Search',
@@ -1882,7 +1890,7 @@ export default {
         this.results.push(page)
       }
     },
-    termSearch (txt) {
+    async termSearch (txt) {
       this.results = []
       this.category = ''
       if (txt === 'in') {
@@ -1916,15 +1924,11 @@ export default {
             }
         });
       } else {
-        axios.post(this.host, {
-          'action': 'searchTerm',
-          'category': this.search
-        }).then((response) => {
-            if (response.data && response.data.message !== 'No action defined.') {
-
-              this.paginate(response.data)
-            }
-        });
+        let res = await dbService.searchTerm(this.search, [])
+        let fin = res[0].replace('"discover"', 'discover')
+        console.log(fin)
+        let response = JSON.parse(fin)
+        this.paginate(response)
       }
     },
     whitepaper () {

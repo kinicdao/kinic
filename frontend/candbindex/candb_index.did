@@ -1,0 +1,7 @@
+type IndexCanister = 
+ service {
+   autoScaleServiceCanister: (text) -> (text);
+   createServiceCanisterByPk: (text) -> (opt text);
+   getCanistersByPK: (text) -> (vec text) query;
+ };
+service : () -> IndexCanister
