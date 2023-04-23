@@ -675,7 +675,7 @@
                   <ol id="legal-disclaimers" class="list-decimal list-inside mb-3">
                     <li>The purpose of the Tokenholder’s interest is not for investment, trading, speculation, or any other financial purpose.</li>
                     <li>Each Tokenholder is a natural person acting on its own behalf and not for the benefit of any other person.</li>
-                    <li>The Tokenholder is not a United States citizen and is not physically present inside the United States, except for the Kinic development organization and seed funders.</li>
+                    <li>The Tokenholder is not a United States citizen and is not physically present inside the United States, except for the Kinic development organization and some seed funders.</li>
                     <li>The Kinic DAO, and nothing in this whitepaper, is intended to, or shall be deemed to, establish any partnership or joint venture between any of the Tokenholders, or authorize any Tokenholder to make or enter into any commitments for or on behalf of any other party. </li>
                     <li>To the maximum extent permitted by law, each Token holder absolutely and irrevocably waives any and all claims, actions, causes of action, loss, damage and expense including any and all attorneys’ fees and other costs of enforcement arising out of or in connection with any breach or alleged breach of any fiduciary duty by any other Tokenholders or the Kinic DAO. It is the express intent of the Tokenholders that each Tokenholder and the Kinic DAO shall be and hereby are relieved of any and all fiduciary duties which might otherwise be applicable.</li>
                     <li>In no event shall any Tokenholder or the Kinic DAO be liable to any other Tokenholder for any loss of anticipated profits or other consequential, special or indirect loss or damage of any nature arising at any time, whether arising under contract, tort (including negligence), strict liability or for any other cause whatsoever.</li>
@@ -1986,6 +1986,7 @@ export default {
   beforeMount () {
     const self = this;
     if (location.port === '3000' || location.port === '8000') {
+      this.host = ''
     }
     window.onpopstate = function () {
       self.setSearch();
