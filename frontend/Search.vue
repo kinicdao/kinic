@@ -57,10 +57,6 @@
                     <a href="#legal-disclaimers" class="block text-blue-600 font-medium hover:underline">7. Token Holder Rights and Limitations</a>
                   </nav>
                   <div section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
-                    <p class="mt-4 text-md text-gray-500">
-                      *This whitepaper is currently in draft form and subject to minor edits prior to launch that will not affect or change the tokenomics or any technical aspects of the Kinic DAO or Kinic app.
-                      We expect draft form will end on 4-27-2023 at which time this notice will be removed.
-                    </p>
                 </div>
               </div>
             </div>
@@ -1510,10 +1506,16 @@ import { createActor as canDBIndex} from "./candbindex/index"
 let main = mainCA(MAIN_CANISTER_ID);
 
 let host = 'https://ic0.app'
+let dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
+let dbServiceCanisterId;
+
 if (location.port === '3000' || location.port === '8000') {
   host = 'http://127.0.0.1:8080'
+  dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
 }
-let dbService = canDBService('rkp4c-7iaaa-aaaaa-aaaca-cai', {agentOptions: {host: "http://127.0.0.1:8080"}});
+
+let dbIndex = canDBIndex(dbIndexCanisterId, {agentOptions: {host}})
+let dbService;
 
 export default {
   name: 'Search',
@@ -1823,9 +1825,9 @@ export default {
       if (!skip) {
         // Sort results
         data.sort(function(a, b) {
-          if (a.Datalength < b.Datalength) {
+          if (a.datalength < b.datalength) {
               return 1;
-          } else if (a.Datalength > b.Datalength) {
+          } else if (a.datalength > b.datalength) {
               return -1;
           }
           return 0;
@@ -1835,7 +1837,7 @@ export default {
         // for Vue.js. Needs new array.
         let newData = [];
         for (let i = 0; i < data.length; i++) {
-          if (data[i].Status === 'official') {
+          if (data[i].status === 'official') {
             top.push(data[i])
           } else {
             newData.push(data[i])
@@ -1843,9 +1845,9 @@ export default {
         }
 
         top.sort(function(a, b) {
-          if (a.Datalength < b.Datalength) {
+          if (a.datalength < b.datalength) {
               return 1;
-          } else if (a.Datalength > b.Datalength) {
+          } else if (a.datalength > b.datalength) {
               return -1;
           }
           return 0;
@@ -1915,19 +1917,14 @@ export default {
       }
 
       if (isIdSearch) {
-        axios.post(this.host, {
-          'action': 'searchID',
-          'category': this.search
-        }).then((response) => {
-            if (response.data) {
-              this.paginate(response.data)
-            }
-        });
+        let res = await dbService.searchCanisterId(this.search, '')
+        let response = JSON.parse(res)
+        let mtx = []
+        mtx.push(response)
+        this.paginate(mtx)
       } else {
         let res = await dbService.searchTerm(this.search, [])
-        let fin = res[0].replace('"discover"', 'discover')
-        console.log(fin)
-        let response = JSON.parse(fin)
+        let response = JSON.parse(res[0])
         this.paginate(response)
       }
     },
@@ -1945,7 +1942,7 @@ export default {
       this.search = ''
       this.whitepaperMode = true
     },
-    categorySearch (txt) {
+    async categorySearch (txt) {
       this.results = []
       let newUrlIS =  window.location.origin + '/category/' + txt
       if (this.page !== 0) {
@@ -1955,16 +1952,11 @@ export default {
       this.searchMode = true
       this.category = txt
 
-      axios.post(this.host, {
-        'action': 'searchCategory',
-        'category': txt
-      }).then((response) => {
-          if (response.data && response.data.message !== 'No action defined.') {
-            this.paginate(response.data)
-          }
-      });
+      let res = await dbService.searchCategory(txt, [])
+      let response = JSON.parse(res[0])
+      this.paginate(response)
     },
-    categorySearchNewest (txt) {
+    async categorySearchNewest (txt) {
       this.results = []
       let newUrlIS =  window.location.origin + '/category/' + txt
       if (this.page !== 0) {
@@ -1974,24 +1966,23 @@ export default {
       this.searchMode = true
       this.category = txt
 
-      axios.post(this.host, {
-        'action': 'categorySearchNewest',
-        'category': txt
-      }).then((response) => {
-          if (response.data && response.data.message !== 'No action defined.') {
-            this.paginate(response.data, true)
-          }
-      });
+      let res = await dbService.categorySearchNewest(txt, [])
+      let response = JSON.parse(res[0])
+      this.paginate(response, true)
     },
     toggleDD () {
       this.dropdownOn = !this.dropdownOn
     }
   },
-  beforeMount () {
+  async beforeMount () {
     const self = this;
-    if (location.port === '3000' || location.port === '8000') {
-      this.host = ''
+
+    let indexId = await dbIndex.getCanistersByPK('test')
+    if (indexId && indexId[0]) {
+        dbServiceCanisterId = indexId[0]
+        dbService = canDBService(dbServiceCanisterId, {agentOptions: {host}})
     }
+
     window.onpopstate = function () {
       self.setSearch();
     }
@@ -2007,7 +1998,6 @@ export default {
       claimCanister: '',
       bidAddress: '',
       accountID: '',
-      host: '',
       searchMode: false,
       adMode: false,
       whitepaperMode: false,
