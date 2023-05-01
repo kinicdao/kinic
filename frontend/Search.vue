@@ -1858,7 +1858,7 @@ export default {
 
       // Set category for Ads
       if (!this.category) {
-        let mainCategory = data.map(function(value, index) {return value['Apptype']}),
+        let mainCategory = data.map(function(value, index) {return value['apptype']}),
           distribution = {},
           max = 0,
           result = [];
