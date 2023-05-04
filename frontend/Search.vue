@@ -1011,13 +1011,13 @@
     <section v-if="searchMode && !whitepaperMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
       <div v-for="item in results[page]" :key="item.canisterid" class="max-w-xl mb-8">
         <div v-if="item.canisterid.length === 27" class="group">
-          <b v-if="item.notraw" class="text-xs redText">
+          <b v-if="item.notnull" class="text-xs redText">
             https://{{item.canisterid}}.icp0.io/
           </b>
           <b v-else class="text-xs redText">
             https://{{item.canisterid}}.raw.icp0.io/
           </b>
-          <a v-if="item.notraw && item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.icp0.io/'">
+          <a v-if="item.notnull && item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.icp0.io/'">
             <h2 class="truncate text-xl group-hover:underline blueText">
               {{item.title}}
             </h2>
@@ -1506,12 +1506,14 @@ import { createActor as canDBIndex} from "./candbindex/index"
 let main = mainCA(MAIN_CANISTER_ID);
 
 let host = 'https://ic0.app'
-let dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
+let dbIndexCanisterId = 'msqgt-mqaaa-aaaaf-qaj2a-cai'
 let dbServiceCanisterId;
+let dbName = 'kindb'
 
 if (location.port === '3000' || location.port === '8000') {
-  host = 'http://127.0.0.1:8080'
-  dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
+  //host = 'http://127.0.0.1:8080'
+  //dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
+  //dbName = 'test'
 }
 
 let dbIndex = canDBIndex(dbIndexCanisterId, {agentOptions: {host}})
@@ -1837,7 +1839,7 @@ export default {
         // for Vue.js. Needs new array.
         let newData = [];
         for (let i = 0; i < data.length; i++) {
-          if (data[i].status === 'official') {
+          if (data[i] && data[i].status === 'official') {
             top.push(data[i])
           } else {
             newData.push(data[i])
@@ -1858,7 +1860,13 @@ export default {
 
       // Set category for Ads
       if (!this.category) {
-        let mainCategory = data.map(function(value, index) {return value['apptype']}),
+        let mainCategory = data.map(function(value, index) {
+            if (value) {
+              return value['apptype']
+            } else {
+              ''
+            }
+          }),
           distribution = {},
           max = 0,
           result = [];
@@ -1977,7 +1985,7 @@ export default {
   async beforeMount () {
     const self = this;
 
-    let indexId = await dbIndex.getCanistersByPK('test')
+    let indexId = await dbIndex.getCanistersByPK(dbName)
     if (indexId && indexId[0]) {
         dbServiceCanisterId = indexId[0]
         dbService = canDBService(dbServiceCanisterId, {agentOptions: {host}})
