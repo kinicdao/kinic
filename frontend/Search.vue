@@ -1077,7 +1077,7 @@
         </a>
       </div>
       <div v-if="results.length === 0" class="max-w-xl mb-8 animate-pulse">
-        ...
+        ... {{queueMessage}} ...
       </div>
     </section>
 
@@ -1924,6 +1924,8 @@ export default {
         }
       }
 
+      this.queueMessage = 'loading from blockchain'
+
       if (isIdSearch) {
         let res = await dbService.searchCanisterId(this.search, '')
         let response = JSON.parse(res)
@@ -1931,9 +1933,31 @@ export default {
         mtx.push(response)
         this.paginate(mtx)
       } else {
-        let res = await dbService.searchTerm(this.search, [])
-        let response = JSON.parse(res[0])
-        this.paginate(response)
+        let res = [];
+        var nextSK = [];
+        let counter = 0;
+        while (true) {
+          await dbService.searchTerm(this.search, nextSK)
+          .then(result => {
+            res = res.concat(JSON.parse(result[0]))
+            console.log(counter)
+            nextSK = result[1]
+            counter++;
+          })
+          .catch(e => {
+            console.log(e)
+          });
+          if (res.length > 0) {
+            this.paginate(res);
+            if (counter > 10) {
+              break;
+            }
+          }
+          if (nextSK.length == 0 || counter > 30) {
+            this.queueMessage = 'No results found'
+            break;
+          }
+        };
       }
     },
     whitepaper () {
@@ -2001,6 +2025,7 @@ export default {
     const auctionEnds = new Date(now.getFullYear(), 8, 26);
 
     return {
+      queueMessage: 'loading from blockchain',
       time: auctionEnds - now,
       search: '',
       claimCanister: '',
