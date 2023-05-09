@@ -1,11 +1,13 @@
 type Service = 
  service {
    categorySearchNewest: (text, opt text) -> (text, opt text) query;
+   getNextKeysForParallelSearchTerm: () -> (vec text) query;
    getPK: () -> (text) query;
    isStatusComplete: () -> (bool) query;
    searchCanisterId: (text, text) -> (text) query;
    searchCategory: (text, opt text) -> (text, opt text) query;
    searchTerm: (text, opt text) -> (text, opt text) query;
+   searchTermWithTarget: (bool, bool, bool, vec text, opt text) -> (text, opt text) query;
    skExists: (text) -> (bool) query;
    transferCycles: () -> ();
    upload: (text) -> ();

@@ -27,10 +27,10 @@
       "packtool": "vessel sources"
     }
   },
-  "dfx": "0.10.0",
+  "dfx": "0.13.1",
   "networks": {
     "local": {
-      "bind": "127.0.0.1:8000",
+      "bind": "127.0.0.1:8080",
       "type": "ephemeral"
     },
     "ic": {

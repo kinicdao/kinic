@@ -18,6 +18,11 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Text, IDL.Opt(IDL.Text)],
         ['query'],
       ),
+    'getNextKeysForParallelSearchTerm' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Text)],
+        ['query'],
+      ),
     'getPK' : IDL.Func([], [IDL.Text], ['query']),
     'isStatusComplete' : IDL.Func([], [IDL.Bool], ['query']),
     'searchCanisterId' : IDL.Func([IDL.Text, IDL.Text], [IDL.Text], ['query']),
@@ -28,6 +33,16 @@ export const idlFactory = ({ IDL }) => {
       ),
     'searchTerm' : IDL.Func(
         [IDL.Text, IDL.Opt(IDL.Text)],
+        [IDL.Text, IDL.Opt(IDL.Text)],
+        ['query'],
+      ),
+    'searchTermWithNextKeysForParallelSearch' : IDL.Func(
+        [IDL.Text],
+        [IDL.Text, IDL.Vec(IDL.Text)],
+        ['query'],
+      ),
+    'searchTermWithTarget' : IDL.Func(
+        [IDL.Bool, IDL.Bool, IDL.Bool, IDL.Vec(IDL.Text), IDL.Opt(IDL.Text)],
         [IDL.Text, IDL.Opt(IDL.Text)],
         ['query'],
       ),
