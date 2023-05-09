@@ -1975,7 +1975,7 @@ export default {
             promises.push(p);
           }
           await Promise.all(promises);
-
+          if (data.length == 0) console.log("No result")
           response = data.map(r => JSON.parse(r)).flat()
         }
         this.paginate(response)
