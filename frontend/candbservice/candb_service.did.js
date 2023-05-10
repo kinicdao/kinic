@@ -36,6 +36,11 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Text, IDL.Opt(IDL.Text)],
         ['query'],
       ),
+    'searchTermForParallel' : IDL.Func(
+        [IDL.Vec(IDL.Text)],
+        [IDL.Text, IDL.Vec(IDL.Text)],
+        ['query'],
+      ),
     'searchTermWithNextKeysForParallelSearch' : IDL.Func(
         [IDL.Text],
         [IDL.Text, IDL.Vec(IDL.Text)],

@@ -1932,7 +1932,7 @@ export default {
         this.paginate(mtx)
       } else {
 
-        let res = await dbService.searchTermWithNextKeysForParallelSearch(this.search)
+        let res = await dbService.searchTermForParallel((this.search).split(" "))
         let response = []
         if (res[0] != '[]') {
           response = JSON.parse(res[0])
@@ -1943,7 +1943,7 @@ export default {
           let data = []
           let query_data = async (term, sk) => {
             return new Promise(async (resolve) => {
-              let res = await dbService.searchTerm(term, [sk])
+              let res = await dbService.searchTermWithTarget(true, true, true, terms.split(" "), [sk])
               if (res[0] != '[]') {
                 got = true
                 data.push(res[0])
