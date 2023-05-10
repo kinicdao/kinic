@@ -1934,48 +1934,54 @@ export default {
 
         let res = await dbService.searchTermForParallel((this.search).split(" "))
         let response = []
+
         if (res[0] != '[]') {
           response = JSON.parse(res[0])
+
+          if (response.length >= 20) {
+            this.paginate(response)
+            return
+          }
         }
-        else {
-          let term = this.search
-          let got = false
-          let data = []
-          let query_data = async (term, sk) => {
-            return new Promise(async (resolve) => {
-              let res = await dbService.searchTermWithTarget(true, true, true, terms.split(" "), [sk])
-              if (res[0] != '[]') {
-                got = true
-                data.push(res[0])
+
+        let term = this.search
+        let got = false
+        let data = []
+        let query_data = async (term, sk) => {
+          return new Promise(async (resolve) => {
+            let res = await dbService.searchTermWithTarget(true, true, true, term.split(" "), [sk])
+            if (res[0] != '[]') {
+              got = true
+              data.push(res[0])
+            }
+            resolve(res)
+          });
+        }
+
+        const MAX = res[1].length;
+        const CONCURRENCY = 40;
+        console.log("Max", MAX)
+        let cnt = 0;
+        let promises = [];
+
+        for (let i = 0; i < CONCURRENCY; i++) {
+          let p = new Promise((resolve) => {
+            (async function loop(index) {
+              if (index < MAX && !got) {
+                await query_data(term, res[1][index]);
+                // console.log(index)
+                loop(cnt++);
+                return;
               }
-              resolve(res)
-            });
-          }
-
-          const MAX = res[1].length;
-          const CONCURRENCY = 40;
-          console.log("Max", MAX)
-          let cnt = 0;
-          let promises = [];
-
-          for (let i = 0; i < CONCURRENCY; i++) {
-            let p = new Promise((resolve) => {
-              (async function loop(index) {
-                if (index < MAX && !got) {
-                  await query_data(term, res[1][index]);
-                  // console.log(index)
-                  loop(cnt++);
-                  return;
-                }
-                resolve();
-              })(cnt++);
-            });
-            promises.push(p);
-          }
-          await Promise.all(promises);
-          if (data.length == 0) console.log("No result")
-          response = data.map(r => JSON.parse(r)).flat()
+              resolve();
+            })(cnt++);
+          });
+          promises.push(p);
         }
+        await Promise.all(promises);
+        if (data.length == 0) console.log("No result")
+        response = data.map(r => JSON.parse(r)).flat()
+        
         this.paginate(response)
       }
     },
