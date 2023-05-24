@@ -1,29 +1,31 @@
 <template>
   <div @click="dropdownOn = false" class="yellowBG">
-    <div v-if="!whitepaperMode" class="max-w-7xl mx-auto py-1 px-2">
-      <div class="flex items-center justify-between flex-wrap">
-        <div class="w-0 flex-1 flex flex-col items-left">
-          <p class="ml-3 text-lg truncate headerSN">
-            <span v-if="!searchMode"><b>Kinic</b> is the world's first web3 search engine. <a class="cursor-pointer text-white underline" @click="whitepaper">Read our SNS Whitepaper.</a></span>
-            <span v-else>Advertisers can bid ICP to place Ads in categories. Login to see more.</span>
-          </p>
-        </div>
-        <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-            <!--<p class="text-xs text-black">Login & make history. 1st ever web3 ad spot auction. Ends in:</p>
-            <div class="flex items-center justify-center px-4 py-3 rounded-md shadow-sm text-sm text font-bold text-white bg-black mt-1">
-                <vue-countdown :time="time" :interval="100" v-slot="{ days, hours, minutes, seconds}">
-                    {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds
-                </vue-countdown>
-            </div>-->
-            <div class="flex flex-row mt-1 w-full mx-auto justify-end items-end ml-auto">
-                <!--<a href="https://discord.gg/AkapKzFCtd" class="ml-2 mb-0.5" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30px" height="30px"><path fill="#ffffff" d="M39.248,10.177c-2.804-1.287-5.812-2.235-8.956-2.778c-0.057-0.01-0.114,0.016-0.144,0.068 c-0.387,0.688-0.815,1.585-1.115,2.291c-3.382-0.506-6.747-0.506-10.059,0c-0.3-0.721-0.744-1.603-1.133-2.291 c-0.03-0.051-0.087-0.077-0.144-0.068c-3.143,0.541-6.15,1.489-8.956,2.778c-0.024,0.01-0.045,0.028-0.059,0.051 c-5.704,8.522-7.267,16.835-6.5,25.044c0.003,0.04,0.026,0.079,0.057,0.103c3.763,2.764,7.409,4.442,10.987,5.554 c0.057,0.017,0.118-0.003,0.154-0.051c0.846-1.156,1.601-2.374,2.248-3.656c0.038-0.075,0.002-0.164-0.076-0.194 c-1.197-0.454-2.336-1.007-3.432-1.636c-0.087-0.051-0.094-0.175-0.014-0.234c0.231-0.173,0.461-0.353,0.682-0.534 c0.04-0.033,0.095-0.04,0.142-0.019c7.201,3.288,14.997,3.288,22.113,0c0.047-0.023,0.102-0.016,0.144,0.017 c0.22,0.182,0.451,0.363,0.683,0.536c0.08,0.059,0.075,0.183-0.012,0.234c-1.096,0.641-2.236,1.182-3.434,1.634 c-0.078,0.03-0.113,0.12-0.075,0.196c0.661,1.28,1.415,2.498,2.246,3.654c0.035,0.049,0.097,0.07,0.154,0.052 c3.595-1.112,7.241-2.79,11.004-5.554c0.033-0.024,0.054-0.061,0.057-0.101c0.917-9.491-1.537-17.735-6.505-25.044 C39.293,10.205,39.272,10.187,39.248,10.177z M16.703,30.273c-2.168,0-3.954-1.99-3.954-4.435s1.752-4.435,3.954-4.435 c2.22,0,3.989,2.008,3.954,4.435C20.658,28.282,18.906,30.273,16.703,30.273z M31.324,30.273c-2.168,0-3.954-1.99-3.954-4.435 s1.752-4.435,3.954-4.435c2.22,0,3.989,2.008,3.954,4.435C35.278,28.282,33.544,30.273,31.324,30.273z"/></svg>
-                </a>-->
-                <a href="https://twitter.com/kinic_app" class="ml-4 mt-1" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="35px" height="35px"><path fill="#ffffff" d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"/></svg>
-                </a>
-
-            </div>
+    <div v-if="!whitepaperMode" class="max-w-7xl mx-auto py-1 px-2 flex items-center justify-between flex-wrap">
+      <div class="w-0 flex-1 flex flex-col items-left">
+        <p class="ml-3 text-lg truncate headerSN">
+          <span v-if="!searchMode">
+            <b>Kinic</b> is the world's first web3 search engine. 
+            <a class="cursor-pointer text-white underline" @click="whitepaper">Read our SNS Whitepaper.</a>
+          </span>
+          <span v-else>Advertisers can bid ICP to place Ads in categories. Login to see more.</span>
+        </p>
+      </div>
+      <div class="order-3 mb-1 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+          <!--<p class="text-xs text-black">Login & make history. 1st ever web3 ad spot auction. Ends in:</p>
+          <div class="flex items-center justify-center px-4 py-3 rounded-md shadow-sm text-sm text font-bold text-white bg-black mt-1">
+              <vue-countdown :time="time" :interval="100" v-slot="{ days, hours, minutes, seconds}">
+                  {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds
+              </vue-countdown>
+          </div>-->
+          <div class="flex flex-row mt-1 w-full mx-auto justify-end items-end ml-auto">
+            <!--<a href="https://discord.gg/AkapKzFCtd" class="ml-2 mb-0.5" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30px" height="30px"><path fill="#ffffff" d="M39.248,10.177c-2.804-1.287-5.812-2.235-8.956-2.778c-0.057-0.01-0.114,0.016-0.144,0.068 c-0.387,0.688-0.815,1.585-1.115,2.291c-3.382-0.506-6.747-0.506-10.059,0c-0.3-0.721-0.744-1.603-1.133-2.291 c-0.03-0.051-0.087-0.077-0.144-0.068c-3.143,0.541-6.15,1.489-8.956,2.778c-0.024,0.01-0.045,0.028-0.059,0.051 c-5.704,8.522-7.267,16.835-6.5,25.044c0.003,0.04,0.026,0.079,0.057,0.103c3.763,2.764,7.409,4.442,10.987,5.554 c0.057,0.017,0.118-0.003,0.154-0.051c0.846-1.156,1.601-2.374,2.248-3.656c0.038-0.075,0.002-0.164-0.076-0.194 c-1.197-0.454-2.336-1.007-3.432-1.636c-0.087-0.051-0.094-0.175-0.014-0.234c0.231-0.173,0.461-0.353,0.682-0.534 c0.04-0.033,0.095-0.04,0.142-0.019c7.201,3.288,14.997,3.288,22.113,0c0.047-0.023,0.102-0.016,0.144,0.017 c0.22,0.182,0.451,0.363,0.683,0.536c0.08,0.059,0.075,0.183-0.012,0.234c-1.096,0.641-2.236,1.182-3.434,1.634 c-0.078,0.03-0.113,0.12-0.075,0.196c0.661,1.28,1.415,2.498,2.246,3.654c0.035,0.049,0.097,0.07,0.154,0.052 c3.595-1.112,7.241-2.79,11.004-5.554c0.033-0.024,0.054-0.061,0.057-0.101c0.917-9.491-1.537-17.735-6.505-25.044 C39.293,10.205,39.272,10.187,39.248,10.177z M16.703,30.273c-2.168,0-3.954-1.99-3.954-4.435s1.752-4.435,3.954-4.435 c2.22,0,3.989,2.008,3.954,4.435C20.658,28.282,18.906,30.273,16.703,30.273z M31.324,30.273c-2.168,0-3.954-1.99-3.954-4.435 s1.752-4.435,3.954-4.435c2.22,0,3.989,2.008,3.954,4.435C35.278,28.282,33.544,30.273,31.324,30.273z"/></svg>
+            </a>-->
+            <a href="https://twitter.com/kinic_app" class="ml-4 mt-1" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="35px" height="35px">
+                  <path fill="#ffffff" d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"/>
+                </svg>
+            </a>
         </div>
       </div>
     </div>
@@ -31,663 +33,497 @@
 
   <!-- WHITEPAGE -->
   <header v-if="whitepaperMode" class="h-full">
-        <div class="content px-8 pt-4 pb-2 blackBG" id="top">
-            <!-- SEARCH RESULT PAGE NAV -->
-            <nav class="flex items-center justify-between mt-1 mb-1">
-                <div class="mb-2 text-4xl font-extrabold leading-none tracking-tight md:text-3xl lg:text-4xl text-white">
-                  Kinic SNS DAO Whitepaper
-                </div>
-            </nav>
-        </div>
-        <div class="w-full px-8 pt-4">
-            <div class="mb-4 rounded-t-1">
-                <div class="p-4 sm:mx-1 lg:mx-8 leading-normal text-lg">
-                  <h5 class="mb-2">
-                    <h2 section-trigger class="relative flex items-center w-full text-2xl font-semibold text-left border-b border-solid">
-                      Table of Contents
-                    </h2>
-                  </h5>
-                  <nav class="space-y-2">
-                    <a href="#executive-summary" class="block text-blue-600 font-medium hover:underline">1. Executive Summary</a>
-                    <a href="#the-kinic-vision-and-product" class="block text-blue-600 font-medium hover:underline">2. The Kinic Vision and Product</a>
-                    <a href="#kinic-dao" class="block text-blue-600 font-medium hover:underline">3. Kinic DAO Launch and Governance</a>
-                    <a href="#kinic-token-and-revenue" class="block text-blue-600 font-medium hover:underline">4. Kinic DAO Treasury and Token Utility</a>
-                    <a href="#kinic-dao-tokenomics" class="block text-blue-600 font-medium hover:underline">5. Kinic DAO Tokenomics</a>
-                    <a href="#launch-allocations-and-mechanics" class="block text-blue-600 font-medium hover:underline">6. Launch Allocations and Mechanics</a>
-                    <a href="#legal-disclaimers" class="block text-blue-600 font-medium hover:underline">7. Token Holder Rights and Limitations</a>
-                  </nav>
-                  <div section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
-                </div>
-              </div>
-            </div>
-            <div class="mb-4 rounded-t-1">
-              <div id="executive-summary" section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
-                <div class="p-4 sm:mx-1 lg:mx-12 leading-normal text-lg opacity-80 ">
-                  <h5 class="mb-2">
-                    <h2 section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      1. Executive Summary
-                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
-                    </h2>
-                  </h5>
-                  <p class="mb-3">Kinic is the first and only search engine for web3 content that runs on blockchain. </p>
-                  <p class="mb-3">Kinic the answer to Google and other search engines that are operated by a centralized entity, undermine data privacy, favor established players, and ignore the emerging world of web3 content.</p>
-                  <p class="mb-3">Currently, Kinic allows you to search all frontend canisters on the Internet Computer blockchain. Kinic’s roadmap includes adding content hosted on other blockchains and decentralized storage networks. Kinic’s SEO module will involve unprecedented transparency backed by zero-knowledge machine learning (ZKML) technology. All users will be able to trust that they are getting the best results as determined by Kinic’s algorithms, and are not being served ad based content other than which is clearly transparent.</p>
-                  <p class="mb-3">Kinic’s vision will be fulfilled by decentralizing its governance using an on-chain, decentralized autonomous organization (DAO). The DAO will operate using the IC’s unique service nervous system. The Kinic DAO will manage and improve the Kinic software service by voting on proposals.</p>
-                  <p class="mb-3">To submit proposals and vote, KINIC token holders must lock (“stake”) their tokens into neurons. To incentivize KINIC token holders to stake their tokens into neurons and vote, neurons receive rewards for voting that can be converted to KINIC tokens.</p>
-                  <p class="mb-3">The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens. KINIC tokens can be used to pay for Kinic's current and upcoming products and services. The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO. ICP tokens in the DAO’s treasury can be used to fund expenses.</p>
-                  <p class="mb-3">Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens. The total supply of KINIC tokens upon launch will be 6 million tokens. Minting tokens increases the total supply and burning tokens decreases them. KINIC tokens can only be burned by proposal. A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards. KINIC tokens that are locked in a neuron are not part of the liquid supply.</p>
-                  <p class="mb-3">The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens. 50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization and 10% allocated to seed funders. The maximum ICP that can be earned in the sale of the KINIC tokens is 1.5 million ICP. The minimum is 500,000 ICP. 1 KINIC token may be worth between 0.33 and 1 ICP tokens based on the DAO earning between 500,000 and 1.5 million ICP tokens in the decentralization sale.</p>
-
-                </div>
-              </div>
-            </div>
-            <div class="mb-4 rounded-t-1">
-              <div section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
-                <div class="p-4 sm:mx-1 lg:mx-8 leading-normal text-lg">
-                  <h5 class="mb-2">
-                    <h2 id="the-kinic-vision-and-product" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      2. The Kinic Vision and Product
-                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
-                    </h2>
-                  </h5>
-                  <p class="mb-3 font-semibold text-xl">Summary</p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>Kinic is the first and only search engine for web3 content that runs on blockchain.</li>
-                    <li>Kinic is fully functional and runs entirely on blockchain on the smart contract canister located at <a class="blueText" href="https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/">https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/</a>.</li>
-                    <li>Currently, Kinic allows you to search all frontend canisters on the Internet Computer blockchain.</li>
-                    <li>Kinic’s proposed roadmap includes adding content hosted on other blockchains and decentralized storage networks, using large language models for advanced web3 search queries.</li>
-                    <li>Kinic’s development will focus on the emerging field of ZKML. Not only will our powerful search models run entirely on-chain, they will also be verifiable with zero-knowledge proofs.</li>
-                  </ol>
-                  <hr class="mb-3"/>
-                  <p class="mb-3 font-semibold text-xl">
-                    A New Vision for Search
-                  </p>
-                  <p class="mb-3">
-                    The Internet revolution was ushered in by search services making nearly all human knowledge available to anyone in numerous forms of online content. Google has dominated searching for that content for nearly two decades. But because it is operated by a centralized corporation, it has done so by undermining data privacy, favoring established players, and all but ignoring the emerging world of web3 content.
-                  </p>
-                  <p class="mb-3">
-                    In 2021, the Dfinity Foundation launched the Internet Computer (IC) blockchain. The IC is a full-stack, decentralized replacement for traditional corporate cloud servers. Like other public, open-source blockchains, the IC operates on the basis of computational consensus among node computers without any centralized authority. Likewise, the IC is powered by computational units called cycles (similar to gas on Ethereum) that are produced when converted from the IC’s native utility token, ICP.
-                  </p>
-                  <p class="mb-3">
-                    Several unique features, however, arguably make the IC the world’s most powerful blockchain and in many ways the truest embodiment of web3 to date. These features include the following:
-                  </p>
-                  <ol class="list-decimal list-inside mb-3">
-                    <li>IC smart contracts not only execute on-chain transactions but also store content files and other forms of data entirely on chain <a class="blueText" href="https://internetcomputer.org/how-it-works/smart-contracts-serve-the-web/" target="_blank">(52 gigabytes per smart contract)</a>.
-                      These smart contracts are referred to as “canisters”. A primary benefit is that web browsers can directly interact with canister smart contracts.</li>
-                    <li>The IC blockchain operates at the <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Web_Speed" target="_blank">speed of the standard web</a> and in principle can scale infinitely with the addition of more nodes.</li>
-                    <li>Any web browser <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Web_Serving" target="_blank">can be used</a> to view content stored on the IC, including websites and the front-end graphics that run inside smart contract canisters.</li>
-                    <li>Publishing content to a smart contract can be done anonymously using login credentials such as the IC’s Webauthn-based <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Internet_Computer_wiki#Internet_Identity_Introduction" target="_blank">Internet Identity</a>.</li>
-                    <li>Content can be <a class="blueText" href="https://internetcomputer.org/docs/current/concepts/trust-in-canisters#complete-immutability" target="_blank">made immutable</a> (i.e., not deletable) if a smart contract canister is locked.</li>
-                  </ol>
-
-                  <p class="mb-3">
-                    As a result, the IC is an end-to-end decentralized compute platform and content network where everything takes place, is stored, and published on chain. More information about the IC is available <a class="blueText" href="https://internetcomputer.org/" target="_blank">here</a>. Other parts of the web3 ecosystem include decentralized content storage networks that complement the IC by specializing in long-term storage of files that are not frequently accessed. These networks include the Interplanetary File System (IPFS) and Arweave.
-                  </p>
-                  <p class="mb-3">
-                    Content that is hosted on web3 needs a new vision for search. And Kinic provides a profound new vision: search that is fully private, user centric, and built on and for web3. The name Kinic comes from the word kin from kinship.
-                  </p>
-                  <p class="mb-3">
-                    <b>Kinic is unlike any other product for several reasons:</b>
-                  </p>
-                  <ol class="list-decimal list-inside mb-3">
-                    <li>
-                      <b>Runs on chain.</b> Kinic is the only search engine that runs <b>entirely on chain</b> to benefit from the privacy, security, and immutability features of blockchain.
-                      Unlike privacy-focused search engines like DuckDuckGo that trust a centralized corporation to maintain user privacy, Kinic must operate according to the privacy-protecting <a class="blueText" target="_blank" href="https://medium.com/dfinity/the-internet-computer-blockchains-privacy-advantages-73340c6c42db">protocol rules</a> of the Internet Computer blockchain and its anonymous
-                      <a class="blueText" target="_blank" href="https://internetcomputer.org/docs/current/tokenomics/identity-auth/what-is-ic-identity"> login methods</a>.
-                    </li>
-                    <li>
-                      <b>Searches content on web3.</b> Kinic is the only search engine dedicated to searching frontend content <b>on web3</b> as opposed to content about web3 that is on web2 such as <a class="blueText" href="https://www.kaito.ai/" target="_blank">Kaito</a>.
-                    </li>
-                    <li>
-                      <b>Searches all of web3.</b> Kinic is the only search engine dedicated to searching <b>all</b> frontend content on web3 and not focused only on one web3 network such as <a class="blueText" href="https://ipfs-search.com/#/" target="_blank">IPFS Search</a>.
-                    </li>
-                    <li>
-                      <b>Searches frontend</b>. Kinic is the only <b>frontend</b> search engine for web3. This is in contrast to backend blockchain and NFT data explorers and indexing protocols such as <a class="blueText" href="https://thegraph.com/en/" target="_blank">The Graph</a>.
-                    </li>
-                  </ol>
-                  <hr class="mb-3"/>
-
-                  <p class="mb-3 font-semibold text-xl">
-                    How Kinic Works
-                  </p>
-                  <p class="mb-3">
-                    Kinic is a dedicated web3 search engine running entirely on blockchain.
-                  </p>
-                  <p class="mb-3">
-                    Kinic is fully functional and averages thousands of unique monthly searches. It is available to use for free at <a class="blueText" href="https://kinic.io/" target="_blank">https://kinic.io/</a> (which points to this smart contract canister: <a class="blueText" href="https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/" target="_blank">https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/</a>).
-                  </p>
-                  <p class="mb-3">
-                    Users can search for content on the IC for free without logging in. Users can also search by category. If users log in, they will be able to see the most recent indexed sites. Kinic’s login methods are anonymous. Searches cannot be connected to real-world identities.
-                    <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image7.png" alt="">
-                  </p>
-                  <p class="mb-3">
-                    Kinic makes front-end content hosted on-chain searchable. Currently, Kinic allows you to search all of the frontend canisters on the Internet Computer blockchain. Other blockchains and decentralized content storage will be added, including IPFS and Aarweave. See the proposed Kinic Roadmap below.
-                  </p>
-                  <p class="mb-3">
-                    When frontend canisters (i.e., websites) are deployed to the IC, it normally takes about 7 days to appear in a Kinic search as we reindex subnets once per 7 days. Sites that are “claimed” by their builder rank higher in the search results. This is to differentiate claimed versus staging sites that are preliminary.
-                  </p>
-                  <p class="mb-3">
-                    Creators can claim a site via the Twitter @kinic_app. Claiming sites can also be done by comparing the canister owner principal ID by what is given to us in a DFX command. Motoko does not have an 'info' method call yet so this comparison is done with DFX for now. See <a class="blueText" href="https://forum.dfinity.org/t/getting-a-canisters-controller-on-chain/7531" target="_blank">here</a> for more details.
-                  </p>
-                  <p class="mb-3">
-                    Kinic’s search categories are taken from the keywords or h1 or h2 of an app that runs on the IC. Kinic also creates a general set of keywords based on all text of an app.
-                  </p>
-                  <p class="mb-3">
-                    Kinic has processes set up for indexing using scripts that anyone can run.The frontend, auction and site claiming code are canisters. The search database will operate on CanDB. Creators can also claim sites to make them have an SEO push to differentiate between staging and production sites.
-                  </p>
-                  <p class="mb-3">
-                    Kinic uses traits of the IC discovered in the Rust source code to gather all canister IDs on the IC’s blockchain subnets. By using other “smart-code” Kinic identifies keywords for each app and app type. We then prioritize 'claimed sites' over WIP or staging sites, creating a new basis for web3 SEO. The frontend app is built using Vue.js. We A/B tested a few variants to find a simple and sleek design.
-                  </p>
-                  <hr class="mb-3"/>
-
-                  <p class="mb-3 font-semibold text-xl">
-                    Kinic Roadmap
-                  </p>
-                  <p class="mb-3">
-                    The following nonbinding roadmap can guide the development of the Kinic app:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>API work (data analytics, social app connections, & in-site search API usable by other web3 projects).</li>
-                    <li>Supporting ad sales (decentralize and targeted ads for categories and search terms).</li>
-                    <li>Automate highlighting of new and interesting web3 content.</li>
-                    <li>Add more chains and decentralized storage networks into the Kinic indexing process such as IPFS and Arweave.</li>
-                    <li>Explore on-chain large language models for advanced web3 search queries.</li>
-                    <li>Improve indexing process to create syntactical structure of backends and frontends across chains.</li>
-                    <li>ZKML will be used to ensure that Kinic not only has the best search and API, but all the most trustless. </li>
-                  </ol>
-                  <h5 class="mt-5 mb-2">
-                    <h2 id="kinic-dao" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      3. Kinic DAO Launch and Governance
-                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
-                    </h2>
-                  </h5>
-                  <p class="mb-3 font-semibold text-xl">
-                    Summary
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>Kinic’s vision will be fulfilled by decentralizing its governance using an on-chain, decentralized autonomous organization (DAO).</li>
-                    <li>The Kinic DAO will manage and improve the Kinic software service by voting on proposals.</li>
-                    <li>To submit proposals and vote, KINIC token holders must lock (“stake”) their tokens into neurons.  </li>
-                    <li>To incentivize KINIC token holders to stake their tokens into neurons and vote, neurons receive voting rewards (that are ultimately redeemable for ICP tokens) each time they vote.</li>
-                    <li>Voting rewards are greater the longer tokens have been staked (higher age) and the longer they are locked (a higher dissolve delay).</li>
-                    <li>Each neuron can only vote once per proposal.</li>
-                    <li>Neurons can directly vote on proposals or delegate their votes to another voting member. </li>
-                  </ol>
-                  <hr class="mb-3"/>
-                  <p class="mb-3 font-semibold text-xl">
-                    Launching the DAO
-                  </p>
-                  <p class="mb-3">
-                    The Internet Computer (IC) provides a system for on-chain governance by token holders for decentralized autonomous organizations (DAOs). DAOs on the IC exist at the protocol level for the entire blockchain and also at the level of individual apps.
-                  </p>
-                  <p class="mb-3">
-                    At the protocol level, the IC is governed on-chain by a DAO known as the <a class="blueText" href="https://internetcomputer.org/how-it-works/network-nervous-system-nns/" target="_blank">Network Nervous System</a>. The NNS accepts votes from holders of locked (staked) ICP. Staked ICP are called neurons. At the app level, a <a class="blueText" href="https://internetcomputer.org/sns" target="_blank">Service Nervous System (SNS)</a> DAO is the means for decentralized, on-chain governance.
-                  </p>
-                  <p class="mb-3">
-                    The Kinic SNS DAO will be officially launched when the smart contract canisters controlled by the founding team are transferred to and thereafter fully controlled by the DAO. The DAO will be formed with an initial governance, tokenomics, and technical configuration. Once made public, the initial configuration is permanent until launch. After launch, the initial configuration parameters can be changed by vote.
-                  </p>
-                  <p class="mb-3">
-                    Creation of the Kinic DAO will take place as follows:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>The Kinic development organization will submit a proposal to the NNS with details (parameters) about the decentralization sale such as the initial token allocation, voting rules and rewards, and tokenomics. </li>
-                    <li>If the proposal is approved by the NNS, the decentralization sale of KINIC tokens will begin to take place.</li>
-                    <li>The ICP raised in the sale will be placed into the smart contract canister owned and controlled by the Kinic DAO. </li>
-                  </ol>
-                  <p class="mb-3">
-                    The sale will take place at some point in the second quarter of 2023 (April through June). To participate in the sale during the sale period, prospective KINIC token buyers must log into the NNS app (https://nns.ic0.app/), transfer ICP into their NNS account, and then go to the Launchpad section inside the NNS app.
-                  </p>
-                  <p class="mb-3">
-                    In the Launchpad, prospective buyers should deposit ICP tokens in the Kinic sale section. When the sale is complete, buyers will receive the number of KINIC tokens in the same proportion as their deposited ICP is to the total amount of the sale. For example, if their deposited ICP is 1% of the total ICP deposited during the sale, the buyer will receive 1% of the KINIC tokens sold.
-                  </p>
-                  <p class="mb-3">
-                    The ICP received from the sale will be controlled by an ICP ledger account owned by the Kinic DAO governance canister.
-                  </p>
-                  <p class="mb-3">
-                    Once the decentralization sale is complete, the Kinic DAO will have now been created and running entirely on chain with decentralized governance.
-                  </p>
-                  <hr class="mb-3"/>
-                  <p class="mb-3 font-semibold text-xl">
-                    Governance of the DAO
-                  </p>
-                  <p class="mb-3">
-                    Once the Kinic DAO is launched, it will be completely controlled by its DAO. Only the DAO will be able to upgrade or otherwise change the smart contract canister code and be able to engage in transactions with the treasury. This means, for example, that only the DAO can choose to disburse funds, change governance rules, or hire third party developers.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Action by Voting on Proposals
-                  </p>
-                  <p class="mb-3">
-                    The Kinic DAO acts through proposals that are voted on by holders of staked KINIC tokens (i.e., KINIC neurons). Each neuron is entitled to one vote per proposal. Proposals can be submitted by any staked neuron holder and relate to any topic.
-                  </p>
-                  <p class="mb-3">
-                    Nonbinding motions can also be made to communicate or clarify ideas without committing the DAO to any particular action. Examples of nonbinding proposals include proposals for roadmap development or changes.
-                  </p>
-                  <p class="mb-3 font-semibold text-lg">
-                    The following types of proposals can be made to the DAO to be approved by voting neurons:
-                  </p>
-                  <ol class="list-decimal list-inside mb-3">
-                    <li><b>Canister upgrade proposals.</b> Upgrades canisters of the dapp or canisters of the DAO itself. These proposals contain a canister Id and a wasm module.</li>
-                    <li><b>SNS config change proposals.</b> Changes the DAO’s initial parameters (see below).</li>
-                    <li><b>Token transfer proposals.</b> Transfer KINIC, ICP, or other IC-native tokens between the DAO and an external account. </li>
-                    <li><b>Burn token proposals.</b> Burn KINIC tokens and reduce their total supply.</li>
-                    <li><b>Custom function proposals.</b> Enable the DAO’s governance canister to perform any operation on a canister such as rolling upgrades, adding a new DAO to sync proposals with, and expanding the Kinic service to operate in additional canisters.</li>
-                  </ol>
-                  <p class="mb-3 font-semibold text-lg">
-                    A proposal is adopted when the following conditions are met:
-                  </p>
-                  <ol class="list-decimal list-inside mb-3">
-                    <li>Within 4 days, the total voting power “adopt” votes is greater that “reject” votes or after a period of quiet, and</li>
-                    <li>“Adopt” votes constitute at least 3% of the voting power, or</li>
-                    <li>Voting power of “adopt” or “reject” votes exceeds 50%.</li>
-                  </ol>
-                  <p class="mb-3">
-                    Neurons that vote within the 4 day period will still earn voting rewards even if the decision about whether to adopt was already resolved.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Voting Rewards Come in the Form of Maturity
-                  </p>
-                  <p class="mb-3">
-                    To incentivize KINIC holders to vote, voters receive voting rewards each time they vote.
-                  </p>
-                  <p class="mb-3">
-                    To qualify for voting rewards, KINIC holders must first stake their tokens and set the neuron’s dissolve delay to at least one month long. The dissolve delay is the length of time that a neuron is locked. One year is the maximum dissolve delay.
-                  </p>
-                  <p class="mb-3">
-                    Staked KINIC tokens (neurons) cannot be traded. To unlock staked KINIC tokens, they must be dissolved. When the dissolve delay has ended, the KINIC tokens can be dissolved and then traded.
-                  </p>
-                  <p class="mb-3">
-                    Voting rewards are larger for longer dissolve delays. This helps to align voting with the long-term interests of Kinic. A minimum dissolve delay of one month is required to qualify to vote on proposals.
-                  </p>
-                  <p class="mb-3">
-                    When neurons vote, voting rewards are earned by the neurons in the form of a maturity. Maturity is an attribute of a neuron and not a tradable asset. The more a neuron votes, the more maturity their neuron obtains. Voting rewards (maturity) are earned daily based on all of the votes of the DAO that ended on that day.
-                  </p>
-                  <p class="mb-3">
-                    To generate income from maturity, the KINIC token holder must convert (disburse) the maturity into new KINIC tokens. This process will consume (or “burn”) the converted maturity. By default, units of maturity are converted into KINIC tokens on a 1:1 basis. For example, disbursing a neuron that 100 has maturity will convert to 100 KINIC tokens. These new KINIC tokens will be provided to the token holder’s main account.
-                  </p>
-                  <p class="mb-3">
-                    As an alternative to converting maturity into KINIC tokens, a voting member can also stake their maturity to earn additional voting rewards.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Voting Power: Dissolve Delay Bonus and Age Bonus
-                  </p>
-                  <p class="mb-3">
-                    Although each neuron can only vote once per proposal, a neuron may have relatively higher voting power when they vote. Neurons that have been staked for a longer period of time have more voting power. This aligns incentives towards longer-term staking.
-                  </p>
-                  <p class="mb-3">
-                    Being staked for a longer time means that the neuron has a higher dissolve delay and/or the time for which the neuron has already been staked (its age). Neuron voting power is accordingly calculated according to the following formula: number of tokens times dissolve delay bonus times age bonus.
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>The dissolve delay bonus is 1x for neurons with no dissolve delay. It increases linearly to 2x for neurons that have the maximum 1 year dissolve delay.</li>
-                    <li>The age bonus is 1x for new neurons and increases linearly to 1.25x for neurons that have been staked for 6 months or longer.</li>
-                  </ol>
-                  <p class="mb-3">
-                    Accordingly, a neuron with a 1 year dissolve delay that is at least 6 months old will have 2.5x the voting power of a new neuron that only has a 1 month dissolve delay.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Delegated Voting
-                  </p>
-                  <p class="mb-3">
-                    Neurons can directly vote on individual proposals using the Kinic section inside the NNS app <a class="blueText" href="https://nns.ic0.app/" target="_blank">here</a>. Neurons can also delegate their votes to another voting member.
-                  </p>
-                  <p class="mb-3">
-                    Vote delegation is accomplished by setting a neuron to follow another neuron; that is, to vote along with the votes of another neuron (per proposal type). For example, neurons can follow the Kinic development organization voting neuron The follower neuron will vote for a proposal if a majority of the Kinic development organization agrees. This way, neurons will follow the Kinic development organization’s votes. An advantage of following the Kinic development organization’s neuron is that the Kinic development organization votes on every proposal. This enables followers to maximize voting rewards for voting on every proposal as well.
-                  </p>
-                  <p class="mb-3">
-                    Voting neurons may effectively gain disproportionate voting power if they have a large number of followers. This is similar to representative democracy.
-                  </p>
-                  <h5 class="mt-5 mb-2">
-                    <h2 id="kinic-token-and-revenue" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      4. Kinic DAO Treasury and Token Utility
-                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
-                    </h2>
-                  </h5>
-                  <p class="mb-3 font-semibold text-xl">
-                    Summary
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens.</li>
-                    <li>It would be very difficult for the DAO to be taken over by a single party that effectively steals the treasury.</li>
-                    <li>KINIC tokens can be used to pay for Kinic's current and upcoming products and services.</li>
-                    <li>The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO. ICP tokens in the DAO’s treasury can be used to fund expenses.</li>
-                    <li>Expenses will most likely exceed revenue for the first few years of the DAO but revenue is expected to eventually exceed DAO expenses. </li>
-                  </ol>
-                  <p class="mb-3 font-semibold underline">
-                    The Kinic DAO Treasury
-                  </p>
-                  <p class="mb-3">
-                    The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens.
-                  </p>
-                  <p class="mb-3">
-                    After the decentralization sale, the DAO will have an ICP ledger account containing the ICP raised in the sale. It will also have a KINIC ledger account with KINIC tokens controlled by the treasury. As discussed in further detail in the Launch Allocations and Mechanics section, the Kinic DAO will retain approximately 50% of the KINIC tokens created upon launch.
-                  </p>
-                  <p class="mb-3">
-                    To enable the trading of KINIC, proposals will be made soon after the decentralization sale to transfer KINIC and ICP to decentralized exchange liquidity pools. The purpose of enabling trading in KINIC tokens is to enable people to join in or exit from Kinic DAO governance. The purpose is not to enable or encourage investment or speculation in KINIC tokens.
-                  </p>
-                  <p class="mb-3">
-                    ICP tokens in the DAO’s treasury can be used to fund expenses such as paying cycles for hosting, third-party services, and paying developers. Infrequent proposals will be made to transfer ICP from the treasury to Kinic’s cycle dispenser canister. The purpose is for the canister to pay for cycles other Kinic canisters.
-                  </p>
-                  <p class="mb-3">
-                    Kinic is an on-chain service. It currently has the following off-chain dependencies:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>Ownership of the https://kinic.io/ domain name that has been pre-paid up to May 2024. Kinic will transfer to an alternative on-chain solution as soon as practical. </li>
-                    <li>Scripts used for finding new sites and ranking them. Ranking is based on various factors such as meta data, social handles, and reputation. There are some subjective ranking values that can be given to token holders to determine in a democratic way.</li>
-                  </ol>
-                  <p class="mb-3 font-semibold underline">
-                    Likelihood of a Malicious DAO Takeover is Low
-                  </p>
-                  <p class="mb-3">
-                    In theory, the DAO can be taken over by a single party that effectively steals the treasury. For example, in a so-called 51% attack, a single party gains control of a majority of the voting power and pushes through a vote to transfer the entire treasury to themselves. In addition to being extremely costly, the purchase of a significant portion of KINIC tokens by the Community Fund in the decentralization sale mitigates this risk. This is because the Community Fund acts as a single, benevolent voting block that would prevent a malicious actor.
-                  </p>
-                  <p class="mb-3">
-                    For example, even in the unlikely event that a malicious actor purchased 65% of the tokens being offered in the decentralization sale and then increased the dissolve delay of all their neurons to the max (to maximize their voting power), the following chart shows the attacker would still only own 47.9%. This would be significantly less voting power required than necessary to execute a 51% attack.
-                  </p>
-                  <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image3.png" alt="">
-                  <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image2.png" alt="">
-                  <p class="mb-3 font-semibold underline">
-                    Token Utility and DAO Revenue and Expenses
-                  </p>
-                  <p class="mb-3">
-                    In addition to being used for governance as described above, the KINIC token has utility because it can be used to pay for Kinic's current and upcoming products and services.
-                  </p>
-                  <p class="mb-3">
-                    These products and services include:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li><b>API calls.</b> Third parties can purchase the ability to call the Kinic search API with KINIC tokens.</li>
-                    <li><b>Ad purchases.</b> Buyers of ad space can pay using KINIC tokens. We used the Ledger canister to allow for bidding on Ad categories. The highest bidder cannot revoke their bid. Other bidders can reclaim their bid, and bid again if they desire. After the auction closes, the highest bid is decided as the winner and gets a two-week ad spot. The ads appear on category pages on the right side. The ads can be images, videos, or gifs and have links.</li>
-                    <li><b>Data analytics.</b> Site owners can view relevant click counts and other information such as search terms that are resolved to a click on their URL. Moreover, site owners can use an internal version of Kinic for search within their project.</li>
-                    <li><b>Zero knowledge machine learning (ZKML).</b> The IC can hold a lot of data very cheaply. This makes it an ideal solution for fully on-chain data models. However it is difficult to assess the output of AI models on any current platform. Kinic will use novel approaches to zero-knowledge based floating points backed by a folding ZKP scheme to make this possible, not only on the IC, but for non-IC users. The work from this is applicable for models outside of search; Kinic will open access for these solutions as a service running on KINIC tokens.</li>
-                    <li><b>Early adoption incentives.</b> This will be aimed at growing Kinic’s market share via viral marketing strategy. It may include meme campaigns, 3rd party writings and videos, but is loosely defined here as incentives for growth. </li>
-                  </ol>
-                  <p class="mb-3">
-                    In some cases, using KINIC token to purchase products and services may burn tokens and serve as a deflationary mechanism.
-                  </p>
-                  <p class="mb-3">
-                    The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO with ICP tokens. The Kinic DAO also earns ICP if the DAO stakes its ICP into a neuron on the NNS and earns voting rewards.
-                  </p>
-                  <p class="mb-3">
-                    The Kinic DAO’s expenses will come from spending ICP to buy cycles for hosting costs, third party services, and the Kinic development organization.
-                  </p>
-                  <p class="mb-3">
-                    Expenses will most likely exceed revenue for the first few years of the DAO but revenue is expected to eventually exceed DAO expenses.
-                  </p>
-                  <h5 class="mt-5 mb-2">
-                    <h2 id="kinic-dao-tokenomics" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      5. Kinic DAO Tokenomics
-                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
-                    </h2>
-                  </h5>
-                  <p class="mb-3 font-semibold text-xl">
-                    Summary
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens.</li>
-                    <li>The total supply of KINIC tokens upon launch will be 6 million tokens.</li>
-                    <li>Minting tokens increases the total supply and burning tokens decreases them. KINIC tokens can only be burned by proposal. </li>
-                    <li>A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards.</li>
-                    <li>Liquid supply refers to the total number of KINIC tokens that are available to trade. </li>
-                    <li>KINIC tokens that are locked in a neuron are not part of the liquid supply.</li>
-                    <li>Several factors relating to voting rewards and mechanics influence the portion of total KINIC tokens that are liquid. </li>
-                  </ol>
-                  <p class="mb-3">
-                    Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens. The goals of healthy tokenomics are to foster stability and long-run increase in token price, paying DAO contributors, user growth, and facilitating liquidity.
-                  </p>
-                  <p class="mb-3">
-                    The total supply of KINIC tokens upon launch will be 6 million tokens. Minting tokens increases the total supply and burning tokens decreases them. The primary mechanism of inflation is voting rewards.
-                  </p>
-                  <p class="mb-3">
-                    Voting rewards incentivize token holders to keep them locked up and not be part of the liquid supply. A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards to neurons that vote. As discussed in the Kinic DAO: Launch and Governance section, these rewards are given in the form of maturity. The DAO’s initial voting reward rate of 2.5% can be changed by vote.
-                  </p>
-                  <p class="mb-3">
-                    A neuron’s maturity is burned when it is disbursed to provide KINIC tokens to the token holder’s main account. At that time, the DAO will mint the corresponding value of KINIC tokens. Converting maturity into KINIC tokens is the primary inflationary mechanism for KINIC tokens.The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens.
-                  </p>
-                  <p class="mb-3">
-                    KINIC tokens can only be burned by proposal. Usage of KINIC will be given back into the DAO treasury. The DAO can make a proposal to burn or otherwise utilize the tokens.
-                  </p>
-                  <p class="mb-3">
-                    When the Kinic DAO is launched, the DAO’s treasury will consist of ICP from the decentralization sale and about half of the total supply of KINIC tokens.
-                  </p>
-                  <p class="mb-3">
-                    The following chart shows a projection of the total supply of KINIC tokens over time. The projection assumes that the reward rate will remain at a constant 2.5% and that the burn rate will start at 0.125% until it becomes greater than the reward rate (increasing by a factor of 1.37 each year). Accordingly, it is expected that eventually more KINIC tokens will be burned than minted.
-                  </p>
-                  <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image5.png" alt="">
-                  <p class="mb-3 font-semibold underline">
-                    Liquid Token Supply
-                  </p>
-                  <p class="mb-3">
-                    Liquid supply refers to the total number of KINIC tokens that are available to trade at any given time.
-                  </p>
-                  <p class="mb-3">
-                    KINIC tokens that are locked in a neuron are not part of the liquid supply.
-                  </p>
-                  <p class="mb-3">
-                    However, when a neuron dissolves, the formerly-locked KINIC tokens are added to the liquid supply. Longer dissolve delays prevent staked tokens from becoming liquid. Accordingly, larger dissolve delay and age bonuses (that incentivize locking up tokens for longer) have the effect of reducing the liquid supply. In addition, KINIC token holders that are subject to vesting cannot disburse their neurons into KINIC tokens until the vesting period is complete.
-                  </p>
-                  <p class="mb-3">
-                    KINIC tokens held by the DAO treasury are considered liquid but are not necessarily part of the market. This is because only a portion of KINIC tokens held in the DAO treasury will be transferred to the community as rewards or to pay for , and only a portion of those will be sold on exchanges. The same applies to the KINIC tokens held in the NNS that are purchased by the Community Fund.
-                  </p>
-                  <p class="mb-3">
-                    The following parameters relating to voting rewards and mechanics influence the portion of total KINIC tokens that are liquid:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>Max dissolve delay</li>
-                    <li>Dissolve delay bonus</li>
-                    <li>Minimum dissolve delay to vote</li>
-                    <li>Max age</li>
-                    <li>Max age bonus</li>
-                    <li>Voting reward rate</li>
-                  </ol>
-                  <p class="mb-3 font-semibold underline">
-                    Initial DAO Tokenomics
-                  </p>
-                  <p class="mb-3">
-                    The values for all of the KINIC DAO’s initial parameters are in the table below. These parameters may be changed by vote.
-                  </p>
-                  <p class="mb-3">
-                    The purpose of these initial values is to find the right balance between incentivizing KINIC token holders to lock their tokens while also incentivizing them to purchase in the first place for liquidity.
-                  </p>
-                  <div class="grid grid-cols-2 gap-4 border border-gray-400 rounded">
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Transaction fee in KINIC tokens that must be paid for ledger transfers</div>
-                    <div class="border-b px-4 py-2">0.001</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Number of KINIC tokens that a rejected proposal costs the proposer</div>
-                    <div class="border-b px-4 py-2">5</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum number of KINIC tokens that can be staked in a neuron</div>
-                    <div class="border-b px-4 py-2">0.1</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum voting period for a proposal</div>
-                    <div class="border-b px-4 py-2">4 days</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Proportion of voting power needed for a proposal to be accepted</div>
-                    <div class="border-b px-4 py-2">3%</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum neuron dissolve delay to vote</div>
-                    <div class="border-b px-4 py-2">1 month</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum neuron dissolve delay</div>
-                    <div class="border-b px-4 py-2">1 year</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum age for age bonus</div>
-                    <div class="border-b px-4 py-2">6 months</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum age bonus</div>
-                    <div class="border-b px-4 py-2">1.25x</div>
-                    <div class="border-r px-4 py-2 font-medium bg-gray-100">Percentage of total supply that will be generated annually for rewards</div>
-                    <div class="px-4 py-2">2.5%</div>
-                  </div>
-                  <h5 class="mt-5 mb-2">
-                    <h2 id="launch-allocations-and-mechanics" section-trigger class="relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
-                      6. Launch Allocations and Mechanics
-                      <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
-                    </h2>
-                  </h5>
-                  <p class="mb-3 font-semibold text-xl">
-                    Summary
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens.</li>
-                    <li>50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization, 10% allocated to seed funders, and 4% will be allocated to Kinic NFT holders via airdrop.</li>
-                    <li>The maximum ICP that can be earned in the sale of the KINIC tokens is 1.5 million ICP, and the minimum is 500,000 ICP.</li>
-                    <li>1 KINIC token may be worth between 0.33 and 1.33 ICP tokens based on earning between 500,000 and 1.5 million ICP tokens</li>
-                  </ol>
-                  <p class="mb-3 font-semibold underline">
-                    Initial token allocation
-                  </p>
-                  <p class="mb-3">
-                    The purpose of the decentralization sale is to decentralize the governance of the Kinic DAO. The Kinic DAO will launch with a total supply of 6 million KINIC tokens.
-                  </p>
-                  <p class="mb-3">
-                    Out of the total 6 million supply of KINIC tokens, 25% (1,500,000) will be available for open sale in exchange for ICP tokens. The maximum ICP that can be earned in the sale of the 1,500,000 KINIC is 1,500,000 million ICP, and the minimum is 500,000 ICP.
-                  </p>
-                  <p class="mb-3">
-                    The Kinic DAO’s two million ICP funding target is based on comparable funding rounds:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>Privacy-focused search engine DuckDuckGo <a class="blueText" target="_blank" href="https://www.crunchbase.com/organization/duck-duck-go">has raised</a> a total of $172 million across four funding rounds, the most recent of which was <a href="https://spreadprivacy.com/duckduckgrowing/">$100 million</a> in late 2020.</li>
-                    <li>In January 2022, The Graph Foundation <a class="blueText" target="_blank" href="https://thegraph.com/blog/graph-raise/">raised</a> $50 million to build an indexing protocol for querying data on networks like Ethereum and IPFS.</li>
-                    <li>In March 2023, Kaito <a class="blueText" target="_blank" href="https://www.linkedin.com/pulse/kaito-ai-raises-53m-transform-crypto-search-chatgpt-kaitoai/?trackingId=1QyGZzaTRYMOo0rKhm0F2w%3D%3D">raised</a> $5.3 million to transform crypto search with ChatGPT.</li>
-                  </ol>
-                  <p class="mb-3">
-                    From the 1,500,000 KINIC tokens available as part of the open sale, Kinic will seek to sell 4.2% (250,000) to the Internet Computer’s Community Fund and the remaining 20.8% (1,250,000) KINIC to the community more generally. If the target maximum ICP is earned in the sale, the amount of ICP earned from the Community Fund will be 252,000 ICP.
-                  </p>
-                  <p class="mb-3">
-                    50% (3,000,000) will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization and funders. 4% (240,000) will be allocated to Kinic NFT holders via airdrop.
-                  </p>
-                  <p class="mb-3">
-                    1% (60,000) of the KINIC tokens will be used to create liquidity pools on exchanges for trading. The tokens available for trade will be backed by ICP earned from the decentralization sale. Proposals will be required to be made and approved to transfer KINIC tokens and ICP to an exchange.
-                  </p>
-                  <p class="mb-3">
-                    The initial target KINIC token allocation is shown in the following chart (assuming the maximum ICP sale target is met):
-                  </p>
-                  <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image6.png" alt="">
-                  <p class="mb-3 font-semibold underline">
-                    Decentralization Sale Mechanics
-                  </p>
-                  <p class="mb-3">
-                    All parties that participate in the decentralization sale will receive an amount of KINIC tokens that equals the amount of ICP they pay divided by the total ICP that is earned in the sale.
-                  </p>
-                  <p class="mb-3">
-                    Buyers will receive their amount of KINIC tokens in the form of 5 neurons that are equally divided in the amount of staked KINIC they contain. Each of the 5 neurons will have a different dissolve delay according to the following schedule:
-                  </p>
-                  <div class="mb-2">
-                    <div>Neuron 1 dissolve delay: 0 months</div>
-                    <div>Neuron 2 dissolve delay: 3 months</div>
-                    <div>Neuron 3 dissolve delay: 6 months</div>
-                    <div>Neuron 4 dissolve delay: 9 months</div>
-                    <div>Neuron 5 dissolve delay: 12 months</div>
-                  </div>
-
-                  <p class="mb-3">
-                    The neuron with 0 months dissolve delay can immediately be released into liquid KINIC tokens. Accordingly, 20% of the neurons for buyers in the decentralization sale will be immediately liquid.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Allocation to Kinic Development Organization and Seed Funders
-                  </p>
-                  <p class="mb-3">
-                    The founding Kinic development organization will receive 10% (600,000) of the KINIC tokens in the form of 3 neurons that have a 1 month dissolve delay.
-                  </p>
-                  <p class="mb-3">
-                    These three neurons have the following vesting schedule:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>25% (150,000) vested for 1 year</li>
-                    <li>25% (150,000) vested for 2 years</li>
-                    <li>50% (300,000) vested for 3 years</li>
-                  </ol>
-                  <p class="mb-3">
-                    During the vesting period, neurons cannot be disbursed into tokens or otherwise changed. The 1 month dissolve delay reduces the relative voting power of the KINIC tokens owned by the Kinic development organization.
-                  </p>
-                  <p class="mb-3">
-                    Likewise, Kinic seed funders will receive 10% (600,000) of the KINIC tokens in the form of 2 neurons that have a 1 month dissolve delay. These neurons have the following vesting schedule:
-                  </p>
-                  <ol class="list-disc list-inside mb-3">
-                    <li>25% (150,000) no vesting</li>
-                    <li>25% (150,000) vested for 1 year</li>
-                    <li>50% (300,000) vested for 2 years</li>
-                  </ol>
-                  <p class="mb-3 font-semibold underline">
-                    Allocation to Kinic NFT Holders
-                  </p>
-                  <p class="mb-3">
-                    4% of KINIC tokens (240,000) will be given to Kinic NFT holders. NFT holders will receive their KINIC tokens in the form of three neurons. These three neurons will have the same dissolve delay and vesting schedule as the seed funders.
-                  </p>
-                  <p class="mb-3">
-                    The process to disburse Kinic NFT holders will require a snapshot on April 17th 8PM JST, owners at this time will be recorded and set into the sns.yml file. Any pending transfer of an NFT, sale, or alteration of ownership after this point in time will not be recorded. Please make sure to hold your NFT at the time of the snapshot. *Please note that if you purchase a Kinic NFT after this time it will not be included in the snapshot.
-                  </p>
-                  <p class="mb-3">
-                    The Kinic NFT is available on <a class="blueText" target="_blank" href="https://entrepot.app/marketplace/kinic">Entrepot</a>.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Allocation to DAO Treasury
-                  </p>
-                  <p class="mb-3">
-                    The Kinic DAO will initially retain 50% of the initial supply of KINIC tokens (plus the 1% of KINIC tokens used to provide exchange liquidity). These tokens will be used to incentivize developers to contribute to the development of Kinic and its ecosystem. They can also be used to incentivize users, for marketing, and other initiatives that improve the standing of Kinic as the world’s first decentralized search engine.
-                  </p>
-                  <p class="mb-3">
-                      The initial values for the decentralization sale are summarized as follows:
-                  </p>
-                  <div class="grid grid-cols-2 gap-4 border border-gray-400 rounded mb-2">
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The total number of KINIC tokens to be sold</div>
-                    <div class="border-b px-4 py-2">1,500,000 (25% of total)</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The maximum ICP to be raised</div>
-                    <div class="border-b px-4 py-2">1,500,000</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The minimum ICP to be raised (otherwise sale fails and ICP returned)</div>
-                    <div class="border-b px-4 py-2">500,000</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">End date of sale (unless maximum ICP raised sooner)</div>
-                    <div class="border-b px-4 py-2">31st May 2023 at 12:00 (noon) GMT (TBC)</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum number of sale participants</div>
-                    <div class="border-b px-4 py-2">300</div>
-                    <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum ICP per buyer</div>
-                    <div class="border-b px-4 py-2">1</div>
-                    <div class="border-r px-4 py-2 font-medium bg-gray-100">Maximum ICP per buyer</div>
-                    <div class="px-4 py-2">100,000</div>
-                  </div>
-
-                  <p class="mb-3 font-semibold underline">
-                    Valuation Range and Token Price
-                  </p>
-
-                  <p class="mb-3">
-                    The value (in ICP) of KINIC tokens upon launch is based upon how many ICP tokens are raised in the decentralization sale.
-                  </p>
-                  <p class="mb-3">
-                    The more ICP tokens that are exchanged for 1.5 million KINIC tokens, the higher the value of a single KINIC token. This is because the price of 1 KINIC equals the amount of ICP earned (between 500,000 and 1.5 million) divided by the number of KINIC tokens sold (1.5 million).
-                  </p>
-                  <p class="mb-3">
-                    Accordingly, 1 KINIC token may be worth between 0.33 and 1 ICP tokens based on earning between 500,000 and 1.5 million ICP tokens, respectively, as shown in the following chart.
-                  </p>
-                  <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image4.png" alt="">
-                  <p class="mb-3">
-                    Ultimately, the price for the KINIC token is influenced by several factors including total and liquid supply, demand, DAO revenue and expenses, and projections about the future.
-                  </p>
-                  <p class="mb-3 font-semibold underline">
-                    Relative Voting Power Upon Launch
-                  </p>
-                  <p class="mb-3">
-                    The relative voting power upon launch of the Kinic DAO is as follows:
-                  </p>
-                  <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image1.png" alt="">
-                  <hr class="mb-3"/>
-                  <p class="mb-3 font-semibold underline">
-                    7. Token Holder Rights and Limitations
-                  </p>
-                  <p class="mb-3">
-                      Any person that purchases, holds, owns, or otherwise directly or indirectly controls or benefits from one or more KINIC tokens (a “Tokenholder”) agrees and acknowledges the following terms and conditions:
-                  </p>
-                  <ol id="legal-disclaimers" class="list-decimal list-inside mb-3">
-                    <li>The purpose of the Tokenholder’s interest is not for investment, trading, speculation, or any other financial purpose.</li>
-                    <li>Each Tokenholder is a natural person acting on its own behalf and not for the benefit of any other person.</li>
-                    <li>The Tokenholder is not a United States citizen and is not physically present inside the United States, except for the Kinic development organization and some seed funders.</li>
-                    <li>The Kinic DAO, and nothing in this whitepaper, is intended to, or shall be deemed to, establish any partnership or joint venture between any of the Tokenholders, or authorize any Tokenholder to make or enter into any commitments for or on behalf of any other party. </li>
-                    <li>To the maximum extent permitted by law, each Token holder absolutely and irrevocably waives any and all claims, actions, causes of action, loss, damage and expense including any and all attorneys’ fees and other costs of enforcement arising out of or in connection with any breach or alleged breach of any fiduciary duty by any other Tokenholders or the Kinic DAO. It is the express intent of the Tokenholders that each Tokenholder and the Kinic DAO shall be and hereby are relieved of any and all fiduciary duties which might otherwise be applicable.</li>
-                    <li>In no event shall any Tokenholder or the Kinic DAO be liable to any other Tokenholder for any loss of anticipated profits or other consequential, special or indirect loss or damage of any nature arising at any time, whether arising under contract, tort (including negligence), strict liability or for any other cause whatsoever.</li>
-                    <li>No Tokenholder shall bring any legal claim, action, or proceeding against any other Tokenholder on any basis.</li>
-                    <li>No Tokenholder is relying upon any statement or representation made by the founding Kinic development organization, the Kinic DAO, or any other Tokenholder.</li>
-                    <li>No Tokenholder, the founding Kinic development organization, nor the Kinic DAO, makes any express or implied warranty, any disclaims all such express or implied warranties, including any warranties of merchantability or fitness for a particular purpose.</li>
-                    <li>Tokenholders that fail to stake their KINIC tokens and engage in voting for a reasonable time are subject to having their tokens repurchased by the DAO.</li>
-                  </ol>
-                  <p class="mb-6">
-
-                  </p>
-                </div>
-              </div>
-            </div>
+      <div class="content px-8 pt-4 pb-2 blackBG" id="top">
+          <!-- SEARCH RESULT PAGE NAV -->
+          <nav class="flex items-center justify-between mt-1 mb-2 text-4xl font-extrabold leading-none tracking-tight md:text-3xl lg:text-4xl text-white">
+              Kinic SNS DAO Whitepaper
+          </nav>
       </div>
-    </header>
+
+      <div class="w-full px-8 pt-4">
+        <div class="mb-4 rounded-t-1">
+            <div section-trigger class="p-4 sm:mx-1 lg:mx-8 leading-normal text-lg">
+              <h2 class="mb-2 pb-2 relative flex items-center w-full text-2xl font-semibold text-left border-b border-solid">
+                  Table of Contents
+              </h2>
+              <nav class="space-y-2">
+                <a href="#executive-summary" class="block text-blue-600 font-medium hover:underline">1. Executive Summary</a>
+                <a href="#the-kinic-vision-and-product" class="block text-blue-600 font-medium hover:underline">2. The Kinic Vision and Product</a>
+                <a href="#kinic-dao" class="block text-blue-600 font-medium hover:underline">3. Kinic DAO Launch and Governance</a>
+                <a href="#kinic-token-and-revenue" class="block text-blue-600 font-medium hover:underline">4. Kinic DAO Treasury and Token Utility</a>
+                <a href="#kinic-dao-tokenomics" class="block text-blue-600 font-medium hover:underline">5. Kinic DAO Tokenomics</a>
+                <a href="#launch-allocations-and-mechanics" class="block text-blue-600 font-medium hover:underline">6. Launch Allocations and Mechanics</a>
+                <a href="#legal-disclaimers" class="block text-blue-600 font-medium hover:underline">7. Token Holder Rights and Limitations</a>
+              </nav>
+              <div section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
+            </div>
+        </div>
+      </div>
+
+      <div class="mb-4 rounded-t-1">
+        <div id="executive-summary" section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
+          <div class="p-4 sm:mx-1 lg:mx-12 leading-normal text-lg opacity-80 ">
+
+            <h2 section-trigger class="mb-2 relative flex items-center w-full p-4 text-2xl font-semibold text-left border-b border-solid">
+              1. Executive Summary
+              <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+            </h2>
+
+            <p class="mb-3">Kinic is the first and only search engine for web3 content that runs on blockchain. </p>
+            <p class="mb-3">Kinic the answer to Google and other search engines that are operated by a centralized entity, undermine data privacy, favor established players, and ignore the emerging world of web3 content.</p>
+            <p class="mb-3">Currently, Kinic allows you to search all frontend canisters on the Internet Computer blockchain. Kinic’s roadmap includes adding content hosted on other blockchains and decentralized storage networks. Kinic’s SEO module will involve unprecedented transparency backed by zero-knowledge machine learning (ZKML) technology. All users will be able to trust that they are getting the best results as determined by Kinic’s algorithms, and are not being served ad based content other than which is clearly transparent.</p>
+            <p class="mb-3">Kinic’s vision will be fulfilled by decentralizing its governance using an on-chain, decentralized autonomous organization (DAO). The DAO will operate using the IC’s unique service nervous system. The Kinic DAO will manage and improve the Kinic software service by voting on proposals.</p>
+            <p class="mb-3">To submit proposals and vote, KINIC token holders must lock (“stake”) their tokens into neurons. To incentivize KINIC token holders to stake their tokens into neurons and vote, neurons receive rewards for voting that can be converted to KINIC tokens.</p>
+            <p class="mb-3">The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens. KINIC tokens can be used to pay for Kinic's current and upcoming products and services. The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO. ICP tokens in the DAO’s treasury can be used to fund expenses.</p>
+            <p class="mb-3">Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens. The total supply of KINIC tokens upon launch will be 6 million tokens. Minting tokens increases the total supply and burning tokens decreases them. KINIC tokens can only be burned by proposal. A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards. KINIC tokens that are locked in a neuron are not part of the liquid supply.</p>
+            <p class="mb-3">The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens. 50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization and 10% allocated to seed funders. The maximum ICP that can be earned in the sale of the KINIC tokens is 1.5 million ICP. The minimum is 500,000 ICP. 1 KINIC token may be worth between 0.33 and 1 ICP tokens based on the DAO earning between 500,000 and 1.5 million ICP tokens in the decentralization sale.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4 rounded-t-1">
+        <div section-content class="overflow-hidden transition-all ease-soft-in-out duration-350">
+          <div class="p-4 sm:mx-1 lg:mx-8 leading-normal text-lg">
+
+              <h2 section-trigger id="the-kinic-vision-and-product"
+                class="relative flex items-center w-full p-4 mb-2 text-2xl font-semibold text-left border-b border-solid">
+                2. The Kinic Vision and Product
+                <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+              </h2>
+
+              <p class="mb-3 font-semibold text-xl">Summary</p>
+              <ol class="list-disc list-inside mb-3">
+                <li>Kinic is the first and only search engine for web3 content that runs on blockchain.</li>
+                <li>Kinic is fully functional and runs entirely on blockchain on the smart contract canister located at <a class="blueText" href="https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/">https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/</a>.</li>
+                <li>Currently, Kinic allows you to search all frontend canisters on the Internet Computer blockchain.</li>
+                <li>Kinic’s proposed roadmap includes adding content hosted on other blockchains and decentralized storage networks, using large language models for advanced web3 search queries.</li>
+                <li>Kinic’s development will focus on the emerging field of ZKML. Not only will our powerful search models run entirely on-chain, they will also be verifiable with zero-knowledge proofs.</li>
+              </ol>
+              <hr class="mb-3"/>
+
+              <p class="mb-3 font-semibold text-xl">A New Vision for Search</p>
+              <p class="mb-3">The Internet revolution was ushered in by search services making nearly all human knowledge available to anyone in numerous forms of online content. Google has dominated searching for that content for nearly two decades. But because it is operated by a centralized corporation, it has done so by undermining data privacy, favoring established players, and all but ignoring the emerging world of web3 content.</p>
+              <p class="mb-3">In 2021, the Dfinity Foundation launched the Internet Computer (IC) blockchain. The IC is a full-stack, decentralized replacement for traditional corporate cloud servers. Like other public, open-source blockchains, the IC operates on the basis of computational consensus among node computers without any centralized authority. Likewise, the IC is powered by computational units called cycles (similar to gas on Ethereum) that are produced when converted from the IC’s native utility token, ICP.</p>
+              <p class="mb-3">Several unique features, however, arguably make the IC the world’s most powerful blockchain and in many ways the truest embodiment of web3 to date. These features include the following:</p>
+              <ol class="list-decimal list-inside mb-3">
+                <li>
+                  IC smart contracts not only execute on-chain transactions but also store content files and other forms of data entirely on chain 
+                  <a class="blueText" href="https://internetcomputer.org/how-it-works/smart-contracts-serve-the-web/" target="_blank">(52 gigabytes per smart contract)</a>.
+                  These smart contracts are referred to as “canisters”. A primary benefit is that web browsers can directly interact with canister smart contracts.
+                </li>
+                <li>
+                  The IC blockchain operates at the 
+                  <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Web_Speed" target="_blank">speed of the standard web</a> 
+                  and in principle can scale infinitely with the addition of more nodes.
+                </li>
+                <li>
+                  Any web browser 
+                  <a class="blueText" href="https://wiki.internetcomputer.org/wiki/Web_Serving" target="_blank">can be used</a> 
+                  to view content stored on the IC, including websites and the front-end graphics that run inside smart contract canisters.
+                </li>
+                <li>
+                  Publishing content to a smart contract can be done anonymously using login credentials such as the IC’s Webauthn-based 
+                  <a class="blueText" target="_blank" href="https://wiki.internetcomputer.org/wiki/Internet_Computer_wiki#Internet_Identity_Introduction">Internet Identity</a>.
+                </li>
+                <li>
+                  Content can be 
+                  <a class="blueText" target="_blank" href="https://internetcomputer.org/docs/current/concepts/trust-in-canisters#complete-immutability">made immutable</a> 
+                  (i.e., not deletable) if a smart contract canister is locked.
+                </li>
+              </ol>
+              <p class="mb-3">
+                As a result, the IC is an end-to-end decentralized compute platform and content network where everything takes place, is stored, and published on chain. More information about the IC is available 
+                <a class="blueText" href="https://internetcomputer.org/" target="_blank">here</a>. 
+                Other parts of the web3 ecosystem include decentralized content storage networks that complement the IC by specializing in long-term storage of files that are not frequently accessed. These networks include the Interplanetary File System (IPFS) and Arweave.
+              </p>
+              <p class="mb-3">Content that is hosted on web3 needs a new vision for search. And Kinic provides a profound new vision: search that is fully private, user centric, and built on and for web3. The name Kinic comes from the word kin from kinship.</p>
+              
+              <p class="mb-3 font-bold">Kinic is unlike any other product for several reasons</p>
+              <ol class="list-decimal list-inside mb-3">
+                <li>
+                  <b>Runs on chain.</b> Kinic is the only search engine that runs <b>entirely on chain</b> to benefit from the privacy, security, and immutability features of blockchain. Unlike privacy-focused search engines like DuckDuckGo that trust a centralized corporation to maintain user privacy, Kinic must operate according to the privacy-protecting 
+                  <a class="blueText" target="_blank" href="https://medium.com/dfinity/the-internet-computer-blockchains-privacy-advantages-73340c6c42db">protocol rules</a> 
+                  of the Internet Computer blockchain and its anonymous
+                  <a class="blueText" target="_blank" href="https://internetcomputer.org/docs/current/tokenomics/identity-auth/what-is-ic-identity"> login methods</a>.
+                </li>
+                <li>
+                  <b>Searches content on web3.</b> Kinic is the only search engine dedicated to searching frontend content <b>on web3</b> as opposed to content about web3 that is on web2 such as 
+                  <a class="blueText" href="https://www.kaito.ai/" target="_blank">Kaito</a>.
+                </li>
+                <li>
+                  <b>Searches all of web3.</b> Kinic is the only search engine dedicated to searching <b>all</b> frontend content on web3 and not focused only on one web3 network such as 
+                  <a class="blueText" href="https://ipfs-search.com/#/" target="_blank">IPFS Search</a>.
+                </li>
+                <li>
+                  <b>Searches frontend</b>. Kinic is the only <b>frontend</b> search engine for web3. This is in contrast to backend blockchain and NFT data explorers and indexing protocols such as 
+                  <a class="blueText" href="https://thegraph.com/en/" target="_blank">The Graph</a>.
+                </li>
+              </ol>
+              <hr class="mb-3"/>
+
+              <p class="mb-3 font-semibold text-xl">How Kinic Works</p>
+              <p class="mb-3">Kinic is a dedicated web3 search engine running entirely on blockchain.</p>
+              <p class="mb-3">
+                Kinic is fully functional and averages thousands of unique monthly searches. It is available to use for free at 
+                <a class="blueText" href="https://kinic.io/" target="_blank">https://kinic.io/</a> 
+                (which points to this smart contract canister: 
+                <a class="blueText" href="https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/" target="_blank">https://74iy7-xqaaa-aaaaf-qagra-cai.raw.ic0.app/</a>).
+              </p>
+              <p class="mb-3">
+                Users can search for content on the IC for free without logging in. Users can also search by category. If users log in, they will be able to see the most recent indexed sites. Kinic’s login methods are anonymous. Searches cannot be connected to real-world identities.
+                <img class="w-full sm:max-w-xs my-3" style="max-width:830px;" src="./assets/image7.png" alt="">
+              </p>
+              <p class="mb-3">Kinic makes front-end content hosted on-chain searchable. Currently, Kinic allows you to search all of the frontend canisters on the Internet Computer blockchain. Other blockchains and decentralized content storage will be added, including IPFS and Aarweave. See the proposed Kinic Roadmap below.</p>
+              <p class="mb-3">When frontend canisters (i.e., websites) are deployed to the IC, it normally takes about 7 days to appear in a Kinic search as we reindex subnets once per 7 days. Sites that are “claimed” by their builder rank higher in the search results. This is to differentiate claimed versus staging sites that are preliminary.</p>
+              <p class="mb-3">
+                Creators can claim a site via the Twitter @kinic_app. Claiming sites can also be done by comparing the canister owner principal ID by what is given to us in a DFX command. Motoko does not have an 'info' method call yet so this comparison is done with DFX for now. See 
+                <a class="blueText" href="https://forum.dfinity.org/t/getting-a-canisters-controller-on-chain/7531" target="_blank">here</a> 
+                for more details.
+              </p>
+              <p class="mb-3">Kinic’s search categories are taken from the keywords or h1 or h2 of an app that runs on the IC. Kinic also creates a general set of keywords based on all text of an app.</p>
+              <p class="mb-3">Kinic has processes set up for indexing using scripts that anyone can run.The frontend, auction and site claiming code are canisters. The search database will operate on CanDB. Creators can also claim sites to make them have an SEO push to differentiate between staging and production sites.</p>
+              <p class="mb-3">Kinic uses traits of the IC discovered in the Rust source code to gather all canister IDs on the IC’s blockchain subnets. By using other “smart-code” Kinic identifies keywords for each app and app type. We then prioritize 'claimed sites' over WIP or staging sites, creating a new basis for web3 SEO. The frontend app is built using Vue.js. We A/B tested a few variants to find a simple and sleek design.</p>
+              <hr class="mb-3"/>
+
+              <p class="mb-3 font-semibold text-xl">Kinic Roadmap</p>
+              <p class="mb-3">The following nonbinding roadmap can guide the development of the Kinic app:</p>
+              <ol class="list-disc list-inside mb-3">
+                <li>API work (data analytics, social app connections, & in-site search API usable by other web3 projects).</li>
+                <li>Supporting ad sales (decentralize and targeted ads for categories and search terms).</li>
+                <li>Automate highlighting of new and interesting web3 content.</li>
+                <li>Add more chains and decentralized storage networks into the Kinic indexing process such as IPFS and Arweave.</li>
+                <li>Explore on-chain large language models for advanced web3 search queries.</li>
+                <li>Improve indexing process to create syntactical structure of backends and frontends across chains.</li>
+                <li>ZKML will be used to ensure that Kinic not only has the best search and API, but all the most trustless. </li>
+              </ol>
+
+            <h2 id="kinic-dao" section-trigger class="relative flex items-center w-full mt-5 mb-2 p-4 text-2xl font-semibold text-left border-b border-solid">
+              3. Kinic DAO Launch and Governance
+              <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+            </h2>
+
+            <p class="mb-3 font-semibold text-xl">Summary</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>Kinic’s vision will be fulfilled by decentralizing its governance using an on-chain, decentralized autonomous organization (DAO).</li>
+              <li>The Kinic DAO will manage and improve the Kinic software service by voting on proposals.</li>
+              <li>To submit proposals and vote, KINIC token holders must lock (“stake”) their tokens into neurons.  </li>
+              <li>To incentivize KINIC token holders to stake their tokens into neurons and vote, neurons receive voting rewards (that are ultimately redeemable for ICP tokens) each time they vote.</li>
+              <li>Voting rewards are greater the longer tokens have been staked (higher age) and the longer they are locked (a higher dissolve delay).</li>
+              <li>Each neuron can only vote once per proposal.</li>
+              <li>Neurons can directly vote on proposals or delegate their votes to another voting member. </li>
+            </ol>
+            <hr class="mb-3"/>
+
+            <p class="mb-3 font-semibold text-xl">Launching the DAO</p>
+            <p class="mb-3">The Internet Computer (IC) provides a system for on-chain governance by token holders for decentralized autonomous organizations (DAOs). DAOs on the IC exist at the protocol level for the entire blockchain and also at the level of individual apps.</p>
+            <p class="mb-3">
+              At the protocol level, the IC is governed on-chain by a DAO known as the 
+              <a class="blueText" href="https://internetcomputer.org/how-it-works/network-nervous-system-nns/" target="_blank">
+                Network Nervous System
+              </a>. 
+              The NNS accepts votes from holders of locked (staked) ICP. Staked ICP are called neurons. At the app level, a 
+              <a class="blueText" href="https://internetcomputer.org/sns" target="_blank">Service Nervous System (SNS)</a> 
+              DAO is the means for decentralized, on-chain governance.
+            </p>
+            <p class="mb-3">The Kinic SNS DAO will be officially launched when the smart contract canisters controlled by the founding team are transferred to and thereafter fully controlled by the DAO. The DAO will be formed with an initial governance, tokenomics, and technical configuration. Once made public, the initial configuration is permanent until launch. After launch, the initial configuration parameters can be changed by vote.</p>
+            <p class="mb-3">Creation of the Kinic DAO will take place as follows:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>The Kinic development organization will submit a proposal to the NNS with details (parameters) about the decentralization sale such as the initial token allocation, voting rules and rewards, and tokenomics. </li>
+              <li>If the proposal is approved by the NNS, the decentralization sale of KINIC tokens will begin to take place.</li>
+              <li>The ICP raised in the sale will be placed into the smart contract canister owned and controlled by the Kinic DAO. </li>
+            </ol>
+            <p class="mb-3">The sale will take place at some point in the second quarter of 2023 (April through June). To participate in the sale during the sale period, prospective KINIC token buyers must log into the NNS app (https://nns.ic0.app/), transfer ICP into their NNS account, and then go to the Launchpad section inside the NNS app.</p>
+            <p class="mb-3">In the Launchpad, prospective buyers should deposit ICP tokens in the Kinic sale section. When the sale is complete, buyers will receive the number of KINIC tokens in the same proportion as their deposited ICP is to the total amount of the sale. For example, if their deposited ICP is 1% of the total ICP deposited during the sale, the buyer will receive 1% of the KINIC tokens sold.</p>
+            <p class="mb-3">The ICP received from the sale will be controlled by an ICP ledger account owned by the Kinic DAO governance canister.</p>
+            <p class="mb-3">Once the decentralization sale is complete, the Kinic DAO will have now been created and running entirely on chain with decentralized governance.</p>
+            <hr class="mb-3"/>
+
+            <p class="mb-3 font-semibold text-xl">Governance of the DAO</p>
+            <p class="mb-3">Once the Kinic DAO is launched, it will be completely controlled by its DAO. Only the DAO will be able to upgrade or otherwise change the smart contract canister code and be able to engage in transactions with the treasury. This means, for example, that only the DAO can choose to disburse funds, change governance rules, or hire third party developers.</p>
+            
+            <p class="mb-3 font-semibold underline">Action by Voting on Proposals</p>
+            <p class="mb-3">The Kinic DAO acts through proposals that are voted on by holders of staked KINIC tokens (i.e., KINIC neurons). Each neuron is entitled to one vote per proposal. Proposals can be submitted by any staked neuron holder and relate to any topic.</p>
+            <p class="mb-3">Nonbinding motions can also be made to communicate or clarify ideas without committing the DAO to any particular action. Examples of nonbinding proposals include proposals for roadmap development or changes.</p>
+            
+            <p class="mb-3 font-semibold text-lg">The following types of proposals can be made to the DAO to be approved by voting neurons:</p>
+            <ol class="list-decimal list-inside mb-3">
+              <li><b>Canister upgrade proposals.</b> Upgrades canisters of the dapp or canisters of the DAO itself. These proposals contain a canister Id and a wasm module.</li>
+              <li><b>SNS config change proposals.</b> Changes the DAO’s initial parameters (see below).</li>
+              <li><b>Token transfer proposals.</b> Transfer KINIC, ICP, or other IC-native tokens between the DAO and an external account. </li>
+              <li><b>Burn token proposals.</b> Burn KINIC tokens and reduce their total supply.</li>
+              <li><b>Custom function proposals.</b> Enable the DAO’s governance canister to perform any operation on a canister such as rolling upgrades, adding a new DAO to sync proposals with, and expanding the Kinic service to operate in additional canisters.</li>
+            </ol>
+
+            <p class="mb-3 font-semibold text-lg">A proposal is adopted when the following conditions are met:</p>
+            <ol class="list-decimal list-inside mb-3">
+              <li>Within 4 days, the total voting power “adopt” votes is greater that “reject” votes or after a period of quiet, and</li>
+              <li>“Adopt” votes constitute at least 3% of the voting power, or</li>
+              <li>Voting power of “adopt” or “reject” votes exceeds 50%.</li>
+            </ol>
+            <p class="mb-3">Neurons that vote within the 4 day period will still earn voting rewards even if the decision about whether to adopt was already resolved.</p>
+            
+            <p class="mb-3 font-semibold underline">Voting Rewards Come in the Form of Maturity</p>
+            <p class="mb-3">To incentivize KINIC holders to vote, voters receive voting rewards each time they vote.</p>
+            <p class="mb-3">To qualify for voting rewards, KINIC holders must first stake their tokens and set the neuron’s dissolve delay to at least one month long. The dissolve delay is the length of time that a neuron is locked. One year is the maximum dissolve delay.</p>
+            <p class="mb-3">Staked KINIC tokens (neurons) cannot be traded. To unlock staked KINIC tokens, they must be dissolved. When the dissolve delay has ended, the KINIC tokens can be dissolved and then traded.</p>
+            <p class="mb-3">Voting rewards are larger for longer dissolve delays. This helps to align voting with the long-term interests of Kinic. A minimum dissolve delay of one month is required to qualify to vote on proposals.</p>
+            <p class="mb-3">When neurons vote, voting rewards are earned by the neurons in the form of a maturity. Maturity is an attribute of a neuron and not a tradable asset. The more a neuron votes, the more maturity their neuron obtains. Voting rewards (maturity) are earned daily based on all of the votes of the DAO that ended on that day.</p>
+            <p class="mb-3">To generate income from maturity, the KINIC token holder must convert (disburse) the maturity into new KINIC tokens. This process will consume (or “burn”) the converted maturity. By default, units of maturity are converted into KINIC tokens on a 1:1 basis. For example, disbursing a neuron that 100 has maturity will convert to 100 KINIC tokens. These new KINIC tokens will be provided to the token holder’s main account.</p>
+            <p class="mb-3">As an alternative to converting maturity into KINIC tokens, a voting member can also stake their maturity to earn additional voting rewards.</p>
+
+            <p class="mb-3 font-semibold underline">Voting Power: Dissolve Delay Bonus and Age Bonus</p>
+            <p class="mb-3">Although each neuron can only vote once per proposal, a neuron may have relatively higher voting power when they vote. Neurons that have been staked for a longer period of time have more voting power. This aligns incentives towards longer-term staking.</p>
+            <p class="mb-3">Being staked for a longer time means that the neuron has a higher dissolve delay and/or the time for which the neuron has already been staked (its age). Neuron voting power is accordingly calculated according to the following formula: number of tokens times dissolve delay bonus times age bonus.</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>The dissolve delay bonus is 1x for neurons with no dissolve delay. It increases linearly to 2x for neurons that have the maximum 1 year dissolve delay.</li>
+              <li>The age bonus is 1x for new neurons and increases linearly to 1.25x for neurons that have been staked for 6 months or longer.</li>
+            </ol>
+            <p class="mb-3">Accordingly, a neuron with a 1 year dissolve delay that is at least 6 months old will have 2.5x the voting power of a new neuron that only has a 1 month dissolve delay.</p>
+
+            <p class="mb-3 font-semibold underline">Delegated Voting</p>
+            <p class="mb-3">
+              Neurons can directly vote on individual proposals using the Kinic section inside the NNS app 
+              <a class="blueText" href="https://nns.ic0.app/" target="_blank">here</a>. 
+              Neurons can also delegate their votes to another voting member.
+            </p>
+            <p class="mb-3">Vote delegation is accomplished by setting a neuron to follow another neuron; that is, to vote along with the votes of another neuron (per proposal type). For example, neurons can follow the Kinic development organization voting neuron The follower neuron will vote for a proposal if a majority of the Kinic development organization agrees. This way, neurons will follow the Kinic development organization’s votes. An advantage of following the Kinic development organization’s neuron is that the Kinic development organization votes on every proposal. This enables followers to maximize voting rewards for voting on every proposal as well.</p>
+            <p class="mb-3">Voting neurons may effectively gain disproportionate voting power if they have a large number of followers. This is similar to representative democracy.</p>
+
+            <h2 id="kinic-token-and-revenue" section-trigger 
+              class="relative flex items-center w-full mt-5 mb-2 p-4 text-2xl font-semibold text-left border-b border-solid">
+              4. Kinic DAO Treasury and Token Utility
+              <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+            </h2>
+
+            <p class="mb-3 font-semibold text-xl">Summary</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens.</li>
+              <li>It would be very difficult for the DAO to be taken over by a single party that effectively steals the treasury.</li>
+              <li>KINIC tokens can be used to pay for Kinic's current and upcoming products and services.</li>
+              <li>The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO. ICP tokens in the DAO’s treasury can be used to fund expenses.</li>
+              <li>Expenses will most likely exceed revenue for the first few years of the DAO but revenue is expected to eventually exceed DAO expenses. </li>
+            </ol>
+
+            <p class="mb-3 font-semibold underline">The Kinic DAO Treasury</p>
+            <p class="mb-3">The treasury controlled by the Kinic DAO will hold KINIC tokens and ICP tokens.</p>
+            <p class="mb-3">After the decentralization sale, the DAO will have an ICP ledger account containing the ICP raised in the sale. It will also have a KINIC ledger account with KINIC tokens controlled by the treasury. As discussed in further detail in the Launch Allocations and Mechanics section, the Kinic DAO will retain approximately 50% of the KINIC tokens created upon launch.</p>
+            <p class="mb-3">To enable the trading of KINIC, proposals will be made soon after the decentralization sale to transfer KINIC and ICP to decentralized exchange liquidity pools. The purpose of enabling trading in KINIC tokens is to enable people to join in or exit from Kinic DAO governance. The purpose is not to enable or encourage investment or speculation in KINIC tokens.</p>
+            <p class="mb-3">ICP tokens in the DAO’s treasury can be used to fund expenses such as paying cycles for hosting, third-party services, and paying developers. Infrequent proposals will be made to transfer ICP from the treasury to Kinic’s cycle dispenser canister. The purpose is for the canister to pay for cycles other Kinic canisters.</p>
+            
+            <p class="mb-3">Kinic is an on-chain service. It currently has the following off-chain dependencies:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>Ownership of the https://kinic.io/ domain name that has been pre-paid up to May 2024. Kinic will transfer to an alternative on-chain solution as soon as practical. </li>
+              <li>Scripts used for finding new sites and ranking them. Ranking is based on various factors such as meta data, social handles, and reputation. There are some subjective ranking values that can be given to token holders to determine in a democratic way.</li>
+            </ol>
+
+            <p class="mb-3 font-semibold underline">Likelihood of a Malicious DAO Takeover is Low</p>
+            <p class="mb-3">In theory, the DAO can be taken over by a single party that effectively steals the treasury. For example, in a so-called 51% attack, a single party gains control of a majority of the voting power and pushes through a vote to transfer the entire treasury to themselves. In addition to being extremely costly, the purchase of a significant portion of KINIC tokens by the Community Fund in the decentralization sale mitigates this risk. This is because the Community Fund acts as a single, benevolent voting block that would prevent a malicious actor.</p>
+            <p class="mb-3">For example, even in the unlikely event that a malicious actor purchased 65% of the tokens being offered in the decentralization sale and then increased the dissolve delay of all their neurons to the max (to maximize their voting power), the following chart shows the attacker would still only own 47.9%. This would be significantly less voting power required than necessary to execute a 51% attack.</p>
+            <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image3.png" alt="">
+            <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image2.png" alt="">
+            
+            <p class="mb-3 font-semibold underline">Token Utility and DAO Revenue and Expenses</p>
+            <p class="mb-3">In addition to being used for governance as described above, the KINIC token has utility because it can be used to pay for Kinic's current and upcoming products and services.</p>
+            <p class="mb-3">These products and services include:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li><b>API calls.</b> Third parties can purchase the ability to call the Kinic search API with KINIC tokens.</li>
+              <li><b>Ad purchases.</b> Buyers of ad space can pay using KINIC tokens. We used the Ledger canister to allow for bidding on Ad categories. The highest bidder cannot revoke their bid. Other bidders can reclaim their bid, and bid again if they desire. After the auction closes, the highest bid is decided as the winner and gets a two-week ad spot. The ads appear on category pages on the right side. The ads can be images, videos, or gifs and have links.</li>
+              <li><b>Data analytics.</b> Site owners can view relevant click counts and other information such as search terms that are resolved to a click on their URL. Moreover, site owners can use an internal version of Kinic for search within their project.</li>
+              <li><b>Zero knowledge machine learning (ZKML).</b> The IC can hold a lot of data very cheaply. This makes it an ideal solution for fully on-chain data models. However it is difficult to assess the output of AI models on any current platform. Kinic will use novel approaches to zero-knowledge based floating points backed by a folding ZKP scheme to make this possible, not only on the IC, but for non-IC users. The work from this is applicable for models outside of search; Kinic will open access for these solutions as a service running on KINIC tokens.</li>
+              <li><b>Early adoption incentives.</b> This will be aimed at growing Kinic’s market share via viral marketing strategy. It may include meme campaigns, 3rd party writings and videos, but is loosely defined here as incentives for growth. </li>
+            </ol>
+            <p class="mb-3">In some cases, using KINIC token to purchase products and services may burn tokens and serve as a deflationary mechanism.</p>
+            <p class="mb-3">The Kinic DAO earns ICP as revenue when users purchase KINIC tokens from the DAO with ICP tokens. The Kinic DAO also earns ICP if the DAO stakes its ICP into a neuron on the NNS and earns voting rewards.</p>
+            <p class="mb-3">The Kinic DAO’s expenses will come from spending ICP to buy cycles for hosting costs, third party services, and the Kinic development organization.</p>
+            <p class="mb-3">Expenses will most likely exceed revenue for the first few years of the DAO but revenue is expected to eventually exceed DAO expenses.</p>
+            
+            <h2 id="kinic-dao-tokenomics" section-trigger 
+              class="relative flex items-center w-full mt-5 mb-2 p-4 text-2xl font-semibold text-left border-b border-solid">
+              5. Kinic DAO Tokenomics
+              <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+            </h2>
+
+            <p class="mb-3 font-semibold text-xl">Summary</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens.</li>
+              <li>The total supply of KINIC tokens upon launch will be 6 million tokens.</li>
+              <li>Minting tokens increases the total supply and burning tokens decreases them. KINIC tokens can only be burned by proposal. </li>
+              <li>A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards.</li>
+              <li>Liquid supply refers to the total number of KINIC tokens that are available to trade. </li>
+              <li>KINIC tokens that are locked in a neuron are not part of the liquid supply.</li>
+              <li>Several factors relating to voting rewards and mechanics influence the portion of total KINIC tokens that are liquid. </li>
+            </ol>
+
+            <p class="mb-3">Tokenomics refers to the initial set up and rules that drive the supply and trading of tokens. The goals of healthy tokenomics are to foster stability and long-run increase in token price, paying DAO contributors, user growth, and facilitating liquidity.</p>
+            <p class="mb-3">The total supply of KINIC tokens upon launch will be 6 million tokens. Minting tokens increases the total supply and burning tokens decreases them. The primary mechanism of inflation is voting rewards.</p>
+            <p class="mb-3">Voting rewards incentivize token holders to keep them locked up and not be part of the liquid supply. A reward rate of 2.5% of the total annual supply will be minted to pay voting rewards to neurons that vote. As discussed in the Kinic DAO: Launch and Governance section, these rewards are given in the form of maturity. The DAO’s initial voting reward rate of 2.5% can be changed by vote.</p>
+            <p class="mb-3">A neuron’s maturity is burned when it is disbursed to provide KINIC tokens to the token holder’s main account. At that time, the DAO will mint the corresponding value of KINIC tokens. Converting maturity into KINIC tokens is the primary inflationary mechanism for KINIC tokens.The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens.</p>
+            <p class="mb-3">KINIC tokens can only be burned by proposal. Usage of KINIC will be given back into the DAO treasury. The DAO can make a proposal to burn or otherwise utilize the tokens.</p>
+            <p class="mb-3">When the Kinic DAO is launched, the DAO’s treasury will consist of ICP from the decentralization sale and about half of the total supply of KINIC tokens.</p>
+            <p class="mb-3">The following chart shows a projection of the total supply of KINIC tokens over time. The projection assumes that the reward rate will remain at a constant 2.5% and that the burn rate will start at 0.125% until it becomes greater than the reward rate (increasing by a factor of 1.37 each year). Accordingly, it is expected that eventually more KINIC tokens will be burned than minted.</p>
+            <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image5.png" alt="">
+            
+            <p class="mb-3 font-semibold underline">Liquid Token Supply</p>
+            <p class="mb-3">Liquid supply refers to the total number of KINIC tokens that are available to trade at any given time.</p>
+            <p class="mb-3">KINIC tokens that are locked in a neuron are not part of the liquid supply.</p>
+            <p class="mb-3">However, when a neuron dissolves, the formerly-locked KINIC tokens are added to the liquid supply. Longer dissolve delays prevent staked tokens from becoming liquid. Accordingly, larger dissolve delay and age bonuses (that incentivize locking up tokens for longer) have the effect of reducing the liquid supply. In addition, KINIC token holders that are subject to vesting cannot disburse their neurons into KINIC tokens until the vesting period is complete.</p>
+            <p class="mb-3">KINIC tokens held by the DAO treasury are considered liquid but are not necessarily part of the market. This is because only a portion of KINIC tokens held in the DAO treasury will be transferred to the community as rewards or to pay for , and only a portion of those will be sold on exchanges. The same applies to the KINIC tokens held in the NNS that are purchased by the Community Fund.</p>
+            
+            <p class="mb-3">The following parameters relating to voting rewards and mechanics influence the portion of total KINIC tokens that are liquid:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>Max dissolve delay</li>
+              <li>Dissolve delay bonus</li>
+              <li>Minimum dissolve delay to vote</li>
+              <li>Max age</li>
+              <li>Max age bonus</li>
+              <li>Voting reward rate</li>
+            </ol>
+
+            <p class="mb-3 font-semibold underline">Initial DAO Tokenomics</p>
+            <p class="mb-3">The values for all of the KINIC DAO’s initial parameters are in the table below. These parameters may be changed by vote.</p>
+            <p class="mb-3">The purpose of these initial values is to find the right balance between incentivizing KINIC token holders to lock their tokens while also incentivizing them to purchase in the first place for liquidity.</p>
+            <div class="grid grid-cols-2 gap-4 border border-gray-400 rounded">
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Transaction fee in KINIC tokens that must be paid for ledger transfers</div>
+              <div class="border-b px-4 py-2">0.001</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Number of KINIC tokens that a rejected proposal costs the proposer</div>
+              <div class="border-b px-4 py-2">5</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum number of KINIC tokens that can be staked in a neuron</div>
+              <div class="border-b px-4 py-2">0.1</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum voting period for a proposal</div>
+              <div class="border-b px-4 py-2">4 days</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Proportion of voting power needed for a proposal to be accepted</div>
+              <div class="border-b px-4 py-2">3%</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum neuron dissolve delay to vote</div>
+              <div class="border-b px-4 py-2">1 month</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum neuron dissolve delay</div>
+              <div class="border-b px-4 py-2">1 year</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum age for age bonus</div>
+              <div class="border-b px-4 py-2">6 months</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Maximum age bonus</div>
+              <div class="border-b px-4 py-2">1.25x</div>
+              <div class="border-r px-4 py-2 font-medium bg-gray-100">Percentage of total supply that will be generated annually for rewards</div>
+              <div class="px-4 py-2">2.5%</div>
+            </div>
+
+            <h2 id="launch-allocations-and-mechanics" section-trigger 
+              class="relative flex items-center w-full mt-5 mb-2 p-4 text-2xl font-semibold text-left border-b border-solid">
+              6. Launch Allocations and Mechanics
+              <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+            </h2>
+
+            <p class="mb-3 font-semibold text-xl">Summary</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>The Kinic DAO will launch with a total supply of 6 million KINIC tokens. 25% will be available for open sale in exchange for ICP tokens.</li>
+              <li>50% of the tokens will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization, 10% allocated to seed funders, and 4% will be allocated to Kinic NFT holders via airdrop.</li>
+              <li>The maximum ICP that can be earned in the sale of the KINIC tokens is 1.5 million ICP, and the minimum is 500,000 ICP.</li>
+              <li>1 KINIC token may be worth between 0.33 and 1.33 ICP tokens based on earning between 500,000 and 1.5 million ICP tokens</li>
+            </ol>
+
+            <p class="mb-3 font-semibold underline">Initial token allocation</p>
+            <p class="mb-3">The purpose of the decentralization sale is to decentralize the governance of the Kinic DAO. The Kinic DAO will launch with a total supply of 6 million KINIC tokens.</p>
+            <p class="mb-3">Out of the total 6 million supply of KINIC tokens, 25% (1,500,000) will be available for open sale in exchange for ICP tokens. The maximum ICP that can be earned in the sale of the 1,500,000 KINIC is 1,500,000 million ICP, and the minimum is 500,000 ICP.</p>
+            <p class="mb-3">The Kinic DAO’s two million ICP funding target is based on comparable funding rounds:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>Privacy-focused search engine DuckDuckGo <a class="blueText" target="_blank" href="https://www.crunchbase.com/organization/duck-duck-go">has raised</a> a total of $172 million across four funding rounds, the most recent of which was <a href="https://spreadprivacy.com/duckduckgrowing/">$100 million</a> in late 2020.</li>
+              <li>In January 2022, The Graph Foundation <a class="blueText" target="_blank" href="https://thegraph.com/blog/graph-raise/">raised</a> $50 million to build an indexing protocol for querying data on networks like Ethereum and IPFS.</li>
+              <li>In March 2023, Kaito <a class="blueText" target="_blank" href="https://www.linkedin.com/pulse/kaito-ai-raises-53m-transform-crypto-search-chatgpt-kaitoai/?trackingId=1QyGZzaTRYMOo0rKhm0F2w%3D%3D">raised</a> $5.3 million to transform crypto search with ChatGPT.</li>
+            </ol>
+            <p class="mb-3">From the 1,500,000 KINIC tokens available as part of the open sale, Kinic will seek to sell 4.2% (250,000) to the Internet Computer’s Community Fund and the remaining 20.8% (1,250,000) KINIC to the community more generally. If the target maximum ICP is earned in the sale, the amount of ICP earned from the Community Fund will be 252,000 ICP.</p>
+            <p class="mb-3">50% (3,000,000) will remain in the DAO’s treasury. 10% will be allocated to the Kinic development organization and funders. 4% (240,000) will be allocated to Kinic NFT holders via airdrop.</p>
+            <p class="mb-3">1% (60,000) of the KINIC tokens will be used to create liquidity pools on exchanges for trading. The tokens available for trade will be backed by ICP earned from the decentralization sale. Proposals will be required to be made and approved to transfer KINIC tokens and ICP to an exchange.</p>
+            <p class="mb-3">The initial target KINIC token allocation is shown in the following chart (assuming the maximum ICP sale target is met):</p>
+            <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image6.png" alt="">
+            
+            <p class="mb-3 font-semibold underline">Decentralization Sale Mechanics</p>
+            <p class="mb-3">All parties that participate in the decentralization sale will receive an amount of KINIC tokens that equals the amount of ICP they pay divided by the total ICP that is earned in the sale.</p>
+            <p class="mb-3">Buyers will receive their amount of KINIC tokens in the form of 5 neurons that are equally divided in the amount of staked KINIC they contain. Each of the 5 neurons will have a different dissolve delay according to the following schedule:</p>
+            <div class="mb-2">
+              <div>Neuron 1 dissolve delay: 0 months</div>
+              <div>Neuron 2 dissolve delay: 3 months</div>
+              <div>Neuron 3 dissolve delay: 6 months</div>
+              <div>Neuron 4 dissolve delay: 9 months</div>
+              <div>Neuron 5 dissolve delay: 12 months</div>
+            </div>
+            <p class="mb-3">The neuron with 0 months dissolve delay can immediately be released into liquid KINIC tokens. Accordingly, 20% of the neurons for buyers in the decentralization sale will be immediately liquid.</p>
+            
+            <p class="mb-3 font-semibold underline">Allocation to Kinic Development Organization and Seed Funders</p>
+            <p class="mb-3">The founding Kinic development organization will receive 10% (600,000) of the KINIC tokens in the form of 3 neurons that have a 1 month dissolve delay.</p>
+            <p class="mb-3">These three neurons have the following vesting schedule:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>25% (150,000) vested for 1 year</li>
+              <li>25% (150,000) vested for 2 years</li>
+              <li>50% (300,000) vested for 3 years</li>
+            </ol>
+            <p class="mb-3">During the vesting period, neurons cannot be disbursed into tokens or otherwise changed. The 1 month dissolve delay reduces the relative voting power of the KINIC tokens owned by the Kinic development organization.</p>
+            <p class="mb-3">Likewise, Kinic seed funders will receive 10% (600,000) of the KINIC tokens in the form of 2 neurons that have a 1 month dissolve delay. These neurons have the following vesting schedule:</p>
+            <ol class="list-disc list-inside mb-3">
+              <li>25% (150,000) no vesting</li>
+              <li>25% (150,000) vested for 1 year</li>
+              <li>50% (300,000) vested for 2 years</li>
+            </ol>
+
+            <p class="mb-3 font-semibold underline">Allocation to Kinic NFT Holders</p>
+            <p class="mb-3">4% of KINIC tokens (240,000) will be given to Kinic NFT holders. NFT holders will receive their KINIC tokens in the form of three neurons. These three neurons will have the same dissolve delay and vesting schedule as the seed funders.</p>
+            <p class="mb-3">The process to disburse Kinic NFT holders will require a snapshot on April 17th 8PM JST, owners at this time will be recorded and set into the sns.yml file. Any pending transfer of an NFT, sale, or alteration of ownership after this point in time will not be recorded. Please make sure to hold your NFT at the time of the snapshot. *Please note that if you purchase a Kinic NFT after this time it will not be included in the snapshot.</p>
+            <p class="mb-3">The Kinic NFT is available on 
+              <a class="blueText" target="_blank" href="https://entrepot.app/marketplace/kinic">Entrepot</a>.
+            </p>
+
+            <p class="mb-3 font-semibold underline">Allocation to DAO Treasury</p>
+            <p class="mb-3">The Kinic DAO will initially retain 50% of the initial supply of KINIC tokens (plus the 1% of KINIC tokens used to provide exchange liquidity). These tokens will be used to incentivize developers to contribute to the development of Kinic and its ecosystem. They can also be used to incentivize users, for marketing, and other initiatives that improve the standing of Kinic as the world’s first decentralized search engine.</p>
+            <p class="mb-3">The initial values for the decentralization sale are summarized as follows:</p>
+            <div class="grid grid-cols-2 gap-4 border border-gray-400 rounded mb-2">
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The total number of KINIC tokens to be sold</div>
+              <div class="border-b px-4 py-2">1,500,000 (25% of total)</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The maximum ICP to be raised</div>
+              <div class="border-b px-4 py-2">1,500,000</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">The minimum ICP to be raised (otherwise sale fails and ICP returned)</div>
+              <div class="border-b px-4 py-2">500,000</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">End date of sale (unless maximum ICP raised sooner)</div>
+              <div class="border-b px-4 py-2">31st May 2023 at 12:00 (noon) GMT (TBC)</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum number of sale participants</div>
+              <div class="border-b px-4 py-2">300</div>
+              <div class="border-b border-r px-4 py-2 font-medium bg-gray-100">Minimum ICP per buyer</div>
+              <div class="border-b px-4 py-2">1</div>
+              <div class="border-r px-4 py-2 font-medium bg-gray-100">Maximum ICP per buyer</div>
+              <div class="px-4 py-2">100,000</div>
+            </div>
+
+            <p class="mb-3 font-semibold underline">Valuation Range and Token Price</p>
+            <p class="mb-3">The value (in ICP) of KINIC tokens upon launch is based upon how many ICP tokens are raised in the decentralization sale.</p>
+            <p class="mb-3">The more ICP tokens that are exchanged for 1.5 million KINIC tokens, the higher the value of a single KINIC token. This is because the price of 1 KINIC equals the amount of ICP earned (between 500,000 and 1.5 million) divided by the number of KINIC tokens sold (1.5 million).</p>
+            <p class="mb-3">Accordingly, 1 KINIC token may be worth between 0.33 and 1 ICP tokens based on earning between 500,000 and 1.5 million ICP tokens, respectively, as shown in the following chart.</p>
+            <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image4.png" alt="">
+            <p class="mb-3">Ultimately, the price for the KINIC token is influenced by several factors including total and liquid supply, demand, DAO revenue and expenses, and projections about the future.</p>
+
+            <p class="mb-3 font-semibold underline">Relative Voting Power Upon Launch</p>
+            <p class="mb-3">The relative voting power upon launch of the Kinic DAO is as follows:</p>
+            <img class="w-full sm:max-w-xs" style="max-width:830px;" src="./assets/image1.png" alt="">
+
+            <h2 id="launch-allocations-and-mechanics" section-trigger 
+              class="relative flex items-center w-full mt-5 mb-2 p-4 text-2xl font-semibold text-left border-b border-solid">
+              7. Token Holder Rights and Limitations
+              <a href="#top" class="hidden sm:block absolute right-4 text-sm cursor-pointer text-gray-800">Back to top</a>
+            </h2>
+
+            <p class="mb-3">Any person that purchases, holds, owns, or otherwise directly or indirectly controls or benefits from one or more KINIC tokens (a “Tokenholder”) agrees and acknowledges the following terms and conditions:</p>
+            <ol id="legal-disclaimers" class="list-decimal list-inside mb-6">
+              <li>The purpose of the Tokenholder’s interest is not for investment, trading, speculation, or any other financial purpose.</li>
+              <li>Each Tokenholder is a natural person acting on its own behalf and not for the benefit of any other person.</li>
+              <li>The Tokenholder is not a United States citizen and is not physically present inside the United States, except for the Kinic development organization and some seed funders.</li>
+              <li>The Kinic DAO, and nothing in this whitepaper, is intended to, or shall be deemed to, establish any partnership or joint venture between any of the Tokenholders, or authorize any Tokenholder to make or enter into any commitments for or on behalf of any other party. </li>
+              <li>To the maximum extent permitted by law, each Token holder absolutely and irrevocably waives any and all claims, actions, causes of action, loss, damage and expense including any and all attorneys’ fees and other costs of enforcement arising out of or in connection with any breach or alleged breach of any fiduciary duty by any other Tokenholders or the Kinic DAO. It is the express intent of the Tokenholders that each Tokenholder and the Kinic DAO shall be and hereby are relieved of any and all fiduciary duties which might otherwise be applicable.</li>
+              <li>In no event shall any Tokenholder or the Kinic DAO be liable to any other Tokenholder for any loss of anticipated profits or other consequential, special or indirect loss or damage of any nature arising at any time, whether arising under contract, tort (including negligence), strict liability or for any other cause whatsoever.</li>
+              <li>No Tokenholder shall bring any legal claim, action, or proceeding against any other Tokenholder on any basis.</li>
+              <li>No Tokenholder is relying upon any statement or representation made by the founding Kinic development organization, the Kinic DAO, or any other Tokenholder.</li>
+              <li>No Tokenholder, the founding Kinic development organization, nor the Kinic DAO, makes any express or implied warranty, any disclaims all such express or implied warranties, including any warranties of merchantability or fitness for a particular purpose.</li>
+              <li>Tokenholders that fail to stake their KINIC tokens and engage in voting for a reasonable time are subject to having their tokens repurchased by the DAO.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <!-- HEADER FOR RESULTS PAGE -->
   <header v-if="searchMode && !whitepaperMode" class="h-full">
@@ -697,185 +533,102 @@
               <img @click="reset" class="cursor-pointer" style="max-width:130px;" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzIxIDM1NC44NiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNmMDVjMjI7fS5jbHMtMntmaWxsOiNmYmFmMjg7fS5jbHMtM3tmaWxsOiMyM2E4ZTA7fS5jbHMtNHtmaWxsOiNlYzE5Nzg7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyNjcuMjEsMzQzLjIzYTE2Mi40MiwxNjIuNDIsMCwwLDEtMTQwLjI3LDYuNEExNjAuMTYsMTYwLjE2LDAsMCwxLDEwNDAsMjYyLjY5YTE2Mi4wNiwxNjIuMDYsMCwwLDEsMC0xMjYuNzdBMTYwLjE5LDE2MC4xOSwwLDAsMSwxMTI2Ljk0LDQ5YTE2Mi45MywxNjIuOTMsMCwwLDEsMTQwLjE3LDYuMiwxNjIuMTYsMTYyLjE2LDAsMCwxLDU4LjA2LDUyLjA1TDEzMzcsOTkuNTVhMTc3LjA2LDE3Ny4wNiwwLDAsMC02My4wOS01Ni43N0ExNzYuNjYsMTc2LjY2LDAsMCwwLDExMjEuNDIsMzYsMTc1LDE3NSwwLDAsMCwxMDI3LDEzMC40YTE3NS40MiwxNzUuNDIsMCwwLDAsMCwxMzcuODEsMTc0Ljk0LDE3NC45NCwwLDAsMCw5NC40Myw5NC40MywxNzYuNiwxNzYuNiwwLDAsMCwxNTIuMy02LjcsMTc3LjQyLDE3Ny40MiwwLDAsMCw2My4wOC01Ni4yOUwxMzI1LjM3LDI5MUExNjMuNzIsMTYzLjcyLDAsMCwxLDEyNjcuMjEsMzQzLjIzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMTkwLjMyLDEyMS4yNGE3Ny42NSw3Ny42NSwwLDAsMSw2NC42NywzNC4xbDExLjYzLTcuNjhBOTEuNTcsOTEuNTcsMCwwLDAsMTIzMy44OSwxMThhOTEuNzksOTEuNzksMCwwLDAtNzkuMzUtMy42NSw5MS4xMyw5MS4xMywwLDAsMC00OS4xOSw0OS4xOCw5MS40OCw5MS40OCwwLDAsMCwwLDcxLjU3LDkxLjE5LDkxLjE5LDAsMCwwLDQ5LjE5LDQ5LjE5LDkxLjg3LDkxLjg3LDAsMCwwLDc5LjE2LTMuNTUsOTEuNTUsOTEuNTUsMCwwLDAsMzIuNzItMjkuMzdMMTI1NSwyNDMuMDdhNzcuNTQsNzcuNTQsMCwwLDEtMjcuNywyNSw3Ni4xNyw3Ni4xNywwLDAsMS0zNyw5LjI2cS0zMi4zMywwLTU1LjItMjIuODZ0LTIyLjg2LTU1LjJxMC0zMi4zNCwyMi44Ni01NS4yVDExOTAuMzIsMTIxLjI0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMjkwLjA4LDEzMS40OWExMTkuNTIsMTE5LjUyLDAsMCwwLTQyLjg4LTM4LjY0LDEyMS4yNiwxMjEuMjYsMCwwLDAtMTE3LjQsMiwxMTkuNDgsMTE5LjQ4LDAsMCwwLTQ0LDQ0LDEyMS4zNCwxMjEuMzQsMCwwLDAsMCwxMjEsMTE5LjQ1LDExOS40NSwwLDAsMCw0NCw0NCwxMjEuMjIsMTIxLjIyLDAsMCwwLDExNy40LDIsMTE5LjYxLDExOS42MSwwLDAsMCw0Mi44OC0zOC42NEwxMjc4LjQ1LDI1OWExMDYuMzEsMTA2LjMxLDAsMCwxLTM3Ljg1LDM0LjExLDEwNi43MSwxMDYuNzEsMCwwLDEtMTAzLjctMS42OCwxMDYuMjIsMTA2LjIyLDAsMCwxLTM4Ljc0LTM4Ljc0LDEwNi45NSwxMDYuOTUsMCwwLDEsMC0xMDYuODUsMTA2LjM3LDEwNi4zNywwLDAsMSwzOC43NC0zOC43NCwxMDYuOTEsMTA2LjkxLDAsMCwxLDEwMy42LTEuNzcsMTA2LjI1LDEwNi4yNSwwLDAsMSwzNy43NSwzMy44MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTMxMy43NCwxMTUuNzJhMTQ5LjE5LDE0OS4xOSwwLDAsMC01My00Ny44MSwxNDkuMzcsMTQ5LjM3LDAsMCwwLTE0NS4xLDIuMzcsMTQ4LjQ2LDE0OC40NiwwLDAsMC01NC4zMiw1NC4zMSwxNDUuNywxNDUuNywwLDAsMC0yMCw3NC43MiwxNDUuNywxNDUuNywwLDAsMCwyMCw3NC43MiwxNDguNTMsMTQ4LjUzLDAsMCwwLDU0LjMyLDU0LjMxLDE0OS40OCwxNDkuNDgsMCwwLDAsMTQ0LjgsMi41NiwxNDguMjEsMTQ4LjIxLDAsMCwwLDUyLjkzLTQ3LjQxTDEzMDEuOTEsMjc1QTEzNS4xOSwxMzUuMTksMCwwLDEsMTI1NCwzMTguMThhMTMxLjE2LDEzMS4xNiwwLDAsMS02My42OCwxNiwxMzIuNzcsMTMyLjc3LDAsMCwxLTUyLjQ0LTEwLjY0LDEzMS41OCwxMzEuNTgsMCwwLDEtNzEuNzYtNzEuNzcsMTM0LjUyLDEzNC41MiwwLDAsMSwwLTEwNC44NywxMzEuNjcsMTMxLjY3LDAsMCwxLDcxLjc2LTcxLjc3LDEzNSwxMzUsMCwwLDEsMTE2LDUuMjMsMTM0LjExLDEzNC4xMSwwLDAsMSw0OCw0My4wOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI0MTUuMjUiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9IjM4NS42MiIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMzU2IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSIzMjYuMzciIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTExLjYxIDM0OC40NCA1MjYuNDIgMzQ4LjQ0IDUyNi40MiA5OS4wOSA1MTEuNjEgNzMuOTggNTExLjYxIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3ODMuMTkgNy43NCA3NjguMzcgNy43NCA3NjguMzcgMjU3LjEgNzgzLjE5IDI4Mi4yIDc4My4xOSA3Ljc0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjcyMy45MyA3Ljc0IDcwOS4xMiA3Ljc0IDcwOS4xMiAxNTkuOTkgNzIzLjkzIDE4NC40NyA3MjMuOTMgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3NTMuNTYgNy43NCA3MzguNzUgNy43NCA3MzguNzUgMjA4LjEzIDc1My41NiAyMzMuMDIgNzUzLjU2IDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNzk4IDMyNC4zNyA2MDMuNzggNy43NCA1ODYuNSA3Ljc0IDc5NS4zMiAzNDguNDQgODEyLjgxIDM0OC40NCA4MTIuODEgNy43NCA3OTggNy43NCA3OTggMzI0LjM3Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjU0MS4yMyAzNDguNDQgNTU2LjA1IDM0OC40NCA1NTYuMDUgMTQ4LjA1IDU0MS4yMyAxMjMuMTYgNTQxLjIzIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1MTYuNzUgNy43NCA3MjYuMiAzNDguNDQgNzQzLjQ4IDM0OC40NCA1MzQuMDMgNy43NCA1MTYuNzUgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1NTEuNzMgNy43NCA3NjAuNzYgMzQ4LjQ0IDc3OC40NSAzNDguNDQgNTY5LjIxIDcuNzQgNTUxLjczIDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTcwLjg2IDM0OC40NCA1ODUuNjcgMzQ4LjQ0IDU4NS42NyAxOTYuMiA1NzAuODYgMTcxLjcyIDU3MC44NiAzNDguNDQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNDgxLjk4IDcuNzQgNDgxLjk4IDM0OC40NCA0OTYuNzkgMzQ4LjQ0IDQ5Ni43OSAzMS44MSA2OTEuNDIgMzQ4LjQ0IDcwOC41IDM0OC40NCA0OTkuNjggNy43NCA0ODEuOTggNy43NCIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iOTE3LjU3IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI4NTguMzEiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9Ijk0Ny4xOSIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iODg3Ljk0IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy00IiB4PSIyOS43MSIgeT0iNC4xNiIgd2lkdGg9IjE0Ljg1IiBoZWlnaHQ9IjM0MS42NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSI4OS4xMiAzNDUuOCAxMDMuOTggMzQ1LjggMTAzLjk4IDI1MS43IDg5LjEyIDIyMi43IDg5LjEyIDM0NS44Ii8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjU5LjQyIDM0NS44IDc0LjI3IDM0NS44IDc0LjI3IDE5My42OSA2NC42OSAxNzQuOTggNzQuMjcgMTU2LjI3IDc0LjI3IDQuMTYgNTkuNDIgNC4xNiA1OS40MiAzNDUuOCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSIxMDMuOTggNC4xNiA4OS4xMiA0LjE2IDg5LjEyIDEyNy4yNiAxMDMuOTggOTguMjUgMTAzLjk4IDQuMTYiLz48cmVjdCBjbGFzcz0iY2xzLTQiIHk9IjQuMTYiIHdpZHRoPSIxNC44NSIgaGVpZ2h0PSIzNDEuNjQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTA2LjkyIDE3Ny42MiAxOTQuMzkgNi44IDE3Ny44OCA2LjggMTAzLjk4IDE1MS4xMyA5MC40MSAxNzcuNjIgMTAzLjk4IDIwNC4xMSAxNzYuNTMgMzQ1LjggMTc3Ljg4IDM0OC40NCAxOTQuMzkgMzQ4LjQ0IDE5My4wMyAzNDUuOCAxMDYuOTIgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjE0MC4zNCAxNzcuNjIgMjI3LjYxIDYuOCAyMTEuMSA2LjggMTIzLjgzIDE3Ny42MiAyMDkuNzUgMzQ1LjggMjExLjEgMzQ4LjQ0IDIyNy42MSAzNDguNDQgMjI2LjI1IDM0NS44IDE0MC4zNCAxNzcuNjIiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTczLjU1IDE3Ny42MiAyNjAuODIgNi44IDI0NC4zMiA2LjggMTU3LjA1IDE3Ny42MiAyNDIuOTcgMzQ1LjggMjQ0LjMyIDM0OC40NCAyNjAuODIgMzQ4LjQ0IDI1OS40NyAzNDUuOCAxNzMuNTUgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjI3Ny41MyA2LjggMTkwLjI2IDE3Ny42MiAyNzcuNTMgMzQ4LjQ0IDI5NC4wNCAzNDguNDQgMjA2Ljc3IDE3Ny42MiAyOTQuMDQgNi44IDI3Ny41MyA2LjgiLz48L3N2Zz4=" alt="kinic logotype">
               <div class="auth flex items-center">
                 <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
-                  <span class="loginStyle">LOGIN</span>
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                     preserveAspectRatio="xMidYMid meet" viewBox="-1 -1 107.42470599999999 54.6597" width="103.42" height="48.66"
-                     class="inline h-8 w-8 ml-1" data-v-45c16e28="" data-v-5e337368="">
-                    <defs data-v-45c16e28="">
-                        <path d="M59.62 9.14C56.48 11.99 53.72 15.07 51.71 17.53C51.71 17.53 54.95 21.18 58.49 25.09C60.41 22.72 63.17 19.51 66.36 16.61C72.26 11.2 76.1 10.11 78.33 10.11C86.64 10.11 93.37 16.92 93.37 25.35C93.37 33.7 86.64 40.51 78.33 40.6C77.94 40.6 77.46 40.55 76.89 40.42C79.29 41.52 81.92 42.31 84.37 42.31C99.58 42.31 102.55 32.03 102.72 31.28C103.16 29.39 103.42 27.42 103.42 25.4C103.38 11.38 92.15 0 78.33 0C72.56 0 66.27 3.08 59.62 9.14Z"
-                              id="a2oTCciHwU" data-v-45c16e28=""></path>
-                        <linearGradient id="gradientc2rIvyDhN" gradientUnits="userSpaceOnUse" x1="65.17" y1="3.67" x2="99.9" y2="39.44"
-                                        data-v-45c16e28="">
-                            <stop offset="21%" data-v-45c16e28="" style="stop-color: rgb(241, 90, 36); stop-opacity: 1;"></stop>
-                            <stop offset="68.41000000000001%" data-v-45c16e28=""
-                                  style="stop-color: rgb(251, 176, 59); stop-opacity: 1;"></stop>
-                        </linearGradient>
-                        <path d="M43.8 41.52C46.95 38.66 49.7 35.59 51.71 33.13C51.71 33.13 48.48 29.48 44.94 25.57C43.01 27.94 40.26 31.15 37.07 34.05C31.17 39.41 27.28 40.55 25.09 40.55C16.79 40.55 10.05 33.74 10.05 25.31C10.05 16.96 16.79 10.15 25.09 10.06C25.48 10.06 25.97 10.11 26.53 10.24C24.13 9.14 21.51 8.35 19.06 8.35C3.85 8.35 0.87 18.63 0.7 19.38C0.26 21.27 0 23.24 0 25.26C0 39.28 11.23 50.66 25.09 50.66C30.86 50.66 37.16 47.58 43.8 41.52Z"
-                              id="aFWcwFIax" data-v-45c16e28=""></path>
-                        <linearGradient id="gradientaIMror5Zz" gradientUnits="userSpaceOnUse" x1="38.22" y1="46.97" x2="3.5" y2="11.2"
-                                        data-v-45c16e28="">
-                            <stop offset="21%" data-v-45c16e28="" style="stop-color: rgb(237, 30, 121); stop-opacity: 1;"></stop>
-                            <stop offset="89.29%" data-v-45c16e28="" style="stop-color: rgb(82, 39, 133); stop-opacity: 1;"></stop>
-                        </linearGradient>
-                        <path d="M19.1 8.57C5.24 8.23 1.16 18.1 0.81 19.37C3.47 8.3 13.37 0.04 25.14 0C34.73 0 44.43 9.21 51.59 17.53C51.6 17.51 51.61 17.5 51.62 17.49C51.62 17.49 54.86 21.13 58.4 25.04C58.4 25.04 62.42 29.7 66.71 33.79C68.37 35.37 76.45 41.74 84.23 41.96C98.49 42.36 102.42 31.94 102.64 31.15C100.02 42.27 90.09 50.57 78.29 50.62C68.69 50.62 58.99 41.4 51.8 33.08C51.78 33.1 51.77 33.11 51.76 33.13C51.76 33.13 48.52 29.48 44.98 25.57C44.98 25.57 40.96 20.91 36.68 16.83C35.01 15.25 26.88 8.79 19.1 8.57ZM0.81 19.37C0.8 19.4 0.79 19.43 0.79 19.46C0.79 19.44 0.8 19.41 0.81 19.37Z"
-                              id="e1RZG6bOc" data-v-45c16e28=""></path>
-                    </defs>
-                    <g data-v-45c16e28="">
-                        <g data-v-45c16e28="">
-                            <use xlink:href="#a2oTCciHwU" opacity="1" fill="url(#gradientc2rIvyDhN)" data-v-45c16e28=""></use>
-                            <g data-v-45c16e28="">
-                                <use xlink:href="#a2oTCciHwU" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1"
-                                     stroke-opacity="0" data-v-45c16e28=""></use>
-                            </g>
-                        </g>
-                        <g data-v-45c16e28="">
-                            <use xlink:href="#aFWcwFIax" opacity="1" fill="url(#gradientaIMror5Zz)" data-v-45c16e28=""></use>
-                            <g data-v-45c16e28="">
-                                <use xlink:href="#aFWcwFIax" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1"
-                                     stroke-opacity="0" data-v-45c16e28=""></use>
-                            </g>
-                        </g>
-                        <g data-v-45c16e28="">
-                            <use xlink:href="#e1RZG6bOc" opacity="1" fill="#29abe2" fill-opacity="1" data-v-45c16e28=""></use>
-                            <g data-v-45c16e28="">
-                                <use xlink:href="#e1RZG6bOc" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1"
-                                     stroke-opacity="0" data-v-45c16e28=""></use>
-                            </g>
-                        </g>
-                    </g>
-                  </svg>
+                  <span class="loginStyle inline-flex text-xs">LOGIN</span>
+                    <img src="./assets/dfinity.svg" class="inline-flex h-3 ml-1" />
                 </button>
                 <button v-if="!principal" @click="logInNFID()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700">
-                      <svg
-                      width="60"
-                      height="32"
-                      viewBox="0 0 70 37"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class=""
-                      >
-                      <path
-                        d="M13.9423 10.0312C14.2583 10.0312 14.4163 10.0312 14.537 10.0956C14.6432 10.1521 14.7295 10.2424 14.7836 10.3534C14.8451 10.4796 14.8451 10.6448 14.8451 10.9752V25.4014C14.8451 25.7319 14.8451 25.8971 14.7836 26.0233C14.7295 26.1343 14.6432 26.2245 14.537 26.2811C14.4163 26.3454 14.2583 26.3454 13.9423 26.3454H11.6363C11.4803 26.3454 11.4023 26.3454 11.3301 26.325C11.2661 26.307 11.2056 26.2772 11.1515 26.2372C11.0904 26.1921 11.0406 26.1293 10.9411 26.0036L4.80368 18.2574C4.65611 18.0711 4.58232 17.978 4.51784 17.9682C4.46199 17.9598 4.40579 17.9809 4.36795 18.0247C4.32426 18.0753 4.32426 18.1962 4.32426 18.438V25.4014C4.32426 25.7319 4.32426 25.8971 4.26276 26.0233C4.20866 26.1343 4.12234 26.2245 4.01617 26.2811C3.89547 26.3454 3.73746 26.3454 3.42144 26.3454H0.902817C0.586801 26.3454 0.428793 26.3454 0.308091 26.2811C0.201919 26.2245 0.115598 26.1343 0.0615007 26.0233C0 25.8971 0 25.7319 0 25.4014V10.9752C0 10.6448 0 10.4796 0.0615007 10.3534C0.115598 10.2424 0.201919 10.1521 0.308091 10.0956C0.428793 10.0312 0.586801 10.0312 0.902816 10.0312H3.20881C3.36481 10.0312 3.44281 10.0312 3.51506 10.0516C3.57906 10.0697 3.63952 10.0994 3.69367 10.1394C3.75477 10.1846 3.80453 10.2474 3.90405 10.373L10.0415 18.1193C10.189 18.3055 10.2628 18.3987 10.3273 18.4084C10.3831 18.4169 10.4393 18.3957 10.4772 18.352C10.5209 18.3014 10.5209 18.1805 10.5209 17.9386V10.9752C10.5209 10.6448 10.5209 10.4796 10.5824 10.3534C10.6365 10.2424 10.7228 10.1521 10.829 10.0956C10.9497 10.0312 11.1077 10.0312 11.4237 10.0312H13.9423Z"
-                        fill="black"
-                      ></path>
-                      <path
-                        d="M22.4022 13.5971C22.3074 13.5971 22.26 13.5971 22.2237 13.6164C22.1919 13.6333 22.166 13.6604 22.1498 13.6937C22.1313 13.7316 22.1313 13.7811 22.1313 13.8802V16.903C22.1313 17.0021 22.1313 17.0517 22.1498 17.0895C22.166 17.1228 22.1919 17.1499 22.2237 17.1669C22.26 17.1862 22.3074 17.1862 22.4022 17.1862H28.1161C28.4321 17.1862 28.5901 17.1862 28.7108 17.2505C28.817 17.307 28.9033 17.3973 28.9574 17.5083C29.0189 17.6345 29.0189 17.7997 29.0189 18.1301V19.808C29.0189 20.1384 29.0189 20.3036 28.9574 20.4299C28.9033 20.5409 28.817 20.6311 28.7108 20.6877C28.5901 20.752 28.4321 20.752 28.1161 20.752H22.4022C22.3074 20.752 22.26 20.752 22.2237 20.7713C22.1919 20.7882 22.166 20.8153 22.1498 20.8486C22.1313 20.8865 22.1313 20.936 22.1313 21.0352V25.4014C22.1313 25.7319 22.1313 25.8971 22.0698 26.0233C22.0157 26.1343 21.9294 26.2245 21.8232 26.2811C21.7025 26.3454 21.5445 26.3454 21.2285 26.3454H18.6207C18.3047 26.3454 18.1467 26.3454 18.026 26.2811C17.9198 26.2245 17.8335 26.1343 17.7794 26.0233C17.7179 25.8971 17.7179 25.7319 17.7179 25.4014V10.9752C17.7179 10.6448 17.7179 10.4796 17.7794 10.3534C17.8335 10.2424 17.9198 10.1521 18.026 10.0956C18.1467 10.0312 18.3047 10.0312 18.6207 10.0312H29.0523C29.3683 10.0312 29.5263 10.0312 29.647 10.0956C29.7532 10.1521 29.8395 10.2424 29.8936 10.3534C29.9551 10.4796 29.9551 10.6448 29.9551 10.9752V12.6531C29.9551 12.9835 29.9551 13.1487 29.8936 13.2749C29.8395 13.3859 29.7532 13.4762 29.647 13.5328C29.5263 13.5971 29.3683 13.5971 29.0523 13.5971H22.4022Z"
-                        fill="black"
-                      ></path>
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M44.2751 2.05897C44.7399 2.00715 45.0766 1.57116 45.027 1.08516C44.9774 0.599165 44.5605 0.24719 44.0957 0.299006L42.3671 0.491699C41.4815 0.590417 40.7712 0.669594 40.1943 0.778949C39.6 0.891604 39.0907 1.0456 38.6177 1.32278C37.8497 1.77281 37.213 2.43227 36.7756 3.23088C36.5062 3.72285 36.3545 4.25376 36.2418 4.87364C36.1323 5.47528 36.0507 6.21649 35.9489 7.14043L35.9445 7.18023L35.7748 8.94512C35.7281 9.43142 36.0672 9.86528 36.5323 9.91418C36.9974 9.96308 37.4123 9.6085 37.4591 9.1222L37.6276 7.37003C37.7335 6.40833 37.8085 5.73352 37.9047 5.20436C37.9992 4.68504 38.1047 4.36599 38.2447 4.11035C38.5296 3.59007 38.9445 3.16021 39.4453 2.86678C39.6914 2.72253 39.9981 2.61494 40.4963 2.52049C41.005 2.42406 41.6536 2.3512 42.5785 2.2481L44.2751 2.05897ZM60.744 1.08516C60.6944 1.57116 61.0311 2.00715 61.4959 2.05897L63.1925 2.2481C64.1174 2.3512 64.766 2.42406 65.2747 2.52049C65.7729 2.61494 66.0796 2.72253 66.3257 2.86678C66.8265 3.16021 67.2414 3.59007 67.5263 4.11035C67.6663 4.36599 67.7718 4.68504 67.8663 5.20436C67.9625 5.73352 68.0375 6.40833 68.1434 7.37003L68.3119 9.1222C68.3587 9.6085 68.7736 9.96308 69.2387 9.91418C69.7038 9.86528 70.0429 9.43142 69.9962 8.94512L69.8265 7.18023L69.8221 7.14043C69.7203 6.21649 69.6387 5.47528 69.5292 4.87364C69.4165 4.25376 69.2648 3.72285 68.9953 3.23088C68.558 2.43227 67.9213 1.77281 67.1533 1.32278C66.6803 1.0456 66.171 0.891604 65.5767 0.778949C64.9998 0.669594 64.2895 0.590417 63.4039 0.491699L61.6753 0.299006C61.2105 0.24719 60.7935 0.599165 60.744 1.08516ZM60.7435 35.2913C60.6939 34.8053 61.0306 34.3693 61.4954 34.3175L63.192 34.1284C64.1169 34.0253 64.7655 33.9524 65.2742 33.856C65.7724 33.7615 66.0791 33.6539 66.3252 33.5097C66.826 33.2163 67.2409 32.7864 67.5259 32.2661C67.6658 32.0105 67.7713 31.6914 67.8658 31.1721C67.962 30.6429 68.037 29.9681 68.1429 29.0064L68.3114 27.2543C68.3582 26.768 68.7731 26.4134 69.2382 26.4623C69.7033 26.5112 70.0425 26.945 69.9957 27.4313L69.826 29.1962L69.8216 29.236C69.7198 30.16 69.6382 30.9012 69.5287 31.5028C69.416 32.1227 69.2643 32.6536 68.9949 33.1456C68.5575 33.9442 67.9208 34.6037 67.1528 35.0537C66.6798 35.3309 66.1705 35.4849 65.5762 35.5975C64.9993 35.7069 64.289 35.786 63.4034 35.8848L61.6749 36.0775C61.21 36.1293 60.7931 35.7773 60.7435 35.2913ZM45.027 35.2912C45.0766 34.8052 44.7399 34.3692 44.2751 34.3174L42.5785 34.1283C41.6536 34.0252 41.005 33.9523 40.4963 33.8559C39.9981 33.7614 39.6914 33.6538 39.4453 33.5096C38.9445 33.2162 38.5296 32.7863 38.2447 32.266C38.1047 32.0104 37.9992 31.6913 37.9047 31.172C37.8085 30.6428 37.7335 29.968 37.6276 29.0063L37.4591 27.2542C37.4123 26.7679 36.9974 26.4133 36.5323 26.4622C36.0672 26.5111 35.7281 26.9449 35.7748 27.4312L35.9445 29.1961L35.9489 29.2359C36.0507 30.1599 36.1323 30.9011 36.2418 31.5027C36.3545 32.1226 36.5062 32.6535 36.7756 33.1455C37.213 33.9441 37.8497 34.6036 38.6177 35.0536C39.0907 35.3308 39.6 35.4848 40.1943 35.5974C40.7712 35.7068 41.4815 35.7859 42.3671 35.8847L44.0957 36.0774C44.5605 36.1292 44.9774 35.7772 45.027 35.2912ZM44.8358 11.3653C44.2836 11.3653 43.8358 11.813 43.8358 12.3653V24.2729C43.8358 24.8252 44.2836 25.2729 44.8358 25.2729H46.5982C47.1505 25.2729 47.5982 24.8252 47.5982 24.2729V12.3653C47.5982 11.813 47.1505 11.3653 46.5982 11.3653H44.8358ZM51.0701 11.3653C50.5178 11.3653 50.0701 11.813 50.0701 12.3653V24.2729C50.0701 24.8252 50.5178 25.2729 51.0701 25.2729H56.3597C57.8166 25.2729 59.1087 24.9881 60.2361 24.4186C61.3636 23.849 62.2377 23.041 62.8584 21.9947C63.4791 20.9483 63.7895 19.7231 63.7895 18.3191C63.7895 16.9151 63.4791 15.6899 62.8584 14.6435C62.2377 13.5971 61.3636 12.7891 60.2361 12.2196C59.1087 11.65 57.8166 11.3653 56.3597 11.3653H51.0701ZM58.944 21.1205C58.2599 21.796 57.3478 22.1337 56.2077 22.1337H54.1325C53.9668 22.1337 53.8325 21.9994 53.8325 21.8337V14.8044C53.8325 14.6387 53.9668 14.5044 54.1325 14.5044H56.2077C57.3478 14.5044 58.2599 14.8422 58.944 15.5177C59.6407 16.1932 59.9891 17.127 59.9891 18.3191C59.9891 19.5111 59.6407 20.4449 58.944 21.1205Z"
-                        fill="url(#paint0_linear_2608_11359)"
-                      ></path>
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_2608_11359"
-                          x1="43.9989"
-                          y1="12.2042"
-                          x2="56.4702"
-                          y2="29.5414"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stop-color="#CC5CDC"></stop>
-                          <stop offset="0.244792" stop-color="#7B66FF"></stop>
-                          <stop offset="0.520833" stop-color="#1F8AF0"></stop>
-                          <stop offset="0.760417" stop-color="#00D1FF"></stop>
-                          <stop offset="1" stop-color="#3DEDD7"></stop>
-                        </linearGradient>
-                      </defs>
-                    </svg>
+                  <img src="./assets/nfid.png" class="h-6" />
+                </button>
+                <div v-else class="relative inline-block">
+                  <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                      <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
+                      <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" 
+                            fill="currentColor">
+                          </path>
+                      </svg>
                   </button>
-                  <div v-else class="relative inline-block">
-                     <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
-                         <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
-                         <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                             <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
-                         </svg>
-                     </button>
-                     <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
-                       <a @click="viewClaim" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                           Claim Site
-                       </a>
-
-                       <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                           Ad Auction
-                       </a>
-
-                       <hr class="border-gray-200">
-
-                       <a @click="logOut()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                           Logout
-                       </a>
-                     </div>
-                 </div>
+                  <div :class="dropdownOn ? 'block' : 'hidden'" 
+                    class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
+                    <a @click="viewClaim" 
+                      class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                      Claim Site
+                    </a>
+                    <a @click="viewAuctions" 
+                      class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                      Ad Auction
+                    </a>
+                    <hr class="border-gray-200">
+                    <a @click="logOut()" 
+                      class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                      Logout
+                    </a>
+                  </div>
+                </div>
               </div>
             </nav>
             <!-- SEARCH RESULT PAGE NAV -->
             <nav class="flex items-center justify-between mt-1 mb-1">
                 <img @click="reset" class="hidden xl:block cursor-pointer" style="max-width:130px;" src="./assets/kinic_0_470px.png" alt="">
                 <div class="flex flex-col block relative mx-auto text-gray-600 w-full xl:w-5/12">
-                   <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
-                     type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
-                       <i class="absolute left-4 top-1 mt-2 mr-4">
-                         <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                           xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                           viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                           width="512px" height="512px">
-                           <path
-                             d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                         </svg>
-                       </i>
-                        <div v-if="searchMode && category && !this.search" @click="categorySearchNewest(category)"
-                             class="absolute top-2 p-1 pl-3 pr-3 right-10 text-white text-sm mr-2 ml-2 text-center cursor-pointer bg-gray-400 hover:bg-gray-800 rounded-xl leading-4">
-                            View newest
-                        </div>
+                  <input 
+                    style="border-width: 1px;" autofocus 
+                    class="border-gray-200 bg-white h-10 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                    type="search" name="search" placeholder="" v-model="search" @keyup.enter="termSearch('in')">
+                    <i class="absolute left-4 top-1 mt-2 mr-4">
+                      <img src="./assets/search.svg" class="text-gray-400 h-4 w-4 fill-current" />
+                    </i>
+                    <div v-if="searchMode && category && !this.search" @click="categorySearchNewest(category)"
+                      class="absolute top-2 p-1 pl-3 pr-3 right-10 text-white text-sm mr-2 ml-2 text-center cursor-pointer bg-gray-400 hover:bg-gray-800 rounded-xl leading-4">
+                      View newest
+                    </div>
                  </div>
                  <div class="hidden xl:block auth flex items-center text-sm">
                    <div v-if="!principal" class="relative inline-block">
-                      <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                      <button @click="toggleDD" 
+                        class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent 
+                        rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
                           <span class="mx-1">Login</span>
                           <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
                           </svg>
                       </button>
                       <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
-
-                        <a @click="logIn()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                            Login with Internet Identity
+                        <a @click="logIn()" 
+                          class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                          Login with Internet Identity
                         </a>
-                        <a @click="logInNFID()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                            Login NFID
+                        <a @click="logInNFID()" 
+                          class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                          Login NFID
                         </a>
                       </div>
                     </div>
 
-                      <div v-else class="relative inline-block">
-                         <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
-                             <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
-                             <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
-                             </svg>
-                         </button>
-                         <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
-
-                           <a @click="viewClaim" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                               Claim Site
-                           </a>
-                           <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                               Ad Auction
-                           </a>
-
-
-                           <hr class="border-gray-200">
-
-                           <a @click="logOut()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                               Logout
-                           </a>
-                         </div>
-                     </div>
+                    <div v-else class="relative inline-block">
+                        <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                            <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
+                            <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
+                            </svg>
+                        </button>
+                        <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
+                          <a @click="viewClaim" 
+                            class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                            Claim Site
+                          </a>
+                          <a @click="viewAuctions" 
+                            class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                            Ad Auction
+                          </a>
+                          <hr class="border-gray-200">
+                          <a @click="logOut()" 
+                            class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                            Logout
+                          </a>
+                        </div>
+                    </div>
                   </div>
-
             </nav>
         </div>
     </header>
@@ -887,118 +640,38 @@
               <nav class="flex items-center justify-between mb-4">
                 <h2 class="font-bold text-2xl"></h2>
                 <div class="auth flex items-center mr-14">
-                    <button v-if="!principal" @click="logIn()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
+                    <button v-if="!principal" @click="logIn()" 
+                      class="bg-gray-50 text-gray-800 py-3 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
                       <span class="loginStyle">LOGIN</span>
-                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                         preserveAspectRatio="xMidYMid meet" viewBox="-1 -1 107.42470599999999 54.6597" width="103.42" height="48.66"
-                         class="inline h-8 w-8 ml-1" data-v-45c16e28="" data-v-5e337368="">
-                        <defs data-v-45c16e28="">
-                            <path d="M59.62 9.14C56.48 11.99 53.72 15.07 51.71 17.53C51.71 17.53 54.95 21.18 58.49 25.09C60.41 22.72 63.17 19.51 66.36 16.61C72.26 11.2 76.1 10.11 78.33 10.11C86.64 10.11 93.37 16.92 93.37 25.35C93.37 33.7 86.64 40.51 78.33 40.6C77.94 40.6 77.46 40.55 76.89 40.42C79.29 41.52 81.92 42.31 84.37 42.31C99.58 42.31 102.55 32.03 102.72 31.28C103.16 29.39 103.42 27.42 103.42 25.4C103.38 11.38 92.15 0 78.33 0C72.56 0 66.27 3.08 59.62 9.14Z"
-                                  id="a2oTCciHwU" data-v-45c16e28=""></path>
-                            <linearGradient id="gradientc2rIvyDhN" gradientUnits="userSpaceOnUse" x1="65.17" y1="3.67" x2="99.9" y2="39.44"
-                                            data-v-45c16e28="">
-                                <stop offset="21%" data-v-45c16e28="" style="stop-color: rgb(241, 90, 36); stop-opacity: 1;"></stop>
-                                <stop offset="68.41000000000001%" data-v-45c16e28=""
-                                      style="stop-color: rgb(251, 176, 59); stop-opacity: 1;"></stop>
-                            </linearGradient>
-                            <path d="M43.8 41.52C46.95 38.66 49.7 35.59 51.71 33.13C51.71 33.13 48.48 29.48 44.94 25.57C43.01 27.94 40.26 31.15 37.07 34.05C31.17 39.41 27.28 40.55 25.09 40.55C16.79 40.55 10.05 33.74 10.05 25.31C10.05 16.96 16.79 10.15 25.09 10.06C25.48 10.06 25.97 10.11 26.53 10.24C24.13 9.14 21.51 8.35 19.06 8.35C3.85 8.35 0.87 18.63 0.7 19.38C0.26 21.27 0 23.24 0 25.26C0 39.28 11.23 50.66 25.09 50.66C30.86 50.66 37.16 47.58 43.8 41.52Z"
-                                  id="aFWcwFIax" data-v-45c16e28=""></path>
-                            <linearGradient id="gradientaIMror5Zz" gradientUnits="userSpaceOnUse" x1="38.22" y1="46.97" x2="3.5" y2="11.2"
-                                            data-v-45c16e28="">
-                                <stop offset="21%" data-v-45c16e28="" style="stop-color: rgb(237, 30, 121); stop-opacity: 1;"></stop>
-                                <stop offset="89.29%" data-v-45c16e28="" style="stop-color: rgb(82, 39, 133); stop-opacity: 1;"></stop>
-                            </linearGradient>
-                            <path d="M19.1 8.57C5.24 8.23 1.16 18.1 0.81 19.37C3.47 8.3 13.37 0.04 25.14 0C34.73 0 44.43 9.21 51.59 17.53C51.6 17.51 51.61 17.5 51.62 17.49C51.62 17.49 54.86 21.13 58.4 25.04C58.4 25.04 62.42 29.7 66.71 33.79C68.37 35.37 76.45 41.74 84.23 41.96C98.49 42.36 102.42 31.94 102.64 31.15C100.02 42.27 90.09 50.57 78.29 50.62C68.69 50.62 58.99 41.4 51.8 33.08C51.78 33.1 51.77 33.11 51.76 33.13C51.76 33.13 48.52 29.48 44.98 25.57C44.98 25.57 40.96 20.91 36.68 16.83C35.01 15.25 26.88 8.79 19.1 8.57ZM0.81 19.37C0.8 19.4 0.79 19.43 0.79 19.46C0.79 19.44 0.8 19.41 0.81 19.37Z"
-                                  id="e1RZG6bOc" data-v-45c16e28=""></path>
-                        </defs>
-                        <g data-v-45c16e28="">
-                            <g data-v-45c16e28="">
-                                <use xlink:href="#a2oTCciHwU" opacity="1" fill="url(#gradientc2rIvyDhN)" data-v-45c16e28=""></use>
-                                <g data-v-45c16e28="">
-                                    <use xlink:href="#a2oTCciHwU" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1"
-                                         stroke-opacity="0" data-v-45c16e28=""></use>
-                                </g>
-                            </g>
-                            <g data-v-45c16e28="">
-                                <use xlink:href="#aFWcwFIax" opacity="1" fill="url(#gradientaIMror5Zz)" data-v-45c16e28=""></use>
-                                <g data-v-45c16e28="">
-                                    <use xlink:href="#aFWcwFIax" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1"
-                                         stroke-opacity="0" data-v-45c16e28=""></use>
-                                </g>
-                            </g>
-                            <g data-v-45c16e28="">
-                                <use xlink:href="#e1RZG6bOc" opacity="1" fill="#29abe2" fill-opacity="1" data-v-45c16e28=""></use>
-                                <g data-v-45c16e28="">
-                                    <use xlink:href="#e1RZG6bOc" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1"
-                                         stroke-opacity="0" data-v-45c16e28=""></use>
-                                </g>
-                            </g>
-                        </g>
-                      </svg>
+                      <img src="./assets/dfinity.svg" class="inline-flex h-5 ml-1" />
                     </button>
-                    <button v-if="!principal" @click="logInNFID()" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700">
-                        <svg
-                        width="60"
-                        height="32"
-                        viewBox="0 0 70 37"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class=""
-                      >
-                        <path
-                          d="M13.9423 10.0312C14.2583 10.0312 14.4163 10.0312 14.537 10.0956C14.6432 10.1521 14.7295 10.2424 14.7836 10.3534C14.8451 10.4796 14.8451 10.6448 14.8451 10.9752V25.4014C14.8451 25.7319 14.8451 25.8971 14.7836 26.0233C14.7295 26.1343 14.6432 26.2245 14.537 26.2811C14.4163 26.3454 14.2583 26.3454 13.9423 26.3454H11.6363C11.4803 26.3454 11.4023 26.3454 11.3301 26.325C11.2661 26.307 11.2056 26.2772 11.1515 26.2372C11.0904 26.1921 11.0406 26.1293 10.9411 26.0036L4.80368 18.2574C4.65611 18.0711 4.58232 17.978 4.51784 17.9682C4.46199 17.9598 4.40579 17.9809 4.36795 18.0247C4.32426 18.0753 4.32426 18.1962 4.32426 18.438V25.4014C4.32426 25.7319 4.32426 25.8971 4.26276 26.0233C4.20866 26.1343 4.12234 26.2245 4.01617 26.2811C3.89547 26.3454 3.73746 26.3454 3.42144 26.3454H0.902817C0.586801 26.3454 0.428793 26.3454 0.308091 26.2811C0.201919 26.2245 0.115598 26.1343 0.0615007 26.0233C0 25.8971 0 25.7319 0 25.4014V10.9752C0 10.6448 0 10.4796 0.0615007 10.3534C0.115598 10.2424 0.201919 10.1521 0.308091 10.0956C0.428793 10.0312 0.586801 10.0312 0.902816 10.0312H3.20881C3.36481 10.0312 3.44281 10.0312 3.51506 10.0516C3.57906 10.0697 3.63952 10.0994 3.69367 10.1394C3.75477 10.1846 3.80453 10.2474 3.90405 10.373L10.0415 18.1193C10.189 18.3055 10.2628 18.3987 10.3273 18.4084C10.3831 18.4169 10.4393 18.3957 10.4772 18.352C10.5209 18.3014 10.5209 18.1805 10.5209 17.9386V10.9752C10.5209 10.6448 10.5209 10.4796 10.5824 10.3534C10.6365 10.2424 10.7228 10.1521 10.829 10.0956C10.9497 10.0312 11.1077 10.0312 11.4237 10.0312H13.9423Z"
-                          fill="black"
-                        ></path>
-                        <path
-                          d="M22.4022 13.5971C22.3074 13.5971 22.26 13.5971 22.2237 13.6164C22.1919 13.6333 22.166 13.6604 22.1498 13.6937C22.1313 13.7316 22.1313 13.7811 22.1313 13.8802V16.903C22.1313 17.0021 22.1313 17.0517 22.1498 17.0895C22.166 17.1228 22.1919 17.1499 22.2237 17.1669C22.26 17.1862 22.3074 17.1862 22.4022 17.1862H28.1161C28.4321 17.1862 28.5901 17.1862 28.7108 17.2505C28.817 17.307 28.9033 17.3973 28.9574 17.5083C29.0189 17.6345 29.0189 17.7997 29.0189 18.1301V19.808C29.0189 20.1384 29.0189 20.3036 28.9574 20.4299C28.9033 20.5409 28.817 20.6311 28.7108 20.6877C28.5901 20.752 28.4321 20.752 28.1161 20.752H22.4022C22.3074 20.752 22.26 20.752 22.2237 20.7713C22.1919 20.7882 22.166 20.8153 22.1498 20.8486C22.1313 20.8865 22.1313 20.936 22.1313 21.0352V25.4014C22.1313 25.7319 22.1313 25.8971 22.0698 26.0233C22.0157 26.1343 21.9294 26.2245 21.8232 26.2811C21.7025 26.3454 21.5445 26.3454 21.2285 26.3454H18.6207C18.3047 26.3454 18.1467 26.3454 18.026 26.2811C17.9198 26.2245 17.8335 26.1343 17.7794 26.0233C17.7179 25.8971 17.7179 25.7319 17.7179 25.4014V10.9752C17.7179 10.6448 17.7179 10.4796 17.7794 10.3534C17.8335 10.2424 17.9198 10.1521 18.026 10.0956C18.1467 10.0312 18.3047 10.0312 18.6207 10.0312H29.0523C29.3683 10.0312 29.5263 10.0312 29.647 10.0956C29.7532 10.1521 29.8395 10.2424 29.8936 10.3534C29.9551 10.4796 29.9551 10.6448 29.9551 10.9752V12.6531C29.9551 12.9835 29.9551 13.1487 29.8936 13.2749C29.8395 13.3859 29.7532 13.4762 29.647 13.5328C29.5263 13.5971 29.3683 13.5971 29.0523 13.5971H22.4022Z"
-                          fill="black"
-                        ></path>
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M44.2751 2.05897C44.7399 2.00715 45.0766 1.57116 45.027 1.08516C44.9774 0.599165 44.5605 0.24719 44.0957 0.299006L42.3671 0.491699C41.4815 0.590417 40.7712 0.669594 40.1943 0.778949C39.6 0.891604 39.0907 1.0456 38.6177 1.32278C37.8497 1.77281 37.213 2.43227 36.7756 3.23088C36.5062 3.72285 36.3545 4.25376 36.2418 4.87364C36.1323 5.47528 36.0507 6.21649 35.9489 7.14043L35.9445 7.18023L35.7748 8.94512C35.7281 9.43142 36.0672 9.86528 36.5323 9.91418C36.9974 9.96308 37.4123 9.6085 37.4591 9.1222L37.6276 7.37003C37.7335 6.40833 37.8085 5.73352 37.9047 5.20436C37.9992 4.68504 38.1047 4.36599 38.2447 4.11035C38.5296 3.59007 38.9445 3.16021 39.4453 2.86678C39.6914 2.72253 39.9981 2.61494 40.4963 2.52049C41.005 2.42406 41.6536 2.3512 42.5785 2.2481L44.2751 2.05897ZM60.744 1.08516C60.6944 1.57116 61.0311 2.00715 61.4959 2.05897L63.1925 2.2481C64.1174 2.3512 64.766 2.42406 65.2747 2.52049C65.7729 2.61494 66.0796 2.72253 66.3257 2.86678C66.8265 3.16021 67.2414 3.59007 67.5263 4.11035C67.6663 4.36599 67.7718 4.68504 67.8663 5.20436C67.9625 5.73352 68.0375 6.40833 68.1434 7.37003L68.3119 9.1222C68.3587 9.6085 68.7736 9.96308 69.2387 9.91418C69.7038 9.86528 70.0429 9.43142 69.9962 8.94512L69.8265 7.18023L69.8221 7.14043C69.7203 6.21649 69.6387 5.47528 69.5292 4.87364C69.4165 4.25376 69.2648 3.72285 68.9953 3.23088C68.558 2.43227 67.9213 1.77281 67.1533 1.32278C66.6803 1.0456 66.171 0.891604 65.5767 0.778949C64.9998 0.669594 64.2895 0.590417 63.4039 0.491699L61.6753 0.299006C61.2105 0.24719 60.7935 0.599165 60.744 1.08516ZM60.7435 35.2913C60.6939 34.8053 61.0306 34.3693 61.4954 34.3175L63.192 34.1284C64.1169 34.0253 64.7655 33.9524 65.2742 33.856C65.7724 33.7615 66.0791 33.6539 66.3252 33.5097C66.826 33.2163 67.2409 32.7864 67.5259 32.2661C67.6658 32.0105 67.7713 31.6914 67.8658 31.1721C67.962 30.6429 68.037 29.9681 68.1429 29.0064L68.3114 27.2543C68.3582 26.768 68.7731 26.4134 69.2382 26.4623C69.7033 26.5112 70.0425 26.945 69.9957 27.4313L69.826 29.1962L69.8216 29.236C69.7198 30.16 69.6382 30.9012 69.5287 31.5028C69.416 32.1227 69.2643 32.6536 68.9949 33.1456C68.5575 33.9442 67.9208 34.6037 67.1528 35.0537C66.6798 35.3309 66.1705 35.4849 65.5762 35.5975C64.9993 35.7069 64.289 35.786 63.4034 35.8848L61.6749 36.0775C61.21 36.1293 60.7931 35.7773 60.7435 35.2913ZM45.027 35.2912C45.0766 34.8052 44.7399 34.3692 44.2751 34.3174L42.5785 34.1283C41.6536 34.0252 41.005 33.9523 40.4963 33.8559C39.9981 33.7614 39.6914 33.6538 39.4453 33.5096C38.9445 33.2162 38.5296 32.7863 38.2447 32.266C38.1047 32.0104 37.9992 31.6913 37.9047 31.172C37.8085 30.6428 37.7335 29.968 37.6276 29.0063L37.4591 27.2542C37.4123 26.7679 36.9974 26.4133 36.5323 26.4622C36.0672 26.5111 35.7281 26.9449 35.7748 27.4312L35.9445 29.1961L35.9489 29.2359C36.0507 30.1599 36.1323 30.9011 36.2418 31.5027C36.3545 32.1226 36.5062 32.6535 36.7756 33.1455C37.213 33.9441 37.8497 34.6036 38.6177 35.0536C39.0907 35.3308 39.6 35.4848 40.1943 35.5974C40.7712 35.7068 41.4815 35.7859 42.3671 35.8847L44.0957 36.0774C44.5605 36.1292 44.9774 35.7772 45.027 35.2912ZM44.8358 11.3653C44.2836 11.3653 43.8358 11.813 43.8358 12.3653V24.2729C43.8358 24.8252 44.2836 25.2729 44.8358 25.2729H46.5982C47.1505 25.2729 47.5982 24.8252 47.5982 24.2729V12.3653C47.5982 11.813 47.1505 11.3653 46.5982 11.3653H44.8358ZM51.0701 11.3653C50.5178 11.3653 50.0701 11.813 50.0701 12.3653V24.2729C50.0701 24.8252 50.5178 25.2729 51.0701 25.2729H56.3597C57.8166 25.2729 59.1087 24.9881 60.2361 24.4186C61.3636 23.849 62.2377 23.041 62.8584 21.9947C63.4791 20.9483 63.7895 19.7231 63.7895 18.3191C63.7895 16.9151 63.4791 15.6899 62.8584 14.6435C62.2377 13.5971 61.3636 12.7891 60.2361 12.2196C59.1087 11.65 57.8166 11.3653 56.3597 11.3653H51.0701ZM58.944 21.1205C58.2599 21.796 57.3478 22.1337 56.2077 22.1337H54.1325C53.9668 22.1337 53.8325 21.9994 53.8325 21.8337V14.8044C53.8325 14.6387 53.9668 14.5044 54.1325 14.5044H56.2077C57.3478 14.5044 58.2599 14.8422 58.944 15.5177C59.6407 16.1932 59.9891 17.127 59.9891 18.3191C59.9891 19.5111 59.6407 20.4449 58.944 21.1205Z"
-                          fill="url(#paint0_linear_2608_11359)"
-                        ></path>
-                        <defs>
-                          <linearGradient
-                            id="paint0_linear_2608_11359"
-                            x1="43.9989"
-                            y1="12.2042"
-                            x2="56.4702"
-                            y2="29.5414"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stop-color="#CC5CDC"></stop>
-                            <stop offset="0.244792" stop-color="#7B66FF"></stop>
-                            <stop offset="0.520833" stop-color="#1F8AF0"></stop>
-                            <stop offset="0.760417" stop-color="#00D1FF"></stop>
-                            <stop offset="1" stop-color="#3DEDD7"></stop>
-                          </linearGradient>
-                        </defs>
-                      </svg>
+                    <button v-if="!principal" @click="logInNFID()" class="bg-gray-50 text-gray-800 py-1 px-3 rounded hover:bg-gray-100 hover:text-gray-700">
+                      <img src="./assets/nfid.png" class="h-10" />
                     </button>
                     <div v-else class="relative inline-block">
-                       <button @click="toggleDD" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
-                           <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
-                           <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                               <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
-                           </svg>
+                       <button @click="toggleDD" 
+                          class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent 
+                          rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring focus:outline-none">
+                            <span class="mx-1">User-{{principal.substring(0, 5)}}</span>
+                            <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
+                            </svg>
                        </button>
-                       <div :class="dropdownOn ? 'block' : 'hidden'" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
-
-
-                         <a @click="viewClaim" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                             Claim Site
-                         </a>
-                         <a @click="viewAuctions" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                             Ad Auction
-                         </a>
-
-                         <hr class="border-gray-200">
-
-                         <a @click="logOut()" class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
-                             Logout
-                         </a>
+                       <div :class="dropdownOn ? 'block' : 'hidden'" 
+                          class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl text-sm">
+                          <a @click="viewClaim" 
+                              class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                              Claim Site
+                          </a>
+                          <a @click="viewAuctions" 
+                              class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                              Ad Auction
+                          </a>
+                          <hr class="border-gray-200">
+                          <a @click="logOut()" 
+                              class="block px-4 py-3 capitalize transition-colors duration-200 transform hover:bg-gray-100 cursor-pointer">
+                              Logout
+                          </a>
                        </div>
                    </div>
                 </div>
@@ -1006,229 +679,201 @@
           </div>
     </header>
 
-
     <!-- SEARCH RESULTS -->
     <section v-if="searchMode && !whitepaperMode" class="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-6">
       <div v-for="item in results[page]" :key="item.canisterid" class="max-w-xl mb-8">
+
         <div v-if="item.canisterid.length === 27" class="group">
-          <b v-if="item.notnull" class="text-xs redText">
-            https://{{item.canisterid}}.icp0.io/
-          </b>
-          <b v-else class="text-xs redText">
-            https://{{item.canisterid}}.raw.icp0.io/
-          </b>
-          <a v-if="item.notnull && item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.icp0.io/'">
-            <h2 class="truncate text-xl group-hover:underline blueText">
-              {{item.title}}
-            </h2>
-          </a>
-          <a v-else-if="item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.raw.icp0.io/'">
-            <h2 class="truncate text-xl group-hover:underline blueText">
-              {{item.title}}
-            </h2>
-          </a>
-          <a v-else @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.raw.icp0.io/'">
-            <h2 class="truncate text-xl group-hover:underline blueText">
-              No Title
-            </h2>
-          </a>
+            <b v-if="item.notnull" class="text-xs redText"> https://{{item.canisterid}}.icp0.io/ </b>
+            <b v-else class="text-xs redText"> https://{{item.canisterid}}.raw.icp0.io/ </b>
+            <a v-if="item.notnull && item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.icp0.io/'">
+              <h2 class="truncate text-xl group-hover:underline blueText"> {{item.title}} </h2>
+            </a>
+            <a v-else-if="item.title" @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.raw.icp0.io/'">
+              <h2 class="truncate text-xl group-hover:underline blueText"> {{item.title}} </h2>
+            </a>
+            <a v-else @click="recordClick(item.canisterid)" :href="'https://' + item.canisterid + '.raw.icp0.io/'">
+              <h2 class="truncate text-xl group-hover:underline blueText"> No Title </h2>
+            </a>
         </div>
+
         <div v-else class="group">
-          <b class="text-xs redText">
-            {{item.subnetid}}
-          </b>
-          <a v-if="item.title" @click="recordClick(item.canisterid)" :href="'http://' + item.subnetid">
-            <h2 class="truncate text-xl group-hover:underline blueText">
-              {{item.title}}
-            </h2>
-          </a>
-          <a v-else @click="recordClick(item.canisterid)" :href="'http://' + item.subnetid">
-            <h2 class="truncate text-xl group-hover:underline blueText">
-              No Title
-            </h2>
-          </a>
+            <b class="text-xs redText"> {{item.subnetid}} </b>
+            <a v-if="item.title" @click="recordClick(item.canisterid)" :href="'http://' + item.subnetid">
+              <h2 class="truncate text-xl group-hover:underline blueText"> {{item.title}} </h2>
+            </a>
+            <a v-else @click="recordClick(item.canisterid)" :href="'http://' + item.subnetid">
+              <h2 class="truncate text-xl group-hover:underline blueText"> No Title </h2>
+            </a>
         </div>
-        <p class="line-clamp-2 text-gray-900">
-          {{item.subtitle}}
-        </p>
-        <p v-if="item.canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
-          ID: {{item.canisterid}}
-        </p>
-        <p v-if="item.canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light">
-          Subnet: {{item.subnetid}}
-        </p>
-        <span v-if="item.status && item.status === 'official'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">OFFICIAL</span>
+
+        <p class="line-clamp-2 text-gray-900"> {{item.subtitle}} </p>
+        <p v-if="item.canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light"> ID: {{item.canisterid}} </p>
+        <p v-if="item.canisterid.length === 27" class="line-clamp-2 text-gray-900 text-sm font-light"> Subnet: {{item.subnetid}} </p>
+        <span v-if="item.status && item.status === 'official'" 
+          class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
+          OFFICIAL
+        </span>
         <a v-if="item.note && item.note === 'ICME'"  target="_blank" href="https://www.icme.io">
-          <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">BUILT ON ICME.IO</span>
+          <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">
+            BUILT ON ICME.IO
+          </span>
         </a>
         <a v-if="item.note && item.note.indexOf('github') > -1"  target="_blank" :href="item.note">
-          <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">OPEN SOURCE</span>
+          <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 ml-1">
+            OPEN SOURCE
+          </span>
         </a>
         <a v-if="item.note && item.note.indexOf('twitter') > -1"  target="_blank" :href="item.note">
-          <svg
-            style="display:inline;"
-            class="w-5 h-5 text-blue-300 fill-current ml-1 pointer"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24">
-            <path
-              d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-            />
+          <svg style="display:inline;" class="w-5 h-5 text-blue-300 fill-current ml-1 pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
           </svg>
         </a>
       </div>
-      <div v-if="results.length === 0" class="max-w-xl mb-8 animate-pulse">
-        ...
-      </div>
+      <div v-if="results.length === 0" class="max-w-xl mb-8 animate-pulse"> ... </div>
     </section>
 
     <!--
         AD SPACE
         We could do this programatically and swap out the text and image.. but we have plans for some crazy Ad types. Therefore each category needs to be unique.
     -->
+
     <div v-if="searchMode && category === 'landing'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/icme.png" alt="">
-            </div>
+          <img class="w-60 -mt-16 mx-auto shadow-lg" src="./assets/icme.png" alt="">
         </div>
         <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
-              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
-            </p>
+          <p class="text-gray-600 text-center px-5">
+              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration. During this time the next auction will take place! Contact 
+              <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+          </p>
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://www.icme.io/"><p class="text-sm text-center underline">Visit icme.io for no-code content creation on web3.</p></a>
+            <a target="_blank" href="https://www.icme.io/">
+              <p class="text-sm text-center underline">Visit icme.io for no-code content creation on web3.</p>
+            </a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'nftbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'nftbl'" @click="dropdownOn = false" 
+        class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/toniq.png" alt="">
-            </div>
+          <img class="w-60 -mt-16 mx-auto shadow-lg" src="./assets/toniq.png" alt="">
         </div>
         <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
-              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
-            </p>
+          <p class="text-gray-600 text-center px-5">
+              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration. During this time the next auction will take place! Contact 
+              <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+          </p>
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://toniqlabs.com/"><p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p></a>
+            <a target="_blank" href="https://toniqlabs.com/" class="text-sm text-center underline">
+              <p class="text-sm text-center underline">Visit Toniqlabs for NFT and tooling for web3.</p>
+            </a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'defibl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'defibl'" @click="dropdownOn = false" 
+      class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">   
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-40 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/infinityswap.png" alt="">
-            </div>
+            <img class="w-40 -mt-16 mx-auto shadow-lg" src="./assets/infinityswap.png" alt="">
         </div>
-        <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              The Platform to Create, Stake and Swap Tokens on the Internet Computer (Dfinity).
-            </p>
-        </div>
+        <div class="w-full mb-10 text-gray-600 text-center px-5">The Platform to Create, Stake and Swap Tokens on the Internet Computer (Dfinity).</div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://exwqn-uaaaa-aaaaf-qaeaa-cai.icp0.io/Infinity-Swap"><p class="text-sm text-center underline">InfinitySwap News on Nuance, the Publishing Platform for Web3.</p></a>
+            <a target="_blank" href="https://exwqn-uaaaa-aaaaf-qaeaa-cai.icp0.io/Infinity-Swap">
+              <p class="text-sm text-center underline">InfinitySwap News on Nuance, the Publishing Platform for Web3.</p>
+            </a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'interestingbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'interestingbl'" @click="dropdownOn = false" 
+        class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace"> 
         <div class="w-full pt-1 pb-5">
             <div class="overflow-hidden w-160 -mt-16 mx-auto shadow-lg">
-                  <video controls>
-                    <source src="./assets/icos_demo.mp4" type="video/mp4">
-                  </video>
+                <video controls> <source src="./assets/icos_demo.mp4" type="video/mp4"> </video>
             </div>
         </div>
-        <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              ICPCS is building an ecosystem on the Internet Computer powered by NFTs.
-              Access your own personalized portal into the IC - featuring powerful dApps, staking rewards, on-chain file storage and much more, all in one place. Join the ICPCS Community today!
-            </p>
+        <div class="w-full mb-10 text-gray-600 text-center px-5">
+            ICPCS is building an ecosystem on the Internet Computer powered by NFTs. Access your own personalized portal into the IC - featuring powerful dApps, staking rewards, on-chain file storage and much more, all in one place. Join the ICPCS Community today!
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
             <a target="_blank" href="https://icpcs.io/"><p class="text-sm text-center underline">Read more about ICPCS</p></a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'investorbl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'investorbl'" @click="dropdownOn = false" 
+      class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/icpanalysis.png" alt="">
-            </div>
-        </div>
-        <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              The ICP Analysis DSCVR portal will be the single most influential space for Internet Computer microeconomic discussion. It will feature monthly supply-demand-price reports from Kyle Langham, as well as deep data drives into the IC ecosystem.
-            </p>
+            <img class="w-60 -mt-16 mx-auto shadow-lg" src="./assets/icpanalysis.png" alt="">
+        </div>  
+        <div class="w-full mb-10 text-gray-600 text-center px-5">
+            The ICP Analysis DSCVR portal will be the single most influential space for Internet Computer microeconomic discussion. It will feature monthly supply-demand-price reports from Kyle Langham, as well as deep data drives into the IC ecosystem.
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://kn5ky-6iaaa-aaaai-qbikq-cai.icp0.io/project.html?projectId=18"><p class="text-sm text-center underline">Access NFTs for Season one on sale now!</p></a>
+            <a target="_blank" href="https://kn5ky-6iaaa-aaaai-qbikq-cai.icp0.io/project.html?projectId=18">
+              <p class="text-sm text-center underline">Access NFTs for Season one on sale now!</p>
+            </a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'daobl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'daobl'" @click="dropdownOn = false" 
+      class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/flowerdao.png" alt="">
-            </div>
-        </div>
-        <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              Community controlled launchpad by @btcflower | Merging the best Web3 stack with the finest art | Exclusively covering developments in the DAO.
-            </p>
+            <img class="w-60 -mt-16 mx-auto shadow-lg" src="./assets/flowerdao.png" alt="">
+        </div>  
+        <div class="w-full mb-10 text-gray-600 text-center px-5">
+            Community controlled launchpad by @btcflower | Merging the best Web3 stack with the finest art | Exclusively covering developments in the DAO.
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://oot6y-haaaa-aaaae-qaa7q-cai.icp0.io/"><p class="text-sm text-center underline">Check it out now!</p></a>
+            <a target="_blank" href="https://oot6y-haaaa-aaaae-qaa7q-cai.icp0.io/">
+              <p class="text-sm text-center underline">Check it out now!</p>
+            </a>
         </div>
     </div>
-    <div v-else-if="searchMode && category === 'funnybl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode && category === 'funnybl'" @click="dropdownOn = false" 
+      class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">     
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-80 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/tacos.gif" alt="">
-            </div>
-        </div>
-        <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              Taco NFTs are stoked to support Kinic’s mission of innovation and discovery on ICP and all of the devs working on Supernova!
-            </p>
+            <img class="w-80 -mt-16 mx-auto shadow-lg" src="./assets/tacos.gif" alt="">
+        </div>  
+        <div class="w-full mb-10 text-gray-600 text-center px-5">
+            Taco NFTs are stoked to support Kinic’s mission of innovation and discovery on ICP and all of the devs working on Supernova!
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://taconfts.xyz/"><p class="text-sm text-center underline">Learn more about our 10,000 Tacos living on the ICP Blockchain, join our community and mint your own at taconfts.xyz</p></a>
+            <a target="_blank" href="https://taconfts.xyz/">
+              <p class="text-sm text-center underline">
+                Learn more about our 10,000 Tacos living on the ICP Blockchain, join our community and mint your own at taconfts.xyz
+              </p>
+            </a>
         </div>
     </div>
     <div v-else-if="searchMode && category === 'utilitybl'" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-                <img src="./assets/nfid.png" alt="">
-            </div>
-        </div>
-        <div class="w-full mb-10">
-            <p class="text-gray-600 text-center px-5">
-              You and your users want a delightful onboarding experience to Web3, complete with proof of humanity and wallet support, and without sacrificing privacy or security. Get it all and then some (soon) with NFID built atop Internet Identity!
-              Contact <a target="_blank" href="https://twitter.com/IdentityMaxis">@IdentityMaxis</a> on Twitter for support.
-            </p>
+            <img class="w-60 -mt-16 mx-auto shadow-lg" src="./assets/nfid.png" alt="">
+        </div>   
+        <div class="w-full mb-10 text-gray-600 text-center px-5">
+            You and your users want a delightful onboarding experience to Web3, complete with proof of humanity and wallet support, and without sacrificing privacy or security. Get it all and then some (soon) with NFID built atop Internet Identity! Contact 
+            <a target="_blank" href="https://twitter.com/IdentityMaxis">@IdentityMaxis</a> 
+            on Twitter for support.
         </div>
         <div class="w-full">
             <p class="text-lg text-indigo-500 text-center addFont">Category | {{category || 'N/A'}}</p>
-            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.icp0.io/"><p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p></a>
+            <a target="_blank" href="https://3y5ko-7qaaa-aaaal-aaaaq-cai.raw.icp0.io/">
+              <p class="text-sm text-center underline">Visit NFID for secure one touch authentication on the IC.</p>
+            </a>
         </div>
     </div>
-    <div v-else-if="searchMode" @click="dropdownOn = false" class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
+    <div v-else-if="searchMode" @click="dropdownOn = false" 
+      class="hidden lg:block w-full mx-auto rounded-lg bg-white shadow-lg px-5 pt-5 pb-10 text-gray-800 fixed top-52 right-24 adSpace">
         <div class="w-full pt-1 pb-5">
-            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg">
-            </div>
+            <div class="overflow-hidden w-60 -mt-16 mx-auto shadow-lg"></div>
         </div>
         <div class="w-full mb-10">
             <div class="text-3xl text-indigo-500 text-center leading-tight addFont">Your AD</div>
             <p class="text-gray-600 text-center px-5">
-              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration.
-              During this time the next auction will take place! Contact <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
+              Login and make a bid on your category. The winner of the auction will have their Ad shown under the category for a two week duration. During this time the next auction will take place! Contact 
+              <a target="_blank" href="https://twitter.com/kinic_app">@kinic_app</a> on Twitter for support.
             </p>
         </div>
         <div class="w-full">
@@ -1240,15 +885,22 @@
     <div v-if="searchMode && pages > 1" class="flex flex-col items-center my-12">
       <div class="flex text-gray-700">
           <div @click="backPage()" class="h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" 
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                  class="feather feather-chevron-left w-6 h-6">
                   <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
           </div>
           <div class="flex h-12 font-medium rounded-full bg-gray-200">
-              <div v-for="i in pages" :key="i" @click="changePage(i)" :class="i == (page + 1) ? 'bg-gray-100' : ''" class="w-12 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in rounded-full">{{i}}</div>
+              <div v-for="i in pages" :key="i" @click="changePage(i)" 
+                :class="i == (page + 1) ? 'bg-gray-100' : ''" class="w-12 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in rounded-full">
+                {{i}}
+              </div>
           </div>
           <div @click="nextPage()" class="h-12 w-12 ml-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" 
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                  class="feather feather-chevron-right w-6 h-6">
                   <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
           </div>
@@ -1258,100 +910,59 @@
     <!-- SEARCH AND TITLE PAGE -->
     <section v-if="!searchMode && !whitepaperMode" @click="dropdownOn = false" class="w-full pt-20 mt-30 blackBG">
       <div class="flex justify-center">
-            <img class="kinicLogo" alt="kinic logotype" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzIxIDM1NC44NiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNmMDVjMjI7fS5jbHMtMntmaWxsOiNmYmFmMjg7fS5jbHMtM3tmaWxsOiMyM2E4ZTA7fS5jbHMtNHtmaWxsOiNlYzE5Nzg7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyNjcuMjEsMzQzLjIzYTE2Mi40MiwxNjIuNDIsMCwwLDEtMTQwLjI3LDYuNEExNjAuMTYsMTYwLjE2LDAsMCwxLDEwNDAsMjYyLjY5YTE2Mi4wNiwxNjIuMDYsMCwwLDEsMC0xMjYuNzdBMTYwLjE5LDE2MC4xOSwwLDAsMSwxMTI2Ljk0LDQ5YTE2Mi45MywxNjIuOTMsMCwwLDEsMTQwLjE3LDYuMiwxNjIuMTYsMTYyLjE2LDAsMCwxLDU4LjA2LDUyLjA1TDEzMzcsOTkuNTVhMTc3LjA2LDE3Ny4wNiwwLDAsMC02My4wOS01Ni43N0ExNzYuNjYsMTc2LjY2LDAsMCwwLDExMjEuNDIsMzYsMTc1LDE3NSwwLDAsMCwxMDI3LDEzMC40YTE3NS40MiwxNzUuNDIsMCwwLDAsMCwxMzcuODEsMTc0Ljk0LDE3NC45NCwwLDAsMCw5NC40Myw5NC40MywxNzYuNiwxNzYuNiwwLDAsMCwxNTIuMy02LjcsMTc3LjQyLDE3Ny40MiwwLDAsMCw2My4wOC01Ni4yOUwxMzI1LjM3LDI5MUExNjMuNzIsMTYzLjcyLDAsMCwxLDEyNjcuMjEsMzQzLjIzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMTkwLjMyLDEyMS4yNGE3Ny42NSw3Ny42NSwwLDAsMSw2NC42NywzNC4xbDExLjYzLTcuNjhBOTEuNTcsOTEuNTcsMCwwLDAsMTIzMy44OSwxMThhOTEuNzksOTEuNzksMCwwLDAtNzkuMzUtMy42NSw5MS4xMyw5MS4xMywwLDAsMC00OS4xOSw0OS4xOCw5MS40OCw5MS40OCwwLDAsMCwwLDcxLjU3LDkxLjE5LDkxLjE5LDAsMCwwLDQ5LjE5LDQ5LjE5LDkxLjg3LDkxLjg3LDAsMCwwLDc5LjE2LTMuNTUsOTEuNTUsOTEuNTUsMCwwLDAsMzIuNzItMjkuMzdMMTI1NSwyNDMuMDdhNzcuNTQsNzcuNTQsMCwwLDEtMjcuNywyNSw3Ni4xNyw3Ni4xNywwLDAsMS0zNyw5LjI2cS0zMi4zMywwLTU1LjItMjIuODZ0LTIyLjg2LTU1LjJxMC0zMi4zNCwyMi44Ni01NS4yVDExOTAuMzIsMTIxLjI0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMjkwLjA4LDEzMS40OWExMTkuNTIsMTE5LjUyLDAsMCwwLTQyLjg4LTM4LjY0LDEyMS4yNiwxMjEuMjYsMCwwLDAtMTE3LjQsMiwxMTkuNDgsMTE5LjQ4LDAsMCwwLTQ0LDQ0LDEyMS4zNCwxMjEuMzQsMCwwLDAsMCwxMjEsMTE5LjQ1LDExOS40NSwwLDAsMCw0NCw0NCwxMjEuMjIsMTIxLjIyLDAsMCwwLDExNy40LDIsMTE5LjYxLDExOS42MSwwLDAsMCw0Mi44OC0zOC42NEwxMjc4LjQ1LDI1OWExMDYuMzEsMTA2LjMxLDAsMCwxLTM3Ljg1LDM0LjExLDEwNi43MSwxMDYuNzEsMCwwLDEtMTAzLjctMS42OCwxMDYuMjIsMTA2LjIyLDAsMCwxLTM4Ljc0LTM4Ljc0LDEwNi45NSwxMDYuOTUsMCwwLDEsMC0xMDYuODUsMTA2LjM3LDEwNi4zNywwLDAsMSwzOC43NC0zOC43NCwxMDYuOTEsMTA2LjkxLDAsMCwxLDEwMy42LTEuNzcsMTA2LjI1LDEwNi4yNSwwLDAsMSwzNy43NSwzMy44MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTMxMy43NCwxMTUuNzJhMTQ5LjE5LDE0OS4xOSwwLDAsMC01My00Ny44MSwxNDkuMzcsMTQ5LjM3LDAsMCwwLTE0NS4xLDIuMzcsMTQ4LjQ2LDE0OC40NiwwLDAsMC01NC4zMiw1NC4zMSwxNDUuNywxNDUuNywwLDAsMC0yMCw3NC43MiwxNDUuNywxNDUuNywwLDAsMCwyMCw3NC43MiwxNDguNTMsMTQ4LjUzLDAsMCwwLDU0LjMyLDU0LjMxLDE0OS40OCwxNDkuNDgsMCwwLDAsMTQ0LjgsMi41NiwxNDguMjEsMTQ4LjIxLDAsMCwwLDUyLjkzLTQ3LjQxTDEzMDEuOTEsMjc1QTEzNS4xOSwxMzUuMTksMCwwLDEsMTI1NCwzMTguMThhMTMxLjE2LDEzMS4xNiwwLDAsMS02My42OCwxNiwxMzIuNzcsMTMyLjc3LDAsMCwxLTUyLjQ0LTEwLjY0LDEzMS41OCwxMzEuNTgsMCwwLDEtNzEuNzYtNzEuNzcsMTM0LjUyLDEzNC41MiwwLDAsMSwwLTEwNC44NywxMzEuNjcsMTMxLjY3LDAsMCwxLDcxLjc2LTcxLjc3LDEzNSwxMzUsMCwwLDEsMTE2LDUuMjMsMTM0LjExLDEzNC4xMSwwLDAsMSw0OCw0My4wOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI0MTUuMjUiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9IjM4NS42MiIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMzU2IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSIzMjYuMzciIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTExLjYxIDM0OC40NCA1MjYuNDIgMzQ4LjQ0IDUyNi40MiA5OS4wOSA1MTEuNjEgNzMuOTggNTExLjYxIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3ODMuMTkgNy43NCA3NjguMzcgNy43NCA3NjguMzcgMjU3LjEgNzgzLjE5IDI4Mi4yIDc4My4xOSA3Ljc0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjcyMy45MyA3Ljc0IDcwOS4xMiA3Ljc0IDcwOS4xMiAxNTkuOTkgNzIzLjkzIDE4NC40NyA3MjMuOTMgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3NTMuNTYgNy43NCA3MzguNzUgNy43NCA3MzguNzUgMjA4LjEzIDc1My41NiAyMzMuMDIgNzUzLjU2IDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNzk4IDMyNC4zNyA2MDMuNzggNy43NCA1ODYuNSA3Ljc0IDc5NS4zMiAzNDguNDQgODEyLjgxIDM0OC40NCA4MTIuODEgNy43NCA3OTggNy43NCA3OTggMzI0LjM3Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjU0MS4yMyAzNDguNDQgNTU2LjA1IDM0OC40NCA1NTYuMDUgMTQ4LjA1IDU0MS4yMyAxMjMuMTYgNTQxLjIzIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1MTYuNzUgNy43NCA3MjYuMiAzNDguNDQgNzQzLjQ4IDM0OC40NCA1MzQuMDMgNy43NCA1MTYuNzUgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1NTEuNzMgNy43NCA3NjAuNzYgMzQ4LjQ0IDc3OC40NSAzNDguNDQgNTY5LjIxIDcuNzQgNTUxLjczIDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTcwLjg2IDM0OC40NCA1ODUuNjcgMzQ4LjQ0IDU4NS42NyAxOTYuMiA1NzAuODYgMTcxLjcyIDU3MC44NiAzNDguNDQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNDgxLjk4IDcuNzQgNDgxLjk4IDM0OC40NCA0OTYuNzkgMzQ4LjQ0IDQ5Ni43OSAzMS44MSA2OTEuNDIgMzQ4LjQ0IDcwOC41IDM0OC40NCA0OTkuNjggNy43NCA0ODEuOTggNy43NCIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iOTE3LjU3IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI4NTguMzEiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9Ijk0Ny4xOSIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iODg3Ljk0IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy00IiB4PSIyOS43MSIgeT0iNC4xNiIgd2lkdGg9IjE0Ljg1IiBoZWlnaHQ9IjM0MS42NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSI4OS4xMiAzNDUuOCAxMDMuOTggMzQ1LjggMTAzLjk4IDI1MS43IDg5LjEyIDIyMi43IDg5LjEyIDM0NS44Ii8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjU5LjQyIDM0NS44IDc0LjI3IDM0NS44IDc0LjI3IDE5My42OSA2NC42OSAxNzQuOTggNzQuMjcgMTU2LjI3IDc0LjI3IDQuMTYgNTkuNDIgNC4xNiA1OS40MiAzNDUuOCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSIxMDMuOTggNC4xNiA4OS4xMiA0LjE2IDg5LjEyIDEyNy4yNiAxMDMuOTggOTguMjUgMTAzLjk4IDQuMTYiLz48cmVjdCBjbGFzcz0iY2xzLTQiIHk9IjQuMTYiIHdpZHRoPSIxNC44NSIgaGVpZ2h0PSIzNDEuNjQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTA2LjkyIDE3Ny42MiAxOTQuMzkgNi44IDE3Ny44OCA2LjggMTAzLjk4IDE1MS4xMyA5MC40MSAxNzcuNjIgMTAzLjk4IDIwNC4xMSAxNzYuNTMgMzQ1LjggMTc3Ljg4IDM0OC40NCAxOTQuMzkgMzQ4LjQ0IDE5My4wMyAzNDUuOCAxMDYuOTIgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjE0MC4zNCAxNzcuNjIgMjI3LjYxIDYuOCAyMTEuMSA2LjggMTIzLjgzIDE3Ny42MiAyMDkuNzUgMzQ1LjggMjExLjEgMzQ4LjQ0IDIyNy42MSAzNDguNDQgMjI2LjI1IDM0NS44IDE0MC4zNCAxNzcuNjIiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTczLjU1IDE3Ny42MiAyNjAuODIgNi44IDI0NC4zMiA2LjggMTU3LjA1IDE3Ny42MiAyNDIuOTcgMzQ1LjggMjQ0LjMyIDM0OC40NCAyNjAuODIgMzQ4LjQ0IDI1OS40NyAzNDUuOCAxNzMuNTUgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjI3Ny41MyA2LjggMTkwLjI2IDE3Ny42MiAyNzcuNTMgMzQ4LjQ0IDI5NC4wNCAzNDguNDQgMjA2Ljc3IDE3Ny42MiAyOTQuMDQgNi44IDI3Ny41MyA2LjgiLz48L3N2Zz4=" />
+          <img class="kinicLogo" alt="kinic logotype" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzIxIDM1NC44NiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNmMDVjMjI7fS5jbHMtMntmaWxsOiNmYmFmMjg7fS5jbHMtM3tmaWxsOiMyM2E4ZTA7fS5jbHMtNHtmaWxsOiNlYzE5Nzg7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyNjcuMjEsMzQzLjIzYTE2Mi40MiwxNjIuNDIsMCwwLDEtMTQwLjI3LDYuNEExNjAuMTYsMTYwLjE2LDAsMCwxLDEwNDAsMjYyLjY5YTE2Mi4wNiwxNjIuMDYsMCwwLDEsMC0xMjYuNzdBMTYwLjE5LDE2MC4xOSwwLDAsMSwxMTI2Ljk0LDQ5YTE2Mi45MywxNjIuOTMsMCwwLDEsMTQwLjE3LDYuMiwxNjIuMTYsMTYyLjE2LDAsMCwxLDU4LjA2LDUyLjA1TDEzMzcsOTkuNTVhMTc3LjA2LDE3Ny4wNiwwLDAsMC02My4wOS01Ni43N0ExNzYuNjYsMTc2LjY2LDAsMCwwLDExMjEuNDIsMzYsMTc1LDE3NSwwLDAsMCwxMDI3LDEzMC40YTE3NS40MiwxNzUuNDIsMCwwLDAsMCwxMzcuODEsMTc0Ljk0LDE3NC45NCwwLDAsMCw5NC40Myw5NC40MywxNzYuNiwxNzYuNiwwLDAsMCwxNTIuMy02LjcsMTc3LjQyLDE3Ny40MiwwLDAsMCw2My4wOC01Ni4yOUwxMzI1LjM3LDI5MUExNjMuNzIsMTYzLjcyLDAsMCwxLDEyNjcuMjEsMzQzLjIzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMTkwLjMyLDEyMS4yNGE3Ny42NSw3Ny42NSwwLDAsMSw2NC42NywzNC4xbDExLjYzLTcuNjhBOTEuNTcsOTEuNTcsMCwwLDAsMTIzMy44OSwxMThhOTEuNzksOTEuNzksMCwwLDAtNzkuMzUtMy42NSw5MS4xMyw5MS4xMywwLDAsMC00OS4xOSw0OS4xOCw5MS40OCw5MS40OCwwLDAsMCwwLDcxLjU3LDkxLjE5LDkxLjE5LDAsMCwwLDQ5LjE5LDQ5LjE5LDkxLjg3LDkxLjg3LDAsMCwwLDc5LjE2LTMuNTUsOTEuNTUsOTEuNTUsMCwwLDAsMzIuNzItMjkuMzdMMTI1NSwyNDMuMDdhNzcuNTQsNzcuNTQsMCwwLDEtMjcuNywyNSw3Ni4xNyw3Ni4xNywwLDAsMS0zNyw5LjI2cS0zMi4zMywwLTU1LjItMjIuODZ0LTIyLjg2LTU1LjJxMC0zMi4zNCwyMi44Ni01NS4yVDExOTAuMzIsMTIxLjI0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2IC0yMS44OCkiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMjkwLjA4LDEzMS40OWExMTkuNTIsMTE5LjUyLDAsMCwwLTQyLjg4LTM4LjY0LDEyMS4yNiwxMjEuMjYsMCwwLDAtMTE3LjQsMiwxMTkuNDgsMTE5LjQ4LDAsMCwwLTQ0LDQ0LDEyMS4zNCwxMjEuMzQsMCwwLDAsMCwxMjEsMTE5LjQ1LDExOS40NSwwLDAsMCw0NCw0NCwxMjEuMjIsMTIxLjIyLDAsMCwwLDExNy40LDIsMTE5LjYxLDExOS42MSwwLDAsMCw0Mi44OC0zOC42NEwxMjc4LjQ1LDI1OWExMDYuMzEsMTA2LjMxLDAsMCwxLTM3Ljg1LDM0LjExLDEwNi43MSwxMDYuNzEsMCwwLDEtMTAzLjctMS42OCwxMDYuMjIsMTA2LjIyLDAsMCwxLTM4Ljc0LTM4Ljc0LDEwNi45NSwxMDYuOTUsMCwwLDEsMC0xMDYuODUsMTA2LjM3LDEwNi4zNywwLDAsMSwzOC43NC0zOC43NCwxMDYuOTEsMTA2LjkxLDAsMCwxLDEwMy42LTEuNzcsMTA2LjI1LDEwNi4yNSwwLDAsMSwzNy43NSwzMy44MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTMxMy43NCwxMTUuNzJhMTQ5LjE5LDE0OS4xOSwwLDAsMC01My00Ny44MSwxNDkuMzcsMTQ5LjM3LDAsMCwwLTE0NS4xLDIuMzcsMTQ4LjQ2LDE0OC40NiwwLDAsMC01NC4zMiw1NC4zMSwxNDUuNywxNDUuNywwLDAsMC0yMCw3NC43MiwxNDUuNywxNDUuNywwLDAsMCwyMCw3NC43MiwxNDguNTMsMTQ4LjUzLDAsMCwwLDU0LjMyLDU0LjMxLDE0OS40OCwxNDkuNDgsMCwwLDAsMTQ0LjgsMi41NiwxNDguMjEsMTQ4LjIxLDAsMCwwLDUyLjkzLTQ3LjQxTDEzMDEuOTEsMjc1QTEzNS4xOSwxMzUuMTksMCwwLDEsMTI1NCwzMTguMThhMTMxLjE2LDEzMS4xNiwwLDAsMS02My42OCwxNiwxMzIuNzcsMTMyLjc3LDAsMCwxLTUyLjQ0LTEwLjY0LDEzMS41OCwxMzEuNTgsMCwwLDEtNzEuNzYtNzEuNzcsMTM0LjUyLDEzNC41MiwwLDAsMSwwLTEwNC44NywxMzEuNjcsMTMxLjY3LDAsMCwxLDcxLjc2LTcxLjc3LDEzNSwxMzUsMCwwLDEsMTE2LDUuMjMsMTM0LjExLDEzNC4xMSwwLDAsMSw0OCw0My4wOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiAtMjEuODgpIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI0MTUuMjUiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9IjM4NS42MiIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMzU2IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSIzMjYuMzciIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTExLjYxIDM0OC40NCA1MjYuNDIgMzQ4LjQ0IDUyNi40MiA5OS4wOSA1MTEuNjEgNzMuOTggNTExLjYxIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3ODMuMTkgNy43NCA3NjguMzcgNy43NCA3NjguMzcgMjU3LjEgNzgzLjE5IDI4Mi4yIDc4My4xOSA3Ljc0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjcyMy45MyA3Ljc0IDcwOS4xMiA3Ljc0IDcwOS4xMiAxNTkuOTkgNzIzLjkzIDE4NC40NyA3MjMuOTMgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI3NTMuNTYgNy43NCA3MzguNzUgNy43NCA3MzguNzUgMjA4LjEzIDc1My41NiAyMzMuMDIgNzUzLjU2IDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNzk4IDMyNC4zNyA2MDMuNzggNy43NCA1ODYuNSA3Ljc0IDc5NS4zMiAzNDguNDQgODEyLjgxIDM0OC40NCA4MTIuODEgNy43NCA3OTggNy43NCA3OTggMzI0LjM3Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjU0MS4yMyAzNDguNDQgNTU2LjA1IDM0OC40NCA1NTYuMDUgMTQ4LjA1IDU0MS4yMyAxMjMuMTYgNTQxLjIzIDM0OC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1MTYuNzUgNy43NCA3MjYuMiAzNDguNDQgNzQzLjQ4IDM0OC40NCA1MzQuMDMgNy43NCA1MTYuNzUgNy43NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1NTEuNzMgNy43NCA3NjAuNzYgMzQ4LjQ0IDc3OC40NSAzNDguNDQgNTY5LjIxIDcuNzQgNTUxLjczIDcuNzQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNTcwLjg2IDM0OC40NCA1ODUuNjcgMzQ4LjQ0IDU4NS42NyAxOTYuMiA1NzAuODYgMTcxLjcyIDU3MC44NiAzNDguNDQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iNDgxLjk4IDcuNzQgNDgxLjk4IDM0OC40NCA0OTYuNzkgMzQ4LjQ0IDQ5Ni43OSAzMS44MSA2OTEuNDIgMzQ4LjQ0IDcwOC41IDM0OC40NCA0OTkuNjggNy43NCA0ODEuOTggNy43NCIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iOTE3LjU3IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy0yIiB4PSI4NTguMzEiIHk9IjcuNzQiIHdpZHRoPSIxNC44MSIgaGVpZ2h0PSIzNDAuNzEiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9Ijk0Ny4xOSIgeT0iNy43NCIgd2lkdGg9IjE0LjgxIiBoZWlnaHQ9IjM0MC43MSIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iODg3Ljk0IiB5PSI3Ljc0IiB3aWR0aD0iMTQuODEiIGhlaWdodD0iMzQwLjcxIi8+PHJlY3QgY2xhc3M9ImNscy00IiB4PSIyOS43MSIgeT0iNC4xNiIgd2lkdGg9IjE0Ljg1IiBoZWlnaHQ9IjM0MS42NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSI4OS4xMiAzNDUuOCAxMDMuOTggMzQ1LjggMTAzLjk4IDI1MS43IDg5LjEyIDIyMi43IDg5LjEyIDM0NS44Ii8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjU5LjQyIDM0NS44IDc0LjI3IDM0NS44IDc0LjI3IDE5My42OSA2NC42OSAxNzQuOTggNzQuMjcgMTU2LjI3IDc0LjI3IDQuMTYgNTkuNDIgNC4xNiA1OS40MiAzNDUuOCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtNCIgcG9pbnRzPSIxMDMuOTggNC4xNiA4OS4xMiA0LjE2IDg5LjEyIDEyNy4yNiAxMDMuOTggOTguMjUgMTAzLjk4IDQuMTYiLz48cmVjdCBjbGFzcz0iY2xzLTQiIHk9IjQuMTYiIHdpZHRoPSIxNC44NSIgaGVpZ2h0PSIzNDEuNjQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTA2LjkyIDE3Ny42MiAxOTQuMzkgNi44IDE3Ny44OCA2LjggMTAzLjk4IDE1MS4xMyA5MC40MSAxNzcuNjIgMTAzLjk4IDIwNC4xMSAxNzYuNTMgMzQ1LjggMTc3Ljg4IDM0OC40NCAxOTQuMzkgMzQ4LjQ0IDE5My4wMyAzNDUuOCAxMDYuOTIgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjE0MC4zNCAxNzcuNjIgMjI3LjYxIDYuOCAyMTEuMSA2LjggMTIzLjgzIDE3Ny42MiAyMDkuNzUgMzQ1LjggMjExLjEgMzQ4LjQ0IDIyNy42MSAzNDguNDQgMjI2LjI1IDM0NS44IDE0MC4zNCAxNzcuNjIiLz48cG9seWdvbiBjbGFzcz0iY2xzLTQiIHBvaW50cz0iMTczLjU1IDE3Ny42MiAyNjAuODIgNi44IDI0NC4zMiA2LjggMTU3LjA1IDE3Ny42MiAyNDIuOTcgMzQ1LjggMjQ0LjMyIDM0OC40NCAyNjAuODIgMzQ4LjQ0IDI1OS40NyAzNDUuOCAxNzMuNTUgMTc3LjYyIi8+PHBvbHlnb24gY2xhc3M9ImNscy00IiBwb2ludHM9IjI3Ny41MyA2LjggMTkwLjI2IDE3Ny42MiAyNzcuNTMgMzQ4LjQ0IDI5NC4wNCAzNDguNDQgMjA2Ljc3IDE3Ny42MiAyOTQuMDQgNi44IDI3Ny41MyA2LjgiLz48L3N2Zz4=" />
       </div>
     </section>
 
     <section v-if="!searchMode && !whitepaperMode" @click="dropdownOn = false" style="margin-bottom:2%;" class="w-full blackBG">
         <div class="p-4 w-full pb-20">
-            <div class="flex justify-center">
-                <div class="pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-6/12 2xl:w-5/12">
-                   <input style="border-width: 1px;" autofocus class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
-                     type="search" name="search" placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
-                   <i class="absolute left-4 top-1 mt-5 mr-4">
-                     <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                       xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                       viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                       width="512px" height="512px">
-                       <path
-                         d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                     </svg>
-                   </i>
-                 </div>
-              </div>
+            <div class="flex justify-center pt-2 relative mx-auto text-gray-600 w-9/12 xl:w-6/12 2xl:w-5/12">
+                <input class="border-gray-200 bg-white h-12 px-5 pl-12 rounded-xl text-sm focus:outline-none w-full customHover text-lg"
+                  style="border-width: 1px;" autofocus type="search" name="search" 
+                  placeholder="Search text or a canister id" v-model="search" @keyup.enter="termSearch('in')">
+                <i class="absolute left-4 top-1 mt-5 mr-4">
+                  <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                    width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                  </svg>
+                </i>
+            </div>
             <div class="flex justify-center mt-10">
-              <button @click="termSearch('in')" class="text-white font-bold py-3 px-8 rounded searchButton text-gray-800 bg-gray-300 hover:text-gray-700 hover:bg-gray-100">Search Web 3.0</button>
+              <button @click="termSearch('in')" 
+                class="text-white font-bold py-3 px-8 rounded searchButton text-gray-800 bg-gray-300 hover:text-gray-700 hover:bg-gray-100">
+                Search Web 3.0
+              </button>
             </div>
         </div>
     </section>
 
     <div v-if="!searchMode && !whitepaperMode" @click="dropdownOn = false" class="mt-6 mx-2 ml-8 mb-2">
-        <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Blog
-        </a>
-        <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Communication
-        </a>
-        <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          DAO
-        </a>
-        <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Defi
-        </a>
-        <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Docs
-        </a>
-        <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Funny
-        </a>
-        <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Games
-        </a>
-        <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Interesting
-        </a>
-        <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Investor
-        </a>
+      <a @click="categorySearch('blog')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Blog</a>
+      <a @click="categorySearch('communication')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Communication</a>
+      <a @click="categorySearch('dao')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">DAO</a>
+      <a @click="categorySearch('defi')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Defi</a>
+      <a @click="categorySearch('docs')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Docs</a>
+      <a @click="categorySearch('funny')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Funny</a>
+      <a @click="categorySearch('game')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Games</a>
+      <a @click="categorySearch('interesting')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Interesting</a>
+      <a @click="categorySearch('investor')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Investor</a>
     </div>
     <div v-if="!searchMode && !whitepaperMode" @click="dropdownOn = false" class="mt-2 mb-10 ml-8">
-        <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Portfolio
-        </a>
-        <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Landing
-        </a>
-        <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Learning
-        </a>
-        <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Music
-        </a>
-        <a @click="categorySearch('news')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          News
-        </a>
-        <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          NFT
-        </a>
-        <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Social
-        </a>
-        <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Utility
-        </a>
-        <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Video
-        </a>
-        <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">
-          Work In Progress
-        </a>
+      <a @click="categorySearch('portfolio')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Portfolio</a>
+      <a @click="categorySearch('landing')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Landing</a>
+      <a @click="categorySearch('learning')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Learning</a>
+      <a @click="categorySearch('music')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Music</a>
+      <a @click="categorySearch('news')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">News</a>
+      <a @click="categorySearch('nft')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">NFT</a>
+      <a @click="categorySearch('social')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Social</a>
+      <a @click="categorySearch('utility')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Utility</a>
+      <a @click="categorySearch('video')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Video</a>
+      <a @click="categorySearch('wip')" class="mr-6 text-gray-500 hover:text-red-800 font-light cursor-pointer">Work In Progress</a>
     </div>
 
-    <Modal
-      v-model="adMode"
-      :close="closeAds"
-      class="z-20"
-    >
+    <Modal v-model="adMode" :close="closeAds" class="z-20">
       <div class="modal shadow-lg">
         <button @click="closeAds" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
           X
@@ -1361,76 +972,64 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <b>Fund your account on the 'Claim Site' page. Auctions end after one week. Check out Twitter @kinic_app for updates!</b>
-                <br/>
-                <b>Kinic receives 1% of each bid for running the auction.</b>
-                <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
-                <table class="min-w-full">
-                  <thead class="bg-indigo-100 border-b">
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                        Category
-                      </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                        Status
-                      </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                        Bids
-                      </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                        Highest Bid
-                      </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                        Manage Your Bid
-                      </th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="item in this.cats" :key="item.name" class="bg-white border-b">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.name}}</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.status}}</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.bids.length}}</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.highestBid}}</td>
-                      <td v-if="item.status === 'Open'" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <button :disabled="buttonClicked" @click="offerBid(item.name, claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
-                          Make Offer
-                          <b v-if="buttonClicked">
-                            <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                              <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                          </b>
-                        </button>
-                        <button :disabled="buttonClicked" @click="cancelBid(claimCanister)" class="bg-red-600 text-white py-2 px-3 rounded hover:bg-red-500 mr-2">
-                          Cancel Offer
-                          <b v-if="buttonClicked">
-                            <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                              <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                          </b>
-                        </button>
-                      </td>
-                      <td v-else class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <button disabled class="bg-green-400 text-white py-2 px-3 rounded mr-2 cursor-not-allowed">
-                          Make Offer
-                        </button>
-                        <button disabled class="bg-red-400 text-white py-2 px-3 rounded mr-2 cursor-not-allowed">
-                          Cancel Offer
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <b>Fund your account on the 'Claim Site' page. Auctions end after one week. Check out Twitter @kinic_app for updates!</b>
+              <br/>
+              <b>Kinic receives 1% of each bid for running the auction.</b>
+              <input type="text" v-model="claimCanister" 
+                  placeholder="The canister ID that you own and want to make an AD for (ex. 74iy7-xqaaa-aaaaf-qagra-cai)" 
+                  class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2"/>
+              <table class="min-w-full">
+                <thead class="bg-indigo-100 border-b">
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Category</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Status</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Bids</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Highest Bid</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Manage Your Bid</th>
+                </thead>
+                <tbody>
+                  <tr v-for="item in this.cats" :key="item.name" class="bg-white border-b">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.name}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.status}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.bids.length}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.highestBid}}</td>
+                    <td v-if="item.status === 'Open'" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <button :disabled="buttonClicked" @click="offerBid(item.name, claimCanister)" 
+                        class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
+                        Make Offer
+                        <b v-if="buttonClicked">
+                          <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" 
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        </b>
+                      </button>
+                      <button :disabled="buttonClicked" @click="cancelBid(claimCanister)" 
+                        class="bg-red-600 text-white py-2 px-3 rounded hover:bg-red-500 mr-2">
+                        Cancel Offer
+                        <b v-if="buttonClicked">
+                          <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" 
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        </b>
+                      </button>
+                    </td>
+                    <td v-else class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <button disabled class="bg-green-400 text-white py-2 px-3 rounded mr-2 cursor-not-allowed">Make Offer</button>
+                      <button disabled class="bg-red-400 text-white py-2 px-3 rounded mr-2 cursor-not-allowed">Cancel Offer</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </Modal>
 
-    <Modal
-      v-model="claimMode"
-      :close="closeClaim"
-      class="z-20"
-    >
+    <Modal v-model="claimMode" :close="closeClaim" class="z-20">
       <div class="modal shadow-lg">
         <button @click="closeClaim" class="bg-gray-200 text-gray-800 py-2 px-3 rounded hover:bg-gray-100 hover:text-gray-700 mr-2">
           X
@@ -1440,56 +1039,55 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <p class="text-medium mt-4">1. Enter your canister's ID and make a Claim Request. If you have done this previously input ID and get funding address in step #3.</p>
-                <input type="text" v-model="claimCanister" placeholder="The canister ID that you own and want to claim. (ex. 74iy7-xqaaa-aaaaf-qagra-cai from the Kinic URL)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
-                <button :disabled="buttonClicked" @click="claimSite(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
-                  Claim Request
-                  <b v-if="buttonClicked">
-                    <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                      <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                  </b>
-                </button>
-                <p class="text-medium mt-4 mb-2">2. Use DFX with the identity that created the canister, or is an owner, and run this command.</p>
-                <p class="font-light text-gray-700 bg-gray-100 px-2 py-4">
-                  dfx canister --network ic call 73j6l-2iaaa-aaaaf-qagrq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'
-                </p>
-                <p class="font-bold mt-2 mb-2 text-xs">
-                  *Your claim request needs to be manually verfied as Motoko does not have a 'canister info' method yet. This may take some time. DM us at https://twitter.com/kinic_app with this principal for support.
-                </p>
-                <hr/>
-                <div class="text-2xl text-indigo-500 leading-tight addFont mt-4">Fill Account</div>
-                <div class="text-medium text-indigo-500">3. Fill this address with ICP to make a bid.</div>
-                <button :disabled="buttonClicked" @click="getAddress(claimCanister)" class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mt-2">
-                  Get Address & Balance
-                  <b v-if="buttonClicked">
-                    <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                      <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                  </b>
-                </button>
-                <p v-if="bidAddress" class="font-light text-gray-700 bg-gray-100 px-2 py-4 mt-2">
-                  {{bidAddress}}
-                </p>
-                <p v-if="bidAddress" class="font-bold mb-2 text-xs mb-2">
-                  *Transfer ICP to this address. The full amount will be used when you make a bid.
-                </p>
-                <p v-if="balance" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">
-                  {{(Number(balance)/100000000)}} ICP
-                </p>
-                <p v-if="balance" class="text-medium mt-4">Enter the account id that you want to send your balance to.</p>
-                <input v-if="balance" type="text" v-model="accountID" placeholder="Account ID (ex. bb1bddb10fa4e5539316e735d6559d8ae454a48aeb68cc6b454f0f9201bdb9f8)" class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
-                <button v-if="balance" :disabled="buttonClicked" @click="refound(claimCanister)" class="bg-yellow-600 text-white py-2 px-3 rounded hover:bg-yellow-500 mt-2 mb-2">
-                  Redeem Balance
-                </button>
+              <p class="text-medium mt-4">1. Enter your canister's ID and make a Claim Request. If you have done this previously input ID and get funding address in step #3.</p>
+              <input type="text" v-model="claimCanister" 
+                placeholder="The canister ID that you own and want to claim. (ex. 74iy7-xqaaa-aaaaf-qagra-cai from the Kinic URL)" 
+                class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 
+                focus:shadow-inner mb-2" 
+              />
+              <button :disabled="buttonClicked" @click="claimSite(claimCanister)" 
+                class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mr-2">
+                Claim Request
+                <b v-if="buttonClicked">
+                  <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </b>
+              </button>
+              <p class="text-medium mt-4 mb-2">2. Use DFX with the identity that created the canister, or is an owner, and run this command.</p>
+              <p class="font-light text-gray-700 bg-gray-100 px-2 py-4">dfx canister --network ic call 73j6l-2iaaa-aaaaf-qagrq-cai requestVerifyContentOwner '(principal "{{claimCanister}}")'</p>
+              <p class="font-bold mt-2 mb-2 text-xs">*Your claim request needs to be manually verfied as Motoko does not have a 'canister info' method yet. This may take some time. DM us at https://twitter.com/kinic_app with this principal for support.</p>
+              <hr/>
+              <div class="text-2xl text-indigo-500 leading-tight addFont mt-4">Fill Account</div>
+              <div class="text-medium text-indigo-500">3. Fill this address with ICP to make a bid.</div>
+              <button :disabled="buttonClicked" @click="getAddress(claimCanister)" 
+                class="bg-green-600 text-white py-2 px-3 rounded hover:bg-green-500 mt-2">
+                Get Address & Balance
+                <b v-if="buttonClicked">
+                  <svg style="display:inline;" class="animate-spin ml-4 mr-3 h-5 w-5 text-white" 
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="#000" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </b>
+              </button>
+              <p v-if="bidAddress" class="font-light text-gray-700 bg-gray-100 px-2 py-4 mt-2">{{bidAddress}}</p>
+              <p v-if="bidAddress" class="font-bold mb-2 text-xs mb-2">*Transfer ICP to this address. The full amount will be used when you make a bid.</p>
+              <p v-if="balance" class="font-light text-gray-700 bg-gray-100 px-2 py-4 my-2">{{(Number(balance)/100000000)}} ICP</p>
+              <p v-if="balance" class="text-medium mt-4">Enter the account id that you want to send your balance to.</p>
+              <input v-if="balance" type="text" v-model="accountID" 
+                placeholder="Account ID (ex. bb1bddb10fa4e5539316e735d6559d8ae454a48aeb68cc6b454f0f9201bdb9f8)" 
+                class="block w-full p-2 mt-2 text-gray-700 bg-gray-100 appearance-none focus:outline-none focus:bg-gray-200 focus:shadow-inner mb-2" />
+              <button v-if="balance" :disabled="buttonClicked" @click="refound(claimCanister)" 
+                class="bg-yellow-600 text-white py-2 px-3 rounded hover:bg-yellow-500 mt-2 mb-2">
+                Redeem Balance
+              </button>
             </div>
           </div>
         </div>
       </div>
     </Modal>
-
 </template>
 
 <script>
