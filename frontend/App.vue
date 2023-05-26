@@ -7,6 +7,7 @@
 
 <script>
 import Search from "./Search.vue"
+import Whitepaper from "./Whitepaper.vue";
 
 export default {
   name: "App",
