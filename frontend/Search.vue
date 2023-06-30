@@ -1980,7 +1980,12 @@ export default {
         }
         await Promise.all(promises);
         if (data.length == 0) console.log("No result")
-        response = data.map(r => JSON.parse(r)).flat()
+        let res2 = data.map(r => JSON.parse(r)).flat()
+        console.log(res2.length)
+        response = response.concat(res2)
+
+        // response.forEach((r)=>{console.log(r.get("title"))})
+        console.log(response.length)
         
         this.paginate(response)
       }
