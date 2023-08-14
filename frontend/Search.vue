@@ -1502,6 +1502,8 @@ import VueCountdown from '@chenfengyuan/vue-countdown'
 import { createActor as canDBService} from "./candbservice/index"
 import { createActor as canDBIndex} from "./candbindex/index"
 
+import {searchTotal} from "./searchTotal.js"
+
 
 let main = mainCA(MAIN_CANISTER_ID);
 
@@ -1510,10 +1512,10 @@ let dbIndexCanisterId = 'msqgt-mqaaa-aaaaf-qaj2a-cai'
 let dbServiceCanisterId;
 let dbName = 'kindb'
 
-if (location.port === '3000' || location.port === '8000') {
-  //host = 'http://127.0.0.1:8080'
-  //dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
-  //dbName = 'test'
+if (location.port === '3000' || location.port === '8000' || location.port === '8080') {
+  // host = 'http://127.0.0.1:8080'
+  // dbIndexCanisterId = 'bkyz2-fmaaa-aaaaa-qaaaq-cai'
+  // dbName = 'kinicdb'
 }
 
 let dbIndex = canDBIndex(dbIndexCanisterId, {agentOptions: {host}})
@@ -1932,62 +1934,13 @@ export default {
         this.paginate(mtx)
       } else {
 
-        let res = await dbService.searchTermForParallel((this.search).split(" "))
-        let response = []
-
-        if (res[0] != '[]') {
-          response = JSON.parse(res[0])
-
-          if (response.length >= 20) {
-            this.paginate(response)
-            return
-          }
-        }
-
-        let term = this.search
-        let got = false
-        let data = []
-        let query_data = async (term, sk) => {
-          return new Promise(async (resolve) => {
-            let res = await dbService.searchTermWithTarget(true, true, true, term.split(" "), [sk])
-            if (res[0] != '[]') {
-              got = true
-              data.push(res[0])
-            }
-            resolve(res)
-          });
-        }
-
-        const MAX = res[1].length;
-        const CONCURRENCY = 40;
-        console.log("Max", MAX)
-        let cnt = 0;
-        let promises = [];
-
-        for (let i = 0; i < CONCURRENCY; i++) {
-          let p = new Promise((resolve) => {
-            (async function loop(index) {
-              if (index < MAX && !got) {
-                await query_data(term, res[1][index]);
-                // console.log(index)
-                loop(cnt++);
-                return;
-              }
-              resolve();
-            })(cnt++);
-          });
-          promises.push(p);
-        }
-        await Promise.all(promises);
-        if (data.length == 0) console.log("No result")
-        let res2 = data.map(r => JSON.parse(r)).flat()
-        console.log(res2.length)
-        response = response.concat(res2)
-
-        // response.forEach((r)=>{console.log(r.get("title"))})
-        console.log(response.length)
+        let query = (this.search).toLowerCase().replace(/[\s]+/g,' ').replace(/ +/g,' ').trim().split(' ');
+        let res = await searchTotal("be2us-64aaa-aaaaa-qaabq-cai", query);
+        console.log(query)
+        console.log(res.length)
         
-        this.paginate(response)
+        // let response = [];
+        this.paginate(res)
       }
     },
     whitepaper () {
