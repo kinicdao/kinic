@@ -1905,6 +1905,43 @@ export default {
         this.results.push(page)
       }
     },
+    paginate2 (data) {
+      data = data.map(([h, t, p, s]) => {
+        let info = {
+          "id": 0,
+          "canisterid": h,
+          "subnetid": "sample-subnetid",
+          "type": "app",
+          "datalength": 80,
+          "lastseen": "2023-08-10",
+          "title": t,
+          "subtitle": "sample-subtitle",
+          "content": "",
+          "apptype": "",
+          "note": "",
+          "status": "",
+          "notnull": ""
+        };
+
+        return info
+      });
+
+      this.pages = Math.ceil(data.length / 20)
+      let total = 0
+      for (let k = 0; k < this.pages; k++) {
+        let page = []
+        for (let i = 0; page.length < 20; i++) {
+          if (data[total]) {
+            page.push(data[total])
+            total++
+          } else {
+            break
+          }
+        }
+        this.results.push(page)
+      }
+
+    },
     async termSearch (txt) {
       this.results = []
       this.category = ''
@@ -2006,6 +2043,7 @@ export default {
         };
 
         // call paginate2
+        this.paginate2(res)
 
       };
 
