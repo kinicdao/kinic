@@ -1502,6 +1502,7 @@ import VueCountdown from '@chenfengyuan/vue-countdown'
 import { createActor as canDBService} from "./candbservice/index"
 import { createActor as canDBIndex} from "./candbindex/index"
 
+import {searchBM25} from "./searchBM25.js"
 
 let main = mainCA(MAIN_CANISTER_ID);
 
@@ -1928,13 +1929,15 @@ export default {
         }
       }
 
+      this.turnOnAlphaTest(); // for test wip
+
       if (isIdSearch) {
         let res = await dbService.searchCanisterId(this.search, '')
         let response = JSON.parse(res)
         let mtx = []
         mtx.push(response)
         this.paginate(mtx)
-      } else {
+      } else if (! this.isAlpaTest) {
 
         let res = await dbService.searchTermForParallel((this.search).split(" "))
         let response = []
@@ -1992,7 +1995,20 @@ export default {
         console.log(response.length)
         
         this.paginate(response)
-      }
+
+      } else {
+        // search on alpha test 
+        let query = (this.search).toLowerCase().replace(/[\s]+/g,' ').replace(/ +/g,' ').trim().split(' ');
+        let res = await searchBM25("be2us-64aaa-aaaaa-qaabq-cai", query);
+
+        if (res.length > 300) {
+          res = res.slice(0, 300);
+        };
+
+        // call paginate2
+
+      };
+
     },
     whitepaper () {
       let newUrlIS =  window.location.origin + '/whitepaper'

@@ -6,3 +6,4 @@ dist-ssr
 .dfx
 .idea
 .vessel
+frontend/page_count_include_the_word.json

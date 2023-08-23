@@ -1,0 +1,70 @@
+type Word = text;
+type Title = text;
+type Tf = float64;
+type Service = 
+ service {
+   batchPut:
+    (vec
+      record {
+        Host;
+        vec Path;
+        vec Title;
+        vec CountOfWord;
+        vec KindOfWord;
+        vec record {
+              Word;
+              record {
+                vec Tf;
+                vec PathIdx;
+              };
+            };
+      }) -> ();
+   getNextKeysForParallelSearchTitle: (nat) -> (vec text) query;
+   getPK: () -> (text) query;
+   isStatusComplete: () -> (bool) query;
+   search: (vec Word) ->
+    (vec record {
+           Host;
+           vec record {
+                 Title;
+                 Path;
+                 int;
+                 int;
+                 vec Tf;
+               };
+         }) query;
+   searchTitle: (vec text, opt text, nat) ->
+    (vec record {
+           Host;
+           vec record {
+                 Title;
+                 Path;
+                 int;
+                 int;
+                 vec Tf;
+               };
+         }) query;
+   skExists: (text) -> (bool) query;
+   transferCycles: () -> ();
+ };
+type ScalingOptions = 
+ record {
+   autoScalingHook: AutoScalingCanisterSharedFunctionHook;
+   sizeLimit: ScalingLimitType;
+ };
+type ScalingLimitType = 
+ variant {
+   count: nat;
+   heapSize: nat;
+ };
+type PathIdx = nat;
+type Path = text;
+type KindOfWord = nat;
+type Host = text;
+type CountOfWord = nat;
+type AutoScalingCanisterSharedFunctionHook = func (text) -> (text);
+service : (record {
+             owners: opt vec principal;
+             partitionKey: text;
+             scalingOptions: ScalingOptions;
+           }) -> Service
