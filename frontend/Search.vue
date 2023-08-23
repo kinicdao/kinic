@@ -1761,6 +1761,9 @@ export default {
       this.identity = null
       this.principal = null
     },
+    turnOnAlphaTest () {
+      this.isAlpaTest = true;    
+    },
     addPageToHistory () {
       this.dropdownOn = false
       if (this.category && !this.search) {
@@ -1804,6 +1807,7 @@ export default {
       this.page = 0
       this.pages = 0
       this.search = ''
+      this.isAlpaTest = false;
     },
     setSearch () {
       if (window.location.pathname && window.location.pathname.split('/')[3]) {
@@ -2072,7 +2076,8 @@ export default {
       principal: null,
       identity: null,
       buttonClicked: false,
-      dropdownOn: false
+      dropdownOn: false,
+      isAlpaTest: false
     }
   }
 }
