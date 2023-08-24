@@ -1,9 +1,11 @@
 
 export async function fetchMetadata(serviceActor, hosts) {
 
-  let get_metadata = async (canisterid) => {
+  let get_metadata = async (host) => {
     return new Promise(async (resolve) => {
-      let res = await serviceActor.searchCanisterId(canisterid);
+      let res = await serviceActor.searchCanisterId(host.canisterid);
+      res = JSON.parse(res)
+      res.title = host.title; // overwrite only title because the metadata might be older
       resolve(res)
     });
   };
@@ -14,10 +16,12 @@ export async function fetchMetadata(serviceActor, hosts) {
   };
   let promises = [];
   hosts.map((host) => {
-    promises.push(get_metadata(host.canisterid))
+    promises.push(get_metadata(host))
   });
   
   let res = await Promise.all(promises);
 
-  return res;
+  res = res.flat();
+  // console.log(res)
+  return res
 };

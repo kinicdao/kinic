@@ -1766,6 +1766,9 @@ export default {
     turnOnAlphaTest () {
       this.isAlpaTest = true;    
     },
+    async fetchMetadataOfPage() {
+      this.results[this.page] = await fetchMetadata(dbService, this.results[this.page])
+    },
     addPageToHistory () {
       this.dropdownOn = false
       if (this.category && !this.search) {
@@ -1776,23 +1779,26 @@ export default {
         history.pushState({}, null, newUrlIS)
       }
     },
-    changePage (page) {
+    async changePage (page) {
       this.page = page - 1
       window.scrollTo({ top: 0, behavior: 'smooth' })
       this.addPageToHistory()
+      await this.fetchMetadataOfPage();
     },
-    backPage () {
+    async backPage () {
       if (this.page !== 0) {
         this.page = this.page - 1
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.addPageToHistory()
+        await this.fetchMetadataOfPage();
       }
     },
-    nextPage () {
+    async nextPage () {
       if (this.page !== (this.pages - 1)) {
         this.page = this.page + 1
         window.scrollTo({ top: 0, behavior: 'smooth' })
         this.addPageToHistory()
+        await this.fetchMetadataOfPage();
       }
     },
     reset () {
@@ -2029,18 +2035,23 @@ export default {
         await Promise.all(promises);
         if (data.length == 0) console.log("No result")
         let res2 = data.map(r => JSON.parse(r)).flat()
-        console.log(res2.length)
+        // console.log(res2.length)
         response = response.concat(res2)
 
         // response.forEach((r)=>{console.log(r.get("title"))})
-        console.log(response.length)
+        // console.log(response.length)
         
         this.paginate(response)
 
       } else {
         // search on alpha test 
         let query = (this.search).toLowerCase().replace(/[\s]+/g,' ').replace(/ +/g,' ').trim().split(' ');
-        let res = await searchBM25("be2us-64aaa-aaaaa-qaabq-cai", query);
+        let res = await searchBM25("be2us-64aaa-aaaaa-qaabq-cai", query); // official
+
+        // if the result from official is few, get more sites from non_official.
+        if (res.length < 100) {
+          res = res.concat(await searchBM25("br5f7-7uaaa-aaaaa-qaaca-cai", query))
+        };
 
         if (res.length > 300) {
           res = res.slice(0, 300);
