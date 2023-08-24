@@ -1503,6 +1503,7 @@ import { createActor as canDBService} from "./candbservice/index"
 import { createActor as canDBIndex} from "./candbindex/index"
 
 import {searchBM25} from "./searchBM25.js"
+import {fetchMetadata} from "./fetchMetadata.js"
 
 let main = mainCA(MAIN_CANISTER_ID);
 
@@ -1905,7 +1906,7 @@ export default {
         this.results.push(page)
       }
     },
-    paginate2 (data) {
+    async paginate2 (data) {
       data = data.map(([h, t, p, s]) => {
         let info = {
           "id": 0,
@@ -1939,7 +1940,10 @@ export default {
           }
         }
         this.results.push(page)
-      }
+      };
+
+      this.results[0] = await fetchMetadata(dbService, this.results[0])
+
 
     },
     async termSearch (txt) {
@@ -2043,7 +2047,7 @@ export default {
         };
 
         // call paginate2
-        this.paginate2(res)
+        await this.paginate2(res)
 
       };
 

@@ -1,16 +1,83 @@
+type Tree_1 = 
+ variant {
+   leaf;
+   node:
+    record {
+      Color;
+      Tree_1;
+      record {
+        text;
+        opt AttributeValueRBTreeValue;
+      };
+      Tree_1;
+    };
+ };
+type Tree = 
+ variant {
+   leaf;
+   node: record {
+           Color;
+           Tree;
+           record {
+             AttributeKey;
+             opt AttributeValue;
+           };
+           Tree;
+         };
+ };
+type SubnetId = 
+ variant {
+   subnetId__3hhby_wmtmw_umt4t_7ieyg_bbiig_xiylg_sblrt_voxgt_bqckd_a75bf_rqe;
+   subnetId__4ecnw_byqwz_dtgss_ua2mh_pfvs7_c3lct_gtf4e_hnu75_j7eek_iifqm_sqe;
+   subnetId__4zbus_z2bmt_ilreg_xakz4_6tyre_hsqj4_slb4g_zjwqo_snjcc_iqphi_3qe;
+   subnetId__5kdm2_62fc6_fwnja_hutkz_ycsnm_4z33i_woh43_4cenu_ev7mi_gii6t_4ae;
+   subnetId__6pbhf_qzpdk_kuqbr_pklfa_5ehhf_jfjps_zsj6q_57nrl_kzhpd_mu7hc_vae;
+   subnetId__brlsh_zidhj_3yy3e_6vqbz_7xnih_xeq2l_as5oc_g32c4_i5pdn_2wwof_oae;
+   subnetId__csyj4_zmann_ys6ge_3kzi6_onexi_obayx_2fvak_zersm_euci4_6pslt_lae;
+   subnetId__cv73p_6v7zi_u67oy_7jc3h_qspsz_g5lrj_4fn7k_xrax3_thek2_sl46v_jae;
+   subnetId__e66qm_3cydn_nkf4i_ml4rb_4ro6o_srm5s_x5hwq_hnprz_3meqp_s7vks_5qe;
+   subnetId__ejbmu_grnam_gk6ol_6irwa_htwoj_7ihfl_goimw_hlnvh_abms4_47v2e_zqe;
+   subnetId__eq6en_6jqla_fbu5s_daskr_h6hx2_376n5_iqabl_qgrng_gfqmv_n3yjr_mqe;
+   subnetId__gmq5v_hbozq_uui6y_o55wc_ihop3_562wb_3qspg_nnijg_npqp5_he3cj_3ae;
+   subnetId__io67a_2jmkw_zup3h_snbwi_g6a5n_rm5dn_b6png_lvdpl_nqnto_yih6l_gqe;
+   subnetId__jtdsg_3h6gi_hs7o5_z2soi_43w3z_soyl3_ajnp3_ekni5_sw553_5kw67_nqe;
+   subnetId__k44fs_gm4pv_afozh_rs7zw_cg32n_u7xov_xqyx3_2pw5q_eucnu_cosd4_uqe;
+   subnetId__lhg73_sax6z_2zank_6oer2_575lz_zgbxx_ptudx_5korm_fy7we_kh4hl_pqe;
+   subnetId__lspz2_jx4pu_k3e7p_znm7j_q4yum_ork6e_6w4q6_pijwq_znehu_4jabe_kqe;
+   subnetId__mpubz_g52jc_grhjo_5oze5_qcj74_sex34_omprz_ivnsm_qvvhr_rfzpv_vae;
+   subnetId__nl6hn_ja4yw_wvmpy_3z2jx_ymc34_pisx3_3cp5z_3oj4a_qzzny_jbsv3_4qe;
+   subnetId__o3ow2_2ipam_6fcjo_3j5vt_fzbge_2g7my_5fz2m_p4o2t_dwlc4_gt2q7_5ae;
+   subnetId__opn46_zyspe_hhmyp_4zu6u_7sbrh_dok77_m7dch_im62f_vyimr_a3n2c_4ae;
+   subnetId__pae4o_o6dxf_xki7q_ezclx_znyd6_fnk6w_vkv5z_5lfwh_xym2i_otrrw_fqe;
+   subnetId__pjljw_kztyl_46ud4_ofrj6_nzkhm_3n4nt_wi3jt_ypmav_ijqkt_gjf66_uae;
+   subnetId__qdvhd_os4o2_zzrdw_xrcv4_gljou_eztdp_bj326_e6jgr_tkhuc_ql6v2_yqe;
+   subnetId__qxesv_zoxpm_vc64m_zxguk_5sj74_35vrb_tbgwg_pcird_5gr26_62oxl_cae;
+   subnetId__shefu_t3kr5_t5q3w_mqmdq_jabyv_vyvtf_cyyey_3kmo4_toyln_emubw_4qe;
+   subnetId__snjp4_xlbw4_mnbog_ddwy6_6ckfd_2w5a2_eipqo_7l436_pxqkh_l6fuv_vae;
+   subnetId__w4asl_4nmyj_qnr7c_6cqq4_tkwmt_o26di_iupkq_vx4kt_asbrx_jzuxh_4ae;
+   subnetId__yinp6_35cfo_wgcd2_oc4ty_2kqpf_t4dul_rfk33_fsq3r_mfmua_m2ngh_jqe;
+ };
 type Service = 
  service {
    categorySearchNewest: (text, opt text) -> (text, opt text) query;
+   debug_searchBySk: (text) -> (opt Entity) query;
+   debug_show_all: () -> (text) query;
    getNextKeysForParallelSearchTerm: () -> (vec text) query;
+   getOwners: () -> (opt vec text) query;
    getPK: () -> (text) query;
    isStatusComplete: () -> (bool) query;
-   searchCanisterId: (text, text) -> (text) query;
+   reportBroken: (text) -> ();
+   searchCanisterId: (text) -> (text) query;
    searchCategory: (text, opt text) -> (text, opt text) query;
    searchTerm: (text, opt text) -> (text, opt text) query;
-   searchTermWithTarget: (bool, bool, bool, vec text, opt text) -> (text, opt text) query;
+   searchTermForParallel: (vec text) -> (text, vec text) query;
+   searchTermWithNextKeysForParallelSearch: (text) -> (text, vec text) query;
+   searchTermWithTarget: (bool, bool, bool, vec text, opt text) -> (text,
+    opt text) query;
    skExists: (text) -> (bool) query;
    transferCycles: () -> ();
    upload: (text) -> ();
+   userNewPost: (PostRequest) -> ();
  };
 type ScalingOptions = 
  record {
@@ -22,7 +89,101 @@ type ScalingLimitType =
    count: nat;
    heapSize: nat;
  };
+type SK = text;
+type PostRequest = 
+ record {
+   apptype: AppType;
+   canisterid: text;
+   content: text;
+   datalength: nat;
+   note: text;
+   subnetid: SubnetId;
+   subtitle: text;
+   title: text;
+ };
+type PK = text;
+type Entity = 
+ record {
+   attributes: AttributeMap;
+   pk: PK;
+   sk: SK;
+ };
+type Color = 
+ variant {
+   B;
+   R;
+ };
 type AutoScalingCanisterSharedFunctionHook = func (text) -> (text);
+type AttributeValueRBTreeValue = 
+ variant {
+   arrayBool: vec bool;
+   arrayFloat: vec float64;
+   arrayInt: vec int;
+   arrayText: vec text;
+   "blob": blob;
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "text": text;
+   tuple: vec AttributeValuePrimitive;
+ };
+type AttributeValuePrimitive = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "text": text;
+ };
+type AttributeValue = 
+ variant {
+   arrayBool: vec bool;
+   arrayFloat: vec float64;
+   arrayInt: vec int;
+   arrayText: vec text;
+   "blob": blob;
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "text": text;
+   tree: Tree_1;
+   tuple: vec AttributeValuePrimitive;
+ };
+type AttributeMap = 
+ variant {
+   leaf;
+   node: record {
+           Color;
+           Tree;
+           record {
+             AttributeKey;
+             opt AttributeValue;
+           };
+           Tree;
+         };
+ };
+type AttributeKey = text;
+type AppType = 
+ variant {
+   blog;
+   communication;
+   dao;
+   defi;
+   docs;
+   funny;
+   info;
+   interesting;
+   investor;
+   landing;
+   learning;
+   music;
+   news;
+   portfolio;
+   scam;
+   social;
+   utility;
+   video;
+   wip;
+ };
 service : (record {
              owners: opt vec principal;
              partitionKey: text;
