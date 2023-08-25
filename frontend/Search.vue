@@ -1507,15 +1507,26 @@ import {fetchMetadata} from "./fetchMetadata.js"
 
 let main = mainCA(MAIN_CANISTER_ID);
 
+// Old DB
 let host = 'https://ic0.app'
 let dbIndexCanisterId = 'msqgt-mqaaa-aaaaf-qaj2a-cai'
 let dbServiceCanisterId;
 let dbName = 'kindb'
 
+// New DB
+let newdb_host = 'https://ic0.app'
+let newdb_indexCanisterId = '';
+let newdb_index;
+
+
 if (location.port === '3000' || location.port === '8000') {
   //host = 'http://127.0.0.1:8080'
   //dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
   //dbName = 'test'
+
+  newdb_host = 'http://127.0.0.1:8080';
+  newdb_indexCanisterId = 'bkyz2-fmaaa-aaaaa-qaaaq-cai';
+  newdb_index = canDBIndex(newdb_indexCanisterId, {agentOptions: {newdb_host}})
 }
 
 let dbIndex = canDBIndex(dbIndexCanisterId, {agentOptions: {host}})
@@ -2046,11 +2057,11 @@ export default {
       } else {
         // search on alpha test 
         let query = (this.search).toLowerCase().replace(/[\s]+/g,' ').replace(/ +/g,' ').trim().split(' ');
-        let res = await searchBM25("be2us-64aaa-aaaaa-qaabq-cai", query); // official
+        let res = await searchBM25((await newdb_index.getCanistersByPK('official'))[0], query); // official
 
         // if the result from official is few, get more sites from non_official.
         if (res.length < 100) {
-          res = res.concat(await searchBM25("br5f7-7uaaa-aaaaa-qaaca-cai", query))
+          res = res.concat(await searchBM25((await newdb_index.getCanistersByPK('non_official'))[0], query))
         };
 
         if (res.length > 300) {
