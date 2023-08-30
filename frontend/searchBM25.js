@@ -13,8 +13,8 @@ export async function searchBM25(serviceCanisterId, query) {
   // set service canister client
   const fetch = window.fetch.bind(window);
   const agent = new HttpAgent({
-    // host: "https://ic0.app",
-    host: "http://127.0.0.1:8080",
+    host: "https://ic0.app",
+    // host: "http://127.0.0.1:8080",
     fetch,
   });
   const serviceActor = ServiceCreateActor(serviceCanisterId, {agent});

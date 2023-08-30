@@ -1519,20 +1519,22 @@ let dbServiceCanisterId;
 let dbName = 'kindb'
 
 // New DB
-let newdb_host = 'https://ic0.app'
-let newdb_indexCanisterId = '';
+// let newdb_host = 'https://ic0.app'
+let newdb_indexCanisterId = 'v2fux-wyaaa-aaaao-a2hea-cai';
 let newdb_index;
 
 
-if (location.port === '3000' || location.port === '8000') {
-  //host = 'http://127.0.0.1:8080'
-  //dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
-  //dbName = 'test'
+// if (location.port === '3000' || location.port === '8000') {
+//   //host = 'http://127.0.0.1:8080'
+//   //dbIndexCanisterId = 'rrkah-fqaaa-aaaaa-aaaaq-cai'
+//   //dbName = 'test'
 
-  newdb_host = 'http://127.0.0.1:8080';
-  newdb_indexCanisterId = 'bkyz2-fmaaa-aaaaa-qaaaq-cai';
-  newdb_index = canDBIndex(newdb_indexCanisterId, {agentOptions: {newdb_host}})
-}
+//   newdb_host = 'http://127.0.0.1:8080';
+//   newdb_indexCanisterId = 'bkyz2-fmaaa-aaaaa-qaaaq-cai';
+//   newdb_index = canDBIndex(newdb_indexCanisterId, {agentOptions: {newdb_host}})
+// }
+
+newdb_index = canDBIndex(newdb_indexCanisterId, {agentOptions: {host}})
 
 let dbIndex = canDBIndex(dbIndexCanisterId, {agentOptions: {host}})
 let dbService;

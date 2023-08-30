@@ -1,8 +1,8 @@
 import page_count_include_the_word from "./page_count_include_the_word.json";
 
-const N_COUNT_DOCUMENTS = 724+853+333; // document count
-const N_AVERAGE_COUNT_WORDS = (40674+191220+28772)/N_COUNT_DOCUMENTS; // document length
-const N_AVERAGE_KIND_WORDS = (24261+90241+18266)/N_COUNT_DOCUMENTS// kinds of word in the document
+const N_COUNT_DOCUMENTS = 7970; // document count
+const N_AVERAGE_COUNT_WORDS = 675722/N_COUNT_DOCUMENTS; // document length
+const N_AVERAGE_KIND_WORDS = 304755/N_COUNT_DOCUMENTS// kinds of word in the document
 
 export async function searchInTitle(serviceActor, query) {
 
